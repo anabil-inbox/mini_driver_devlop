@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:get/utils.dart';
 import 'package:inbox_driver/feature/view/screens/profile/edit_profile/change_mobile/change_mobile_screen.dart';
 import 'package:inbox_driver/feature/view/screens/profile/edit_profile/user_edit_profile_screen.dart';
 import 'package:inbox_driver/feature/view/widgets/primary_button.dart';
+import 'package:inbox_driver/feature/view_model/auht_view_modle/auth_view_modle.dart';
 import 'package:inbox_driver/feature/view_model/profile_view_modle/profile_view_modle.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
@@ -115,6 +117,7 @@ class HeaderProfileCard extends StatelessWidget {
                   textButton: txtEditProfile.tr,
                   isLoading: false,
                   onClicked: () {
+                      Get.put(AuthViewModle());
                      Get.to(() => const EditProfileScreen());
                   },
                   isExpanded: true)),

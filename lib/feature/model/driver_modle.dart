@@ -1,3 +1,5 @@
+import 'country.dart';
+
 class Driver {
   Driver(
       {this.id,
@@ -9,7 +11,8 @@ class Driver {
       this.deviceType,
       this.fcm,
       this.contactNumber,
-      this.email});
+      this.email,
+      this.country});
 
   String? id;
   String? driverName;
@@ -21,6 +24,7 @@ class Driver {
   dynamic image;
   List<Map<String, dynamic>>? contactNumber;
   String? email;
+  List<Country>? country;
 
   factory Driver.fromJson(Map<String, dynamic> json) => Driver(
         id: json["id"],
@@ -36,6 +40,11 @@ class Driver {
             ? null
             : List<Map<String, dynamic>>.from(
                 json["contact_number"].map((x) => x)),
+        country: json["country"] == null
+            ? null
+            : List<Country>.from(
+                json["country"].map((x) => Country.fromJson(x)),
+              ),
       );
 
   Map<String, dynamic> toJson() => {
@@ -50,5 +59,8 @@ class Driver {
         "contact_number": contactNumber == null
             ? null
             : List<Map<String, dynamic>>.from(contactNumber!.map((x) => x)),
+        "country": country == null
+            ? null
+            : List<dynamic>.from(country!.map((x) => x.toJson())),
       };
 }

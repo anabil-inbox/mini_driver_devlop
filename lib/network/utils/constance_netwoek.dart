@@ -3,7 +3,7 @@ import 'package:inbox_driver/util/sh_util.dart';
 
 abstract class ConstanceNetwork {
   ///todo here insert base_url
-  static String imageUrl = "http://50.17.152.72/".trim();
+  static String imageUrl = "http://50.17.152.72".trim();
 
   ///todo here insert key Of Request
 

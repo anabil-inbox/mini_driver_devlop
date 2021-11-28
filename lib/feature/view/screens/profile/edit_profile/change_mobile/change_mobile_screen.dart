@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/parser.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
@@ -8,11 +10,12 @@ import 'package:inbox_driver/feature/view/screens/auth/country/choose_country_vi
 import 'package:inbox_driver/feature/view/screens/auth/signUp_signIn/widget/header_code_verfication_widget.dart';
 import 'package:inbox_driver/feature/view/widgets/primary_button.dart';
 import 'package:inbox_driver/feature/view_model/auht_view_modle/auth_view_modle.dart';
+import 'package:inbox_driver/network/utils/constance_netwoek.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
+import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/sh_util.dart';
 import 'package:inbox_driver/util/string.dart';
-
 
 class ChangeMobileScreen extends StatelessWidget {
   ChangeMobileScreen({Key? key, required this.mobileNumber}) : super(key: key);
@@ -30,7 +33,7 @@ class ChangeMobileScreen extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-             const HeaderCodeVerfication(),
+              const HeaderCodeVerfication(),
               SizedBox(height: sizeH25),
               Text(txtChangeMobileNumber.tr),
               SizedBox(height: sizeH10),
@@ -68,9 +71,29 @@ class ChangeMobileScreen extends StatelessWidget {
                                       initState: (_) {},
                                       builder: (value) {
                                         return Text(
-                                          "${value.defCountry.prefix == null || value.defCountry.prefix!.isEmpty ? "+974" : value.defCountry.prefix}",
+                                          value.defCountry.prefix!.isEmpty
+                                              ? "${SharedPref.instance.getCurrentUserData().country?[0].prefix}"
+                                              : "${value.defCountry.prefix}",
                                           textDirection: TextDirection.ltr,
                                         );
+                                      },
+                                    ),
+                                                                        SizedBox(width: sizeW5,),
+
+                                    GetBuilder<AuthViewModle>(
+                                      init: AuthViewModle(),
+                                      initState: (_) {},
+                                      builder: (value) {
+                                        return value.defCountry.prefix!.isEmpty
+                                            ? imageNetwork(
+                                                url: ConstanceNetwork.imageUrl+SharedPref.instance.getCurrentUserData().country![0].flag!.trim(),
+                                                height: sizeH36,
+                                                width: sizeW26)
+
+                                            : imageNetwork(
+                                                url: ConstanceNetwork.imageUrl+value.defCountry.flag!,
+                                                height: sizeH36,
+                                                width: sizeW26);
                                       },
                                     ),
                                     const VerticalDivider(),
@@ -93,7 +116,8 @@ class ChangeMobileScreen extends StatelessWidget {
                                         validator: (value) {
                                           if (value == null || value.isEmpty) {
                                             return txtErrorMobileNumber;
-                                          } else if (value.length > 9 || value.length < 8) {
+                                          } else if (value.length > 9 ||
+                                              value.length < 8) {
                                             return txtErrorMobileNumber;
                                           }
                                           return null;
@@ -123,8 +147,7 @@ class ChangeMobileScreen extends StatelessWidget {
                                             .id,
                                         udid: logic.identifier,
                                         target: "sms",
-                                        mobileNumber:
-                                            logic.tdMobileNumber.text,
+                                        mobileNumber: logic.tdMobileNumber.text,
                                         countryCode: logic.defCountry.prefix,
                                         isFromChange: true);
                                   }

@@ -110,34 +110,6 @@ class AuthViewModle extends GetxController {
     return countres;
   }
 
-  // Future<Customer> signUpUser({User? user}) async {
-  //   Customer customer = Customer();
-  //   isLoading = true;
-  //   update();
-  //   FocusScope.of(Get.context!).unfocus();
-  //   await AuthHelper.getInstance.registerUser(user!.toJson()).then((value) => {
-  //         if (value.status!.success!)
-  //           {
-  //             isLoading = false,
-  //             update(),
-  //             snackSuccess("${tr.success}", "${value.status!.message}"),
-  //             Get.to(() => CompanyVerficationCodeScreen(
-  //                 id: value.data["Customer"]["id"],
-  //                 mobileNumber: user.mobile!,
-  //                 countryCode: user.countryCode!,
-  //                 type: "${ConstanceNetwork.userType}")),
-  //           }
-  //         else
-  //           {
-  //             log.e(value.status!.toJson()),
-  //             isLoading = false,
-  //             update(),
-  //             snackError("${tr.error_occurred}", "${value.status!.message}")
-  //           }
-  //       });
-
-  //   return customer;
-  // }
 
   Future<void> signInUser({Driver? user}) async {
     isLoading = true;
