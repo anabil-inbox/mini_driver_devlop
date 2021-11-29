@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/parser.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
@@ -10,10 +8,8 @@ import 'package:inbox_driver/feature/view/screens/auth/country/choose_country_vi
 import 'package:inbox_driver/feature/view/screens/auth/signUp_signIn/widget/header_code_verfication_widget.dart';
 import 'package:inbox_driver/feature/view/widgets/primary_button.dart';
 import 'package:inbox_driver/feature/view_model/auht_view_modle/auth_view_modle.dart';
-import 'package:inbox_driver/network/utils/constance_netwoek.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
-import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/sh_util.dart';
 import 'package:inbox_driver/util/string.dart';
 
@@ -78,51 +74,71 @@ class ChangeMobileScreen extends StatelessWidget {
                                         );
                                       },
                                     ),
-                                                                        SizedBox(width: sizeW5,),
-
-                                    GetBuilder<AuthViewModle>(
-                                      init: AuthViewModle(),
-                                      initState: (_) {},
-                                      builder: (value) {
-                                        return value.defCountry.prefix!.isEmpty
-                                            ? imageNetwork(
-                                                url: ConstanceNetwork.imageUrl+SharedPref.instance.getCurrentUserData().country![0].flag!.trim(),
-                                                height: sizeH36,
-                                                width: sizeW26)
-
-                                            : imageNetwork(
-                                                url: ConstanceNetwork.imageUrl+value.defCountry.flag!,
-                                                height: sizeH36,
-                                                width: sizeW26);
-                                      },
+                                    SizedBox(
+                                      width: sizeW5,
                                     ),
+
+                                    // GetBuilder<AuthViewModle>(
+                                    //   init: AuthViewModle(),
+                                    //   initState: (_) {},
+                                    //   builder: (value) {
+                                    //     var s =
+                                    //     print("msg_val ${ConstanceNetwork.imageUrl +
+                                    //                 SharedPref.instance
+                                    //                     .getCurrentUserData()
+                                    //                     .country![0]
+                                    //                     .flag!
+                                    //                     .trim()} ");
+                                    //     return value.defCountry.prefix!.isEmpty
+                                    //         ? imageNetwork(
+                                    //             url: ConstanceNetwork.imageUrl +
+                                    //                 SharedPref.instance
+                                    //                     .getCurrentUserData()
+                                    //                     .country![0]
+                                    //                     .flag!
+                                    //                     .trim(),
+                                    //             height: sizeH36,
+                                    //             width: sizeW26)
+                                    //         : imageNetwork(
+                                    //             url: value.defCountry.flag,
+                                    //             height: sizeH36,
+                                    //             width: sizeW26);
+                                    //   },
+                                    // ),
+
                                     const VerticalDivider(),
                                     SizedBox(
                                       width: sizeW10,
                                     ),
                                     Expanded(
-                                      child: TextFormField(
-                                        textDirection: TextDirection.ltr,
-                                        maxLength: 9,
-                                        onSaved: (newValue) {
-                                          logic.tdMobileNumber.text =
-                                              newValue.toString();
-                                          logic.update();
+                                      child: GetBuilder<AuthViewModle>(
+                                        builder: (_) {
+                                          logic.tdMobileNumber.text = SharedPref.instance.getCurrentUserData().mobileNumber ?? "";
+                                          return TextFormField(
+                                            textDirection: TextDirection.ltr,
+                                            maxLength: 9,
+                                            onSaved: (newValue) {
+                                              logic.tdMobileNumber.text =
+                                                  newValue.toString();
+                                              logic.update();
+                                            },
+                                            decoration: const InputDecoration(
+                                              counterText: "",
+                                            ),
+                                            controller: logic.tdMobileNumber,
+                                            validator: (value) {
+                                              if (value == null ||
+                                                  value.isEmpty) {
+                                                return txtErrorMobileNumber;
+                                              } else if (value.length > 9 ||
+                                                  value.length < 8) {
+                                                return txtErrorMobileNumber;
+                                              }
+                                              return null;
+                                            },
+                                            keyboardType: TextInputType.number,
+                                          );
                                         },
-                                        decoration: const InputDecoration(
-                                          counterText: "",
-                                        ),
-                                        controller: logic.tdMobileNumber,
-                                        validator: (value) {
-                                          if (value == null || value.isEmpty) {
-                                            return txtErrorMobileNumber;
-                                          } else if (value.length > 9 ||
-                                              value.length < 8) {
-                                            return txtErrorMobileNumber;
-                                          }
-                                          return null;
-                                        },
-                                        keyboardType: TextInputType.number,
                                       ),
                                     )
                                   ],
