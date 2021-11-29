@@ -73,7 +73,7 @@ class LoginForm extends GetWidget<AuthViewModle> {
                         Expanded(
                           child: TextFormField(
                             textDirection: TextDirection.ltr,
-                            maxLength: 9,
+                            maxLength: 10,
                             decoration: const InputDecoration(counterText: ""),
                             onSaved: (newValue) {
                               controller.tdMobileNumber.text =
@@ -84,7 +84,7 @@ class LoginForm extends GetWidget<AuthViewModle> {
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return txtErrorMobileNumber.tr;
-                              } else if (value.length > 9 || value.length < 8) {
+                              } else if (value.length > 10 || value.length < 8) {
                                 return txtErrorMobileNumber.tr;
                               } else {
                                 return null;

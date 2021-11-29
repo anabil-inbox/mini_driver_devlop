@@ -113,10 +113,9 @@ class ChangeMobileScreen extends StatelessWidget {
                                     Expanded(
                                       child: GetBuilder<AuthViewModle>(
                                         builder: (_) {
-                                          logic.tdMobileNumber.text = SharedPref.instance.getCurrentUserData().mobileNumber ?? "";
                                           return TextFormField(
                                             textDirection: TextDirection.ltr,
-                                            maxLength: 9,
+                                            maxLength: 10,
                                             onSaved: (newValue) {
                                               logic.tdMobileNumber.text =
                                                   newValue.toString();
@@ -130,7 +129,7 @@ class ChangeMobileScreen extends StatelessWidget {
                                               if (value == null ||
                                                   value.isEmpty) {
                                                 return txtErrorMobileNumber;
-                                              } else if (value.length > 9 ||
+                                              } else if (value.length > 10 ||
                                                   value.length < 8) {
                                                 return txtErrorMobileNumber;
                                               }

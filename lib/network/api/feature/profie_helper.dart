@@ -20,7 +20,7 @@ class ProfileHelper {
     }
   }
 
-  Future<AppResponse> editProfile(Map<String, dynamic> body) async {
+  Future<AppResponse> editProfile(var body) async {
     var appResponse = await ProfileApi.getInstance.editProfile(
         body: body,
         url: ConstanceNetwork.editProfilEndPoint,

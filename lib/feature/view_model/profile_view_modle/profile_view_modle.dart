@@ -71,7 +71,7 @@ class ProfileViewModle extends BaseController {
               {
                 isLoading = false,
                 update(),
-                snackError(txtError!.tr, "${value.status!.message}")
+                snackError(txtError!.tr, "${value.status!.message}"),
               }
           });
     } catch (e) {}

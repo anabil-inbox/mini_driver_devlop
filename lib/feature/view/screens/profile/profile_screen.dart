@@ -30,7 +30,7 @@ class ProfileScreen extends GetWidget<ProfileViewModle> {
         automaticallyImplyLeading: true,
         elevation: 1,
         title: Text(
-          txtProfile,
+          txtProfile.tr,
           style: textStyleAppBarTitle(),
         ),
         leading: IconButton(

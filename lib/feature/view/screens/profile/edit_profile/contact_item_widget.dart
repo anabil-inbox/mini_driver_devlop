@@ -40,26 +40,28 @@ class ContactItemWidget extends StatelessWidget {
             child: Row(
               textDirection: TextDirection.ltr,
               children: [
+
                 SizedBox(
                   width: sizeW18,
                 ),
                 Row(
                   children: [
-                    Text(
-                      "$prefix",
-                      textDirection: TextDirection.ltr,
-                    ),
                     SizedBox(
                       width: sizeH5,
                     ),
                     const VerticalDivider(),
+                    Text(
+                      "$prefix",
+                      textDirection: TextDirection.ltr,
+                    ),
+                    
                   ],
                 ),
                 Expanded(
                   child: TextFormField(
                     initialValue: "$mobileNumber",
                     textDirection: TextDirection.ltr,
-                    maxLength: 9,
+                    maxLength: 10,
                     onSaved: (newValue) {},
                     decoration: const InputDecoration(
                       counterText: "",
@@ -73,7 +75,7 @@ class ContactItemWidget extends StatelessWidget {
                     validator: (value) {
                       if (value!.isEmpty) {
                         return txtErrorMobileNumber.tr;
-                      } else if (value.length > 9 || value.length < 8) {
+                      } else if (value.length > 10 || value.length < 8) {
                         return txtErrorMobileNumber.tr;
                       } else {
                         return null;
@@ -82,6 +84,7 @@ class ContactItemWidget extends StatelessWidget {
                     keyboardType: TextInputType.number,
                   ),
                 ),
+             
               ],
             ),
           ),

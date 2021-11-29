@@ -13,7 +13,6 @@ import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/sh_util.dart';
 import 'package:inbox_driver/util/string.dart';
 
-
 import 'contact_item_widget.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -37,8 +36,8 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
     profileViewModle.tdUserEmailEdit.text =
         SharedPref.instance.getCurrentUserData().email ?? "";
     profileViewModle.contactMap.clear();
-    profileViewModle.contactMap = SharedPref.instance.getCurrentUserData().contactNumber ?? [];
-        
+    profileViewModle.contactMap =
+        SharedPref.instance.getCurrentUserData().contactNumber ?? [];
   }
 
   @override
@@ -82,9 +81,9 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
                         children: [
                           GetBuilder<ProfileViewModle>(
                             builder: (_) {
-                              return  InkWell(
+                              return InkWell(
                                   splashColor: colorTrans,
-                                  highlightColor : colorTrans,
+                                  highlightColor: colorTrans,
                                   onTap: () async {
                                     profileViewModle.getImageBottomSheet();
                                   },
@@ -98,19 +97,24 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
                                           backgroundColor:
                                               colorPrimary.withOpacity(0.5),
                                         )
-                                      : GetUtils.isNull(SharedPref.instance.getCurrentUserData().image) || 
-                                      SharedPref.instance.getCurrentUserData().image.toString().isEmpty
-                                      ? CircleAvatar(
-                                          radius: 50,
-                                          backgroundColor:
-                                              colorPrimary.withOpacity(0.5),
-                                        ):CircleAvatar(
-                                          radius: 50,
-                                          backgroundImage: NetworkImage("${SharedPref.instance.getCurrentUserData().image}"),
-                                        )
-                                        );
-                            
-                            
+                                      : GetUtils.isNull(SharedPref.instance
+                                                  .getCurrentUserData()
+                                                  .image) ||
+                                              SharedPref.instance
+                                                  .getCurrentUserData()
+                                                  .image
+                                                  .toString()
+                                                  .isEmpty
+                                          ? CircleAvatar(
+                                              radius: 50,
+                                              backgroundColor:
+                                                  colorPrimary.withOpacity(0.5),
+                                            )
+                                          : CircleAvatar(
+                                              radius: 50,
+                                              backgroundImage: NetworkImage(
+                                                  "${SharedPref.instance.getCurrentUserData().image}"),
+                                            ));
                             },
                           ),
                           PositionedDirectional(
@@ -130,8 +134,7 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
                           profileViewModle.tdUserFullNameEdit.text = e!;
                           profileViewModle.update();
                         },
-                        decoration:
-                            InputDecoration(hintText: txtFullName.tr),
+                        decoration: InputDecoration(hintText: txtFullName.tr),
                         validator: (e) {
                           if (e.toString().trim().isEmpty) {
                             return txtErrorFillYourName.tr;
@@ -150,8 +153,7 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
                           profileViewModle.tdUserEmailEdit.text = e!;
                           profileViewModle.update();
                         },
-                        decoration:
-                            InputDecoration(hintText: txtEmail!.tr),
+                        decoration: InputDecoration(hintText: txtEmail!.tr),
                         validator: (e) {
                           if (e!.isEmpty) {
                             return txtErrorFillYourEmail.tr;
@@ -174,6 +176,7 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
                         height: sizeH10,
                       ),
                       Row(
+                       
                         children: [
                           Expanded(
                             child: InkWell(
@@ -199,12 +202,15 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
                                       builder: (value) {
                                         return Row(
                                           children: [
+                                            SizedBox(
+                                              width: sizeH5!,
+                                            ),
+                                            const VerticalDivider(),
                                             Text(
                                               "${value.defCountry.prefix}",
                                               textDirection: TextDirection.ltr,
                                             ),
-                                             SizedBox(width: sizeH5!,),
-                                             const VerticalDivider(),
+                                            
                                             
                                           ],
                                         );
@@ -214,7 +220,7 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
                                       child: TextFormField(
                                         enabled: true,
                                         textDirection: TextDirection.ltr,
-                                        maxLength: 9,
+                                        maxLength: 10,
                                         onSaved: (newValue) {
                                           profileViewModle
                                               .tdUserMobileNumberEdit
@@ -259,29 +265,32 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
                       ),
                       GetBuilder<ProfileViewModle>(builder: (logic) {
                         return ListView.builder(
-                          primary:false,
+                          primary: false,
                           shrinkWrap: true,
+                          reverse: true,
                           keyboardDismissBehavior:
                               ScrollViewKeyboardDismissBehavior.onDrag,
                           itemCount: logic.contactMap.length,
                           itemBuilder: (context, index) {
-                            return ContactItemWidget(
-                                deleteContact: () {
-                                  logic.contactMap.removeAt(index);
-                                  logic.update();
-                                },
-                                mobileNumber: logic.contactMap[index]
-                                    [ConstanceNetwork.mobileNumberKey],
-                                onChange: (_) {
-                                  logic.contactMap[index]
-                                      [ConstanceNetwork.mobileNumberKey] = _;
-                                  logic.update();
-                                },
-                                prefix: logic.contactMap[index]
-                                    [ConstanceNetwork.countryCodeKey]);
-                          },
-                        );
+                          return ContactItemWidget(
+                              deleteContact: () {
+                                var deletedIndex = logic.contactMap.indexOf(logic.contactMap[index]);
+                                logic.contactMap.removeAt(deletedIndex);
+                                logic.update();
+                              },
+                              mobileNumber: logic.contactMap[index]
+                                  [ConstanceNetwork.mobileNumberKey],
+                              onChange: (_) {
+                                logic.contactMap[index]
+                                    [ConstanceNetwork.mobileNumberKey] = _;
+                                logic.update();
+                              },
+                              prefix: logic.contactMap[index]
+                                  [ConstanceNetwork.countryCodeKey]);
+                        },
+                      );
                       }),
+                      
                     ],
                   ),
                 ),
@@ -296,8 +305,7 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
                     textButton: txtSave.tr,
                     isLoading: value.isLoading,
                     onClicked: () {
-                      if (EditProfileScreen._formKey.currentState!
-                          .validate()) {
+                      if (EditProfileScreen._formKey.currentState!.validate()) {
                         value.editProfileUser();
                       }
                     },
@@ -314,7 +322,6 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
   }
 
   addNewContact(String countryCode) {
-
     if (profileViewModle.tdUserMobileNumberEdit.text.isEmpty) {
       return;
     }
