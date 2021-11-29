@@ -154,7 +154,7 @@ class AuthViewModle extends GetxController {
           if (value.status!.success!)
             {
               snackSuccess(txtSuccess!.tr, "${value.status!.message}"),
-              Get.off(() => const ProfileScreen()),
+              Get.offAll(() => const ProfileScreen()),
               Get.put(AuthViewModle())
             }
           else

@@ -27,7 +27,7 @@ moveToIntro(){
       Get.off(() => const LoginScreen());
   }else if(state?.toLowerCase() == ConstanceNetwork.userLoginedState){
         
-        Get.off(() => const ProfileScreen());
+        Get.offAll(() => const ProfileScreen());
     //  Get.off(() => const LoginScreen());
   }else{
     Get.off(() => const LoginScreen());
