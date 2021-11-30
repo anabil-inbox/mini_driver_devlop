@@ -13,7 +13,6 @@ class VerficationScreen extends StatefulWidget {
   final String mobileNumber;
   final String countryCode;
   final String id;
-
   const VerficationScreen(
       {Key? key,
       required this.mobileNumber,
@@ -120,6 +119,7 @@ class _ChangeMobilScreenState extends State<VerficationScreen> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: sizeW80!),
       child: PinCodeTextField(
+        autoFocus: true,
         hintCharacter: "__",
         hintStyle: textStyleTitle(),
         length: 4,

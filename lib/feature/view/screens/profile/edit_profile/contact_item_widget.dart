@@ -46,45 +46,46 @@ class ContactItemWidget extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    SizedBox(
-                      width: sizeH5,
-                    ),
-                    const VerticalDivider(),
                     Text(
                       "$prefix",
                       textDirection: TextDirection.ltr,
                     ),
                     
+                    SizedBox(
+                      width: sizeH5,
+                    ),
+                    const VerticalDivider(),
+                    
                   ],
                 ),
-                Expanded(
-                  child: TextFormField(
-                    initialValue: "$mobileNumber",
-                    textDirection: TextDirection.ltr,
-                    maxLength: 10,
-                    onSaved: (newValue) {},
-                    decoration: const InputDecoration(
-                      counterText: "",
-                    ),
-                    onChanged: (value) {
-                      onChange!(value.toString());
-                    },
-                    onFieldSubmitted: (value) {
-                      onChange!(value.toString());
-                    },
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return txtErrorMobileNumber.tr;
-                      } else if (value.length > 10 || value.length < 8) {
-                        return txtErrorMobileNumber.tr;
-                      } else {
-                        return null;
-                      }
-                    },
-                    keyboardType: TextInputType.number,
-                  ),
-                ),
-             
+                // Expanded(
+                //   child: TextFormField(
+                //     initialValue: "$mobileNumber",
+                //     textDirection: TextDirection.ltr,
+                //     maxLength: 10,
+                //     onSaved: (newValue) {},
+                //     decoration: const InputDecoration(
+                //       counterText: "",
+                //     ),
+                //     onChanged: (value) {
+                //       onChange!(value.toString());
+                //     },
+                //     onFieldSubmitted: (value) {
+                //       onChange!(value.toString());
+                //     },
+                //     validator: (value) {
+                //       if (value!.isEmpty) {
+                //         return txtErrorMobileNumber.tr;
+                //       } else if (value.length > 10 || value.length < 8) {
+                //         return txtErrorMobileNumber.tr;
+                //       } else {
+                //         return null;
+                //       }
+                //     },
+                //     keyboardType: TextInputType.number,
+                //   ),
+                // ),
+                Text("$mobileNumber")
               ],
             ),
           ),

@@ -3,7 +3,6 @@ String? messageMatcherPassword = "كلمات المرور غير متوافقة"
 String? messageMatcherEmail = "هذا الايميل غير صالح ";
 String? errorPasswordLength = "كلمة المرور يجب ان تكون اكبر من 6 حروف ";
 String? error = "خطأ";
-String? txtOk = "Ok";
 String? txtCancel = "Cancel";
 String? txtWait = "please wait...";
 String? txtLogout = "Logout";
@@ -56,5 +55,5 @@ const String txtProfile = "Profile";
 const String txtLogOutChecking = "Are You Sure You Want to LogOut ?";
 const String txtChangeMobileNumber = "Change Mobile Number";
 const String txtWhatIsYourNewPhoneNumber = "What is your New Phone Number ?";
-
-
+const String txtOk = "OK";
+const String txtSelect = "Select";

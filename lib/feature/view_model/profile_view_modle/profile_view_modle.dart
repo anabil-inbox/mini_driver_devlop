@@ -41,6 +41,7 @@ class ProfileViewModle extends BaseController {
   logOutBottomSheet() {
     Get.bottomSheet(GlobalBottomSheet(
       title: txtLogOutChecking.tr,
+      
       onOkBtnClick: () {
          logOut();
         Get.back();
@@ -66,12 +67,15 @@ class ProfileViewModle extends BaseController {
                 SharedPref.instance
                     .setUserLoginState(ConstanceNetwork.userEnterd),
                 Get.offAll(() => const LoginScreen()),
+                Get.put(AuthViewModle())
               }
             else
               {
                 isLoading = false,
                 update(),
                 snackError(txtError!.tr, "${value.status!.message}"),
+                Get.offAll(() => const LoginScreen()),
+                 Get.put(AuthViewModle())
               }
           });
     } catch (e) {}

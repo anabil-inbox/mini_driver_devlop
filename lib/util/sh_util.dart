@@ -29,39 +29,19 @@ class SharedPref {
   setAppSetting(var json) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     String prfApiSettings = jsonEncode(json);
-    pref.setString('$appSettingKey', prfApiSettings);
+    pref.setString(appSettingKey, prfApiSettings);
   }
 
-  // setCurrentUserDate(Map<String,dynamic> customer) async {
-  //   try {
-  //     Map<String,dynamic> json = jsonDecode(customer.toString());
-  //     String user = jsonEncode(Customer.fromJson(json));
-  //     print("saved_Succeffully ${_prefs?.setString("$userDataKey","$user")}");
-  //   } catch (e) {
-  //     print("error $e");
-  //   }
-  // }
-
-  // getCurrentUserData() {
-//       print("msg_get_Current_user_data ${_prefs?.getString('$userDataKey')}");
-//       try{
-//         Customer currentUserObject = jsonDecode(_prefs!.getString('$userDataKey')!);
-//       return currentUserObject;
-//       }catch(e){
-//         print(e);
-//         return;
-//       }
-//   }
   setLocalization(String lang) {
     _prefs?.setString(_localizationKey, lang);
   }
 
   String getLocalization() {
     try {
-      return _prefs?.getString(_localizationKey) ?? "${Constance.arabicKey}";
+      return _prefs?.getString(_localizationKey) ?? Constance.arabicKey;
     } catch (e) {
       print(e);
-      return "${Constance.arabicKey}";
+      return Constance.arabicKey;
     }
   }
 
@@ -69,7 +49,7 @@ class SharedPref {
     try {
       print("msg_profile_data_to_save $profileData");
       bool? isSaved =
-          await _prefs?.setString("$userDataKey", profileData.toString());
+          await _prefs?.setString(userDataKey, profileData.toString());
       print(isSaved);
     } catch (e) {
       Logger().e(e);
@@ -79,7 +59,7 @@ class SharedPref {
 
   Driver getCurrentUserData() {
     try {
-      var string = _prefs?.getString("$userDataKey");
+      var string = _prefs?.getString(userDataKey);
       var decode;
       if (GetUtils.isNull(json.decode(string!)["data"]["Driver"])) {
         print("get Current user if");

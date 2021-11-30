@@ -12,7 +12,6 @@ Map<String, String> arSU = {
   txtEnterYourPasscode : "ادخل الرمز",
   txtChooseCountry :"اختر الدولة",
   txtSearchForCountry : "ابحث عن الدولة",
-  txtOk! : "موافق",
   txtEditProfile : "تعديل الملف الشخصي",
   txtLog : "السجل",
   txtLogOut : "تسجيل خروج",
@@ -32,6 +31,9 @@ Map<String, String> arSU = {
   txtProfile : "الملف الشخصي",
   txtLogOutChecking : "هل أنت متأكد بأنك تريد تسجيل الخروج ؟",
   txtChangeMobileNumber : "تغيير رقم الهاتف",
-  txtWhatIsYourNewPhoneNumber : "ما هو رقم هاتفك الجديد ؟"
+  txtWhatIsYourNewPhoneNumber : "ما هو رقم هاتفك الجديد ؟",
+  txtOk : "موافق",
+  txtCancel! : " الغاء",
+  txtSelect : "تأكيد"
 };
   

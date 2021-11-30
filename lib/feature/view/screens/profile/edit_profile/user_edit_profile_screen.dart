@@ -176,7 +176,6 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
                         height: sizeH10,
                       ),
                       Row(
-                       
                         children: [
                           Expanded(
                             child: InkWell(
@@ -202,16 +201,14 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
                                       builder: (value) {
                                         return Row(
                                           children: [
-                                            SizedBox(
-                                              width: sizeH5!,
-                                            ),
-                                            const VerticalDivider(),
                                             Text(
                                               "${value.defCountry.prefix}",
                                               textDirection: TextDirection.ltr,
                                             ),
-                                            
-                                            
+                                            const VerticalDivider(),
+                                            SizedBox(
+                                              width: sizeH5!,
+                                            ),
                                           ],
                                         );
                                       },
@@ -230,6 +227,8 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
                                         decoration: const InputDecoration(
                                           counterText: "",
                                         ),
+                                        validator: (e) =>
+                                            phoneVaild(e.toString()),
                                         controller: profileViewModle
                                             .tdUserMobileNumberEdit,
                                         keyboardType: TextInputType.number,
@@ -264,33 +263,35 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
                         height: sizeH20,
                       ),
                       GetBuilder<ProfileViewModle>(builder: (logic) {
-                        return ListView.builder(
-                          primary: false,
-                          shrinkWrap: true,
-                          reverse: true,
-                          keyboardDismissBehavior:
-                              ScrollViewKeyboardDismissBehavior.onDrag,
-                          itemCount: logic.contactMap.length,
-                          itemBuilder: (context, index) {
-                          return ContactItemWidget(
-                              deleteContact: () {
-                                var deletedIndex = logic.contactMap.indexOf(logic.contactMap[index]);
-                                logic.contactMap.removeAt(deletedIndex);
-                                logic.update();
-                              },
-                              mobileNumber: logic.contactMap[index]
-                                  [ConstanceNetwork.mobileNumberKey],
-                              onChange: (_) {
-                                logic.contactMap[index]
-                                    [ConstanceNetwork.mobileNumberKey] = _;
-                                logic.update();
-                              },
-                              prefix: logic.contactMap[index]
-                                  [ConstanceNetwork.countryCodeKey]);
-                        },
-                      );
-                      }),
-                      
+                        return ListView(
+                            shrinkWrap: true,
+                            primary: false,
+                            children: logic.contactMap
+                                .asMap()
+                                .map((index, value) => MapEntry(
+                                    index,
+                                    ContactItemWidget(
+                                        deleteContact: () {
+                                          logic.contactMap
+                                              .removeWhere((element) {
+                                            return element == value;
+                                          });
+
+                                          logic.update();
+                                        },
+                                        mobileNumber: logic.contactMap[index]
+                                            [ConstanceNetwork.mobileNumberKey],
+                                        onChange: (_) {
+                                          logic.contactMap[index][
+                                              ConstanceNetwork
+                                                  .mobileNumberKey] = _;
+                                          logic.update();
+                                        },
+                                        prefix: logic.contactMap[index]
+                                            [ConstanceNetwork.countryCodeKey])))
+                                .values
+                                .toList());
+                      })
                     ],
                   ),
                 ),
@@ -325,14 +326,15 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
     if (profileViewModle.tdUserMobileNumberEdit.text.isEmpty) {
       return;
     }
-
-    Map<String, String> map = {
-      ConstanceNetwork.countryCodeKey: countryCode,
-      ConstanceNetwork.mobileNumberKey:
-          profileViewModle.tdUserMobileNumberEdit.text,
-    };
-    profileViewModle.contactMap.add(map);
-    profileViewModle.tdUserMobileNumberEdit.clear();
-    profileViewModle.update();
+    if (EditProfileScreen._formKey.currentState!.validate()) {
+      Map<String, String> map = {
+        ConstanceNetwork.countryCodeKey: countryCode,
+        ConstanceNetwork.mobileNumberKey:
+            profileViewModle.tdUserMobileNumberEdit.text,
+      };
+      profileViewModle.contactMap.add(map);
+      profileViewModle.tdUserMobileNumberEdit.clear();
+      profileViewModle.update();
+    }
   }
 }

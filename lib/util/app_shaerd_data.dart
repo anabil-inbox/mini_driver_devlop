@@ -96,6 +96,15 @@ emailValid(String val) {
   }
 }
 
+phoneVaild(String value) {
+  if (value == null || value.isEmpty) {
+    return txtErrorMobileNumber;
+  } else if (value.length > 10 || value.length < 8) {
+    return txtErrorMobileNumber;
+  }
+  return null;
+}
+
 Widget simplePopup() => PopupMenuButton<int>(
       initialValue: 1,
       itemBuilder: (context) => [
@@ -436,19 +445,20 @@ void changeLanguageBottomSheet() {
             ),
             PrimaryButton(
                 isLoading: false,
-                textButton: "select",
-                onClicked: () async{
+                textButton: txtSelect.tr,
+                onClicked: () async {
                   try {
                     controller.selectedLang = controller.temproreySelectedLang;
-
                     if (controller.selectedLang!.toLowerCase().contains("ar")) {
                       LocalizationService().changeLocale(Constance.arabicKey);
-                     await SharedPref.instance.setLocalization(Constance.arabicKey);
+                      await SharedPref.instance
+                          .setLocalization(Constance.arabicKey);
                     } else if (controller.selectedLang!
                         .toLowerCase()
                         .contains("en")) {
                       LocalizationService().changeLocale(Constance.englishKey);
-                     await SharedPref.instance.setLocalization(Constance.englishKey);
+                      await SharedPref.instance
+                          .setLocalization(Constance.englishKey);
                     } else {}
 
                     Get.back();

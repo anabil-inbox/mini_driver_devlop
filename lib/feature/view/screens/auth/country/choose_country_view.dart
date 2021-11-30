@@ -129,7 +129,7 @@ class _ChooseCountryScreenState extends State<ChooseCountryScreen> {
                 padding: const EdgeInsets.all(10),
                 child: PrimaryButton(
                     isLoading: false,
-                    textButton: txtOk!.tr,
+                    textButton: txtOk.tr,
                     onClicked: () {
                       logic.defCountry = selctedCountry;
                       logic.update();

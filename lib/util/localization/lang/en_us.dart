@@ -12,7 +12,6 @@ Map<String, String> enUS = {
   txtEnterYourPasscode: "Enter Your Passcode",
   txtChooseCountry: "Choose Country",
   txtSearchForCountry: "Search For Country",
-  txtOk!: "Ok",
   txtEditProfile: "Edit Profile",
   txtLog: "Log",
   txtLogOut: "Log Out",
@@ -32,5 +31,8 @@ Map<String, String> enUS = {
   txtProfile : "Profile",
   txtLogOutChecking : "Are You Sure You Want to Log Out ?",
 txtChangeMobileNumber : "Change Mobile Number",
-  txtWhatIsYourNewPhoneNumber : "What is Your New Phone Number ?"
+  txtWhatIsYourNewPhoneNumber : "What is Your New Phone Number ?",
+  txtOk : "Ok",
+  txtCancel! : "Cancel",
+  txtSelect : "Select"
 };

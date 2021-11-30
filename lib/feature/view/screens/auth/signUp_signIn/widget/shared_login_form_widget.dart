@@ -7,9 +7,7 @@ import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 import 'package:get/utils.dart';
 import 'package:inbox_driver/feature/model/driver_modle.dart';
-import 'package:inbox_driver/feature/model/user_modle.dart';
 import 'package:inbox_driver/feature/view/screens/auth/country/choose_country_view.dart';
-import 'package:inbox_driver/feature/view/screens/auth/signUp_signIn/verification/verfication_screen.dart';
 import 'package:inbox_driver/feature/view/screens/auth/signUp_signIn/widget/primary_button_finger_pinter.dart';
 import 'package:inbox_driver/feature/view_model/auht_view_modle/auth_view_modle.dart';
 import 'package:inbox_driver/network/utils/constance_netwoek.dart';
@@ -64,6 +62,7 @@ class LoginForm extends GetWidget<AuthViewModle> {
                           init: AuthViewModle(),
                           initState: (_) {},
                           builder: (value) {
+                            print("msg_ ${value.defCountry}");
                             return Text(
                               value.defCountry.prefix ?? "+974",
                               textDirection: TextDirection.ltr,

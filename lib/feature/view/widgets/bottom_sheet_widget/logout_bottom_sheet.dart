@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/feature/view/widgets/primary_button.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
+import 'package:inbox_driver/util/string.dart';
 
 class GlobalBottomSheet extends StatelessWidget {
   const GlobalBottomSheet(
@@ -66,7 +68,7 @@ class GlobalBottomSheet extends StatelessWidget {
                  Expanded(
                    child: PrimaryButton(
                     isLoading: false,
-                    textButton: "ok",
+                    textButton: txtOk.tr,
                     width: double.infinity ,
                     onClicked: onOkBtnClick??(){},
                     isExpanded: false),
@@ -77,7 +79,7 @@ class GlobalBottomSheet extends StatelessWidget {
                 !isTwoBtn! ? const SizedBox.shrink(): Expanded(
                   child: PrimaryButton(
                        isLoading: false,
-                       textButton: "cancle",
+                       textButton: txtCancel!.tr,
                        width: double.infinity ,
                        onClicked: onCancelBtnClick??(){},
                        colorBtn: colorBtnGray,
