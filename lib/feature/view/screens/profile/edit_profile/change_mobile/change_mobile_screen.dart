@@ -128,10 +128,10 @@ class ChangeMobileScreen extends StatelessWidget {
                                             validator: (value) {
                                               if (value == null ||
                                                   value.isEmpty) {
-                                                return txtErrorMobileNumber;
+                                                return txtErrorMobileNumber.tr;
                                               } else if (value.length > 10 ||
                                                   value.length < 8) {
-                                                return txtErrorMobileNumber;
+                                                return txtErrorMobileNumber.tr;
                                               }
                                               return null;
                                             },

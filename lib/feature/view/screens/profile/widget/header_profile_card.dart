@@ -118,6 +118,7 @@ class HeaderProfileCard extends StatelessWidget {
                   isLoading: false,
                   onClicked: () {
                       Get.put(AuthViewModle());
+                      Get.put(ProfileViewModle());
                      Get.to(() => const EditProfileScreen());
                   },
                   isExpanded: true)),

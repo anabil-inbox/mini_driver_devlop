@@ -98,21 +98,31 @@ emailValid(String val) {
 
 phoneVaild(String value) {
   if (value == null || value.isEmpty) {
-    return txtErrorMobileNumber;
+    return txtErrorMobileNumber.tr;
   } else if (value.length > 10 || value.length < 8) {
-    return txtErrorMobileNumber;
+    return txtErrorMobileNumber.tr;
   }
   return null;
 }
 
+phoneVaildAlternativeContact(String value) {
+ if (value.length > 10 || value.length < 8) {
+     return txtErrorMobileNumber.tr;
+  }else{
+    return;
+  }
+
+}
+
+
 Widget simplePopup() => PopupMenuButton<int>(
       initialValue: 1,
       itemBuilder: (context) => [
-        PopupMenuItem(
+        const PopupMenuItem(
           value: 1,
           child: Text("First"),
         ),
-        PopupMenuItem(
+        const PopupMenuItem(
           value: 2,
           child: Text("Second"),
         ),

@@ -17,6 +17,7 @@ import 'contact_item_widget.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({Key? key}) : super(key: key);
+
   static final _formKey = GlobalKey<FormState>();
 
   @override
@@ -26,11 +27,13 @@ class EditProfileScreen extends StatefulWidget {
 class _UserEditProfileScreenState extends State<EditProfileScreen> {
   ProfileViewModle profileViewModle = Get.put(ProfileViewModle());
   AuthViewModle authViewModle = Get.put(AuthViewModle());
+  final _formFieldKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
 
+    Get.put(ProfileViewModle());
     profileViewModle.tdUserFullNameEdit.text =
         SharedPref.instance.getCurrentUserData().driverName ?? "";
     profileViewModle.tdUserEmailEdit.text =
@@ -156,7 +159,7 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
                         decoration: InputDecoration(hintText: txtEmail!.tr),
                         validator: (e) {
                           if (e!.isEmpty) {
-                            return txtErrorFillYourEmail.tr;
+                            return null;
                           } else if (!GetUtils.isEmail(e)) {
                             return txtErrorFillYourEmail.tr;
                           }
@@ -200,6 +203,7 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
                                       initState: (_) {},
                                       builder: (value) {
                                         return Row(
+                                          textDirection: TextDirection.ltr,
                                           children: [
                                             Text(
                                               "${value.defCountry.prefix}",
@@ -213,26 +217,38 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
                                         );
                                       },
                                     ),
-                                    Expanded(
-                                      child: TextFormField(
-                                        enabled: true,
-                                        textDirection: TextDirection.ltr,
-                                        maxLength: 10,
-                                        onSaved: (newValue) {
-                                          profileViewModle
-                                              .tdUserMobileNumberEdit
-                                              .text = newValue.toString();
-                                          profileViewModle.update();
-                                        },
-                                        decoration: const InputDecoration(
-                                          counterText: "",
-                                        ),
-                                        validator: (e) =>
-                                            phoneVaild(e.toString()),
-                                        controller: profileViewModle
-                                            .tdUserMobileNumberEdit,
-                                        keyboardType: TextInputType.number,
-                                      ),
+                                    GetBuilder<AuthViewModle>(
+                                      init: AuthViewModle(),
+                                      initState: (_) {},
+                                      builder: (bloc) {
+                                        return Form(
+                                          key: _formFieldKey,
+                                          child: Expanded(
+                                            child: TextFormField(
+                                              enabled: true,
+                                              textDirection: TextDirection.ltr,
+                                              maxLength: 10,
+                                              onSaved: (newValue) {
+                                                profileViewModle
+                                                    .tdUserMobileNumberEdit
+                                                    .text = newValue.toString();
+                                                profileViewModle.update();
+                                              },
+                                              decoration: const InputDecoration(
+                                                counterText: "",
+                                              ),
+                                              validator: (e) {
+                                                return phoneVaildAlternativeContact(
+                                                    e!);
+                                              },
+                                              controller: profileViewModle
+                                                  .tdUserMobileNumberEdit,
+                                              keyboardType:
+                                                  TextInputType.number,
+                                            ),
+                                          ),
+                                        );
+                                      },
                                     )
                                   ],
                                 ),
@@ -307,7 +323,8 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
                     isLoading: value.isLoading,
                     onClicked: () {
                       if (EditProfileScreen._formKey.currentState!.validate()) {
-                        value.editProfileUser();
+                        value.editProfileUser(
+                            udid: "${authViewModle.identifier}");
                       }
                     },
                     isExpanded: true);
@@ -323,15 +340,13 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
   }
 
   addNewContact(String countryCode) {
-    if (profileViewModle.tdUserMobileNumberEdit.text.isEmpty) {
-      return;
-    }
-    if (EditProfileScreen._formKey.currentState!.validate()) {
+    if (_formFieldKey.currentState!.validate()) {
       Map<String, String> map = {
         ConstanceNetwork.countryCodeKey: countryCode,
         ConstanceNetwork.mobileNumberKey:
             profileViewModle.tdUserMobileNumberEdit.text,
       };
+
       profileViewModle.contactMap.add(map);
       profileViewModle.tdUserMobileNumberEdit.clear();
       profileViewModle.update();

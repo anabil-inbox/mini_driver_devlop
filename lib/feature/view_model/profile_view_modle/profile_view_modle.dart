@@ -83,7 +83,7 @@ class ProfileViewModle extends BaseController {
 
 //   //-- for user Edit profile:
 
-  editProfileUser() async {
+  editProfileUser({required String udid}) async {
     isLoading = true;
     update();
     File? myImg;
@@ -97,7 +97,8 @@ class ProfileViewModle extends BaseController {
       "full_name": tdUserFullNameEdit.text,
       "image": myImg != null ? multipart.MultipartFile.fromFileSync(myImg.path) : "",
       "contact_number": jsonEncode(contactMap),
-      "email" : tdUserEmailEdit.text
+      "email" : tdUserEmailEdit.text,
+      "udid" : udid
     };
 
     try {

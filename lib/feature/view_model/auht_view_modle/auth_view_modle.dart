@@ -10,6 +10,7 @@ import 'package:inbox_driver/feature/model/driver_modle.dart';
 import 'package:inbox_driver/feature/model/features_modle.dart';
 import 'package:inbox_driver/feature/view/screens/auth/signUp_signIn/verification/verfication_screen.dart';
 import 'package:inbox_driver/feature/view/screens/profile/profile_screen.dart';
+import 'package:inbox_driver/feature/view_model/profile_view_modle/profile_view_modle.dart';
 import 'package:inbox_driver/network/api/feature/auth_helper.dart';
 import 'package:inbox_driver/network/api/feature/country_helper.dart';
 import 'package:inbox_driver/network/utils/constance_netwoek.dart';
@@ -155,7 +156,8 @@ class AuthViewModle extends GetxController {
             {
               snackSuccess(txtSuccess!.tr, "${value.status!.message}"),
               Get.offAll(() => const ProfileScreen()),
-              Get.put(AuthViewModle())
+              Get.put(AuthViewModle()),
+              Get.put(ProfileViewModle()),
             }
           else
             {snackError(txtError!.tr, "${value.status!.message}")}

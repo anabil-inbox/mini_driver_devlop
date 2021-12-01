@@ -20,8 +20,7 @@ import 'widget/header_profile_card.dart';
 
 class ProfileScreen extends GetWidget<ProfileViewModle> {
   const ProfileScreen({ Key? key }) : super(key: key);
-
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +34,7 @@ class ProfileScreen extends GetWidget<ProfileViewModle> {
         ),
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(Get.context!);
+           // Navigator.pop(Get.context!);
           },
           icon: isArabicLang()?SvgPicture.asset("assets/svgs/back_arrow_ar.svg"):SvgPicture.asset("assets/svgs/back_arrow.svg"),
         ),

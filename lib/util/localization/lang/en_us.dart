@@ -15,7 +15,7 @@ Map<String, String> enUS = {
   txtEditProfile: "Edit Profile",
   txtLog: "Log",
   txtLogOut: "Log Out",
-  txtSetting: "Setting",
+  txtSetting: "Settings",
   txtFullName: "full name",
   txtErrorFillYourName: "fill your name",
   txtErrorFillYourEmail: "fill your Email Correctly",

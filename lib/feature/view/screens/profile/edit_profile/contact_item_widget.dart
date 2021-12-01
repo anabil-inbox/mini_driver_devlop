@@ -5,7 +5,6 @@ import 'package:inbox_driver/feature/view_model/profile_view_modle/profile_view_
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
-import 'package:inbox_driver/util/string.dart';
 
 class ContactItemWidget extends StatelessWidget {
   final String? flag;
@@ -40,22 +39,20 @@ class ContactItemWidget extends StatelessWidget {
             child: Row(
               textDirection: TextDirection.ltr,
               children: [
-
                 SizedBox(
                   width: sizeW18,
                 ),
                 Row(
+                  textDirection: TextDirection.ltr,
                   children: [
                     Text(
                       "$prefix",
                       textDirection: TextDirection.ltr,
                     ),
-                    
                     SizedBox(
                       width: sizeH5,
                     ),
                     const VerticalDivider(),
-                    
                   ],
                 ),
                 // Expanded(
