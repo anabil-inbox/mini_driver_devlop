@@ -73,7 +73,7 @@ class _ChangeMobilScreenState extends State<VerficationScreen> {
                     children: [
                       value.startTimerCounter != 0
                           ? Text(
-                              "$txtResendCodeIn : ${value.startTimerCounter}",
+                              "${txtResendCodeIn.tr} : ${value.startTimerCounter}",
                               style: textStyleHint()!.copyWith(
                                   decoration: TextDecoration.none,
                                   fontWeight: FontWeight.normal,

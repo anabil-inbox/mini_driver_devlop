@@ -32,7 +32,7 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
   @override
   void initState() {
     super.initState();
-
+ 
     Get.put(ProfileViewModle());
     profileViewModle.tdUserFullNameEdit.text =
         SharedPref.instance.getCurrentUserData().driverName ?? "";

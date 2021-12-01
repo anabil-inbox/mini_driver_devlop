@@ -75,7 +75,7 @@ class ProfileViewModle extends BaseController {
                 update(),
                 snackError(txtError!.tr, "${value.status!.message}"),
                 Get.offAll(() => const LoginScreen()),
-                 Get.put(AuthViewModle())
+                Get.put(AuthViewModle())
               }
           });
     } catch (e) {}
