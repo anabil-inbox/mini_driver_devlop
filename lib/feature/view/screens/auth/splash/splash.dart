@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:inbox_driver/feature/view/screens/auth/signUp_signIn/log_in/log_in_screen.dart';
+import 'package:inbox_driver/feature/view/screens/home/home_screen.dart';
 import 'package:inbox_driver/feature/view/screens/profile/profile_screen.dart';
 import 'package:inbox_driver/feature/view_model/auht_view_modle/auth_view_modle.dart';
 import 'package:inbox_driver/feature/view_model/profile_view_modle/profile_view_modle.dart';
@@ -26,7 +27,7 @@ moveToIntro() {
   if (state?.toLowerCase() == ConstanceNetwork.userEnterd) {
     Get.off(() => const LoginScreen());
   } else if (state?.toLowerCase() == ConstanceNetwork.userLoginedState) {
-    Get.offAll(() => const ProfileScreen());
+    Get.offAll(() => HomeScreen());
     Get.put(AuthViewModle());
     Get.put(ProfileViewModle());
 

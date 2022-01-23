@@ -9,6 +9,7 @@ import 'package:inbox_driver/feature/model/country.dart';
 import 'package:inbox_driver/feature/model/driver_modle.dart';
 import 'package:inbox_driver/feature/model/features_modle.dart';
 import 'package:inbox_driver/feature/view/screens/auth/signUp_signIn/verification/verfication_screen.dart';
+import 'package:inbox_driver/feature/view/screens/home/Home_screen.dart';
 import 'package:inbox_driver/feature/view/screens/profile/profile_screen.dart';
 import 'package:inbox_driver/feature/view_model/profile_view_modle/profile_view_modle.dart';
 import 'package:inbox_driver/network/api/feature/auth_helper.dart';
@@ -111,7 +112,6 @@ class AuthViewModle extends GetxController {
     return countres;
   }
 
-
   Future<void> signInUser({Driver? user}) async {
     isLoading = true;
     update();
@@ -129,7 +129,7 @@ class AuthViewModle extends GetxController {
                     mobileNumber: user.mobileNumber!,
                     countryCode: user.countryCode!,
                   )),
-               Get.put(AuthViewModle()),   
+              Get.put(AuthViewModle()),
             }
           else
             {
@@ -155,7 +155,7 @@ class AuthViewModle extends GetxController {
           if (value.status!.success!)
             {
               snackSuccess(txtSuccess!.tr, "${value.status!.message}"),
-              Get.offAll(() => const ProfileScreen()),
+              Get.offAll(() => HomeScreen()),
               Get.put(AuthViewModle()),
               Get.put(ProfileViewModle()),
             }
@@ -188,11 +188,13 @@ class AuthViewModle extends GetxController {
               startTimer(),
               update(),
               snackSuccess(txtSuccess!.tr, "${value.status!.message}"),
-              isFromChange ? Get.to(() => VerficationScreen(
-                id: id ?? "",
-                mobileNumber: mobileNumber ?? "",
-                countryCode: countryCode ?? "",
-              )) : {},
+              isFromChange
+                  ? Get.to(() => VerficationScreen(
+                        id: id ?? "",
+                        mobileNumber: mobileNumber ?? "",
+                        countryCode: countryCode ?? "",
+                      ))
+                  : {},
             }
           else
             {snackError(txtError!.tr, "${value.status!.message}")}

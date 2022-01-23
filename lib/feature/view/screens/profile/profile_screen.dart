@@ -15,12 +15,9 @@ import 'package:inbox_driver/util/string.dart';
 
 import 'widget/header_profile_card.dart';
 
-
-
-
 class ProfileScreen extends GetWidget<ProfileViewModle> {
-  const ProfileScreen({ Key? key }) : super(key: key);
-  
+  const ProfileScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,57 +31,61 @@ class ProfileScreen extends GetWidget<ProfileViewModle> {
         ),
         leading: IconButton(
           onPressed: () {
-           // Navigator.pop(Get.context!);
+            Navigator.pop(Get.context!);
           },
-          icon: isArabicLang()?SvgPicture.asset("assets/svgs/back_arrow_ar.svg"):SvgPicture.asset("assets/svgs/back_arrow.svg"),
+          icon: isArabicLang()
+              ? SvgPicture.asset("assets/svgs/back_arrow_ar.svg")
+              : SvgPicture.asset("assets/svgs/back_arrow.svg"),
         ),
         centerTitle: true,
         backgroundColor: colorBackground,
       ),
       body: Column(
         children: [
-         const HeaderProfileCard(),
+          const HeaderProfileCard(),
           Expanded(
             child: ListView(
               padding: const EdgeInsets.all(0),
               children: [
                 SettingItem(
-                  onTap: (){
-                   changeLanguageBottomSheet();
+                  onTap: () {
+                    changeLanguageBottomSheet();
                   },
                   trailingTitle: "",
                   settingTitle: txtlanguage.tr,
                   iconPath: "assets/svgs/language_profile.svg",
                 ),
-                SizedBox(height: sizeH12,), 
+                SizedBox(
+                  height: sizeH12,
+                ),
                 SettingItem(
-                  onTap: (){
-                    
-                  },
-                  settingTitle: txtLog.tr ,
+                  onTap: () {},
+                  settingTitle: txtLog.tr,
                   trailingTitle: "",
                   iconPath: "assets/svgs/log_icon.svg",
                 ),
-              SizedBox(height: sizeH12,),  
+                SizedBox(
+                  height: sizeH12,
+                ),
                 SettingItem(
-                  onTap: (){
-                   Get.to(() => const SettingsScreen());
+                  onTap: () {
+                    Get.to(() => const SettingsScreen());
                   },
                   settingTitle: txtSetting.tr,
                   trailingTitle: "",
                   iconPath: "assets/svgs/setting.svg",
                 ),
-
-                SizedBox(height: sizeH12,),  
+                SizedBox(
+                  height: sizeH12,
+                ),
                 SettingItem(
-                  onTap: (){
-                   controller.logOutBottomSheet();
+                  onTap: () {
+                    controller.logOutBottomSheet();
                   },
                   settingTitle: txtLogOut.tr,
                   trailingTitle: "",
                   iconPath: "assets/svgs/logout.svg",
                 ),
-                
               ],
             ),
           )

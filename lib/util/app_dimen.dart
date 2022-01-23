@@ -17,8 +17,8 @@ final double? sizeH20 = 20.h;
 final double? sizeH10 = 10.h;
 final double? sizeH12 = 12.h;
 final double? sizeH7 = 7.h;
-final double? sizeH65 =  65.h;
-final double? sizeH60 =  60.h;
+final double? sizeH65 = 65.h;
+final double? sizeH60 = 60.h;
 final double? sizeH90 = 90.h;
 final double? sizeH9 = 9.h;
 final double? sizeH13 = 13.h;
@@ -62,8 +62,6 @@ final double? sizeH350 = 350.h;
 final double sizeH150 = 150.h;
 final double sizeH54 = 54.h;
 
-
-
 //todo ///////////////////////////////////////////////////////////////
 
 //todo this for w
@@ -77,6 +75,7 @@ final double? sizeW1 = 1.w;
 final double? sizeW135 = 135.w;
 final double? sizeW170 = 170.w;
 final double? sizeW320 = 320.w;
+final double? sizeW335 = 335.w;
 final double? sizeW165 = 165.w;
 final double? sizeW28 = 28.w;
 final double? sizeW114 = 114.w;
@@ -90,26 +89,24 @@ final double? sizeW2 = 2.w;
 final double? sizeW12 = 12.w;
 final double? sizeW26 = 26.w;
 final double? sizeW9 = 9.w;
-final double? sizeW20 =  20.w;
-final double? sizeW24 =  24.w;
-final double? sizeW10 =  10.w;
-final double? sizeW13 =  13.w;
-final double? sizeW27 =  27.w;
-final double? sizeW105 =  105.w;
-final double? sizeW40 =  40.w;
-final double? sizeW45 =  45.w;
-final double? sizeW48 =  48.w;
-final double? sizeW7 =  7.w;
-final double? sizeW65 =  65.w;
-final double? sizeW80 =  80.w;
-final double? sizeW85 =  85.w;
-final double? sizeW100 =  100.w;
-final double? sizeW70 =  70.w;
-final double? sizeW60 =  60.w;
-final double? sizeW50 =  50.w;
+final double? sizeW20 = 20.w;
+final double? sizeW24 = 24.w;
+final double? sizeW10 = 10.w;
+final double? sizeW13 = 13.w;
+final double? sizeW27 = 27.w;
+final double? sizeW105 = 105.w;
+final double? sizeW40 = 40.w;
+final double? sizeW45 = 45.w;
+final double? sizeW48 = 48.w;
+final double? sizeW7 = 7.w;
+final double? sizeW65 = 65.w;
+final double? sizeW80 = 80.w;
+final double? sizeW85 = 85.w;
+final double? sizeW100 = 100.w;
+final double? sizeW70 = 70.w;
+final double? sizeW60 = 60.w;
+final double? sizeW50 = 50.w;
 final double sizeW95 = 95.w;
-
-
 
 //todo padding && radius
 final double? sizeRadius = 12;
@@ -148,6 +145,5 @@ final double? padding340 = 340;
 final double? padding52 = 52;
 final double? padding63 = 63;
 
-//todo Stack values 
+//todo Stack values
 final double stack0 = 0;
-

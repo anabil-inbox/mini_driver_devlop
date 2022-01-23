@@ -9,8 +9,7 @@ import 'font_dimne.dart';
 
 SystemUiOverlayStyle? systemUiOverLayLight() {
   return SystemUiOverlayStyle.light.copyWith(
-      statusBarColor: colorTextWhite,
-      systemNavigationBarColor: colorTextWhite);
+      statusBarColor: colorTextWhite, systemNavigationBarColor: colorTextWhite);
 }
 
 TextStyle? textStyle() {
@@ -62,9 +61,7 @@ TextStyle? textStyleBtnBlue() {
 
 TextStyle? textStyleLoginPage() {
   return textStyle()?.copyWith(
-      color: colorBlack,
-      fontSize: fontSize28,
-      fontFamily: Constance.Font_bold);
+      color: colorBlack, fontSize: fontSize28, fontFamily: Constance.Font_bold);
 }
 
 TextStyle? textStyleDrawerHeader() {
@@ -82,18 +79,16 @@ TextStyle? textStyleAppbar() {
 }
 
 TextStyle? textStyleBigPrimaryText() {
-  return TextStyle(
-    color: colorPrimary,
-    fontSize: fontSize34
-  );
+  return TextStyle(color: colorPrimary, fontSize: fontSize34);
 }
 
-TextStyle? textStyleSubTitle(){
-   return TextStyle(
+TextStyle? textStyleSubTitle() {
+  return TextStyle(
       color: colorTextBlack,
       fontSize: fontSize21,
       fontFamily: Constance.Font_regular);
 }
+
 TextStyle? textStyleLargeText() {
   return textStyle()?.copyWith(
       color: colorTextBlack,
@@ -108,12 +103,11 @@ TextStyle? textStyleTitle() {
       fontFamily: Constance.Font_regular);
 }
 
-TextStyle? textStylePrimaryFont(){
+TextStyle? textStylePrimaryFont() {
   return TextStyle(
-    color: colorPrimary,
-    fontFamily: Constance.Font_regular,
-    fontSize: fontSize18
-  );
+      color: colorPrimary,
+      fontFamily: Constance.Font_regular,
+      fontSize: fontSize18);
 }
 
 TextStyle? textStyleTitleBold() {
@@ -124,6 +118,14 @@ TextStyle? textStyleNormal() {
   return textStyle()?.copyWith(
       color: colorTextHint,
       fontSize: fontSize14,
+      height: 1.5,
+      fontFamily: Constance.Font_regular);
+}
+
+TextStyle? textStyleBlack16() {
+  return textStyle()?.copyWith(
+      color: colorBlack,
+      fontSize: fontSize16,
       height: 1.5,
       fontFamily: Constance.Font_regular);
 }
@@ -147,6 +149,7 @@ TextStyle? textStyleCardTitle() {
     color: colorBlack,
   );
 }
+
 TextStyle? textStyleHint() {
   return TextStyle(
     fontSize: fontSize16,
@@ -154,7 +157,8 @@ TextStyle? textStyleHint() {
     color: colorTextHint1,
   );
 }
-TextStyle? smallHintTextStyle(){
+
+TextStyle? smallHintTextStyle() {
   return TextStyle(
     fontSize: fontSize12,
     fontWeight: FontWeight.normal,
@@ -162,7 +166,7 @@ TextStyle? smallHintTextStyle(){
   );
 }
 
-TextStyle? mediumHintTextStyle(){
+TextStyle? mediumHintTextStyle() {
   return TextStyle(
     fontSize: fontSize15,
     fontWeight: FontWeight.normal,
@@ -170,7 +174,7 @@ TextStyle? mediumHintTextStyle(){
   );
 }
 
-TextStyle? mediumTitleTextStyle(){
+TextStyle? mediumTitleTextStyle() {
   return TextStyle(
     fontSize: fontSize15,
     fontWeight: FontWeight.normal,
@@ -178,7 +182,7 @@ TextStyle? mediumTitleTextStyle(){
   );
 }
 
-TextStyle? smallFontHint2TextStyle(){
+TextStyle? smallFontHint2TextStyle() {
   return TextStyle(
     fontSize: fontSize13,
     fontWeight: FontWeight.normal,
@@ -188,10 +192,7 @@ TextStyle? smallFontHint2TextStyle(){
 
 TextStyle? textStyleUnSelectedButton() {
   return TextStyle(
-    fontSize: fontSize16,
-    color: colorTextDark,
-    fontWeight: FontWeight.bold
-  );
+      fontSize: fontSize16, color: colorTextDark, fontWeight: FontWeight.bold);
 }
 
 TextStyle? textStyleCardTitlePrice() {
@@ -199,90 +200,64 @@ TextStyle? textStyleCardTitlePrice() {
     color: colorPrimaryDark,
   );
 }
-TextStyle? textPrimaryButton(){
+
+TextStyle? textPrimaryButton() {
   return TextStyle(
-    color: colorTextWhite , 
-    fontSize: fontSize15,
-    fontWeight: FontWeight.bold
-  );
+      color: colorTextWhite, fontSize: fontSize15, fontWeight: FontWeight.bold);
 }
 
-TextStyle? textSeconderyButton(){
+TextStyle? textSeconderyButton() {
   return TextStyle(
-    color: colorPrimary , 
-    fontSize: fontSize15,
-    fontWeight: FontWeight.bold
-  );
+      color: colorPrimary, fontSize: fontSize15, fontWeight: FontWeight.bold);
 }
 
-TextStyle? textSeconderyButtonUnBold(){
+TextStyle? textSeconderyButtonUnBold() {
   return TextStyle(
-    color: colorPrimary, 
-    fontSize: fontSize14,
-    fontWeight: FontWeight.normal
-  );
+      color: colorPrimary, fontSize: fontSize14, fontWeight: FontWeight.normal);
 }
 
-
-TextStyle? textStyleIntroTitle(){
+TextStyle? textStyleIntroTitle() {
   return TextStyle(
-    color: Colors.black, 
-    fontSize: fontSize21,
-    fontWeight: FontWeight.normal
-  );
+      color: Colors.black, fontSize: fontSize21, fontWeight: FontWeight.normal);
 }
 
-TextStyle? textStyleIntroBody(){
+TextStyle? textStyleIntroBody() {
   return TextStyle(
-    color: Colors.black, 
-    fontSize: fontSize14,
-      fontFamily: Constance.Font_regular
-  );
+      color: Colors.black,
+      fontSize: fontSize14,
+      fontFamily: Constance.Font_regular);
 }
 
-TextStyle? textStyleUnderLinePrimary(){
+TextStyle? textStyleUnderLinePrimary() {
   return TextStyle(
-    color: colorPrimary, 
-    fontSize: fontSize16,
-    decoration: TextDecoration.underline,
-    fontWeight: FontWeight.normal
-  );
+      color: colorPrimary,
+      fontSize: fontSize16,
+      decoration: TextDecoration.underline,
+      fontWeight: FontWeight.normal);
 }
 
-TextStyle? textStyleAppBarTitle(){
+TextStyle? textStyleAppBarTitle() {
   return TextStyle(
-    color: colorBlack, 
-    fontSize: fontSize17,
-    fontFamily: Constance.Font_regular,
-    fontWeight: FontWeight.normal
-  );
+      color: colorBlack,
+      fontSize: fontSize17,
+      fontFamily: Constance.Font_regular,
+      fontWeight: FontWeight.normal);
 }
 
-TextStyle? textStylePrimary(){
+TextStyle? textStylePrimary() {
   return TextStyle(
-    color: colorPrimary, 
-    fontSize: fontSize16,
-    fontWeight: FontWeight.normal
-  );
+      color: colorPrimary, fontSize: fontSize16, fontWeight: FontWeight.normal);
 }
 
-TextStyle? textStyleHints(){
+TextStyle? textStyleHints() {
   return TextStyle(
-    color: colorHint, 
-    fontSize: fontSize15,
-    fontWeight: FontWeight.normal
-  );
+      color: colorHint, fontSize: fontSize15, fontWeight: FontWeight.normal);
 }
 
-TextStyle? textStyleSkipButton(){
+TextStyle? textStyleSkipButton() {
   return TextStyle(
-    color: Colors.black, 
-    fontSize: fontSize15,
-    fontWeight: FontWeight.normal
-  );
+      color: Colors.black, fontSize: fontSize15, fontWeight: FontWeight.normal);
 }
-
-
 
 BoxShadow? boxShadow() {
   return BoxShadow(
@@ -307,48 +282,55 @@ BoxShadow? boxShadowLight() {
 }
 
 ButtonStyle? get buttonStyle => ButtonStyle(
-    padding:MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 12)) ,
+    padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 12)),
     backgroundColor: MaterialStateProperty.all(colorPrimaryDark),
-    shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(6))));
+    shape: MaterialStateProperty.all(
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(6))));
 
 ButtonStyle? get primaryButtonStyle => ButtonStyle(
-    padding:MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: padding12!)) ,
+    padding:
+        MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: padding12!)),
     backgroundColor: MaterialStateProperty.all(colorPrimary),
-    shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)))
-    );
+    shape: MaterialStateProperty.all(
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(6))));
 ButtonStyle? get primaryButtonOpacityStyle => ButtonStyle(
-    padding:MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: padding12!)) ,
+    padding:
+        MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: padding12!)),
     backgroundColor: MaterialStateProperty.all(colorPrimaryOpcaityColor),
-    shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)))
-    );
-
+    shape: MaterialStateProperty.all(
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(6))));
 
 ButtonStyle? get seconderyCustomButtonStyle => ButtonStyle(
     textStyle: MaterialStateProperty.all(textPrimaryButton()),
-    padding:MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: padding12!)) ,
+    padding:
+        MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: padding12!)),
     backgroundColor: MaterialStateProperty.all(colorPrimary),
-    shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(6))));
+    shape: MaterialStateProperty.all(
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(6))));
 
 ButtonStyle? get seconderyButtonBothFormStyle => ButtonStyle(
     textStyle: MaterialStateProperty.all(TextStyle(color: Colors.black)),
-    padding:MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: padding12!)) ,
-        backgroundColor: MaterialStateProperty.all(colorUnSelectedWidget),
-
-    shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(6))));
-
+    padding:
+        MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: padding12!)),
+    backgroundColor: MaterialStateProperty.all(colorUnSelectedWidget),
+    shape: MaterialStateProperty.all(
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(6))));
 
 ButtonStyle? get seconderyButtonStyle => ButtonStyle(
-    textStyle: MaterialStateProperty.all(textSeconderyButton()!.copyWith(color: Colors.black)),
-    padding:MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: padding12!)) ,
-    shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(6))));
-
+    textStyle: MaterialStateProperty.all(
+        textSeconderyButton()!.copyWith(color: Colors.black)),
+    padding:
+        MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: padding12!)),
+    shape: MaterialStateProperty.all(
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(6))));
 
 ButtonStyle? get textButtonStyle => ButtonStyle(
     textStyle: MaterialStateProperty.all(textSeconderyButton()),
     overlayColor: MaterialStateProperty.all(seconderyColor),
-    padding:MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: padding12!)) ,
-    shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(6))));
-
+    padding:
+        MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: padding12!)),
+    shape: MaterialStateProperty.all(
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(6))));
 
 ScrollPhysics? customScrollViewIOS() =>
     BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics());
