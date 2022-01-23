@@ -6,7 +6,7 @@ import 'package:inbox_driver/util/app_shaerd_data.dart';
 
 class IconBtn extends StatelessWidget {
   final Color? backgroundColor, borderColor, iconColor;
-  final double? width , height;
+  final double? width, height;
   final Function()? onPressed;
   final String? icon;
 
@@ -14,7 +14,11 @@ class IconBtn extends StatelessWidget {
       {Key? key,
       this.backgroundColor,
       this.borderColor,
-      this.iconColor,this.width, this.height, this.onPressed, this.icon})
+      this.iconColor,
+      this.width,
+      this.height,
+      this.onPressed,
+      this.icon})
       : super(key: key);
 
   @override
@@ -25,14 +29,17 @@ class IconBtn extends StatelessWidget {
       height: sizeH50,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(sizeRadius10!),
-          color: backgroundColor ??colorTextWhite,
-          border: Border.all(color:borderColor?? colorRed)),
+          color: backgroundColor ?? colorTextWhite,
+          border: Border.all(color: borderColor ?? colorRed)),
       child: MaterialButton(
-        height:height?? sizeH50,
-        minWidth:width ?? sizeW50,
-        onPressed: onPressed??() {},
+        height: height ?? sizeH50,
+        minWidth: width ?? sizeW50,
+        onPressed: onPressed ?? () {},
         clipBehavior: Clip.hardEdge,
-        child: SvgPicture.asset(icon??"assets/svgs/delete_widget.svg" ,color: iconColor ?? colorRed,),
+        child: SvgPicture.asset(
+          icon ?? "assets/svgs/delete_widget.svg",
+          color: iconColor ?? colorRed,
+        ),
       ),
     );
   }

@@ -8,7 +8,8 @@ String? txtWait = "please wait...";
 String? txtLogout = "Logout";
 String? txtLogoutHint = "are you sure that you want Logout";
 String? txtConnection = " انت بلا انترنت  ";
-String? txtConnectionNote = " كل العمليات التي ستقوم بها سيتم تخزينها على الهاتف وفي حال اتصالك بالانترنت سيتم تنفيذها  ";
+String? txtConnectionNote =
+    " كل العمليات التي ستقوم بها سيتم تخزينها على الهاتف وفي حال اتصالك بالانترنت سيتم تنفيذها  ";
 
 //todo this for login page
 String? txtWelcome = "Welcome,";
@@ -17,15 +18,22 @@ String? txtSignIn = "Sign In";
 String? txtSignInContinue = "Sign in to Continue";
 String? txtName = "Name";
 String? txtEmail = "Email";
-String? txtPassword= "Password";
-String? txtForgotPassword= "Forgot Password?";
-String? txtOr= "-OR-";
-String? txtFacebook= "Sign In with Facebook";
-String? txtGoogle= "Sign In with Google";
-String? txtError= "Error";
-String? txtSuccess= "Success";
+String? txtPassword = "Password";
+String? txtForgotPassword = "Forgot Password?";
+String? txtOr = "-OR-";
+String? txtFacebook = "Sign In with Facebook";
+String? txtGoogle = "Sign In with Google";
+String? txtError = "Error";
+String? txtSuccess = "Success";
 
-
+//todo this for home page
+String? txtSearchHere = "Search Here…";
+String? txtCurrent = "Current";
+String? txtCompleted = "Completed";
+String? txtWHLoading = "WH Loading";
+String? txtTotalTask = "Total Task";
+String? txtClosedTask = "Closed Task";
+String? txtDate = "20/06/2021 07:00 PM";
 
 String txtContinue = "Continue";
 String txtWhatsIsyourMobileNumber = "What is your Phone Number?";
@@ -50,7 +58,7 @@ const String txtCamera = "Camera";
 const String txtGallery = "Gallery";
 const String txtTirms = "tirms";
 const String txtAboutInbox = "About Inbox";
-const String txtHelpCenter= "Help Center";
+const String txtHelpCenter = "Help Center";
 const String txtProfile = "Profile";
 const String txtLogOutChecking = "Are You Sure You Want to LogOut ?";
 const String txtChangeMobileNumber = "Change Mobile Number";
