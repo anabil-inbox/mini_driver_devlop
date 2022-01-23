@@ -41,9 +41,8 @@ class ProfileViewModle extends BaseController {
   logOutBottomSheet() {
     Get.bottomSheet(GlobalBottomSheet(
       title: txtLogOutChecking.tr,
-      
       onOkBtnClick: () {
-         logOut();
+        logOut();
         Get.back();
       },
       onCancelBtnClick: () {
@@ -95,10 +94,11 @@ class ProfileViewModle extends BaseController {
 
     myMap = {
       "full_name": tdUserFullNameEdit.text,
-      "image": myImg != null ? multipart.MultipartFile.fromFileSync(myImg.path) : "",
+      "image":
+          myImg != null ? multipart.MultipartFile.fromFileSync(myImg.path) : "",
       "contact_number": jsonEncode(contactMap),
-      "email" : tdUserEmailEdit.text,
-      "udid" : udid
+      "email": tdUserEmailEdit.text,
+      "udid": udid
     };
 
     try {

@@ -19,77 +19,80 @@ class WhLoadingAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     screenUtil(context);
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: sizeW20!, vertical: sizeH20!),
-      child: SizedBox(
-        height: sizeH50,
-        child: CustomAppBarWidget(
-          elevation: 0,
-          appBarColor: Colors.transparent,
-          isCenterTitle: true,
-          titleWidget: CustomTextView(
-            txt: txtWHLoading,
-            textStyle: textStyleBlack16(),
-          ),
-          leadingWidget: GestureDetector(
-            onTap: () {
-              Get.back();
-            },
-            child:
-
-                // IconBtn(
-                //   onPressed: () {
-                //     Navigator.pop(Get.context!);
-                //   },
-                //   icon: isArabicLang()
-                //       ? "assets/svgs/back_arrow_ar.svg"
-                //       : "assets/svgs/back_arrow.svg",
-                //   width: sizeW48,
-                //   height: sizeH48,
-                //   backgroundColor: colorBtnGray,
-                //   iconColor: Colors.black,
-                //   borderColor: Colors.transparent,
-                // )
-
-                IconButton(
-              onPressed: () {
-                Navigator.pop(Get.context!);
+    return Container(
+      color: colorTextWhite,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: sizeW20!, vertical: sizeH20!),
+        child: SizedBox(
+          height: sizeH50,
+          child: CustomAppBarWidget(
+            elevation: 0,
+            appBarColor: Colors.transparent,
+            isCenterTitle: true,
+            titleWidget: CustomTextView(
+              txt: txtWHLoading,
+              textStyle: textStyleBlack16(),
+            ),
+            leadingWidget: GestureDetector(
+              onTap: () {
+                Get.back();
               },
-              icon: isArabicLang()
-                  ? SvgPicture.asset("assets/svgs/back_arrow_ar.svg")
-                  : SvgPicture.asset("assets/svgs/back_arrow.svg"),
-            ),
+              child:
 
-            // IconBtn(
-            //   iconColor: colorTextWhite,
-            //   width: sizeW48,
-            //   height: sizeH48,
-            //   backgroundColor: colorRed,
-            //   onPressed: () {
-            //     // Get.to(() => QrScreen());
-            //   },
-            //   borderColor: colorTrans,
-            //   icon: "assets/svgs/Scan.svg",
-            // ),
-          ),
-          leadingWidth: sizeW48,
-          actionsWidgets: [
-            Padding(
-              padding:
-                  EdgeInsets.symmetric(horizontal: sizeW2!, vertical: sizeH7!),
-              child: IconBtn(
-                icon: "assets/svgs/Call Missed.svg",
-                iconColor: colorRed,
-                width: sizeW36,
-                height: sizeH36,
-                backgroundColor: Colors.transparent,
+                  // IconBtn(
+                  //   onPressed: () {
+                  //     Navigator.pop(Get.context!);
+                  //   },
+                  //   icon: isArabicLang()
+                  //       ? "assets/svgs/back_arrow_ar.svg"
+                  //       : "assets/svgs/back_arrow.svg",
+                  //   width: sizeW48,
+                  //   height: sizeH48,
+                  //   backgroundColor: colorBtnGray,
+                  //   iconColor: Colors.black,
+                  //   borderColor: Colors.transparent,
+                  // )
+
+                  IconButton(
                 onPressed: () {
-                  // Get.to(() => const CartScreen());
+                  Navigator.pop(Get.context!);
                 },
-                borderColor: colorRed,
+                icon: isArabicLang()
+                    ? SvgPicture.asset("assets/svgs/back_arrow_ar.svg")
+                    : SvgPicture.asset("assets/svgs/back_arrow.svg"),
               ),
+
+              // IconBtn(
+              //   iconColor: colorTextWhite,
+              //   width: sizeW48,
+              //   height: sizeH48,
+              //   backgroundColor: colorRed,
+              //   onPressed: () {
+              //     // Get.to(() => QrScreen());
+              //   },
+              //   borderColor: colorTrans,
+              //   icon: "assets/svgs/Scan.svg",
+              // ),
             ),
-          ],
+            leadingWidth: sizeW48,
+            actionsWidgets: [
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: sizeW2!, vertical: sizeH7!),
+                child: IconBtn(
+                  icon: "assets/svgs/Call Missed.svg",
+                  iconColor: colorRed,
+                  width: sizeW36,
+                  height: sizeH36,
+                  backgroundColor: Colors.transparent,
+                  onPressed: () {
+                    // Get.to(() => const CartScreen());
+                  },
+                  borderColor: colorRed,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

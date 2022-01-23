@@ -54,7 +54,7 @@ class WhSearchBar extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: sizeW13!),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(sizeRadius10!),
-          color: colorSearchBox,
+          color: colorTextWhite,
           // border: Border.all(color: colorBorderContainer)
         ),
         child: Row(
