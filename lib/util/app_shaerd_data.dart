@@ -239,85 +239,85 @@ Widget imageNetwork({double? width, double? height, String? url}) {
   );
 }
 
-Future<void> askOnWhatsApp(String? phoneNumber) async {
-  final u =
-      "https://api.whatsapp.com/send?phone=+972${phoneNumber.toString().replaceFirst(RegExp(r'^0+'), "")}&text=";
+// Future<void> askOnWhatsApp(String? phoneNumber) async {
+//   final u =
+//       "https://api.whatsapp.com/send?phone=+972${phoneNumber.toString().replaceFirst(RegExp(r'^0+'), "")}&text=";
 
-  final uri = Uri.encodeFull(u);
-  if (await canLaunch(uri)) {
-    try {
-      await launch(uri);
-    } catch (e) {
-      //Crashlytics.instance.recordError('Manuel Reporting Crash $e', s);
-      snackError(
-          "خطا",
-          'لم نتمكن من فتح الواتساب في جهازك، برجاء التأكد من تنصيبه او ارسل لنا استفسارك علي'
-              '\n'
-              '$phoneNumber'
-              '\n'
-              'مع الرقم المرجعي للمنتج');
-    }
-  } else {
-    final u =
-        "whatsapp://send?phone=+972${phoneNumber.toString().replaceFirst(RegExp(r'^0+'), "")}&text=";
+//   final uri = Uri.encodeFull(u);
+//   if (await canLaunch(uri)) {
+//     try {
+//       await launch(uri);
+//     } catch (e) {
+//       //Crashlytics.instance.recordError('Manuel Reporting Crash $e', s);
+//       snackError(
+//           "خطا",
+//           'لم نتمكن من فتح الواتساب في جهازك، برجاء التأكد من تنصيبه او ارسل لنا استفسارك علي'
+//               '\n'
+//               '$phoneNumber'
+//               '\n'
+//               'مع الرقم المرجعي للمنتج');
+//     }
+//   } else {
+//     final u =
+//         "whatsapp://send?phone=+972${phoneNumber.toString().replaceFirst(RegExp(r'^0+'), "")}&text=";
 
-    final uri = Uri.encodeFull(u);
-    try {
-      await launch(uri);
-    } catch (e) {
-      //Crashlytics.instance.recordError('Manuel Reporting Crash $e', s);
-      snackError(
-          "خطا",
-          'لم نتمكن من فتح الواتساب في جهازك، برجاء التأكد من تنصيبه او ارسل لنا استفسارك علي'
-              '\n'
-              '$phoneNumber'
-              '\n'
-              'مع الرقم المرجعي للمنتج');
-    }
-  }
-}
+//     final uri = Uri.encodeFull(u);
+//     try {
+//       await launch(uri);
+//     } catch (e) {
+//       //Crashlytics.instance.recordError('Manuel Reporting Crash $e', s);
+//       snackError(
+//           "خطا",
+//           'لم نتمكن من فتح الواتساب في جهازك، برجاء التأكد من تنصيبه او ارسل لنا استفسارك علي'
+//               '\n'
+//               '$phoneNumber'
+//               '\n'
+//               'مع الرقم المرجعي للمنتج');
+//     }
+//   }
+// }
 
-Future<void> makePhoneCall(String? phone) async {
-  try {
-    await launch(
-        "tel://+972${phone.toString().replaceFirst(RegExp(r'^0+'), "")}");
-  } catch (e) {
-    print(e);
-  }
-}
+// Future<void> makePhoneCall(String? phone) async {
+//   try {
+//     await launch(
+//         "tel://+972${phone.toString().replaceFirst(RegExp(r'^0+'), "")}");
+//   } catch (e) {
+//     print(e);
+//   }
+// }
 
-void launchWaze(double lat, double lng) async {
-  var url = 'waze://?ll=${lat.toString()},${lng.toString()}&navigate=yes';
-  var fallbackUrl =
-      'https://waze.com/ul?ll=${lat.toString()},${lng.toString()}&navigate=yes';
-  try {
-    bool launched =
-        await launch(url, forceSafariVC: false, forceWebView: false);
-    if (!launched) {
-      await launch(fallbackUrl, forceSafariVC: false, forceWebView: false);
-    } else {
-      //launchGoogleMaps(lat, lng);
-    }
-  } catch (e) {
-    await launch(fallbackUrl, forceSafariVC: false, forceWebView: false);
-    Logger().d(e);
-  }
-}
+// void launchWaze(double lat, double lng) async {
+//   var url = 'waze://?ll=${lat.toString()},${lng.toString()}&navigate=yes';
+//   var fallbackUrl =
+//       'https://waze.com/ul?ll=${lat.toString()},${lng.toString()}&navigate=yes';
+//   try {
+//     bool launched =
+//         await launch(url, forceSafariVC: false, forceWebView: false);
+//     if (!launched) {
+//       await launch(fallbackUrl, forceSafariVC: false, forceWebView: false);
+//     } else {
+//       //launchGoogleMaps(lat, lng);
+//     }
+//   } catch (e) {
+//     await launch(fallbackUrl, forceSafariVC: false, forceWebView: false);
+//     Logger().d(e);
+//   }
+// }
 
-launchGoogleMaps(var lat, var lng) async {
-  var url = 'google.navigation:q=${lat.toString()},${lng.toString()}';
-  var fallbackUrl =
-      'https://www.google.com/maps/search/?api=1&query=${lat.toString()},${lng.toString()}';
-  try {
-    bool launched =
-        await launch(url, forceSafariVC: false, forceWebView: false);
-    if (!launched) {
-      await launch(fallbackUrl, forceSafariVC: false, forceWebView: false);
-    }
-  } catch (e) {
-    await launch(fallbackUrl, forceSafariVC: false, forceWebView: false);
-  }
-}
+// launchGoogleMaps(var lat, var lng) async {
+//   var url = 'google.navigation:q=${lat.toString()},${lng.toString()}';
+//   var fallbackUrl =
+//       'https://www.google.com/maps/search/?api=1&query=${lat.toString()},${lng.toString()}';
+//   try {
+//     bool launched =
+//         await launch(url, forceSafariVC: false, forceWebView: false);
+//     if (!launched) {
+//       await launch(fallbackUrl, forceSafariVC: false, forceWebView: false);
+//     }
+//   } catch (e) {
+//     await launch(fallbackUrl, forceSafariVC: false, forceWebView: false);
+//   }
+// }
 
 hideFocus(context) {
   FocusScopeNode currentFocus = FocusScope.of(context ?? Get.context!);

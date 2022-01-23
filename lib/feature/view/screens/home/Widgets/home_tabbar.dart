@@ -37,7 +37,7 @@ class HomeTabBar extends StatelessWidget {
                                   width: 1,
                                   color: logic.selectedTab == 0
                                       ? colorRed
-                                      : Colors.transparent,
+                                      : colorTrans,
                                   style: BorderStyle.solid))),
                       child: Center(
                         child: CustomTextView(
@@ -59,7 +59,7 @@ class HomeTabBar extends StatelessWidget {
                     logic.isTabBarOutBox = true;
                   },
                   child: Container(
-                    height: sizeH45,
+                    height: sizeH50,
                     padding: EdgeInsets.only(bottom: sizeH5!),
                     decoration: BoxDecoration(
                         border: Border(

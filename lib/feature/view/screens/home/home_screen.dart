@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -10,7 +12,10 @@ import 'package:inbox_driver/util/app_color.dart';
 
 import 'completed_screen/completed_screen.dart';
 
+
 class HomeScreen extends StatelessWidget {
+   HomeScreen({Key? key}) : super(key: key);
+
   Widget get appBar => const HomeAppBar();
   Widget get tabBar => const HomeTabBar();
 
@@ -31,15 +36,13 @@ class HomeScreen extends StatelessWidget {
       body: GetBuilder<HomeViewModel>(
           init: HomeViewModel(),
           builder: (logic) {
-            return SafeArea(
-              child: Column(
-                children: [
-                  appBar,
-                  const Divider(height: 3),
-                  tabBar,
-                  Expanded(child: tabs[logic.selectedTab])
-                ],
-              ),
+            return Column(
+              children: [
+                appBar,
+                const Divider(height: 3),
+                tabBar,
+                Expanded(child: tabs[logic.selectedTab])
+              ],
             );
           }),
     );

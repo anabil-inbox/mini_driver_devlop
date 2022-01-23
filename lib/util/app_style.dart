@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -264,7 +263,7 @@ BoxShadow? boxShadow() {
       color: Colors.grey.withOpacity(.3),
       blurRadius: 5.0, // soften the shadow
       spreadRadius: 3.0, //extend the shadow
-      offset: Offset(
+      offset: const Offset(
         0.0, // Move to right 10  horizontally
         0.10, // Move to bottom 10 Vertically
       ));
@@ -275,10 +274,17 @@ BoxShadow? boxShadowLight() {
       color: Colors.grey.withOpacity(.15),
       blurRadius: 5.0, // soften the shadow
       spreadRadius: 0.0, //extend the shadow
-      offset: Offset(
+      offset: const Offset(
         0.0, // Move to right 10  horizontally
         0.10, // Move to bottom 10 Vertically
       ));
+} 
+
+BoxDecoration boxDecorationWghitBorderRaduis6(){
+  return BoxDecoration(
+    color: colorBackground,
+    borderRadius: BorderRadius.circular(padding6!)
+  );
 }
 
 ButtonStyle? get buttonStyle => ButtonStyle(

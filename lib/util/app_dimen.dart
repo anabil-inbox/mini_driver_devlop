@@ -109,13 +109,13 @@ final double? sizeW50 = 50.w;
 final double sizeW95 = 95.w;
 
 //todo padding && radius
-final double? sizeRadius = 12;
-final double? sizeRadius10 = 10;
-final double? sizeRadius16 = 16;
-final double? sizeRadius5 = 5;
-final double? sizeRadius25 = 25;
-final double? sizeRadius20 = 20;
-final double? padding32 = 32;
+const double? sizeRadius = 12;
+const double? sizeRadius10 = 10;
+const double? sizeRadius16 = 16;
+const double? sizeRadius5 = 5;
+const double? sizeRadius25 = 25;
+const double? sizeRadius20 = 20;
+const double? padding32 = 32;
 final double? padding9 = 9;
 final double? padding12 = 12;
 final double? padding4 = 4;

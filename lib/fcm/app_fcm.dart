@@ -1,4 +1,6 @@
 
+// ignore_for_file: unused_local_variable
+
 import 'dart:io';
 
 
@@ -59,18 +61,18 @@ class AppFcm {
     //   requestSoundPermission: false,
     // );
 
-    const InitializationSettings initializationSettings = InitializationSettings(
-        android: initializationSettingsAndroid,
-        iOS: initializationSettingsIOS,
-        macOS: null);
+    // const InitializationSettings initializationSettings = InitializationSettings(
+    //     android: initializationSettingsAndroid,
+    //     iOS: initializationSettingsIOS,
+    //     macOS: null);
 
-    await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: selectNotification);
-    final notificationAppLaunchDetails =
-    await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
-    if (notificationAppLaunchDetails?.didNotificationLaunchApp ?? false) {
-      await selectNotification(notificationAppLaunchDetails?.payload);
-    }
+    // await flutterLocalNotificationsPlugin.initialize(initializationSettings,
+    //     onSelectNotification: selectNotification);
+    // final notificationAppLaunchDetails =
+    // await flutterLocalNotificationsPlugin.getNotificationAppLaunchDetails();
+    // if (notificationAppLaunchDetails?.didNotificationLaunchApp ?? false) {
+    //   await selectNotification(notificationAppLaunchDetails?.payload);
+    // }
   }
 
   Future selectNotification(String? payload) async {

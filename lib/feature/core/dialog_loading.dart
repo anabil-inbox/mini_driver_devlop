@@ -1,5 +1,3 @@
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:inbox_driver/feature/core/loading.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
