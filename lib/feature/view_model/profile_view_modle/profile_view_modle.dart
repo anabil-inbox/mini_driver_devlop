@@ -29,7 +29,7 @@ class ProfileViewModle extends BaseController {
   TextEditingController tdUserEmailEdit = TextEditingController();
   TextEditingController tdUserMobileNumberEdit = TextEditingController();
   Country defCountry =
-      Country(prefix: SharedPref.instance.getCurrentUserData().countryCode);
+      Country(prefix: SharedPref.instance.getCurrentUserData()?.countryCode);
   final picker = ImagePicker();
   File? img;
   List<Map<String, dynamic>> contactMap = [];
@@ -42,8 +42,8 @@ class ProfileViewModle extends BaseController {
     Get.bottomSheet(GlobalBottomSheet(
       title: txtLogOutChecking.tr,
       
-      onOkBtnClick: () {
-         logOut();
+      onOkBtnClick: () async{
+          logOut();
         Get.back();
       },
       onCancelBtnClick: () {

@@ -332,14 +332,13 @@ class AuthViewModle extends GetxController {
       await _checkBiometrics();
       await _getAvailableBiometrics();
       await _authenticate();
-      if (isAuth! &&
-          SharedPref.instance.getCurrentUserData().id.toString().isNotEmpty) {
+      if (isAuth! && "${SharedPref.instance.getCurrentUserData()?.id.toString()}".isNotEmpty) {
         await signInUser(
             user: Driver(
                 countryCode:
-                    "${SharedPref.instance.getCurrentUserData().countryCode}",
+                    "${SharedPref.instance.getCurrentUserData()?.countryCode}",
                 mobileNumber:
-                    "${SharedPref.instance.getCurrentUserData().mobileNumber}",
+                    "${SharedPref.instance.getCurrentUserData()?.mobileNumber}",
                 udId: identifier,
                 deviceType: deviceType));
       }

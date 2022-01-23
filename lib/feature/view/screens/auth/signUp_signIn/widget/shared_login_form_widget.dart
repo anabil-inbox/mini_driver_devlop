@@ -99,7 +99,7 @@ class LoginForm extends GetWidget<AuthViewModle> {
               },
             ),
             SizedBox(height: sizeH28),
-            !(GetUtils.isNull(SharedPref.instance.getCurrentUserData().id))
+            (SharedPref.instance .getUserToken() != null && !GetUtils.isNull(SharedPref.instance.getCurrentUserData()?.id) &&"${SharedPref.instance.getCurrentUserData()?.id.toString()}".isNotEmpty )
                 ? Row(
                     children: [
                       GetBuilder<AuthViewModle>(

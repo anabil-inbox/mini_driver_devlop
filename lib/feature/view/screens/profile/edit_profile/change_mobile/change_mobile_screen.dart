@@ -68,7 +68,7 @@ class ChangeMobileScreen extends StatelessWidget {
                                       builder: (value) {
                                         return Text(
                                           value.defCountry.prefix!.isEmpty
-                                              ? "${SharedPref.instance.getCurrentUserData().country?[0].prefix}"
+                                              ? "${SharedPref.instance.getCurrentUserData()?.country?[0].prefix}"
                                               : "${value.defCountry.prefix}",
                                           textDirection: TextDirection.ltr,
                                         );
@@ -159,7 +159,7 @@ class ChangeMobileScreen extends StatelessWidget {
                                     await logic.reSendVerficationCode(
                                         id: SharedPref.instance
                                             .getCurrentUserData()
-                                            .id,
+                                            ?.id,
                                         udid: logic.identifier,
                                         target: "sms",
                                         mobileNumber: logic.tdMobileNumber.text,

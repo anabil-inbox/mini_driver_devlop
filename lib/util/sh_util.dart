@@ -57,7 +57,7 @@ class SharedPref {
     }
   }
 
-  Driver getCurrentUserData() {
+  Driver? getCurrentUserData() {
     try {
       var string = _prefs?.getString(userDataKey);
       var decode;
@@ -71,7 +71,7 @@ class SharedPref {
       return profileData;
     } catch (e) {
       Logger().e(e);
-      return Driver();
+      return null;
     }
   }
 
@@ -179,16 +179,15 @@ class SharedPref {
 
   setUserToken(String token) async {
     try {
-      SharedPreferences pref = await SharedPreferences.getInstance();
       if (!GetUtils.isNull(token)) {
-        pref.setString("$tokenKey", token);
+        _prefs!.setString("$tokenKey", token);
       }
     } catch (e) {}
   }
 
   getUserToken() {
     try {
-      return SharedPref._prefs!.getString('$tokenKey');
+      return _prefs!.getString('$tokenKey');
     } catch (e) {
       print(e);
       return "";
