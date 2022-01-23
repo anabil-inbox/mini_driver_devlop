@@ -23,7 +23,6 @@ import 'package:inbox_driver/util/sh_util.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import 'app_color.dart';
 import 'app_style.dart';
