@@ -7,16 +7,17 @@ import 'package:get/get.dart';
 import 'package:inbox_driver/feature/view/screens/home/Widgets/home_appbar.dart';
 import 'package:inbox_driver/feature/view/screens/home/Widgets/home_tabbar.dart';
 import 'package:inbox_driver/feature/view/screens/home/current_screen/current_screen.dart';
+import 'package:inbox_driver/feature/view/widgets/bottom_sheet_widget/map_bottom_sheet.dart';
 import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
 import 'package:inbox_driver/util/app_color.dart';
 
 import 'completed_screen/completed_screen.dart';
 
-
 class HomeScreen extends StatelessWidget {
-   HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({Key? key}) : super(key: key);
 
   Widget get appBar => const HomeAppBar();
+
   Widget get tabBar => const HomeTabBar();
 
   List<Widget> tabs = [const CurrentScreen(), const CompletedScreen()];
