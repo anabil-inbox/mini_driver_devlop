@@ -3,6 +3,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:inbox_driver/feature/view/screens/details/widget/address_box_widget.dart';
 import 'package:inbox_driver/feature/view/screens/details/widget/name_box_widget.dart';
+import 'package:inbox_driver/feature/view/screens/details/widget/order_summery_widget.dart';
 import 'package:inbox_driver/feature/view/screens/details/widget/schedule%20_box_widget.dart';
 import 'package:inbox_driver/feature/view/widgets/appbar/custom_app_bar_widget.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
@@ -29,27 +30,35 @@ class OrderDetailsStarted extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: padding20!),
-        child: Stack(
+        child: Column(
           children: [
-            ListView(
-              children: [
-                SizedBox(
-                  height: sizeH27,
-                ),
-                const NameBox(),
-                SizedBox(
-                  height: sizeH10,
-                ),
-                const AddressBox(),
-                SizedBox(
-                  height: sizeH10,
-                ),
-                const ScheduleBox(),
-                SizedBox(
-                  height: sizeH10,
-                ),
-              ],
+            Expanded(
+              child: ListView(
+                children: [
+                  SizedBox(
+                    height: sizeH27,
+                  ),
+                  const NameBox(),
+                  SizedBox(
+                    height: sizeH10,
+                  ),
+                  const AddressBox(),
+                  SizedBox(
+                    height: sizeH10,
+                  ),
+                  const ScheduleBox(),
+                  SizedBox(
+                    height: sizeH10,
+                  ),
+                  //todo order summery
+                  const OrderSummeryWidget(),
+                  SizedBox(
+                    height: sizeH10,
+                  ),
+                ],
+              ),
             ),
+
             if(true)...[
               Center(
                 child: PrimaryButton(
@@ -83,8 +92,10 @@ class OrderDetailsStarted extends StatelessWidget {
                   ],
                 ),
               ),
-            ]
-            
+            ],
+            SizedBox(
+              height: sizeH27,
+            ),
           ],
         ),
       ),
