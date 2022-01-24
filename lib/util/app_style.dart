@@ -13,6 +13,19 @@ SystemUiOverlayStyle? systemUiOverLayLight() {
       systemNavigationBarColor: colorTextWhite);
 }
 
+TextStyle textStyleCardPaymentTitle() {
+  return TextStyle(
+      color: colorTextHint1,
+      fontSize: fontSize12,
+      fontWeight: FontWeight.normal);
+}
+
+TextStyle textStyleCardPaymentBody() {
+  return TextStyle(
+      color: colorBlack, fontSize: fontSize15, fontWeight: FontWeight.normal);
+}
+
+
 TextStyle? textStyle() {
   return TextStyle(
       color: colorTextDark,
@@ -160,6 +173,13 @@ TextStyle? smallHintTextStyle(){
     fontWeight: FontWeight.normal,
     color: colorTextHint1,
   );
+}
+
+TextStyle? textStylebodyBlack() {
+  return TextStyle(
+      color: colorBlack,
+      fontFamily: Constance.Font_regular,
+      fontSize: fontSize14);
 }
 
 TextStyle? mediumHintTextStyle(){

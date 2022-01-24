@@ -506,6 +506,9 @@ class CustomMaterialPageRoute extends MaterialPageRoute {
         );
 }
 
+
+
+
 bool isArabicLang() {
   return (SharedPref.instance.getAppLanguageMain() == "ar" ? true : false);
   // return isRTL;
