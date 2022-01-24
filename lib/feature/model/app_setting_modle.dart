@@ -23,10 +23,10 @@ class ApiSettings {
         customerType: json["customer_type"],
         aboutUs: json["about_us"] ?? "",
         termOfConditions: json["term_of_conditions"],
-        contactInfo: ContactInfo.fromJson(json["contact_info"]),
-        companySectors: List<CompanySector>.from(json["company_sectors"].map((x) => CompanySector.fromJson(x))),
-        notAllowed: List<dynamic>.from(json["not_allowed"].map((x) => x)),
-        languges: List<Language>.from(json["languages"].map((x) => Language.fromJson(x))),
+        contactInfo: json["contact_info"] == null ? null: ContactInfo.fromJson(json["contact_info"]),
+        companySectors: json["company_sectors"] == null ? null : List<CompanySector>.from(json["company_sectors"].map((x) => CompanySector.fromJson(x))),
+        notAllowed: json["not_allowed"] == null ? null : List<dynamic>.from(json["not_allowed"].map((x) => x)),
+        languges: json["languages"] == null ? null : List<Language>.from(json["languages"].map((x) => Language.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {

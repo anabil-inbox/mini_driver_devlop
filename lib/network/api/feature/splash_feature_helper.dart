@@ -1,4 +1,3 @@
-
 import 'package:inbox_driver/feature/model/app_setting_modle.dart';
 import 'package:inbox_driver/network/api/model/splash.dart';
 import 'package:inbox_driver/network/utils/constance_netwoek.dart';
@@ -12,9 +11,11 @@ class SplashHelper {
 
   Future<ApiSettings> getAppSettings() async {
     try {
-      var response = await SplashApi.getInstance.getAppSettings(url: ConstanceNetwork.settingeEndPoint, header: ConstanceNetwork.header(0));
+      var response = await SplashApi.getInstance.getAppSettings(
+          url: ConstanceNetwork.settingeEndPoint,
+          header: ConstanceNetwork.header(0));
       if (response.status?.success == true) {
-        await SharedPref.instance.setAppSetting(response.data); 
+        await SharedPref.instance.setAppSetting(response.data);
         return ApiSettings.fromJson(response.data);
       } else {
         return ApiSettings.fromJson({});

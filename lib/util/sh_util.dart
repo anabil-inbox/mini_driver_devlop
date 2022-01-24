@@ -27,9 +27,8 @@ class SharedPref {
   static late SharedPreferences? _prefs;
 
   setAppSetting(var json) async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
     String prfApiSettings = jsonEncode(json);
-    pref.setString(appSettingKey, prfApiSettings);
+    _prefs?.setString(appSettingKey, prfApiSettings);
   }
 
   setLocalization(String lang) {
@@ -101,7 +100,7 @@ class SharedPref {
           .languges;
     } catch (e) {
       // ignore: avoid_print
-      print("e");
+      print(e);
     }
   }
 
@@ -120,10 +119,8 @@ class SharedPref {
   }
 
   setAppLanguage(var local) async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setString(languageKey, local.toString());
+    _prefs?.setString(languageKey, local.toString());
     print("exxx:${local.toString()}");
-
   }
 
   String getAppLanguageMain() {
