@@ -20,7 +20,7 @@ class HomeAppBar extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: sizeW20!, vertical: sizeH20!),
       child: SizedBox(
-        height: sizeH80,
+        height: sizeH70,
         child: CustomAppBarWidget(
           elevation: 0,
           appBarColor: Colors.transparent,
