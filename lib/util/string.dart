@@ -34,6 +34,34 @@ String? txtWHLoading = "WH Loading";
 String? txtTotalTask = "Total Task";
 String? txtClosedTask = "Closed Task";
 String? txtDate = "20/06/2021 07:00 PM";
+String? txtBoxes = "Boxes";
+String? txtOther = "Other";
+String? txtCustomerToWH = "Customer to WH";
+String? txtHelena = "Helena Brauer";
+String? txtAddress = "20 Wadi Alsail, 918 Alreef st. Building no.10";
+String? txtReceived = "Received";
+
+//todo this for Bottom Sheets
+String? txtCall = "Call";
+String? txtWhatsApp = "WhatsApp";
+String? txtPhoneCall = "Phone Call";
+String? txtSMSOnMyWay = "SMS: I’m on my way";
+String? txtSMSArrivedOutside = "SMS: I arrived here outside";
+String? txtSMSReportNoShow = "SMS: I’ll report “no show” within 5 mins";
+String? txtNextScan = "Next Scan";
+String? txtSealed = "Sealed";
+String? txtTerminate = "Terminate";
+String? txtReschedule = "Reschedule";
+String? txtTakePicture = "Take a Picture";
+String? txtSubmitReport = "Submit Report";
+String? txtEmergency = "Emergency";
+String? txtCase1 = "Case 1";
+String? txtWriteDownCaseRemarks = "Write down case remarks";
+String? txtNoShowReport = "No Show Report";
+String? txtTimer = "00:00:00";
+String? txtReSchedule = "Re-Schedule";
+String? txtNoShow = "No Show";
+String? txtCancelOrder = "Cancel Order";
 
 String txtContinue = "Continue";
 String txtWhatsIsyourMobileNumber = "What is your Phone Number?";

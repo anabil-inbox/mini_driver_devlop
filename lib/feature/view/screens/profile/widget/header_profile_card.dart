@@ -40,12 +40,8 @@ class HeaderProfileCard extends StatelessWidget {
                 initState: (_) {},
                 builder: (_) {
                   return GetUtils.isNull(
-                              SharedPref.instance.getCurrentUserData().image) ||
-                          SharedPref.instance
-                              .getCurrentUserData()
-                              .image
-                              .toString()
-                              .isEmpty
+                              SharedPref.instance.getCurrentUserData()?.image) ||
+                          "${SharedPref.instance.getCurrentUserData()?.image.toString()}".isEmpty
                       ? CircleAvatar(
                           backgroundColor: colorPrimary,
                           radius: 35,
@@ -53,7 +49,7 @@ class HeaderProfileCard extends StatelessWidget {
                       : CircleAvatar(
                           backgroundColor: colorPrimary,
                           backgroundImage: NetworkImage(
-                              "${SharedPref.instance.getCurrentUserData().image}"),
+                              "${SharedPref.instance.getCurrentUserData()?.image}"),
                           radius: 35,
                         );
                 },
@@ -69,7 +65,7 @@ class HeaderProfileCard extends StatelessWidget {
                     initState: (_) {},
                     builder: (_) {
                       return Text(
-                          "${SharedPref.instance.getCurrentUserData().driverName}");
+                          "${SharedPref.instance.getCurrentUserData()?.driverName}");
                     },
                   ),
                  //  const Text("Ahmed Ali Abdullah"),
@@ -83,7 +79,7 @@ class HeaderProfileCard extends StatelessWidget {
                         initState: (_) {},
                         builder: (_) {
                           return Text(
-                              "${SharedPref.instance.getCurrentUserData().countryCode} ${SharedPref.instance.getCurrentUserData().mobileNumber}",
+                              "${SharedPref.instance.getCurrentUserData()?.countryCode} ${SharedPref.instance.getCurrentUserData()?.mobileNumber}",
                           //    "+974 2228 0808",
                               style: textStyleHint()!
                                   .copyWith(fontWeight: FontWeight.normal),
@@ -97,7 +93,7 @@ class HeaderProfileCard extends StatelessWidget {
                             onTap: () {
                               Get.to(() => ChangeMobileScreen(
                                     mobileNumber:
-                                        "${SharedPref.instance.getCurrentUserData().countryCode} ${SharedPref.instance.getCurrentUserData().mobileNumber}",
+                                        "${SharedPref.instance.getCurrentUserData()?.countryCode} ${SharedPref.instance.getCurrentUserData()?.mobileNumber}",
                                   ));
                             },
                             child: SvgPicture.asset("assets/svgs/edit_pen.svg"))

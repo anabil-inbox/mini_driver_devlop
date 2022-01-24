@@ -35,12 +35,12 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
  
     Get.put(ProfileViewModle());
     profileViewModle.tdUserFullNameEdit.text =
-        SharedPref.instance.getCurrentUserData().driverName ?? "";
+        SharedPref.instance.getCurrentUserData()?.driverName ?? "";
     profileViewModle.tdUserEmailEdit.text =
-        SharedPref.instance.getCurrentUserData().email ?? "";
+        SharedPref.instance.getCurrentUserData()?.email ?? "";
     profileViewModle.contactMap.clear();
     profileViewModle.contactMap =
-        SharedPref.instance.getCurrentUserData().contactNumber ?? [];
+        SharedPref.instance.getCurrentUserData()?.contactNumber ?? [];
   }
 
   @override
@@ -102,12 +102,8 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
                                         )
                                       : GetUtils.isNull(SharedPref.instance
                                                   .getCurrentUserData()
-                                                  .image) ||
-                                              SharedPref.instance
-                                                  .getCurrentUserData()
-                                                  .image
-                                                  .toString()
-                                                  .isEmpty
+                                                  ?.image) ||
+                                              "${SharedPref.instance.getCurrentUserData()?.image.toString()}".isEmpty
                                           ? CircleAvatar(
                                               radius: 50,
                                               backgroundColor:
@@ -116,7 +112,7 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
                                           : CircleAvatar(
                                               radius: 50,
                                               backgroundImage: NetworkImage(
-                                                  "${SharedPref.instance.getCurrentUserData().image}"),
+                                                  "${SharedPref.instance.getCurrentUserData()?.image}"),
                                             ));
                             },
                           ),

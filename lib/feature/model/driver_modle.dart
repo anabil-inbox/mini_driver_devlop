@@ -27,7 +27,7 @@ class Driver {
   List<Country>? country;
 
   factory Driver.fromJson(Map<String, dynamic> json) => Driver(
-        id: json["id"],
+        id: json["id"] ?? "",
         driverName: json["driver_name"],
         mobileNumber: json["mobile_number"],
         countryCode: json["country_code"] ?? "",
