@@ -37,7 +37,7 @@ class ScheduleBox extends StatelessWidget {
                 enabled: false,
                 suffixStyle: TextStyle(color: Colors.transparent),
                 contentPadding: EdgeInsets.all(1.0),
-                hintText: "Fabiana Capmany"),
+                hintText: "22.6.2021 (6:00 PM)"),
           ),
           SizedBox(
             height: sizeH1,
