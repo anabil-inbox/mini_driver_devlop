@@ -7,6 +7,7 @@ import 'package:inbox_driver/feature/view/widgets/custom_text_filed.dart';
 import 'package:inbox_driver/feature/view/widgets/icon_btn.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
+import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/constance.dart';
 
 class HomeAppBar extends StatelessWidget {
@@ -14,6 +15,7 @@ class HomeAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: sizeW20!, vertical: sizeH20!),
       child: SizedBox(
