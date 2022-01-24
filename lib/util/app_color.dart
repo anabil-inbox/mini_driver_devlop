@@ -38,6 +38,7 @@ var colorTextEnableHint = Color(0xFF000000);
 var colorTextWhite = Color(0xFFFFFFFF);
 var colorTextBlack = Color(0xFF000000);
 var colorTextDark = Color(0xFF676771);
+var colorGryBackgroundContainer = Color(0xFFD8D8D8);
 
 //todo this for btn
 var colorPink = Color(0xFFD84B71);

@@ -30,9 +30,16 @@ Map<String, String> enUS = {
   txtHelpCenter: "Help Center",
   txtProfile : "Profile",
   txtLogOutChecking : "Are You Sure You Want to Log Out ?",
-txtChangeMobileNumber : "Change Mobile Number",
+  txtChangeMobileNumber : "Change Mobile Number",
   txtWhatIsYourNewPhoneNumber : "What is Your New Phone Number ?",
   txtOk : "Ok",
   txtCancel! : "Cancel",
-  txtSelect : "Select"
+  txtSelect : "Select",
+
+
+  //todo this for Order Details Pending page
+
+  txtSelect : "Select",
+
+
 };
