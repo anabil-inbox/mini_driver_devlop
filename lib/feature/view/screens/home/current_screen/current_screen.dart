@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:inbox_driver/feature/view/screens/details/order_details_started_screen.dart';
 import 'package:inbox_driver/feature/view/screens/home/current_screen/Widgets/home_card.dart';
 import 'package:inbox_driver/feature/view/widgets/bottom_sheet_widget/map_bottom_sheet.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
@@ -11,6 +12,11 @@ class CurrentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     screenUtil(context);
+    // WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+    //   Future.delayed(const Duration(seconds: 3)).then((value) {
+    //     Get.to(() => const OrderDetailsStarted());
+    //   });
+    // });
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,

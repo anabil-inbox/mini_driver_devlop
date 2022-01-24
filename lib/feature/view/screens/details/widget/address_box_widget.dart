@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:inbox_driver/feature/view/widgets/bottom_sheet_widget/map_bottom_sheet.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
-
 
 class AddressBox extends StatelessWidget {
   const AddressBox({Key? key}) : super(key: key);
@@ -33,34 +33,44 @@ class AddressBox extends StatelessWidget {
                 CustomTextView(
                   txt: 'Delivery Address',
                   maxLine: Constance.maxLineOne,
-                  textStyle:textStyleNormal()?.copyWith(color: colorBlack),
+                  textStyle: textStyleNormal()?.copyWith(color: colorBlack),
                 ),
                 SizedBox(
                   height: sizeH1,
                 ),
-
                 InkWell(
-                  onTap: () {
-                    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-                     // Get.bottomSheet(MapBottomSheet());
-                    });
-                  },
+                  onTap: _goToMap,
                   child: CustomTextView(
-                    txt:"Fabiana Capmany",
+                    txt: "Fabiana Capmany",
                     maxLine: Constance.maxLineOne,
-                    textStyle:textStyleNormal(),
+                    textStyle: textStyleNormal(),
                   ),
                 ),
-
                 SizedBox(
                   height: sizeH13,
                 ),
               ],
             ),
           ),
-          Image.asset("assets/png/Location.png",height: sizeH32,width: sizeW30,),
+          InkWell(
+            onTap: _goToMap,
+            child: Image.asset(
+              "assets/png/Location.png",
+              height: sizeH32,
+              width: sizeW30,
+            ),
+          ),
         ],
       ),
     );
+  }
+
+  void _goToMap() {
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      Get.bottomSheet(const MapBottomSheet(),
+          enableDrag: true,
+          isScrollControlled: true,
+          clipBehavior: Clip.hardEdge);
+    });
   }
 }
