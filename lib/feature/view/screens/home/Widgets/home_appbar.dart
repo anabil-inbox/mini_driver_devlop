@@ -20,7 +20,7 @@ class HomeAppBar extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: sizeW20!, vertical: sizeH20!),
       child: SizedBox(
-        height: sizeH50,
+        height: sizeH80,
         child: CustomAppBarWidget(
           elevation: 0,
           appBarColor: Colors.transparent,
@@ -30,9 +30,9 @@ class HomeAppBar extends StatelessWidget {
             onTap: () {
               Get.to(() => const ProfileScreen());
             },
-            child: CircleAvatar(
-              radius: sizeRadius5,
-              backgroundImage: const AssetImage('assets/png/profile.png'),
+            child: const CircleAvatar(
+              radius: sizeRadius25,
+              backgroundImage:  AssetImage('assets/png/profile.png'),
               // child: Image.asset(
               //   'assets/png/profile.png',
               //   height: sizeH38,
