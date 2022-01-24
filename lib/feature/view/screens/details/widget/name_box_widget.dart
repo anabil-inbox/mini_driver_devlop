@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_style.dart';
+import 'package:inbox_driver/util/constance.dart';
 
 class NameBox extends StatelessWidget {
   const NameBox({Key? key}) : super(key: key);
@@ -22,28 +24,21 @@ class NameBox extends StatelessWidget {
           SizedBox(
             height: sizeH4,
           ),
-          RichText(
-            text: TextSpan(
-              style: textStyleNormal(),
-              children: const [
-                TextSpan(
-                  text: 'Client Name',
-                ),
-              ],
-            ),
-          ),
-          TextFormField(
-            decoration: const InputDecoration(
-                enabled: false,
-                suffixStyle: TextStyle(color: Colors.transparent),
-                contentPadding: EdgeInsets.all(1.0),
-                hintText: "Fabiana Capmany"),
+          CustomTextView(
+            txt: 'Client Name',
+            maxLine: Constance.maxLineOne,
+            textStyle:textStyleNormal()?.copyWith(color: colorBlack),
           ),
           SizedBox(
             height: sizeH1,
           ),
+          CustomTextView(
+            txt:"Fabiana Capmany",
+            maxLine: Constance.maxLineOne,
+            textStyle:textStyleNormal(),
+          ),
           SizedBox(
-            height: sizeH1,
+            height: sizeH12,
           ),
         ],
       ),
