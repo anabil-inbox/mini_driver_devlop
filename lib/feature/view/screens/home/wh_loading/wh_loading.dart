@@ -17,21 +17,7 @@ class WhLoading extends StatelessWidget {
   Widget get appBar => const WhLoadingAppBar();
   Widget get tabBar => const HomeTabBar();
   Widget get searchBar => const WhSearchBar();
-  //  Widget get chart => WhLoadingChart(
-  //    title: "Home",
-  //    pieCharts: [
-  //   PieChartSectionData(
-  //       radius: padding6,
-  //       color: colorRed,
-  //       value: 100,
-  //       showTitle: false),
-  //   PieChartSectionData(
-  //       radius: padding6,
-  //       color: colorGreen,
-  //       value: 30,
-  //       showTitle: false),
-  // ],
-  //  );
+  // Widget get chart => WhLoadingChart();
 
   @override
   Widget build(BuildContext context) {

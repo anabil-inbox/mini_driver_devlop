@@ -41,9 +41,8 @@ class ProfileViewModle extends BaseController {
   logOutBottomSheet() {
     Get.bottomSheet(GlobalBottomSheet(
       title: txtLogOutChecking.tr,
-      
-      onOkBtnClick: () async{
-          logOut();
+      onOkBtnClick: () {
+        logOut();
         Get.back();
       },
       onCancelBtnClick: () {
@@ -186,7 +185,6 @@ class ProfileViewModle extends BaseController {
       update();
     }
   }
-
 
 //   // fot timer on change number :
 //   Timer? timer;

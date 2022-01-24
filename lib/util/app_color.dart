@@ -17,6 +17,7 @@ Color seconderyButtonUnSelected = const Color(0xff676771);
 Color colorPrimaryOpcaityColor = Color(0xffF6E3E5);
 Color colorBtnGray = const Color(0xFFDADBDF);
 Color colorSearchBox = const Color(0xFFF7F9FB);
+Color colorGreenText = const Color(0xFF2ED0A5);
 
 //todo this for textField
 var colorBorderTextFiled = Color(0xFF707070);
@@ -28,7 +29,11 @@ var colorBlack = Color(0xFF000000);
 var colorBackground = Color(0xFFFFFFFF);
 var colorTrans = Colors.transparent;
 
+//todo this  Bottom Sheets
+var colorBottomSheetContainer = Color(0xFFE1E1E3);
+var colorBottomSheetTextField = Color(0xFFF7F9FB);
 var colorTextHint = Color(0xFF707070);
+
 var colorTextEnableHint = Color(0xFF000000);
 var colorTextWhite = Color(0xFFFFFFFF);
 var colorTextBlack = Color(0xFF000000);

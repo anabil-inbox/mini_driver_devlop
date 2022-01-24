@@ -30,6 +30,9 @@ class AuthViewModle extends GetxController {
   String? selectedLang;
   String? temproreySelectedLang;
 
+  //aziz bottom sheets
+  bool isSelected = true;
+
   //user text Controllers
 
   TextEditingController tdSearch = TextEditingController();
