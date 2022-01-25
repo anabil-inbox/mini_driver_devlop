@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
-import '../../app_color.dart';
-import '../../app_dimen.dart';
-import '../../app_style.dart';
+import 'package:inbox_driver/util/app_color.dart';
+import 'package:inbox_driver/util/app_dimen.dart';
+import 'package:inbox_driver/util/app_style.dart';
 
 class BottomSheetCard extends StatelessWidget {
   final String text;

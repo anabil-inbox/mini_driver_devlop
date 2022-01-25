@@ -7,10 +7,10 @@ import 'package:inbox_driver/feature/view_model/auht_view_modle/auth_view_modle.
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
-import 'package:inbox_driver/util/bottom_sheets/Widgets/bottom_sheet_card.dart';
 import 'package:inbox_driver/util/string.dart';
 
-import '../app_color.dart';
+import '../../../../util/app_color.dart';
+import 'Widgets/bottom_sheet_card.dart';
 
 class NoShowReportBottomSheet extends StatelessWidget {
   const NoShowReportBottomSheet({Key? key}) : super(key: key);

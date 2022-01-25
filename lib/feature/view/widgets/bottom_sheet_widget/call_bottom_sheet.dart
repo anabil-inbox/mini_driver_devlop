@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:inbox_driver/feature/view/widgets/bottom_sheet_widget/Widgets/bottom_sheet_card.dart';
 import 'package:inbox_driver/feature/view/widgets/primary_button.dart';
 import 'package:inbox_driver/feature/view_model/auht_view_modle/auth_view_modle.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
 
-import '../app_color.dart';
-import '../app_dimen.dart';
-import '../string.dart';
-import 'Widgets/bottom_sheet_card.dart';
+import '../../../../util/app_color.dart';
+import '../../../../util/app_dimen.dart';
+import '../../../../util/string.dart';
 
 class CallBottomSheet extends StatelessWidget {
   const CallBottomSheet({Key? key}) : super(key: key);
