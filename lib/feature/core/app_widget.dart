@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/route_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:inbox_driver/feature/view/screens/auth/splash/splash.dart';
+import 'package:inbox_driver/feature/view/screens/details/order_details_started_screen.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_style.dart';
