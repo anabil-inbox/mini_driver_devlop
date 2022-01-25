@@ -1,30 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:inbox_driver/feature/model/home/Task_model.dart';
 import 'package:inbox_driver/feature/view/screens/home/wh_loading/wh_loading.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
+import 'package:inbox_driver/util/constance.dart';
+import 'package:inbox_driver/util/date/date_time_util.dart';
 import 'package:inbox_driver/util/font_dimne.dart';
 import 'package:inbox_driver/util/string.dart';
 import 'package:get/get.dart';
 
 class HomeCard extends StatelessWidget {
-  const HomeCard({Key? key}) : super(key: key);
+  const HomeCard({Key? key, required this.task, required this.index})
+      : super(key: key);
+
+  final Task task;
+  final int index;
+
   @override
   Widget build(BuildContext context) {
     screenUtil(context);
     return GestureDetector(
       onTap: () {
-        Get.to(() => const WhLoading());
+        Get.to(() => WhLoading(task: task,));
       },
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: sizeW20!, vertical: sizeH13!),
+      child: Container(
+        margin: EdgeInsets.only(
+            bottom: padding9!,
+            left: padding20!,
+            right: padding20!,
+            top: padding12!),
+        decoration: BoxDecoration(
+          color: (index != 0 && task.status == Constance.inProgress)
+              ? colorTextWhite.withOpacity(0.5)
+              : colorTextWhite,
+          borderRadius: BorderRadius.circular(10),
+        ),
         child: Container(
-          decoration: BoxDecoration(
-            color: colorTextWhite,
-            borderRadius: BorderRadius.circular(10),
-          ),
+          color: (index != 0 && task.status == Constance.inProgress)
+              ? colorTextWhite.withOpacity(0.5)
+              : colorTextWhite,
           child: Padding(
             padding:
                 EdgeInsets.symmetric(horizontal: sizeW20!, vertical: sizeH17!),
@@ -33,12 +50,12 @@ class HomeCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomTextView(
-                  txt: txtWHLoading?.tr,
+                  txt: task.taskName,
                   textStyle: textStyleBlack16(),
                 ),
                 SizedBox(height: sizeH5),
                 CustomTextView(
-                  txt: txtDate?.tr,
+                  txt: DateUtility.getChatTime(task.date.toString()),
                   textStyle: textStyleNormal(),
                 ),
                 SizedBox(height: sizeH7),
@@ -50,11 +67,11 @@ class HomeCard extends StatelessWidget {
                       height: sizeH27,
                       decoration: BoxDecoration(
                         color: colorGryBackgroundContainer.withOpacity(0.3),
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(padding12!),
                       ),
                       child: Center(
                         child: CustomTextView(
-                          txt: "5 ${txtTotalTask!.tr}",
+                          txt: "${task.totalTasks} ${txtTotalTask!.tr}",
                           textStyle: textStyleNormal()
                               ?.copyWith(fontSize: fontSize13, color: colorRed),
                         ),
@@ -70,7 +87,7 @@ class HomeCard extends StatelessWidget {
                       ),
                       child: Center(
                         child: CustomTextView(
-                          txt: "2 ${txtClosedTask!.tr}",
+                          txt: "${task.totalDone} ${txtClosedTask!.tr}",
                           textStyle: textStyleNormal()?.copyWith(
                               fontSize: fontSize13, color: colorGreen),
                         ),
