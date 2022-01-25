@@ -40,5 +40,8 @@ Map<String, String> arSU = {
   txtHour: "ساعة",
   txtMinute: "دقيقة",
   txtSecondes: "ثانية",
-  txtNow : "الان"
+  txtNow: "الان",
+  txtSearchHere: "صندوق البحث",
+  txtCompleted: "مكتمل",
+  txtCurrent: "حالي",
 };

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:inbox_driver/feature/view/screens/home/new_customer/new_customer.dart';
 import 'package:inbox_driver/feature/view/screens/profile/profile_screen.dart';
 import 'package:inbox_driver/feature/view/widgets/appbar/custom_app_bar_widget.dart';
 import 'package:inbox_driver/feature/view/widgets/custom_text_filed.dart';
@@ -8,6 +9,7 @@ import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/constance.dart';
+import 'package:inbox_driver/util/string.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({Key? key}) : super(key: key);
@@ -60,7 +62,7 @@ class HomeAppBar extends StatelessWidget {
               height: sizeH48,
               backgroundColor: colorRedTrans,
               onPressed: () {
-                // Get.to(() => const CartScreen());
+                Get.to(() => NewCustomer());
               },
               borderColor: colorTrans,
             ),
@@ -105,7 +107,7 @@ class HomeAppBar extends StatelessWidget {
   //         ],
   //       ),
   //     );
-  
+
   Widget get searchWidget => CustomTextFormFiled(
         iconSize: sizeRadius20,
         maxLine: Constance.maxLineOne,
@@ -120,9 +122,9 @@ class HomeAppBar extends StatelessWidget {
         fillColor: scaffoldColor,
         isFill: true,
         isBorder: true,
-        label: "Search here ...",
+        label: txtSearchHere.tr,
       );
- 
+
   void _goToFilterNameView() {
     // Get.to(() => SearchScreen());
   }

@@ -16,15 +16,14 @@ import 'package:logger/logger.dart';
 
 import 'completed_screen/completed_screen.dart';
 
-
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
 
   Widget get appBar => const HomeAppBar();
-
   Widget get tabBar => const HomeTabBar();
-
   List<Widget> tabs = [const CurrentScreen(), const CompletedScreen()];
+
+  HomeViewModel homeViewModel = Get.put(HomeViewModel());
 
   @override
   Widget build(BuildContext context) {

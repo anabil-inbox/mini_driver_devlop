@@ -12,11 +12,11 @@ class CurrentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     screenUtil(context);
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-      Future.delayed(const Duration(seconds: 3)).then((value) {
-        Get.to(() => const OrderDetailsStarted());
-      });
-    });
+    // WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+    //   Future.delayed(const Duration(seconds: 3)).then((value) {
+    //     Get.to(() => const OrderDetailsStarted());
+    //   });
+    // });
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,

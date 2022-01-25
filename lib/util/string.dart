@@ -27,19 +27,41 @@ String? txtError = "Error";
 String? txtSuccess = "Success";
 
 //todo this for home page
-String? txtSearchHere = "Search Here…";
-String? txtCurrent = "Current";
-String? txtCompleted = "Completed";
-String? txtWHLoading = "WH Loading";
-String? txtTotalTask = "Total Task";
-String? txtClosedTask = "Closed Task";
-String? txtDate = "20/06/2021 07:00 PM";
-String? txtBoxes = "Boxes";
-String? txtOther = "Other";
-String? txtCustomerToWH = "Customer to WH";
-String? txtHelena = "Helena Brauer";
-String? txtAddress = "20 Wadi Alsail, 918 Alreef st. Building no.10";
+const String txtSearchHere = "Search Here…";
+const String txtCompleted = "Completed";
+const String txtCurrent = "Current";
+const String txtWHLoading = "WH Loading";
+const String txtTotalTask = "Total Task";
+const String txtClosedTask = "Closed Task";
+const String txtDate = "20/06/2021 07:00 PM";
+const String txtBoxes = "Boxes";
+const String txtOther = "Other";
+const String txtCustomerToWH = "Customer to WH";
+const String txtHelena = "Helena Brauer";
+const String txtAddress = "20 Wadi Alsail, 918 Alreef st. Building no.10";
 const String txtReceived = "Received";
+
+//todo this for New Customer
+const String txtNewCustomer = "New Customer";
+const String txtContractSignature = "Contract Signature";
+const String txtIDVerification = "ID Verification";
+const String txtScanBox = "Scan Box";
+const String txtScanProducts = "Scan Products";
+const String txtBalance = "Balance";
+const String txtTotal = "Total";
+const String txtPaid = "Paid";
+const String txtAmountDue = "Amount Due";
+const String txtCash = "Cash";
+const String txtCard = "Card";
+const String txtApplication = "Application";
+const String txtQR = "QR";
+const String txtCustomerSignature = "Customer Signature";
+const String txtProduct1 = "Product 01";
+const String txtQuantity2 = "Quantity 2";
+const String txtDriverSide = "On Driver side";
+const String txtClientSide = "On client side";
+const String txtFingerprint = "Fingerprint";
+const String txtDone = "Done";
 
 //todo this for Bottom Sheets
 String? txtCall = "Call";
@@ -99,4 +121,3 @@ const String txtHour = "Hour";
 const String txtMinute = "Minute";
 const String txtSecondes = "secondes";
 const String txtNow = "now";
-
