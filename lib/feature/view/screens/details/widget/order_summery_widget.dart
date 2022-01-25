@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/font_dimne.dart';
+import 'package:inbox_driver/util/string.dart';
 
 class OrderSummeryWidget extends StatelessWidget {
   const OrderSummeryWidget({Key? key}) : super(key: key);
@@ -30,7 +32,7 @@ class OrderSummeryWidget extends StatelessWidget {
             children: [
               Expanded(
                 child: CustomTextView(
-                  txt: 'Order Summery',
+                  txt: txtOrderSummery!.tr,
                   maxLine: Constance.maxLineOne,
                   textStyle:textStyleNormal()?.copyWith(color: colorBlack),
                 ),
@@ -45,7 +47,7 @@ class OrderSummeryWidget extends StatelessWidget {
                 ),
                 child: Center(
                   child: CustomTextView(
-                    txt: "Pending",
+                    txt: txtPending.tr,
                     textStyle: textStyleNormal()?.copyWith(fontSize: fontSize13, color: seconderyButtonUnSelected),
                   ),
                 ),
@@ -61,7 +63,7 @@ class OrderSummeryWidget extends StatelessWidget {
             height: sizeH10,
           ),
           CustomTextView(
-            txt: 'Recall',
+            txt: txtRecall.tr,
             maxLine: Constance.maxLineOne,
             textStyle:textStyleNormal()?.copyWith(color: colorBlack),
           ),
@@ -69,7 +71,7 @@ class OrderSummeryWidget extends StatelessWidget {
             height: sizeH1,
           ),
           CustomTextView(
-            txt:"Boxes 0/2",
+            txt:txtBoxes0.tr,
             maxLine: Constance.maxLineOne,
             textStyle:textStyleNormal(),
           ),

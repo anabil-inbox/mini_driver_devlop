@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
+import 'package:inbox_driver/util/string.dart';
 
 class ScheduleBox extends StatelessWidget {
   const ScheduleBox({Key? key}) : super(key: key);
@@ -22,12 +24,12 @@ class ScheduleBox extends StatelessWidget {
             height: sizeH13,
           ),
           CustomTextView(
-            txt: 'Schedule Delivery',
+            txt: txtScheduleDelivery.tr,
             maxLine: Constance.maxLineOne,
             textStyle:textStyleNormal()?.copyWith(color: colorBlack),
           ),
           CustomTextView(
-            txt: '22.6.2021 (6:00 PM)',
+            txt: txtTime.tr,
             maxLine: Constance.maxLineOne,
             textStyle:textStyleNormal(),
           ),

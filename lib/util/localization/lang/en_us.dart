@@ -40,5 +40,17 @@ Map<String, String> enUS = {
   txtHour: "Hour",
   txtMinute: "Minute",
   txtSecondes: "Seconds",
-  txtNow: "Just Now"
+  txtNow: "Just Now",
+  txtDeliveryAddress: "Delivery Address",
+  txtFabianaCapmany: "Fabiana Capmany",
+  txtClientName: "Client Name",
+  txtDeliveryMap: "Zone No., Street No., Building No.",
+  txtOrderSummery: "Order Summery",
+  txtPending: "Pending",
+  txtRecall: "Recall",
+  txtBoxes0: "Boxes 0/2",
+  txtScheduleDelivery: "Schedule Delivery",
+  txtTime: "22.6.2021 (6:00 PM)",
+  txtOrderDetails: "Order Details",
+  txtButtonStart: "Start",
 };

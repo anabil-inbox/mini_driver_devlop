@@ -40,5 +40,18 @@ Map<String, String> arSU = {
   txtHour: "ساعة",
   txtMinute: "دقيقة",
   txtSecondes: "ثانية",
-  txtNow : "الان"
+  txtNow : "الان",
+  txtDeliveryAddress: "عنوان التسليم",
+  txtFabianaCapmany: " شركة فابيانا",
+  txtClientName: "اسم العميل",
+  txtDeliveryMap: "رقم المنطقة ، رقم الشارع  ،  رقم المبنى .",
+  txtOrderSummery: " ملخص الطلب ",
+  txtPending: "قيد الأنتظار",
+  txtRecall: "اعد الطلب",
+  txtBoxes0: "بوكس 0/2",
+  txtScheduleDelivery: "وقت التسليم",
+  txtTime: "22.6.2021 (6:00 مساءا)",
+  txtOrderDetails: "تفاصيل الطلب",
+  txtButtonStart: "ابدأ",
 };
+
