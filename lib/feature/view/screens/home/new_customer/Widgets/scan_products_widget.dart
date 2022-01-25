@@ -9,10 +9,11 @@ import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
+import 'package:inbox_driver/util/font_dimne.dart';
 import 'package:inbox_driver/util/string.dart';
 
-class ScanBox extends StatelessWidget {
-  const ScanBox({Key? key}) : super(key: key);
+class ScanProducts extends StatelessWidget {
+  const ScanProducts({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,7 @@ class ScanBox extends StatelessWidget {
             ),
             SizedBox(width: sizeW10),
             CustomTextView(
-              txt: txtScanBox.tr,
+              txt: txtScanProducts.tr,
               textStyle: textStyleNormal()?.copyWith(color: colorBlack),
             ),
             const Spacer(),
@@ -61,7 +62,7 @@ class ScanBox extends StatelessWidget {
             ),
           ],
         ),
-        collapsed: SizedBox.shrink(),
+        collapsed:const SizedBox.shrink(),
         expanded: Column(
           children: [
             SizedBox(height: sizeH14),
@@ -75,11 +76,46 @@ class ScanBox extends StatelessWidget {
               ),
               child: Row(
                 children: <Widget>[
-                  SvgPicture.asset('assets/svgs/Folder_Shared.svg'),
-                  SizedBox(width: sizeW5),
+                  const CircleAvatar(
+                    radius: sizeRadius10,
+                    backgroundImage: AssetImage('assets/png/profile.png'),
+                  ),
+                  SizedBox(width: sizeW10),
                   CustomTextView(
-                    txt: txtBoxes.tr,
+                    txt: txtProduct1.tr,
                     textStyle: textStyleNormal()?.copyWith(color: colorBlack),
+                  ),
+                  SizedBox(width: sizeW48),
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: sizeH10!, vertical: sizeH4!),
+                    decoration: BoxDecoration(
+                      color: colorTextWhite,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Center(
+                      child: CustomTextView(
+                        txt: txtQuantity2.tr,
+                        textStyle: textStyleNormal()
+                            ?.copyWith(color: colorRed, fontSize: fontSize13),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: sizeW12),
+                  Container(
+                    width: sizeW30,
+                    height: sizeH30,
+                    decoration: BoxDecoration(
+                      color: colorRed.withOpacity(0.3),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                        child: SvgPicture.asset(
+                      'assets/svgs/delete_widget.svg',
+                      color: colorRed,
+                      width: sizeW15,
+                      height: sizeH16,
+                    )),
                   )
                 ],
               ),

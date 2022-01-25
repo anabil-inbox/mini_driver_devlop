@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:inbox_driver/feature/view/screens/home/new_customer/new_customer.dart';
+import 'package:inbox_driver/feature/view/screens/home/new_customer/new_customer_view.dart';
 import 'package:inbox_driver/feature/view/screens/profile/profile_screen.dart';
 import 'package:inbox_driver/feature/view/widgets/appbar/custom_app_bar_widget.dart';
 import 'package:inbox_driver/feature/view/widgets/custom_text_filed.dart';

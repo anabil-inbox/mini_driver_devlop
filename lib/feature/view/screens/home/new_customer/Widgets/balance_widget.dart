@@ -11,6 +11,66 @@ import 'package:get/get.dart';
 class Balance extends StatelessWidget {
   const Balance({Key? key}) : super(key: key);
 
+  Widget get btn => Row(
+    children: <Widget>[
+      GestureDetector(
+        onTap: () {},
+        child: Container(
+          height: sizeH34,
+          width: sizeW95,
+          decoration: BoxDecoration(
+            color: colorRed,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: Center(
+            child: CustomTextView(
+              txt: txtCash.tr,
+              textStyle: textStyleBtn(),
+            ),
+          ),
+        ),
+      ),
+      SizedBox(width: sizeW15),
+      GestureDetector(
+        onTap: () {},
+        child: Container(
+          height: sizeH34,
+          width: sizeW95,
+          decoration: BoxDecoration(
+            color: colorTextWhite,
+            borderRadius: BorderRadius.circular(5),
+            border: Border.all(color: colorBtnGray),
+          ),
+          child: Center(
+            child: CustomTextView(
+              txt: txtCard.tr,
+              textStyle: textStyleNormal(),
+            ),
+          ),
+        ),
+      ),
+      SizedBox(width: sizeW15),
+      GestureDetector(
+        onTap: () {},
+        child: Container(
+          height: sizeH34,
+          width: sizeW95,
+          decoration: BoxDecoration(
+            color: colorTextWhite,
+            borderRadius: BorderRadius.circular(5),
+            border: Border.all(color: colorBtnGray),
+          ),
+          child: Center(
+            child: CustomTextView(
+              txt: txtApplication.tr,
+              textStyle: textStyleNormal(),
+            ),
+          ),
+        ),
+      ),
+    ],
+  );
+
   @override
   Widget build(BuildContext context) {
     screenUtil(context);
@@ -107,63 +167,5 @@ class Balance extends StatelessWidget {
     );
   }
 
-  Widget get btn => Row(
-        children: <Widget>[
-          GestureDetector(
-            onTap: () {},
-            child: Container(
-              height: sizeH34,
-              width: sizeW95,
-              decoration: BoxDecoration(
-                color: colorRed,
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: Center(
-                child: CustomTextView(
-                  txt: txtCash.tr,
-                  textStyle: textStyleBtn(),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(width: sizeW15),
-          GestureDetector(
-            onTap: () {},
-            child: Container(
-              height: sizeH34,
-              width: sizeW95,
-              decoration: BoxDecoration(
-                color: colorTextWhite,
-                borderRadius: BorderRadius.circular(5),
-                border: Border.all(color: colorBtnGray),
-              ),
-              child: Center(
-                child: CustomTextView(
-                  txt: txtCard.tr,
-                  textStyle: textStyleNormal(),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(width: sizeW15),
-          GestureDetector(
-            onTap: () {},
-            child: Container(
-              height: sizeH34,
-              width: sizeW95,
-              decoration: BoxDecoration(
-                color: colorTextWhite,
-                borderRadius: BorderRadius.circular(5),
-                border: Border.all(color: colorBtnGray),
-              ),
-              child: Center(
-                child: CustomTextView(
-                  txt: txtApplication.tr,
-                  textStyle: textStyleNormal(),
-                ),
-              ),
-            ),
-          ),
-        ],
-      );
+
 }
