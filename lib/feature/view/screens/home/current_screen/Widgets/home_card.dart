@@ -24,7 +24,9 @@ class HomeCard extends StatelessWidget {
     screenUtil(context);
     return GestureDetector(
       onTap: () {
-        Get.to(() => WhLoading(task: task,));
+        Get.to(() => WhLoading(
+              task: task,
+            ));
       },
       child: Container(
         margin: EdgeInsets.only(
@@ -71,7 +73,7 @@ class HomeCard extends StatelessWidget {
                       ),
                       child: Center(
                         child: CustomTextView(
-                          txt: "${task.totalTasks} ${txtTotalTask!.tr}",
+                          txt: "${task.totalTasks} ${txtTotalTask.tr}",
                           textStyle: textStyleNormal()
                               ?.copyWith(fontSize: fontSize13, color: colorRed),
                         ),
@@ -87,7 +89,7 @@ class HomeCard extends StatelessWidget {
                       ),
                       child: Center(
                         child: CustomTextView(
-                          txt: "${task.totalDone} ${txtClosedTask!.tr}",
+                          txt: "${task.totalDone} ${txtClosedTask.tr}",
                           textStyle: textStyleNormal()?.copyWith(
                               fontSize: fontSize13, color: colorGreen),
                         ),

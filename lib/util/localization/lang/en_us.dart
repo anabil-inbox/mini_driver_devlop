@@ -40,5 +40,8 @@ Map<String, String> enUS = {
   txtHour: "Hour",
   txtMinute: "Minute",
   txtSecondes: "Seconds",
-  txtNow: "Just Now"
+  txtNow: "Just Now",
+  txtSearchHere: "Search Here…",
+  txtCompleted: "Completed",
+  txtCurrent: "Current",
 };
