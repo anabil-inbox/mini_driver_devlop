@@ -121,3 +121,25 @@ const String txtHour = "Hour";
 const String txtMinute = "Minute";
 const String txtSecondes = "secondes";
 const String txtNow = "now";
+
+//todo this for AddressBox Widget
+const String txtDeliveryAddress = "Delivery Address";
+const String txtFabianaCapmany = "Fabiana Capmany";
+
+//todo this for NameBox Widget
+const String txtClientName = "Client Name";
+const String txtDeliveryMap = "Zone No., Street No., Building No.";
+
+//todo this for OrderSummery Widget
+const String txtOrderSummery = "Order Summery";
+const String txtPending = "Pending";
+const String txtRecall = "Recall";
+const String txtBoxes0 = "Boxes 0/2";
+
+//todo this for ScheduleBox Widget
+const String txtScheduleDelivery = "Schedule Delivery";
+const String txtTime = "22.6.2021 (6:00 PM)";
+
+//todo this for OrderDetailsStarted Widget
+const String txtOrderDetails = "Order Details";
+const String txtButtonStart = "Start";

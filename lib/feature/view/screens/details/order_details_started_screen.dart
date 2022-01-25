@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:inbox_driver/feature/view/screens/details/widget/address_box_widget.dart';
 import 'package:inbox_driver/feature/view/screens/details/widget/name_box_widget.dart';
 import 'package:inbox_driver/feature/view/screens/details/widget/order_summery_widget.dart';
@@ -8,11 +7,11 @@ import 'package:inbox_driver/feature/view/screens/details/widget/schedule%20_box
 import 'package:inbox_driver/feature/view/widgets/appbar/custom_app_bar_widget.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/feature/view/widgets/primary_button.dart';
-import 'package:inbox_driver/feature/view/widgets/secondery_button.dart';
 import 'package:inbox_driver/feature/view/widgets/secondery_form_button.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
+import 'package:inbox_driver/util/string.dart';
 
 class OrderDetailsStarted extends StatelessWidget {
   const OrderDetailsStarted({Key? key}) : super(key: key);
@@ -22,7 +21,7 @@ class OrderDetailsStarted extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBarWidget(
         titleWidget: CustomTextView(
-          txt: "Order Details",
+          txt: txtOrderDetails.tr,
           maxLine: Constance.maxLineOne,
           textStyle: textStyleAppBarTitle(),
         ),
@@ -64,7 +63,7 @@ class OrderDetailsStarted extends StatelessWidget {
                 child: PrimaryButton(
                   isExpanded: true,
                   isLoading: false,
-                  textButton: "Start",
+                  textButton: txtButtonStart.tr,
                   onClicked: () {},
                 ),
               )
