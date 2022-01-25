@@ -29,19 +29,19 @@ class ScanScreen extends StatelessWidget {
             onPermissionSet: (ctrl, p) =>
                 homeViewModel.onPermissionSet(context, ctrl, p),
           ),
-          Positioned(
-              top: padding40,
-              right: padding20,
-              left: padding20,
-              child: const ChartWidget(
-                firstGreenValue: 40,
-                firstRedValue: 60,
-                firstTitle: "12/15 \nBoxes",
-                secondGreenValue: 30,
-                secondRedValue: 100,
-                secondTitle: "4/5 \nOthers",
-                mainTitle: "22/6/2021 6:00 PM",
-              ))
+          // Positioned(
+          //     top: padding40,
+          //     right: padding20,
+          //     left: padding20,
+          //     child: const ChartWidget(
+          //       firstGreenValue: 40,
+          //       firstRedValue: 60,
+          //       firstTitle: "12/15 \nBoxes",
+          //       secondGreenValue: 30,
+          //       secondRedValue: 100,
+          //       secondTitle: "4/5 \nOthers",
+          //       mainTitle: "22/6/2021 6:00 PM",
+          //     ))
         ],
       ),
     );

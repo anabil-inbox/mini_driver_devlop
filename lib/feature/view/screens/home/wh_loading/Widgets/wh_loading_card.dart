@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:inbox_driver/feature/view/screens/home/wh_loading/Widgets/primary_border_button.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
@@ -8,8 +9,10 @@ import 'package:inbox_driver/util/font_dimne.dart';
 import 'package:inbox_driver/util/string.dart';
 
 class WhLoadingCard extends StatelessWidget {
-  const WhLoadingCard({Key? key}) : super(key: key);
+  const WhLoadingCard({Key? key , required this.onRecivedClick}) : super(key: key);
 
+  final Function onRecivedClick;
+  
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -69,8 +72,13 @@ class WhLoadingCard extends StatelessWidget {
                   txt: txtDate,
                   textStyle: textStyleNormal()?.copyWith(fontSize: fontSize12),
                 ),
-                btn,
-                SizedBox(height: sizeH6),
+                SizedBox(
+                  height: sizeH10,
+                ),
+                PrimaryBorderButton(buttonText: txtReceived, function: (){
+                  onRecivedClick();
+                }),
+                SizedBox(height: sizeH16),
               ],
             ),
           ),
@@ -80,20 +88,20 @@ class WhLoadingCard extends StatelessWidget {
     );
   }
 
-  Widget get btn => Padding(
-        padding: EdgeInsets.symmetric(horizontal: sizeW15!, vertical: sizeH10!),
-        child: Container(
-          height: sizeH40,
-          decoration: BoxDecoration(
-            color: colorTextWhite,
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: colorRed),
-          ),
-          child: Center(
-              child: CustomTextView(
-            txt: txtReceived,
-            textStyle: textStyleNormal()?.copyWith(color: colorRed),
-          )),
-        ),
-      );
+  // Widget get btn => Padding(
+  //       padding: EdgeInsets.symmetric(horizontal: sizeW15!, vertical: sizeH10!),
+  //       child: Container(
+  //         height: sizeH40,
+  //         decoration: BoxDecoration(
+  //           color: colorTextWhite,
+  //           borderRadius: BorderRadius.circular(10),
+  //           border: Border.all(color: colorRed),
+  //         ),
+  //         child: Center(
+  //             child: CustomTextView(
+  //           txt: txtReceived,
+  //           textStyle: textStyleNormal()?.copyWith(color: colorRed),
+  //         )),
+  //       ),
+  //     );
 }

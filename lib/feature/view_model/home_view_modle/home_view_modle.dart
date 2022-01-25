@@ -1,5 +1,12 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:inbox_driver/feature/model/home/Task_model.dart';
+import 'package:inbox_driver/feature/model/home/sales_order.dart';
+import 'package:inbox_driver/network/api/feature/home_helper.dart';
+import 'package:inbox_driver/util/constance.dart';
+import 'package:logger/logger.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class HomeViewModel extends GetxController {
@@ -24,7 +31,9 @@ class HomeViewModel extends GetxController {
       this.controller = controller;
       controller.scannedDataStream.listen((scanData) {
         result = scanData;
-      }).onData((data) async {});
+      }).onData((data) async {
+        // await scanBox(serial: serial, taskName: taskName)
+      });
     } catch (e) {
       printError();
     }
@@ -43,4 +52,80 @@ class HomeViewModel extends GetxController {
   }
 
   bool isTabBarOutBox = false;
+
+  // this Fun For Loading And ETC >>
+  bool isLoading = false;
+
+  startLoading() {
+    isLoading = true;
+    update();
+  }
+
+  endLoading() {
+    isLoading = false;
+    update();
+  }
+
+  List<Task> tasksInProgress = [];
+  List<Task> tasksDone = [];
+
+  // to do here for Getting Driver Tasks :
+  Future<void> getHomeTasks({required String taskType}) async {
+    try {
+      startLoading();
+      await HomeHelper.getInstance.getHomeTasks(taskType: {
+        Constance.taskStatus: taskType
+      }).then((value) => {
+            if (taskType == Constance.inProgress)
+              {
+                tasksInProgress = value,
+              }
+            else
+              {
+                tasksDone = value,
+              }
+          });
+    } catch (e) {
+      //Fauiler State
+      endLoading();
+      printError();
+    }
+    endLoading();
+    update();
+  }
+
+  // to do here getting Specfice Task With Id :
+  List<SalesOrder> operationsSalesOrder = [];
+  
+  Future<void> getSpecificTask({required String taskId}) async {
+    try {
+      startLoading();
+      await HomeHelper.getInstance
+          .getSpecificTask(taskId: {Constance.taskId: taskId}).then((value) => {
+                operationsSalesOrder = value,
+              });
+    } catch (e) {
+      endLoading();
+      printError();
+    }
+    endLoading();
+  }
+
+  scanBox({required String serial, required String taskName}) async {
+    try {
+      await HomeHelper.getInstance.scanBox(body: {
+        Constance.serial: serial,
+        Constance.taskName: taskName
+      }).then((value) => {if (value.status!.success!) {} else {}});
+    } catch (e) {
+      printError();
+    }
+  }
+
+  @override
+  void onInit() async {
+    super.onInit();
+    await getHomeTasks(taskType: Constance.inProgress);
+    await getHomeTasks(taskType: Constance.done);
+  }
 }

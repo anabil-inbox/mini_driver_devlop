@@ -19,4 +19,13 @@ abstract class Constance {
   static const String arabicKey ="Arabic";
   static const String englishKey ="English";
 
+  // to add here Tasks Constance :: 
+
+  static String inProgress = "In processing";
+  static String done = "Done";
+  static String taskStatus = "task_status";
+  static String taskId = "task_id";
+  static String serial = "serial";
+  static String taskName = "task_name";
+  static String salesOrder = "Sales Orders";
 }

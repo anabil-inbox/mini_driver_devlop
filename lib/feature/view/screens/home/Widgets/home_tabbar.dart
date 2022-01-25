@@ -51,7 +51,6 @@ class HomeTabBar extends StatelessWidget {
                       ),
                     )),
               ),
-
               Expanded(
                 child: GestureDetector(
                   onTap: () {
@@ -82,8 +81,6 @@ class HomeTabBar extends StatelessWidget {
                   ),
                 ),
               ),
-
-              // SizedBox(width: sizeW40),
             ],
           ),
         );

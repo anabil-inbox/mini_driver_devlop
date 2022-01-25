@@ -39,7 +39,7 @@ String? txtOther = "Other";
 String? txtCustomerToWH = "Customer to WH";
 String? txtHelena = "Helena Brauer";
 String? txtAddress = "20 Wadi Alsail, 918 Alreef st. Building no.10";
-String? txtReceived = "Received";
+const String txtReceived = "Received";
 
 //todo this for Bottom Sheets
 String? txtCall = "Call";
@@ -93,3 +93,10 @@ const String txtChangeMobileNumber = "Change Mobile Number";
 const String txtWhatIsYourNewPhoneNumber = "What is your New Phone Number ?";
 const String txtOk = "OK";
 const String txtSelect = "Select";
+const String txtDay = "day";
+const String txtBefor = "Befor";
+const String txtHour = "Hour";
+const String txtMinute = "Minute";
+const String txtSecondes = "secondes";
+const String txtNow = "now";
+

@@ -19,6 +19,14 @@ TextStyle? textStyle() {
       fontSize: fontSize14);
 }
 
+TextStyle textStyleBorderButton() {
+  return TextStyle(
+      color: colorPrimary,
+      fontSize: fontSize15,
+      fontFamily: Constance.Font_regular);
+}
+
+
 TextStyle? textStyleBottomNavSelected() {
   return TextStyle(
       color: colorPrimaryDark,
@@ -285,7 +293,12 @@ BoxDecoration boxDecorationWghitBorderRaduis6(){
     color: colorBackground,
     borderRadius: BorderRadius.circular(padding6!)
   );
-}
+} 
+
+ButtonStyle get borderPrimaryButtonStyle => ButtonStyle(
+      overlayColor: MaterialStateProperty.all(colorPrimary.withOpacity(0.3)),
+    );
+
 
 ButtonStyle? get buttonStyle => ButtonStyle(
     padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 12)),

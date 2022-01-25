@@ -43,11 +43,19 @@ abstract class ConstanceNetwork {
   static String editProfilEndPoint = "inbox_app.driver.auth.edit_profile";
 
   static String logOutEndPoint = "inbox_app.driver.auth.logout";
+
+
+
+  // to add here Home End Points ::
+  static String homeTasksEndPoint = "inbox_app.driver.task_management.get_level_one_tasks";
+  static String getSpecificTask = "inbox_app.driver.task_management.get_level_one_task";
+  static String scanBoxEndPoint = "inbox_app.driver.task_management.scan_box";
   
   //todo this for constance type of user
   static String userType = "user";
   static String companyType = "company";
   static String bothType = "both";
+
 
   static Map<String, String> header(int typeToken) {
     Map<String, String> headers = {};

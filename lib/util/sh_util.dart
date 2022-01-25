@@ -125,7 +125,7 @@ class SharedPref {
 
   String getAppLanguageMain() {
     try {
-      Object appLanguage = _prefs!.get(languageKey)!;
+      Object appLanguage = _prefs!.get(languageKey)?? "en";
       return appLanguage.toString();
     } catch (e) {
       return "en";

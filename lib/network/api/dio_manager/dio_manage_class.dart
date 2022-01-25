@@ -24,6 +24,8 @@ class DioManagerClass {
 
   Future<Response> dioGetMethod(
       {var url, Map<String, dynamic>? header, var queryParameters}) async {
+    print("msg_request_url : $url");
+    print("msg_request_header : $header");
     return await _dio!.get(url,
         options: Options(headers: header), queryParameters: queryParameters);
   }
@@ -32,6 +34,9 @@ class DioManagerClass {
       {var url,
       Map<String, dynamic>? header,
       Map<String, dynamic>? body}) async {
+           print("msg_request_url : $url");
+    print("msg_request_header : $header");
+    print("msg_request_body : $body");
     return await _dio!.post(
       url,
       options: Options(headers: header),
@@ -55,6 +60,9 @@ class DioManagerClass {
       {var url,
       Map<String, dynamic>? header,
       Map<String, dynamic>? body}) async {
+           print("msg_request_url : $url");
+    print("msg_request_header : $header");
+    print("msg_request_body : $body");
     return await _dio!.put(url, options: Options(headers: header), data: body);
   }
 
@@ -62,6 +70,9 @@ class DioManagerClass {
       {var url,
       Map<String, dynamic>? header,
       Map<String, dynamic>? body}) async {
+    print("msg_request_url : $url");
+    print("msg_request_header : $header");
+    print("msg_request_body : $body");
     return await _dio!
         .delete(url, options: Options(headers: header), data: body);
   }
