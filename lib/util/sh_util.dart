@@ -154,7 +154,7 @@ class SharedPref {
     try {
       return SharedPref._prefs!.getString('$loginKey');
     } catch (e) {
-      print(e);
+      printError();
       return "";
     }
   }
@@ -166,8 +166,10 @@ class SharedPref {
   setFCMToken(String fcmToken) async {
     try {
       SharedPreferences pref = await SharedPreferences.getInstance();
-      pref.setString("$fcmKey", fcmToken);
-    } catch (e) {}
+      pref.setString(fcmKey, fcmToken);
+    } catch (e) {
+      printError();
+    }
   }
 
   String getFCMToken() {
@@ -179,7 +181,9 @@ class SharedPref {
       if (!GetUtils.isNull(token)) {
         _prefs!.setString("$tokenKey", token);
       }
-    } catch (e) {}
+    } catch (e) {
+      printError();
+    }
   }
 
   getUserToken() {

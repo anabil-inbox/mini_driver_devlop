@@ -62,7 +62,7 @@ class HomeAppBar extends StatelessWidget {
               height: sizeH48,
               backgroundColor: colorRedTrans,
               onPressed: () {
-                Get.to(() => NewCustomer());
+              //  Get.to(() => NewCustomer());
               },
               borderColor: colorTrans,
             ),

@@ -14,7 +14,9 @@ class ChartWidget extends StatelessWidget {
       required this.secondGreenValue,
       required this.secondRedValue,
       required this.secondTitle,
-      required this.mainTitle})
+      required this.mainTitle,
+      required this.isHaveItems
+      })
       : super(key: key);
 
   final double firstRedValue;
@@ -24,6 +26,7 @@ class ChartWidget extends StatelessWidget {
   final String firstTitle;
   final String secondTitle;
   final String mainTitle;
+  final bool isHaveItems;
 
   @override
   Widget build(BuildContext context) {
@@ -55,22 +58,24 @@ class ChartWidget extends StatelessWidget {
               SizedBox(
                 width: sizeW15,
               ),
-              Expanded(
-                  child: WhLoadingChart(
-                pieCharts: [
-                  PieChartSectionData(
-                      radius: padding6,
-                      color: colorRed,
-                      value: secondRedValue,
-                      showTitle: false),
-                  PieChartSectionData(
-                      radius: padding6,
-                      color: colorGreen,
-                      value: secondGreenValue,
-                      showTitle: false),
-                ],
-                title: secondTitle,
-              )),
+              isHaveItems
+                  ? Expanded(
+                      child: WhLoadingChart(
+                      pieCharts: [
+                        PieChartSectionData(
+                            radius: padding6,
+                            color: colorRed,
+                            value: secondRedValue,
+                            showTitle: false),
+                        PieChartSectionData(
+                            radius: padding6,
+                            color: colorGreen,
+                            value: secondGreenValue,
+                            showTitle: false),
+                      ],
+                      title: secondTitle,
+                    ))
+                  : const SizedBox(),
               const Spacer(),
             ],
           ),

@@ -1,12 +1,12 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:inbox_driver/feature/model/home/Task_model.dart';
+import 'package:inbox_driver/feature/model/home/sales_data.dart';
 import 'package:inbox_driver/feature/model/home/sales_order.dart';
 import 'package:inbox_driver/network/api/feature/home_helper.dart';
+import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/constance.dart';
-import 'package:logger/logger.dart';
+import 'package:inbox_driver/util/string.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class HomeViewModel extends GetxController {
@@ -32,7 +32,11 @@ class HomeViewModel extends GetxController {
       controller.scannedDataStream.listen((scanData) {
         result = scanData;
       }).onData((data) async {
-        // await scanBox(serial: serial, taskName: taskName)
+        controller.dispose();
+        await scanBox(
+            serial: data.code ?? "",
+            taskName: operationsSalesData?.taskName ?? "");
+        Get.back();
       });
     } catch (e) {
       printError();
@@ -95,14 +99,15 @@ class HomeViewModel extends GetxController {
   }
 
   // to do here getting Specfice Task With Id :
-  List<SalesOrder> operationsSalesOrder = [];
-  
+
+  SalesData? operationsSalesData;
+
   Future<void> getSpecificTask({required String taskId}) async {
     try {
       startLoading();
       await HomeHelper.getInstance
           .getSpecificTask(taskId: {Constance.taskId: taskId}).then((value) => {
-                operationsSalesOrder = value,
+                operationsSalesData = value,
               });
     } catch (e) {
       endLoading();
@@ -116,7 +121,16 @@ class HomeViewModel extends GetxController {
       await HomeHelper.getInstance.scanBox(body: {
         Constance.serial: serial,
         Constance.taskName: taskName
-      }).then((value) => {if (value.status!.success!) {} else {}});
+      }).then((value) => {
+            if (value.status!.success!)
+              {
+                operationsSalesData?.totalReceived =
+                    (operationsSalesData?.totalReceived ?? 0) + 1,
+                    
+              }
+            else
+              {snackError("$txtError", "Box Not Found")}
+          });
     } catch (e) {
       printError();
     }

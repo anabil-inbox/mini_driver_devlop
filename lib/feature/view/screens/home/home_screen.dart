@@ -8,7 +8,6 @@ import 'package:inbox_driver/feature/core/loading_circle.dart';
 import 'package:inbox_driver/feature/view/screens/home/Widgets/home_appbar.dart';
 import 'package:inbox_driver/feature/view/screens/home/Widgets/home_tabbar.dart';
 import 'package:inbox_driver/feature/view/screens/home/current_screen/current_screen.dart';
-import 'package:inbox_driver/feature/view/screens/home/wh_loading/Widgets/wh_loading_card.dart';
 import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/sh_util.dart';
