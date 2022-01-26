@@ -1,4 +1,5 @@
 import 'package:inbox_driver/feature/model/home/Task_model.dart';
+import 'package:inbox_driver/feature/model/home/sales_data.dart';
 import 'package:inbox_driver/feature/model/home/sales_order.dart';
 import 'package:inbox_driver/network/api/model/app_response.dart';
 import 'package:inbox_driver/network/api/model/home_api.dart';
@@ -31,7 +32,7 @@ class HomeHelper {
     }
   }
 
-  Future<List<SalesOrder>> getSpecificTask(
+  Future<SalesData> getSpecificTask(
       {required Map<String, dynamic> taskId}) async {
     try {
       var response = await HomeApi.getInstance.getSpecificTask(
@@ -39,14 +40,13 @@ class HomeHelper {
           url: ConstanceNetwork.getSpecificTask,
           header: ConstanceNetwork.header(4));
       if (response.status?.success == true) {
-        List data = response.data[Constance.salesOrder];
-        return data.map((e) => SalesOrder.fromJson(e)).toList();
+        return SalesData.fromJson(response.data);
       } else {
-       return [];
+        return SalesData.fromJson(response.data);
       }
     } catch (e) {
       log.d(e.toString());
-      return [];
+      return SalesData.fromJson({});
     }
   }
 

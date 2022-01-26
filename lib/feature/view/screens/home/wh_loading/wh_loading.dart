@@ -9,6 +9,8 @@ import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:get/get.dart';
+import 'package:inbox_driver/util/constance.dart';
+import 'package:inbox_driver/util/date/date_time_util.dart';
 
 import 'Widgets/wh_loading_appbar.dart';
 import 'Widgets/wh_loading_card.dart';
@@ -22,6 +24,74 @@ class WhLoading extends StatelessWidget {
   // Widget get chart => WhLoadingChart();
   static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
   final Task task;
+  // final SalesOrder salesOrder;
+
+  Widget get lvSalesOrder {
+    if (GetUtils.isNull(homeViewModel.operationsSalesData)) {
+      return const SizedBox();
+    } else {
+      return ListView(
+        shrinkWrap: true,
+        primary: false,
+        children: homeViewModel.operationsSalesData!.salesOrders!.map((e) {
+          if (task.taskName!
+              .toLowerCase()
+              .contains(Constance.taskWarehouseLoading.toLowerCase()) || task.taskName!
+              .toLowerCase()
+              .contains(Constance.taskWarehouseClosure.toLowerCase())) {
+            return WhLoadingCard(
+              salesData: homeViewModel.operationsSalesData!,
+              salesOrder: e,
+              onRecivedClick: () {
+
+              },
+            );
+          } else if (task.taskName!
+              .toLowerCase()
+              .contains(Constance.taskCustomerVisit.toLowerCase())) {
+            return const Text("Customer Vist");
+          } else {
+            return const Text("Else Case");
+          }
+        }).toList(),
+      );
+    }
+  }
+
+  Widget get flowChart {
+    if (GetUtils.isNull(homeViewModel.operationsSalesData)) {
+      return const SizedBox();
+    } else {
+      double greenValue = 0;
+      double redValue = 0;
+
+      if ((homeViewModel.operationsSalesData?.totalReceived == 0 &&
+              homeViewModel.operationsSalesData?.totalBoxes == 0) ||
+          (homeViewModel.operationsSalesData?.totalReceived ==
+              homeViewModel.operationsSalesData?.totalBoxes)) {
+        greenValue = 100;
+        redValue = 0;
+      } else {
+        greenValue = ((homeViewModel.operationsSalesData?.totalReceived ?? 1) /
+            (homeViewModel.operationsSalesData?.totalBoxes ?? 1));
+        redValue = 100 - greenValue;
+      }
+
+      return ChartWidget(
+        firstGreenValue: greenValue,
+        firstRedValue: redValue,
+        firstTitle:
+            "${homeViewModel.operationsSalesData?.totalReceived ?? 0} / ${homeViewModel.operationsSalesData?.totalBoxes ?? 0} \nBoxes",
+        secondGreenValue: 30,
+        isHaveItems: false,
+        secondRedValue: 100,
+        secondTitle: "4/5 \nOthers",
+        mainTitle: DateUtility.getChatTime(
+            homeViewModel.operationsSalesData!.lastUpdate.toString()),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     screenUtil(context);
@@ -29,9 +99,9 @@ class WhLoading extends StatelessWidget {
         backgroundColor: scaffoldColor,
         body: GetBuilder<HomeViewModel>(
             init: HomeViewModel(),
-            initState: (_) {
-              WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-                homeViewModel.getSpecificTask(taskId: task.id ?? "");
+            initState: (_) async {
+              WidgetsBinding.instance?.addPostFrameCallback((timeStamp) async {
+                await homeViewModel.getSpecificTask(taskId: task.id ?? "");
               });
             },
             builder: (logic) {
@@ -55,35 +125,8 @@ class WhLoading extends StatelessWidget {
                             SizedBox(
                               height: sizeH10,
                             ),
-                            const ChartWidget(
-                              firstGreenValue: 40,
-                              firstRedValue: 60,
-                              firstTitle: "12/15 \nBoxes",
-                              secondGreenValue: 30,
-                              secondRedValue: 100,
-                              secondTitle: "4/5 \nOthers",
-                              mainTitle: "22/6/2021 6:00 PM",
-                            ),
-                            ListView(
-                              shrinkWrap: true,
-                              primary: false,
-                              children: logic.operationsSalesOrder
-                                  .map((e) => WhLoadingCard(
-                                        onRecivedClick: () {},
-                                      ))
-                                  .toList(),
-                              // children: [
-                              //   WhLoadingCard(
-                              //     onRecivedClick: () {},
-                              //   ),
-                              //   WhLoadingCard(
-                              //     onRecivedClick: () {},
-                              //   ),
-                              //   WhLoadingCard(
-                              //     onRecivedClick: () {},
-                              //   ),
-                              // ],
-                            )
+                            flowChart,
+                            lvSalesOrder
                           ],
                         ),
                       ),
