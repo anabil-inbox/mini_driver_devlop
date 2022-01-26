@@ -54,7 +54,7 @@ class InstantOrderBottomSheet extends StatelessWidget {
                           decoration: BoxDecoration(
                             border: Border.all(
                                 color:
-                                logic.isSelected ? colorRed : colorBtnGray),
+                                    logic.isSelected ? colorRed : colorBtnGray),
                             shape: BoxShape.circle,
                           ),
                           child: Padding(
@@ -64,20 +64,20 @@ class InstantOrderBottomSheet extends StatelessWidget {
                               radius: 20,
                               child: Container(
                                   decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: logic.isSelected
-                                        ? colorRed
-                                        : Colors.transparent,
-                                  )),
+                                shape: BoxShape.circle,
+                                color: logic.isSelected
+                                    ? colorRed
+                                    : Colors.transparent,
+                              )),
                               // backgroundColor: colorRed,
                             ),
                           ),
                         ),
                         SizedBox(width: sizeW5),
                         CustomTextView(
-                          txt: txtSealed?.tr,
+                          txt: txtSealed.tr,
                           textStyle:
-                          textStyleNormal()?.copyWith(color: colorBlack),
+                              textStyleNormal()?.copyWith(color: colorBlack),
                         ),
                       ],
                     ),
@@ -106,7 +106,7 @@ class InstantOrderBottomSheet extends StatelessWidget {
                           decoration: BoxDecoration(
                             border: Border.all(
                                 color:
-                                logic.isSelected ? colorRed : colorBtnGray),
+                                    logic.isSelected ? colorRed : colorBtnGray),
                             shape: BoxShape.circle,
                           ),
                           child: Padding(
@@ -116,11 +116,11 @@ class InstantOrderBottomSheet extends StatelessWidget {
                               radius: 20,
                               child: Container(
                                   decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: logic.isSelected
-                                        ? colorRed
-                                        : Colors.transparent,
-                                  )),
+                                shape: BoxShape.circle,
+                                color: logic.isSelected
+                                    ? colorRed
+                                    : Colors.transparent,
+                              )),
                               // backgroundColor: colorRed,
                             ),
                           ),
@@ -129,7 +129,7 @@ class InstantOrderBottomSheet extends StatelessWidget {
                         CustomTextView(
                           txt: txtTerminate,
                           textStyle:
-                          textStyleNormal()?.copyWith(color: colorBlack),
+                              textStyleNormal()?.copyWith(color: colorBlack),
                         ),
                       ],
                     ),
@@ -158,7 +158,7 @@ class InstantOrderBottomSheet extends StatelessWidget {
                           decoration: BoxDecoration(
                             border: Border.all(
                                 color:
-                                logic.isSelected ? colorRed : colorBtnGray),
+                                    logic.isSelected ? colorRed : colorBtnGray),
                             shape: BoxShape.circle,
                           ),
                           child: Padding(
@@ -168,11 +168,11 @@ class InstantOrderBottomSheet extends StatelessWidget {
                               radius: 20,
                               child: Container(
                                   decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: logic.isSelected
-                                        ? colorRed
-                                        : Colors.transparent,
-                                  )),
+                                shape: BoxShape.circle,
+                                color: logic.isSelected
+                                    ? colorRed
+                                    : Colors.transparent,
+                              )),
                               // backgroundColor: colorRed,
                             ),
                           ),
@@ -181,7 +181,7 @@ class InstantOrderBottomSheet extends StatelessWidget {
                         CustomTextView(
                           txt: txtReschedule,
                           textStyle:
-                          textStyleNormal()?.copyWith(color: colorBlack),
+                              textStyleNormal()?.copyWith(color: colorBlack),
                         ),
                       ],
                     ),

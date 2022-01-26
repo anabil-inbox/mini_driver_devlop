@@ -44,6 +44,7 @@ var colorPink = Color(0xFFD84B71);
 var colorRed = Color(0xFFE63331);
 var colorRedTrans = Color(0x22E63331);
 var colorGreen = Color(0xFF27D39F);
+var colorBlue = Color(0xFF0091FF);
 var colorOrangeLight = Color(0xFFF9B20C);
 
 //todo this for containers

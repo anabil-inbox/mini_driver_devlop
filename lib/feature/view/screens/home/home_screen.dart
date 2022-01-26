@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:inbox_driver/feature/core/loading_circle.dart';
+import 'package:inbox_driver/feature/view/screens/details/order_details_started_screen.dart';
 import 'package:inbox_driver/feature/view/screens/home/Widgets/home_appbar.dart';
 import 'package:inbox_driver/feature/view/screens/home/Widgets/home_tabbar.dart';
 import 'package:inbox_driver/feature/view/screens/home/current_screen/current_screen.dart';
@@ -32,6 +33,7 @@ class HomeScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
           backgroundColor: colorRed,
           onPressed: () {
+            Get.to(() => OrderDetailsStarted());
             Logger().i(SharedPref.instance.getUserToken());
           },
           child: SvgPicture.asset(
