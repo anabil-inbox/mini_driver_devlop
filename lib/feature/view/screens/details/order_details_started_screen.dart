@@ -160,6 +160,8 @@ class OrderDetailsStarted extends StatelessWidget {
                 // todo for order previous Task bar scenario
                 Positioned(
                   top: 0,
+                  left: 0,
+                  right: 0,
                   child: previousTask,
                 ),
               ],
