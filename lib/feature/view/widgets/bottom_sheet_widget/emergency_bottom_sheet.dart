@@ -77,7 +77,7 @@ class EmergencyBottomSheet extends StatelessWidget {
                 ),
                 SizedBox(height: sizeH20),
                 BottomSheetCard(
-                  text: txtTakePicture!.tr,
+                  text: txtTakePicture.tr,
                   containerColor: colorTextWhite,
                   borderColor: colorRed,
                   textStyleColor: colorRed,
@@ -88,7 +88,7 @@ class EmergencyBottomSheet extends StatelessWidget {
                 ),
                 PrimaryButton(
                     isLoading: false,
-                    textButton: txtSubmitReport!.tr,
+                    textButton: txtSubmitReport.tr,
                     onClicked: () {
                       Get.back();
                     },

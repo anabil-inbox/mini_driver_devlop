@@ -14,7 +14,7 @@ class OrderSummeryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
       padding: EdgeInsets.symmetric(horizontal: padding20!),
       decoration: BoxDecoration(
           color: colorBackground,
@@ -23,10 +23,7 @@ class OrderSummeryWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: sizeH6,
-          ),
-          SizedBox(
-            height: sizeH4,
+            height: sizeH10,
           ),
           Row(
             children: [
@@ -34,7 +31,7 @@ class OrderSummeryWidget extends StatelessWidget {
                 child: CustomTextView(
                   txt: txtOrderSummery.tr,
                   maxLine: Constance.maxLineOne,
-                  textStyle:textStyleNormal()?.copyWith(color: colorBlack),
+                  textStyle: textStyleNormal()?.copyWith(color: colorBlack),
                 ),
               ),
               Container(
@@ -48,7 +45,8 @@ class OrderSummeryWidget extends StatelessWidget {
                 child: Center(
                   child: CustomTextView(
                     txt: txtPending.tr,
-                    textStyle: textStyleNormal()?.copyWith(fontSize: fontSize13, color: seconderyButtonUnSelected),
+                    textStyle: textStyleNormal()?.copyWith(
+                        fontSize: fontSize13, color: seconderyButtonUnSelected),
                   ),
                 ),
               ),
@@ -65,15 +63,15 @@ class OrderSummeryWidget extends StatelessWidget {
           CustomTextView(
             txt: txtRecall.tr,
             maxLine: Constance.maxLineOne,
-            textStyle:textStyleNormal()?.copyWith(color: colorBlack),
+            textStyle: textStyleNormal()?.copyWith(color: colorBlack),
           ),
           SizedBox(
             height: sizeH1,
           ),
           CustomTextView(
-            txt:txtBoxes0.tr,
+            txt: txtBoxes0.tr,
             maxLine: Constance.maxLineOne,
-            textStyle:textStyleNormal(),
+            textStyle: textStyleNormal(),
           ),
           SizedBox(
             height: sizeH12,

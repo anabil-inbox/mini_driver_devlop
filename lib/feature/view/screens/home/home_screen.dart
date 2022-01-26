@@ -33,6 +33,7 @@ class HomeScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
           backgroundColor: colorRed,
           onPressed: () {
+            Get.to(() => OrderDetailsStarted());
             Logger().i(SharedPref.instance.getUserToken());
             Get.to(() => const OrderDetailsStarted());
           },

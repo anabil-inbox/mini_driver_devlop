@@ -63,6 +63,17 @@ const String txtClientSide = "On client side";
 const String txtFingerprint = "Fingerprint";
 const String txtDone = "Done";
 
+//todo this for Instant Order
+const String txtInstantOrder = "Instant Order";
+const String txtScanDeliveredBox = "Scan Delivered Box";
+const String txtSealed = "Sealed";
+const String txtTerminate = "Terminate";
+const String txtReschedule = "Reschedule";
+const String txtTakePicture = "Take a Picture";
+const String txtSubmitReport = "Submit Report";
+const String txtWriteDownRemarksOrComments = "Write down remarks or comments";
+const String txtWaitingTime = "Waiting Time";
+
 //todo this for Bottom Sheets
 String? txtCall = "Call";
 String? txtWhatsApp = "WhatsApp";
@@ -71,16 +82,11 @@ String? txtSMSOnMyWay = "SMS: I’m on my way";
 String? txtSMSArrivedOutside = "SMS: I arrived here outside";
 String? txtSMSReportNoShow = "SMS: I’ll report “no show” within 5 mins";
 String? txtNextScan = "Next Scan";
-String? txtSealed = "Sealed";
-String? txtTerminate = "Terminate";
-String? txtReschedule = "Reschedule";
-String? txtTakePicture = "Take a Picture";
-String? txtSubmitReport = "Submit Report";
 String? txtEmergency = "Emergency";
 String? txtCase1 = "Case 1";
 String? txtWriteDownCaseRemarks = "Write down case remarks";
 String? txtNoShowReport = "No Show Report";
-String? txtTimer = "00:00:00";
+const String txtTimer = "00:00:00";
 String? txtReSchedule = "Re-Schedule";
 String? txtNoShow = "No Show";
 String? txtCancelOrder = "Cancel Order";
@@ -121,6 +127,15 @@ const String txtHour = "Hour";
 const String txtMinute = "Minute";
 const String txtSecondes = "secondes";
 const String txtNow = "now";
+
+//todo this for Order details
+const String txtOrderList = "Order List";
+const String txtOptions = "Options";
+const String txtValuableItem = "Valuable High Security Item";
+const String txtPreviousTask = "Please Finish the Previous Task";
+const String txtBulkItem = "Bulk Item";
+const String txtAllItems = "All Items";
+const String txtTV = "TV";
 
 //todo this for AddressBox Widget
 const String txtDeliveryAddress = "Delivery Address";

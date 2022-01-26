@@ -10,6 +10,8 @@ import 'package:logger/logger.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class HomeViewModel extends GetxController {
+  bool isSelected = true;
+
   int selectedTab = 0;
   void changeTab(int x) {
     selectedTab = x;
@@ -96,7 +98,7 @@ class HomeViewModel extends GetxController {
 
   // to do here getting Specfice Task With Id :
   List<SalesOrder> operationsSalesOrder = [];
-  
+
   Future<void> getSpecificTask({required String taskId}) async {
     try {
       startLoading();
