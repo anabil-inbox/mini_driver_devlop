@@ -177,7 +177,7 @@ class CustomTextFormFiled extends StatelessWidget
         counterText: "",
         isDense: true,
         filled: isFill,
-        errorStyle: TextStyle(
+        errorStyle: const TextStyle(
           /*  height: 0,*/ /*backgroundColor: colorBackground*/
         ),
         enabledBorder: isFill!

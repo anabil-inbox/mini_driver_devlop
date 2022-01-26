@@ -32,7 +32,7 @@ class OrderSummeryWidget extends StatelessWidget {
             children: [
               Expanded(
                 child: CustomTextView(
-                  txt: txtOrderSummery!.tr,
+                  txt: txtOrderSummery.tr,
                   maxLine: Constance.maxLineOne,
                   textStyle:textStyleNormal()?.copyWith(color: colorBlack),
                 ),

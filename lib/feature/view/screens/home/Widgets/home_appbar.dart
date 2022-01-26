@@ -9,10 +9,24 @@ import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/constance.dart';
+import 'package:inbox_driver/util/sh_util.dart';
 import 'package:inbox_driver/util/string.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({Key? key}) : super(key: key);
+
+  Widget get _userProfileImage {
+    return (SharedPref.instance.getCurrentUserData()?.image != null &&
+            SharedPref.instance.getCurrentUserData()!.image.toString().isNotEmpty)
+        ? Container(
+            clipBehavior: Clip.hardEdge,
+            decoration: const BoxDecoration(shape: BoxShape.circle),
+            child: imageNetwork(url: "${SharedPref.instance.getCurrentUserData()?.image}"))
+        : Container(
+            clipBehavior: Clip.hardEdge,
+            decoration: const BoxDecoration(shape: BoxShape.circle),
+            child: Image.asset('assets/png/profile.png'));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +44,9 @@ class HomeAppBar extends StatelessWidget {
             onTap: () {
               Get.to(() => const ProfileScreen());
             },
-            child: const CircleAvatar(
+            child: CircleAvatar(
               radius: sizeRadius5,
-              backgroundImage: AssetImage('assets/png/profile.png'),
+              child: _userProfileImage,
               // child: Image.asset(
               //   'assets/png/profile.png',
               //   height: sizeH38,

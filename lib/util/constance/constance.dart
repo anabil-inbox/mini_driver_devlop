@@ -1,4 +1,4 @@
-// class Constance {
-//   static String inProgress = "In processing";
-//   static String done = "Done";
-// }
+class ConstanceApp {
+  static String googleMapKey = "AIzaSyAzBtxE3NluLYNrUajTg9OnG7X_luzESvU";
+
+}

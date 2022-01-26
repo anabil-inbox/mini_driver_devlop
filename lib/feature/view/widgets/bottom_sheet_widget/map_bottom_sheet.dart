@@ -44,7 +44,7 @@ class MapBottomSheet extends StatelessWidget {
                           borderRadius: BorderRadius.only(topRight: Radius.circular(sizeRadius25!),topLeft: Radius.circular(sizeRadius25!)),
                           child: GoogleMap(
                             myLocationButtonEnabled: true,
-                            initialCameraPosition:logic.kGooglePlex,
+                            initialCameraPosition:logic.initialCameraPosition,
                             zoomControlsEnabled: true,
                             mapType: MapType.normal,
                             mapToolbarEnabled: true,
@@ -54,7 +54,7 @@ class MapBottomSheet extends StatelessWidget {
                             rotateGesturesEnabled: false,
                             onTap: (argument) => logic.onMapTaped(argument),
                             markers: logic.markers,
-                            polylines: logic.polyline,
+                            polylines: logic.polyLines,
                             gestureRecognizers: logic.gestureRecognizers,
                             onMapCreated: (GoogleMapController controller) => logic.onMapCreated(controller),
                           ),
@@ -63,7 +63,7 @@ class MapBottomSheet extends StatelessWidget {
                     ],
                   ),
                   PositionedDirectional(
-                    end:sizeW20 ,
+                    start:sizeW20 ,
                     top: sizeH20,
                     height: sizeH30,
                     width: sizeW30,
