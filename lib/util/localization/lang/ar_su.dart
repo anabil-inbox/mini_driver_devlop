@@ -56,4 +56,6 @@ Map<String, String> arSU = {
   txtTime: "22.6.2021 (6:00 مساءا)",
   txtOrderDetails: "تفاصيل الطلب",
   txtButtonStart: "ابدأ",
+  txtVisitTasks : "زيارة المهام",
+  txtOngoing : "جاري التنفيذ",
 };

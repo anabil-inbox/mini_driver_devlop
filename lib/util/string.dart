@@ -158,3 +158,8 @@ const String txtTime = "22.6.2021 (6:00 PM)";
 //todo this for OrderDetailsStarted Widget
 const String txtOrderDetails = "Order Details";
 const String txtButtonStart = "Start";
+
+
+//todo this for Visit Tasks page
+const String txtVisitTasks = "Visit Tasks";
+const String txtOngoing = "Ongoing";

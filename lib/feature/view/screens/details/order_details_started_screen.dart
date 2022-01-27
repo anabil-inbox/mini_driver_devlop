@@ -22,6 +22,8 @@ import 'package:inbox_driver/util/font_dimne.dart';
 import 'package:inbox_driver/util/string.dart';
 
 class OrderDetailsStarted extends StatelessWidget {
+  const OrderDetailsStarted({Key? key}) : super(key: key);
+
   Widget get orderStatus => Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
