@@ -56,4 +56,6 @@ Map<String, String> enUS = {
   txtTime: "22.6.2021 (6:00 PM)",
   txtOrderDetails: "Order Details",
   txtButtonStart: "Start",
+  txtVisitTasks : "Visit Tasks",
+  txtOngoing : "Ongoing",
 };

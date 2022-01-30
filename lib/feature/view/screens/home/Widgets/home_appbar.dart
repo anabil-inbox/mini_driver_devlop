@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:inbox_driver/feature/view/screens/home/new_customer/new_customer_view.dart';
 import 'package:inbox_driver/feature/view/screens/profile/profile_screen.dart';
+import 'package:inbox_driver/feature/view/screens/visit_tasks/visit_tasks_view.dart';
 import 'package:inbox_driver/feature/view/widgets/appbar/custom_app_bar_widget.dart';
 import 'package:inbox_driver/feature/view/widgets/custom_text_filed.dart';
 import 'package:inbox_driver/feature/view/widgets/icon_btn.dart';
@@ -77,6 +78,7 @@ class HomeAppBar extends StatelessWidget {
               backgroundColor: colorRedTrans,
               onPressed: () {
               //  Get.to(() => NewCustomer());
+                Get.to(()=> const VisitTasksView());
               },
               borderColor: colorTrans,
             ),
