@@ -9,8 +9,9 @@ import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/string.dart';
 
 class WhLoadingAppBar extends StatelessWidget {
-  const WhLoadingAppBar({Key? key}) : super(key: key);
+  const WhLoadingAppBar({Key? key , required this.title}) : super(key: key);
 
+  final String title;
   @override
   Widget build(BuildContext context) {
     screenUtil(context);
@@ -21,7 +22,7 @@ class WhLoadingAppBar extends StatelessWidget {
         appBarColor: colorBackground,
         isCenterTitle: true,
         titleWidget: CustomTextView(
-          txt: txtWHLoading,
+          txt: title,
           textStyle: textStyleBlack16(),
         ),
         // leadingWidget: GestureDetector(

@@ -18,7 +18,6 @@ import 'Widgets/wh_loading_card.dart';
 class WhLoading extends StatelessWidget {
   const WhLoading({Key? key, required this.task}) : super(key: key);
 
-  Widget get appBar => const WhLoadingAppBar();
   Widget get tabBar => const HomeTabBar();
   Widget get searchBar => const WhSearchBar();
   // Widget get chart => WhLoadingChart();
@@ -35,16 +34,15 @@ class WhLoading extends StatelessWidget {
         primary: false,
         children: homeViewModel.operationsSalesData!.salesOrders!.map((e) {
           if (task.taskName!
-              .toLowerCase()
-              .contains(Constance.taskWarehouseLoading.toLowerCase()) || task.taskName!
-              .toLowerCase()
-              .contains(Constance.taskWarehouseClosure.toLowerCase())) {
+                  .toLowerCase()
+                  .contains(Constance.taskWarehouseLoading.toLowerCase()) ||
+              task.taskName!
+                  .toLowerCase()
+                  .contains(Constance.taskWarehouseClosure.toLowerCase())) {
             return WhLoadingCard(
               salesData: homeViewModel.operationsSalesData!,
               salesOrder: e,
-              onRecivedClick: () {
-
-              },
+              onRecivedClick: () {},
             );
           } else if (task.taskName!
               .toLowerCase()
@@ -110,7 +108,9 @@ class WhLoading extends StatelessWidget {
               } else {
                 return Column(
                   children: [
-                    appBar,
+                    WhLoadingAppBar(
+                      title: task.taskName ?? "",
+                    ),
                     const Divider(height: 3),
                     tabBar,
                     Expanded(

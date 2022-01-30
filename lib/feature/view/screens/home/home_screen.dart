@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
           onPressed: () {
             Get.to(() => OrderDetailsStarted());
             Logger().i(SharedPref.instance.getUserToken());
-            Get.to(() => const OrderDetailsStarted());
+            Get.to(() =>  OrderDetailsStarted());
           },
           child: SvgPicture.asset(
             "assets/svgs/Call Missed.svg",
@@ -50,9 +50,9 @@ class HomeScreen extends StatelessWidget {
               return Column(
                 children: [
                   appBar,
-                  const Divider(height: 3),
-                  tabBar,
-                  Expanded(child: tabs[logic.selectedTab])
+                 const Divider(height: 3),
+                 tabBar,
+                 Expanded(child: tabs[logic.selectedTab])
                 ],
               );
             }
