@@ -33,7 +33,32 @@ class HomeApi {
     }
   }
 
-    Future<AppResponse> scanBox({var url, var header, var body}) async {
+  Future<AppResponse> scanBox({var url, var header, var body}) async {
+    try {
+      var response = await DioManagerClass.getInstance
+          .dioPostFormMethod(url: url, header: header, body: body);
+      return AppResponse.fromJson(json.decode(response.toString()));
+    } on DioError catch (ex) {
+      var message = json.decode(ex.response.toString());
+      Logger().e(message);
+      return AppResponse.fromJson(message);
+    }
+  }
+
+  Future<AppResponse> getEmergencyCasses({var url, var header}) async {
+    try {
+      var response = await DioManagerClass.getInstance
+          .dioGetMethod(url: url, header: header);
+      return AppResponse.fromJson(json.decode(response.toString()));
+    } on DioError catch (ex) {
+      var message = json.decode(ex.response.toString());
+      Logger().e(message);
+      return AppResponse.fromJson(message);
+    }
+  }
+
+  Future<AppResponse> createEmergencyReports(
+      {var url, var header, var body}) async {
     try {
       var response = await DioManagerClass.getInstance
           .dioPostFormMethod(url: url, header: header, body: body);
@@ -45,4 +70,17 @@ class HomeApi {
     }
   }
   
+
+    Future<AppResponse> reciveBoxess(
+      {var url, var header, var body}) async {
+    try {
+      var response = await DioManagerClass.getInstance
+          .dioPostFormMethod(url: url, header: header, body: body);
+      return AppResponse.fromJson(json.decode(response.toString()));
+    } on DioError catch (ex) {
+      var message = json.decode(ex.response.toString());
+      Logger().e(message);
+      return AppResponse.fromJson(message);
+    }
+  }
 }

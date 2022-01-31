@@ -9,10 +9,12 @@ class CompletedTabWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     screenUtil(context);
-    return ListView.builder(
-      physics: customScrollViewIOS(),
-      shrinkWrap: true,
-      itemCount: 7,
-      itemBuilder: (context, index) => const VisitLvItemWidget(),);
+    return 
+    Text("data");
+    // ListView.builder(
+    //   physics: customScrollViewIOS(),
+    //   shrinkWrap: true,
+    //   itemCount: 7,
+    //   itemBuilder: (context, index) => const VisitLvItemWidget(),);
   }
 }

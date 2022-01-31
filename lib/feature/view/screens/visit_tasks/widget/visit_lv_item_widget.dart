@@ -1,19 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:inbox_driver/feature/model/home/sales_data.dart';
+import 'package:inbox_driver/feature/model/home/sales_order.dart';
+import 'package:inbox_driver/feature/view/widgets/bottom_sheet_widget/call_bottom_sheet.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
+import 'package:inbox_driver/util/date/date_time_util.dart';
 import 'package:inbox_driver/util/font_dimne.dart';
 
 class VisitLvItemWidget extends StatelessWidget {
-  const VisitLvItemWidget({Key? key, this.isBlockContainer = false}) : super(key: key);
+  const VisitLvItemWidget(
+      {Key? key,
+      this.isBlockContainer = false,
+      required this.salesData,
+      required this.salesOrder})
+      : super(key: key);
   final bool? isBlockContainer;
-  Widget chipStatusWidget({var title, Color? titleColor, Color? backgroundColor, bool? isOutBound}) => Container(
-        padding: EdgeInsets.symmetric(horizontal: sizeH10!, vertical: sizeH4!),
-        margin: EdgeInsets.symmetric(horizontal: sizeW4!),
+
+  final SalesOrder salesOrder;
+  final SalesData salesData;
+
+  Widget chipStatusWidget(
+          {var title,
+          Color? titleColor,
+          Color? backgroundColor,
+          bool? isOutBound}) =>
+      Container(
+        padding: EdgeInsets.symmetric(vertical: sizeH4!),
         decoration: BoxDecoration(
           color: backgroundColor ?? colorBlueLight,
           borderRadius: BorderRadius.circular(8),
@@ -52,8 +70,9 @@ class VisitLvItemWidget extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          margin: EdgeInsets.only(left: sizeW10!, right: sizeW10!, top: sizeH10!),
-          padding: EdgeInsets.symmetric(horizontal: sizeW20!, vertical: sizeH17!),
+          // margin: EdgeInsets.only(left: sizeW10!, right: sizeW10!, top: sizeH10!),
+          padding:
+              EdgeInsets.symmetric(horizontal: sizeW20!, vertical: sizeH17!),
           decoration: BoxDecoration(
             color: colorTextWhite,
             borderRadius: BorderRadius.circular(10),
@@ -69,11 +88,11 @@ class VisitLvItemWidget extends StatelessWidget {
                       SvgPicture.asset('assets/svgs/Folder_Shared.svg'),
                       PositionedDirectional(
                         start: 0,
-                        top: 0,
+                        top: 3,
                         end: 0,
                         bottom: 0,
                         child: CustomTextView(
-                          txt: "X5",
+                          txt: "X ${salesOrder.totalBoxes}",
                           textAlign: TextAlign.center,
                           textStyle: textStyleNormal()
                               ?.copyWith(color: colorTextWhite),
@@ -82,24 +101,28 @@ class VisitLvItemWidget extends StatelessWidget {
                     ],
                   ),
                   const Spacer(),
-                  chipStatusWidget(isOutBound: false),
-                  chipStatusWidget(),
+                  chipStatusWidget(
+                      isOutBound: false, title: salesOrder.contentStatus),
+                  // chipStatusWidget(),
                 ],
               ),
               SizedBox(height: sizeH10),
               CustomTextView(
-                txt: "Helena Brauer",
+                txt: salesOrder.customerId,
                 textStyle: textStyleNormal()?.copyWith(color: colorBlack),
               ),
               SizedBox(height: sizeH5),
               CustomTextView(
-                txt: "20 Wadi Alsail, 918 Alreef st.Building no.10",
+                txt: salesOrder.orderShippingAddress ??
+                    salesOrder.orderWarehouseAddress ??
+                    "",
                 textStyle: textStyleNormal()?.copyWith(fontSize: fontSize13),
                 maxLine: Constance.maxLineTwo,
               ),
               SizedBox(height: sizeH10),
               CustomTextView(
-                txt: "20/06/2021 07:00 PM",
+                txt:
+                    DateUtility.getChatTime(salesOrder.deliveryDate.toString()),
                 textStyle: textStyleNormal()?.copyWith(
                     fontSize: fontSize12,
                     color: colorTextHint.withOpacity(0.7)),
@@ -107,24 +130,37 @@ class VisitLvItemWidget extends StatelessWidget {
             ],
           ),
         ),
+        // ignore: todo
         //TODO: this for Make CAll
         PositionedDirectional(
             bottom: sizeH20,
             end: sizeW30,
-            child: SvgPicture.asset(
-              "assets/svgs/call_red_fig.svg",
+            child: IconButton(
+              padding: const EdgeInsets.all(0),
+              onPressed: () {
+                Get.bottomSheet(
+                    CallBottomSheet(
+                      phoneNumber: salesOrder.customerMobile,
+                    ),
+                    isScrollControlled: true);
+              },
+              icon: SvgPicture.asset(
+                "assets/svgs/call_red_fig.svg",
+              ),
             )),
+        // ignore: todo
         //TODO: this for block container
-        if(isBlockContainer!)
-        Container(
-          margin: EdgeInsets.only(left: sizeW10!, right: sizeW10!, top: sizeH10!),
-          width: double.infinity,
-          height: sizeH140,
-          decoration: BoxDecoration(
-            color: colorTextWhite.withOpacity(0.5),
-            borderRadius: BorderRadius.circular(10),
+        if (isBlockContainer!)
+          Container(
+            margin:
+                EdgeInsets.only(left: sizeW10!, right: sizeW10!, top: sizeH10!),
+            width: double.infinity,
+            height: sizeH140,
+            decoration: BoxDecoration(
+              color: colorTextWhite.withOpacity(0.5),
+              borderRadius: BorderRadius.circular(10),
+            ),
           ),
-        ),
       ],
     );
   }

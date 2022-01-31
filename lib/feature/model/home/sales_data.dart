@@ -9,8 +9,8 @@ class SalesData {
       this.salesOrders});
 
   String? taskName;
-  int? totalBoxes;
-  int? totalReceived;
+  num? totalBoxes;
+  num? totalReceived;
   DateTime? lastUpdate;
   List<SalesOrder>? salesOrders;
 

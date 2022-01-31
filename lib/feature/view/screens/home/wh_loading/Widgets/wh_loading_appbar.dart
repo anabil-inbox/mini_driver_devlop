@@ -6,11 +6,11 @@ import 'package:inbox_driver/feature/view/widgets/icon_btn.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_style.dart';
-import 'package:inbox_driver/util/string.dart';
 
 class WhLoadingAppBar extends StatelessWidget {
-  const WhLoadingAppBar({Key? key}) : super(key: key);
+  const WhLoadingAppBar({Key? key , required this.title}) : super(key: key);
 
+  final String title;
   @override
   Widget build(BuildContext context) {
     screenUtil(context);
@@ -21,9 +21,10 @@ class WhLoadingAppBar extends StatelessWidget {
         appBarColor: colorBackground,
         isCenterTitle: true,
         titleWidget: CustomTextView(
-          txt: txtWHLoading,
+          txt: title,
           textStyle: textStyleBlack16(),
         ),
+        
         // leadingWidget: GestureDetector(
         //   onTap: () {
         //     Get.back();
@@ -42,7 +43,6 @@ class WhLoadingAppBar extends StatelessWidget {
         //       //   iconColor: Colors.black,
         //       //   borderColor: Colors.transparent,
         //       // )
-
         //       IconButton(
         //     onPressed: () {
         //       Navigator.pop(Get.context!);
@@ -51,7 +51,6 @@ class WhLoadingAppBar extends StatelessWidget {
         //         ? SvgPicture.asset("assets/svgs/back_arrow_ar.svg")
         //         : SvgPicture.asset("assets/svgs/back_arrow.svg"),
         //   ),
-
         //   // IconBtn(
         //   //   iconColor: colorTextWhite,
         //   //   width: sizeW48,
@@ -64,7 +63,6 @@ class WhLoadingAppBar extends StatelessWidget {
         //   //   icon: "assets/svgs/Scan.svg",
         //   // ),
         // ),
-       
        // leadingWidth: sizeW48,
        
         actionsWidgets: [

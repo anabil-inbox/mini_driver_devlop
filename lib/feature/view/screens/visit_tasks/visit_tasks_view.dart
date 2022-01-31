@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:inbox_driver/feature/view/screens/home/qr_scan/scan_screen.dart';
 import 'package:inbox_driver/feature/view/screens/visit_tasks/widget/completed_tab_widget.dart';
 import 'package:inbox_driver/feature/view/screens/visit_tasks/widget/ongoing_tab_widget.dart';
 import 'package:inbox_driver/feature/view/widgets/appbar/custom_app_bar_widget.dart';
-import 'package:inbox_driver/feature/view/widgets/custom_text_filed.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/feature/view/widgets/icon_btn.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
-import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/font_dimne.dart';
 import 'package:inbox_driver/util/string.dart';
 import 'package:get/get.dart';
@@ -82,7 +78,6 @@ class _VisitTasksViewState extends State<VisitTasksView>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     myTabController = TabController(length: 2, vsync: this);
   }
@@ -94,7 +89,6 @@ class _VisitTasksViewState extends State<VisitTasksView>
       appBar: myAppbar,
       body: Column(
         children: [
-          //TODO: here we will add getX controller sa a parameter to [myTabBar]
           myTabBar(),
           Expanded(
             child: TabBarView(controller: myTabController, children: const [

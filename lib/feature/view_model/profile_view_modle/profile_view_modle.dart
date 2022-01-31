@@ -120,7 +120,8 @@ class ProfileViewModle extends BaseController {
   }
 
   void getImageBottomSheet() {
-    Get.bottomSheet(Container(
+    Get.bottomSheet(
+      Container(
       height: sizeH240,
       padding: EdgeInsets.symmetric(horizontal: padding20!),
       decoration: BoxDecoration(

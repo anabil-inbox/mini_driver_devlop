@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:inbox_driver/feature/model/home/sales_data.dart';
 import 'package:inbox_driver/feature/model/home/sales_order.dart';
 import 'package:inbox_driver/feature/view/screens/home/wh_loading/Widgets/primary_border_button.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
+import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_style.dart';
@@ -100,11 +102,16 @@ class WhLoadingCard extends StatelessWidget {
                 SizedBox(
                   height: sizeH10,
                 ),
-                PrimaryBorderButton(
-                    buttonText: txtReceived,
-                    function: () {
-                      onRecivedClick();
-                    }),
+                GetBuilder<HomeViewModel>(
+                  builder: (builder) {
+                    return PrimaryBorderButton(
+                        isLoading: builder.isLoading,
+                        buttonText: txtReceived,
+                        function: () {
+                          onRecivedClick();
+                        });
+                  },
+                ),
                 SizedBox(height: sizeH16),
               ],
             ),
@@ -131,4 +138,5 @@ class WhLoadingCard extends StatelessWidget {
   //         )),
   //       ),
   //     );
+
 }

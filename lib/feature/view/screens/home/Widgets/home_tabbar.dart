@@ -41,7 +41,7 @@ class HomeTabBar extends StatelessWidget {
                                   style: BorderStyle.solid))),
                       child: Center(
                         child: CustomTextView(
-                          txt: '${txtCurrent.tr}',
+                          txt: txtCurrent.tr,
                           textStyle: (logic.selectedTab == 0)
                               ? textStyleNormal()?.copyWith(
                                   color: colorRed, fontSize: fontSize14)
@@ -70,7 +70,7 @@ class HomeTabBar extends StatelessWidget {
                                 style: BorderStyle.solid))),
                     child: Center(
                       child: CustomTextView(
-                        txt: '${txtCompleted.tr}',
+                        txt: txtCompleted.tr,
                         textStyle: (logic.selectedTab == 1)
                             ? textStyleNormal()?.copyWith(
                                 color: colorRed, fontSize: fontSize14)

@@ -58,4 +58,5 @@ Map<String, String> arSU = {
   txtButtonStart: "ابدأ",
   txtVisitTasks : "زيارة المهام",
   txtOngoing : "جاري التنفيذ",
+  txtYouHaveToSelectEmergencyCase : "اختيار حالة الطوارئ اجبارية"
 };

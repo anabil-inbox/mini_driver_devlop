@@ -50,11 +50,13 @@ abstract class ConstanceNetwork {
   static String homeTasksEndPoint = "inbox_app.driver.task_management.get_level_one_tasks";
   static String getSpecificTask = "inbox_app.driver.task_management.get_level_one_task";
   static String scanBoxEndPoint = "inbox_app.driver.task_management.scan_box";
-  
-  //todo this for constance type of user
-  static String userType = "user";
-  static String companyType = "company";
-  static String bothType = "both";
+
+  // to add here emergency End Points ::
+  static String getEmergencyCassesEndPoint = "inbox_app.driver.emergency_report.get_emergency_cases";
+  static String sendEmergencyReportEndPoint = "inbox_app.driver.emergency_report.create_report";
+  static String getEmergencyReportsEndPoint = "inbox_app.driver.emergency_report.get_emergency_reports";
+
+  static String reciveBoxessEndPoint = "inbox_app.driver.task_management.receive_all_boxes";
 
 
   static Map<String, String> header(int typeToken) {

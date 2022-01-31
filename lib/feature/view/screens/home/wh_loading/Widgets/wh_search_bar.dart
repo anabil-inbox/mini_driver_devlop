@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inbox_driver/feature/view/screens/home/qr_scan/scan_screen.dart';
 import 'package:inbox_driver/feature/view/widgets/custom_text_filed.dart';
-import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
-import 'package:inbox_driver/util/app_shaerd_data.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:inbox_driver/feature/view/widgets/appbar/custom_app_bar_widget.dart';
 import 'package:inbox_driver/feature/view/widgets/icon_btn.dart';
@@ -12,35 +9,52 @@ import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/constance.dart';
 
 class WhSearchBar extends StatelessWidget {
-  const WhSearchBar({Key? key}) : super(key: key);
+  const WhSearchBar({Key? key, this.isHaveScan = true}) : super(key: key);
+
+  final bool isHaveScan;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: CustomAppBarWidget(
-        elevation: 0,
-        appBarColor: Colors.transparent,
-        isCenterTitle: true,
-        titleWidget: searchWidget,
-        leadingWidget: GestureDetector(
-          onTap: () {
-            Get.back();
-          },
-          child: IconBtn(
-            iconColor: colorTextWhite,
-            width: sizeW48,
-            height: sizeH48,
-            backgroundColor: colorRed,
-            onPressed: () {
-              Get.to(() => const ScanScreen());
-            },
-            borderColor: colorTrans,
-            icon: "assets/svgs/Scan.svg",
-          ),
+    if (isHaveScan) {
+      return SizedBox(
+        child: CustomAppBarWidget(
+          elevation: 0,
+          appBarColor: Colors.transparent,
+          isCenterTitle: true,
+          titleWidget: searchWidget,
+          leadingWidget: GestureDetector(
+              onTap: () {
+                Get.back();
+              },
+              child: IconBtn(
+                iconColor: colorTextWhite,
+                width: sizeW48,
+                height: sizeH48,
+                backgroundColor: colorRed,
+                onPressed: () {
+                  Get.to(() => const ScanScreen());
+                },
+                borderColor: colorTrans,
+                icon: "assets/svgs/Scan.svg",
+              )),
+          leadingWidth: sizeW48,
         ),
-        leadingWidth: sizeW48,
-      ),
-    );
+      );
+    } else {
+      return Padding(
+        padding: EdgeInsets.only(top: padding12!),
+        child: SizedBox(
+          child: searchWidget,
+          // child: CustomAppBarWidget(
+          //   elevation: 0,
+          //   appBarColor: Colors.transparent,
+          //   isCenterTitle: true,
+          //   titleWidget: searchWidget,
+          //   leadingWidget: const SizedBox(),
+          // ),
+        ),
+      );
+    }
   }
 
   // Widget get searchWidget => Container(

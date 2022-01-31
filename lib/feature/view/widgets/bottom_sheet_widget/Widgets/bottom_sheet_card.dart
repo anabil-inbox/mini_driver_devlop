@@ -22,7 +22,9 @@ class BottomSheetCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onClicked(),
+      onTap: () {
+        onClicked();
+      },
       child: Container(
         height: sizeH50,
         width: double.infinity,

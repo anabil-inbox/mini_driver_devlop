@@ -9,6 +9,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image/image.dart' as Img;
@@ -16,13 +17,14 @@ import 'package:inbox_driver/feature/core/dialog_loading.dart';
 import 'package:inbox_driver/feature/view/screens/auth/signUp_signIn/widget/language_item_widget.dart';
 import 'package:inbox_driver/feature/view/widgets/primary_button.dart';
 import 'package:inbox_driver/feature/view_model/auht_view_modle/auth_view_modle.dart';
-import 'package:inbox_driver/feature/view_model/profile_view_modle/profile_view_modle.dart';
 import 'package:inbox_driver/feature/view_model/splash_view_modle/splash_view_modle.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/sh_util.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
+// import 'package:sms_maintained/sms.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'app_color.dart';
 import 'app_style.dart';
@@ -40,7 +42,7 @@ screenUtil(BuildContext context) {
       BoxConstraints(
           maxWidth: MediaQuery.of(context).size.width,
           maxHeight: MediaQuery.of(context).size.height),
-      designSize: Size(392.72727272727275, 803.6363636363636),
+      designSize: const Size(392.72727272727275, 803.6363636363636),
       orientation: Orientation.portrait);
 }
 
@@ -105,14 +107,12 @@ phoneVaild(String value) {
 }
 
 phoneVaildAlternativeContact(String value) {
- if (value.length > 10 || value.length < 8) {
-     return txtErrorMobileNumber.tr;
-  }else{
+  if (value.length > 10 || value.length < 8) {
+    return txtErrorMobileNumber.tr;
+  } else {
     return;
   }
-
 }
-
 
 Widget simplePopup() => PopupMenuButton<int>(
       initialValue: 1,
@@ -134,12 +134,61 @@ String getDeviceLang() {
   return languageCode;
 }
 
-/*String parseHtmlString(String htmlString) {
-  final document = parse(htmlString);
-  final String parsedString = parse(document.body.text).documentElement.text;
+openwhatsapp({required String phoneNumber}) async {
+  String whatsapp = phoneNumber;
+  String whatsappAndroid = "whatsapp://send?phone=" + whatsapp + "&text=";
+  String whatappIos = "https://wa.me/$whatsapp?text=}";
+  if (Platform.isIOS) {
+    if (await canLaunch(whatappIos)) {
+      await launch(whatappIos, forceSafariVC: false);
+    } else {
+      ScaffoldMessenger.of(Get.context!)
+          .showSnackBar(const SnackBar(content: Text("whatsapp no installed")));
+    }
+  } else {
+    // android , web
+    if (await canLaunch(whatsappAndroid)) {
+      await launch(whatsappAndroid);
+    } else {
+      ScaffoldMessenger.of(Get.context!)
+          .showSnackBar(const SnackBar(content: Text("whatsapp no installed")));
+    }
+  }
+}
 
-  return parsedString.trim();
-}*/
+Future<void> startPhoneCall({required String phoneNumber}) async {
+  final Uri launchUri = Uri(
+    scheme: 'tel',
+    path: phoneNumber,
+  );
+  await launch(launchUri.toString());
+}
+
+callNumber({required String phoneNumber}) async {
+  try {
+    await FlutterPhoneDirectCaller.callNumber(phoneNumber) ?? false;
+  } catch (e) {
+    Logger().e(e);
+  }
+}
+
+// Future<void> directSmsSend(
+//     {required String phoneNumber, required String msg}) async {
+//   try {
+//     SmsSender sender = SmsSender();
+//     SmsMessage message = SmsMessage(phoneNumber, msg);
+//     message.onStateChanged.listen((state) {
+//       if (state == SmsMessageState.Sent) {
+//         snackSuccess(txtSuccess!.tr, "Sms Sended");
+//       } else if (state == SmsMessageState.Delivered) {
+//         snackSuccess(txtSuccess!.tr, "Sms Deliverd");
+//       }
+//     });
+//     sender.sendSms(message);
+//   } catch (e) {
+//     snackError(txtError!.tr, e.toString());
+//   }
+// }
 
 snackSuccess(String title, String body) {
   Future.delayed(Duration(seconds: 0)).then((value) {
@@ -505,10 +554,7 @@ class CustomMaterialPageRoute extends MaterialPageRoute {
         );
 }
 
-
-
 bool isArabicLang() {
   return (SharedPref.instance.getAppLanguageMain() == "ar" ? true : false);
   // return isRTL;
 }
-

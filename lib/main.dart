@@ -33,6 +33,10 @@ void enableHybridComposition(){
   }
 }
 
+// emergance 
+// call phone 
+// whats App:
+
 class BindingsController extends Bindings {
   @override
   void dependencies() {

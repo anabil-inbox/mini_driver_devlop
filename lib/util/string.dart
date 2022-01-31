@@ -163,3 +163,6 @@ const String txtButtonStart = "Start";
 //todo this for Visit Tasks page
 const String txtVisitTasks = "Visit Tasks";
 const String txtOngoing = "Ongoing";
+
+//todo this for Emergency Report :
+const String txtYouHaveToSelectEmergencyCase = "You Have To Select Emergency Case";

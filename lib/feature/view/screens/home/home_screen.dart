@@ -9,6 +9,7 @@ import 'package:inbox_driver/feature/view/screens/details/order_details_started_
 import 'package:inbox_driver/feature/view/screens/home/Widgets/home_appbar.dart';
 import 'package:inbox_driver/feature/view/screens/home/Widgets/home_tabbar.dart';
 import 'package:inbox_driver/feature/view/screens/home/current_screen/current_screen.dart';
+import 'package:inbox_driver/feature/view/widgets/bottom_sheet_widget/emergency_bottom_sheet.dart';
 import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/sh_util.dart';
@@ -33,7 +34,9 @@ class HomeScreen extends StatelessWidget {
           backgroundColor: colorRed,
           onPressed: () {
             Logger().i(SharedPref.instance.getUserToken());
-            Get.to(() =>  const OrderDetailsStarted());
+            // Get.to(() =>  const OrderDetailsStarted());
+            Get.bottomSheet(const EmergencyBottomSheet(),
+                isScrollControlled: true);
           },
           child: SvgPicture.asset(
             "assets/svgs/Call Missed.svg",
