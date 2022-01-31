@@ -5,10 +5,13 @@ import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
+import 'package:inbox_driver/util/date/date_time_util.dart';
 import 'package:inbox_driver/util/string.dart';
 
 class ScheduleBox extends StatelessWidget {
-  const ScheduleBox({Key? key}) : super(key: key);
+  const ScheduleBox({Key? key ,required this.dateTime }) : super(key: key);
+
+  final String dateTime;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +32,7 @@ class ScheduleBox extends StatelessWidget {
             textStyle:textStyleNormal()?.copyWith(color: colorBlack),
           ),
           CustomTextView(
-            txt: txtTime.tr,
+            txt: /* DateUtility.getChatTime(dateTime) */ dateTime.split(" ")[0],
             maxLine: Constance.maxLineOne,
             textStyle:textStyleNormal(),
           ),

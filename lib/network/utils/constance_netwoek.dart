@@ -57,7 +57,7 @@ abstract class ConstanceNetwork {
   static String getEmergencyReportsEndPoint = "inbox_app.driver.emergency_report.get_emergency_reports";
 
   static String reciveBoxessEndPoint = "inbox_app.driver.task_management.receive_all_boxes";
-
+  static String updateBoxTaskEndpoint = "inbox_app.driver.task_management.update_task_status";
 
   static Map<String, String> header(int typeToken) {
     Map<String, String> headers = {};

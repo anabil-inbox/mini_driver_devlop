@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:inbox_driver/feature/view/widgets/custom_text_filed.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
@@ -10,7 +9,6 @@ import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/font_dimne.dart';
 import 'package:inbox_driver/util/string.dart';
 import 'package:get/get.dart';
-import 'dart:math' as math;
 
 class OrderList extends StatelessWidget {
   const OrderList({Key? key}) : super(key: key);
@@ -151,6 +149,7 @@ class OrderList extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          
           SizedBox(height: sizeH13),
           CustomTextView(
             txt: txtOrderList.tr,
@@ -230,6 +229,7 @@ class OrderList extends StatelessWidget {
           SizedBox(height: sizeH10),
           bulkItem,
           SizedBox(height: sizeH13),
+
         ],
       ),
     );

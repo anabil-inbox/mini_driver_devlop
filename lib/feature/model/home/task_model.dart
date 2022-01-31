@@ -1,5 +1,5 @@
-class Task {
-  Task({
+class TaskModel {
+  TaskModel({
     this.id,
     this.taskName,
     this.status,
@@ -15,7 +15,7 @@ class Task {
   int? totalTasks;
   int? totalDone;
 
-  factory Task.fromJson(Map<String, dynamic> json) => Task(
+  factory TaskModel.fromJson(Map<String, dynamic> json) => TaskModel(
         id: json["id"],
         taskName: json["task_name"],
         status: json["status"],

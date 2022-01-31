@@ -1,11 +1,9 @@
-import 'package:inbox_driver/feature/model/home/Task_model.dart';
 import 'package:inbox_driver/feature/model/home/emergencey/emergency_case.dart';
 import 'package:inbox_driver/feature/model/home/sales_data.dart';
-import 'package:inbox_driver/feature/model/home/sales_order.dart';
+import 'package:inbox_driver/feature/model/home/task_model.dart';
 import 'package:inbox_driver/network/api/model/app_response.dart';
 import 'package:inbox_driver/network/api/model/home_api.dart';
 import 'package:inbox_driver/network/utils/constance_netwoek.dart';
-import 'package:inbox_driver/util/constance.dart';
 import 'package:logger/logger.dart';
 
 class HomeHelper {
@@ -14,7 +12,7 @@ class HomeHelper {
   var log = Logger();
 
   //todo get Home Tasks For Driver From Api
-  Future<List<Task>> getHomeTasks(
+  Future<List<TaskModel>> getHomeTasks(
       {required Map<String, dynamic> taskType}) async {
     try {
       var response = await HomeApi.getInstance.getHomeTasks(
@@ -23,7 +21,7 @@ class HomeHelper {
           header: ConstanceNetwork.header(4));
       if (response.status?.success == true) {
         List data = response.data;
-        return data.map((e) => Task.fromJson(e)).toList();
+        return data.map((e) => TaskModel.fromJson(e)).toList();
       } else {
         return [];
       }
@@ -57,7 +55,7 @@ class HomeHelper {
           body: body,
           url: ConstanceNetwork.scanBoxEndPoint,
           header: ConstanceNetwork.header(4));
-          Logger().i(response.toJson());
+      Logger().i(response.toJson());
       if (response.status?.success == true) {
         return response;
       } else {
@@ -69,14 +67,14 @@ class HomeHelper {
     }
   }
 
-    Future<List<EmergencyCase>> getEmergencyCasses() async {
+  Future<List<EmergencyCase>> getEmergencyCasses() async {
     try {
       var response = await HomeApi.getInstance.getEmergencyCasses(
           url: ConstanceNetwork.getEmergencyCassesEndPoint,
           header: ConstanceNetwork.header(4));
-          Logger().i(response.toJson());
+      Logger().i(response.toJson());
       if (response.status?.success == true) {
-         List data = response.data;
+        List data = response.data;
         return data.map((e) => EmergencyCase.fromJson(e)).toList();
       } else {
         return [];
@@ -87,14 +85,13 @@ class HomeHelper {
     }
   }
 
-
-Future<AppResponse> createEmergencyReports({required var body}) async {
+  Future<AppResponse> createEmergencyReports({required var body}) async {
     try {
       var response = await HomeApi.getInstance.createEmergencyReports(
           body: body,
           url: ConstanceNetwork.sendEmergencyReportEndPoint,
           header: ConstanceNetwork.header(4));
-          Logger().i(response.toJson());
+      Logger().i(response.toJson());
       if (response.status?.success == true) {
         return response;
       } else {
@@ -106,13 +103,13 @@ Future<AppResponse> createEmergencyReports({required var body}) async {
     }
   }
 
-    Future<AppResponse> reciveBoxess({required var body}) async {
+  Future<AppResponse> reciveBoxess({required var body}) async {
     try {
       var response = await HomeApi.getInstance.reciveBoxess(
           body: body,
           url: ConstanceNetwork.reciveBoxessEndPoint,
           header: ConstanceNetwork.header(4));
-          Logger().i(response.toJson());
+      Logger().i(response.toJson());
       if (response.status?.success == true) {
         return response;
       } else {
@@ -124,4 +121,21 @@ Future<AppResponse> createEmergencyReports({required var body}) async {
     }
   }
 
+  Future<AppResponse> updateTaskStatus({required var body}) async {
+    try {
+      var response = await HomeApi.getInstance.updateTaskStatus(
+          body: body,
+          url: ConstanceNetwork.updateBoxTaskEndpoint,
+          header: ConstanceNetwork.header(4));
+      Logger().i(response.toJson());
+      if (response.status?.success == true) {
+        return response;
+      } else {
+        return response;
+      }
+    } catch (e) {
+      log.d(e.toString());
+      return AppResponse.fromJson({});
+    }
+  }
 }

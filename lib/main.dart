@@ -36,6 +36,8 @@ void enableHybridComposition(){
 // emergance 
 // call phone 
 // whats App:
+// messages
+// order details Scenarios ::
 
 class BindingsController extends Bindings {
   @override

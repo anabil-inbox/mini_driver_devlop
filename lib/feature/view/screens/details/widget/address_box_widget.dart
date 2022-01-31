@@ -11,7 +11,9 @@ import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/string.dart';
 
 class AddressBox extends StatelessWidget {
-  const AddressBox({Key? key}) : super(key: key);
+  const AddressBox({Key? key , required this.address}) : super(key: key);
+
+  final String address;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +45,7 @@ class AddressBox extends StatelessWidget {
                 InkWell(
                   onTap: _goToMap,
                   child: CustomTextView(
-                    txt: txtDeliveryMap.tr,
+                    txt: address,
                     maxLine: Constance.maxLineOne,
                     textStyle: textStyleNormal(),
                   ),

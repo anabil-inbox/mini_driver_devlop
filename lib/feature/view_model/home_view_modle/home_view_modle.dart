@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart' as multipart;
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:inbox_driver/feature/model/home/Task_model.dart';
 import 'package:inbox_driver/feature/model/home/emergencey/emergency_case.dart';
-import 'package:inbox_driver/feature/model/home/emergencey/emergency_report.dart';
 import 'package:inbox_driver/feature/model/home/sales_data.dart';
+import 'package:inbox_driver/feature/model/home/task_model.dart';
 import 'package:inbox_driver/feature/view/screens/home/Widgets/secondery_button.dart';
 import 'package:inbox_driver/network/api/feature/home_helper.dart';
 import 'package:inbox_driver/util/app_color.dart';
@@ -82,8 +81,8 @@ class HomeViewModel extends GetxController {
     update();
   }
 
-  List<Task> tasksInProgress = [];
-  List<Task> tasksDone = [];
+  List<TaskModel> tasksInProgress = [];
+  List<TaskModel> tasksDone = [];
 
   // to do here for Getting Driver Tasks :
   Future<void> getHomeTasks({required String taskType}) async {
@@ -303,6 +302,33 @@ class HomeViewModel extends GetxController {
       printError();
     }
     endLoading();
+  }
+
+  Future<void> updateTaskStatus(
+      {required String newStatus, required String taskId}) async {
+    try {
+      await HomeHelper.getInstance.updateTaskStatus(body: {
+        Constance.taskId: taskId,
+        Constance.status: newStatus
+      }).then((value) => {
+            if (value.status!.success!)
+              {
+                snackSuccess(txtSuccess!.tr, value.status!.message!), Get.back()
+                }
+            else
+              {
+                snackError(txtSuccess!.tr, value.status!.message!)
+                }
+          });
+    } catch (e) {
+      printError();
+    }
+  }
+
+  Future<void> changeBoxStatus() async {
+    try {} catch (e) {
+      printError();
+    }
   }
 
   @override

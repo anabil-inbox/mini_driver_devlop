@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inbox_driver/feature/model/home/Task_model.dart';
+import 'package:inbox_driver/feature/model/home/task_model.dart';
 import 'package:inbox_driver/feature/view/screens/home/wh_loading/wh_loading.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/util/app_color.dart';
@@ -16,7 +16,7 @@ class HomeCard extends StatelessWidget {
   const HomeCard({Key? key, required this.task, required this.index})
       : super(key: key);
 
-  final Task task;
+  final TaskModel task;
   final int index;
 
   @override

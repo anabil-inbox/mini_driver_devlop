@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inbox_driver/feature/core/loading_circle.dart';
-import 'package:inbox_driver/feature/model/home/Task_model.dart';
+import 'package:inbox_driver/feature/model/home/task_model.dart';
 import 'package:inbox_driver/feature/view/screens/home/Widgets/home_tabbar.dart';
 import 'package:inbox_driver/feature/view/screens/home/wh_loading/Widgets/chart_widget.dart';
 import 'package:inbox_driver/feature/view/screens/home/wh_loading/Widgets/wh_search_bar.dart';
@@ -30,7 +30,7 @@ class WhLoading extends StatelessWidget {
       );
   // Widget get chart => WhLoadingChart();
   static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
-  final Task task;
+  final TaskModel task;
   // final SalesOrder salesOrder;
 
   Widget get lvSalesOrder {
@@ -49,21 +49,36 @@ class WhLoading extends StatelessWidget {
                     .toLowerCase()
                     .contains(Constance.taskWarehouseClosure.toLowerCase())) {
               return WhLoadingCard(
+                task: task,
+                index: index,
                 salesData: homeViewModel.operationsSalesData!,
                 salesOrder:
                     homeViewModel.operationsSalesData!.salesOrders![index],
-                onRecivedClick: () async {
-                  await homeViewModel.recivedBoxes(
-                      serial: homeViewModel.operationsSalesData!
-                              .salesOrders![index].orderId ??
-                          "",
-                      taskName: task.taskName ?? "");
-                },
+                onRecivedClick: index == 0
+                    ? () async {
+                        if (task.taskName!.toLowerCase().contains(
+                            Constance.taskWarehouseLoading.toLowerCase())) {
+                          await homeViewModel.recivedBoxes(
+                              serial: homeViewModel.operationsSalesData!
+                                      .salesOrders![index].orderId ??
+                                  "",
+                              taskName: Constance.taskWarehouseLoading);
+                        } else {
+                          await homeViewModel.recivedBoxes(
+                              serial: homeViewModel.operationsSalesData!
+                                      .salesOrders![index].orderId ??
+                                  "",
+                              taskName: Constance.taskWarehouseClosure);
+                        }
+                      }
+                    : () {},
               );
             } else if (task.taskName!
                 .toLowerCase()
                 .contains(Constance.taskCustomerVisit.toLowerCase())) {
               return VisitLvItemWidget(
+                task: task,
+                index: index,
                 salesData: homeViewModel.operationsSalesData!,
                 salesOrder:
                     homeViewModel.operationsSalesData!.salesOrders![index],

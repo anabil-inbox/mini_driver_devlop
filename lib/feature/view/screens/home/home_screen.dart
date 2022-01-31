@@ -54,7 +54,15 @@ class HomeScreen extends StatelessWidget {
                   appBar,
                   const Divider(height: 3),
                   tabBar,
-                  Expanded(child: tabs[logic.selectedTab])
+                  Expanded(
+                    child: RefreshIndicator(
+                        color: colorPrimary,
+                        onRefresh: () async {
+                          logic.onInit();
+                          return;
+                        },
+                        child: tabs[logic.selectedTab]),
+                  )
                 ],
               );
             }
