@@ -118,7 +118,7 @@ class OrderDetailsStarted extends StatelessWidget {
               onClicked: () async {
                 await home.updateTaskStatus(
                   newStatus: Constance.taskStart,
-                  taskId: task.id ?? "",
+                  taskId: salesOrder.taskId ?? "",
                 );
               },
             );
@@ -140,7 +140,7 @@ class OrderDetailsStarted extends StatelessWidget {
               left: 0,
               bottom: 0,
               child: Container(
-                color: colorBackground,
+                color: colorBackground.withOpacity(0.32),
               ))
         ],
       );

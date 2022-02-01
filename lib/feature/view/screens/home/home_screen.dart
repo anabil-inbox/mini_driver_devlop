@@ -1,17 +1,16 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:inbox_driver/feature/core/loading_circle.dart';
-import 'package:inbox_driver/feature/view/screens/details/order_details_started_screen.dart';
 import 'package:inbox_driver/feature/view/screens/home/Widgets/home_appbar.dart';
 import 'package:inbox_driver/feature/view/screens/home/Widgets/home_tabbar.dart';
 import 'package:inbox_driver/feature/view/screens/home/current_screen/current_screen.dart';
 import 'package:inbox_driver/feature/view/widgets/bottom_sheet_widget/emergency_bottom_sheet.dart';
 import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
 import 'package:inbox_driver/util/app_color.dart';
+import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/sh_util.dart';
 import 'package:logger/logger.dart';
 
@@ -28,7 +27,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil();
+    screenUtil(context);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
           backgroundColor: colorRed,

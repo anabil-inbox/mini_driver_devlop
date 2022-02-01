@@ -58,7 +58,9 @@ abstract class ConstanceNetwork {
 
   static String reciveBoxessEndPoint = "inbox_app.driver.task_management.receive_all_boxes";
   static String updateBoxTaskEndpoint = "inbox_app.driver.task_management.update_task_status";
+  static String searchEndPoint = "inbox_app.driver.task_management.search_tasks";
 
+  
   static Map<String, String> header(int typeToken) {
     Map<String, String> headers = {};
     if (typeToken == 0) {

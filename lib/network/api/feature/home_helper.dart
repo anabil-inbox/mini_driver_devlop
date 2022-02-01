@@ -138,4 +138,22 @@ class HomeHelper {
       return AppResponse.fromJson({});
     }
   }
+
+  Future<SalesData> search({required var body}) async {
+    try {
+      var response = await HomeApi.getInstance.search(
+          body: body,
+          url: ConstanceNetwork.searchEndPoint,
+          header: ConstanceNetwork.header(4));
+      if (response.status?.success == true) {
+        return SalesData.fromJson(response.data);
+      } else {
+        return SalesData.fromJson(response.data);
+      }
+    } catch (e) {
+      log.d(e.toString());
+      return SalesData.fromJson({});
+    }
+  }
+
 }

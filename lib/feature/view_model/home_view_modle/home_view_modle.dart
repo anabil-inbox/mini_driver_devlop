@@ -137,6 +137,8 @@ class HomeViewModel extends GetxController {
               {
                 operationsSalesData?.totalReceived =
                     (operationsSalesData?.totalReceived ?? 0) + 1,
+                 onInit(),
+                snackSuccess("$txtSuccess", "${value.status!.message}")
               }
             else
               {
@@ -147,6 +149,7 @@ class HomeViewModel extends GetxController {
     } catch (e) {
       printError();
     }
+    update();
   }
 
   EmergencyCase? selectedEmergencyCase;
@@ -291,11 +294,13 @@ class HomeViewModel extends GetxController {
                     (operationsSalesData?.totalReceived ?? 0) +
                         num.parse(value.data["box_received_count"].toString()),
                 snackSuccess(txtSuccess!.tr, value.status!.message!),
+                update()
               }
             else
               {
                 Logger().i(value.toJson()),
-                snackError("$txtError", "${value.status!.message}")
+                snackError("$txtError", "${value.status!.message}"),
+                update()
               }
           });
     } catch (e) {
@@ -312,21 +317,24 @@ class HomeViewModel extends GetxController {
         Constance.status: newStatus
       }).then((value) => {
             if (value.status!.success!)
-              {
-                snackSuccess(txtSuccess!.tr, value.status!.message!), Get.back()
-                }
+              {snackSuccess(txtSuccess!.tr, value.status!.message!), Get.back()}
             else
-              {
-                snackError(txtSuccess!.tr, value.status!.message!)
-                }
+              {snackError(txtSuccess!.tr, value.status!.message!)}
           });
     } catch (e) {
       printError();
     }
   }
 
-  Future<void> changeBoxStatus() async {
-    try {} catch (e) {
+  TextEditingController tdSearchWhLoading = TextEditingController();
+  
+  search({required String searchedText, required String taskId}) async {
+    try {
+      HomeHelper.getInstance.search(body: {
+        "task_id": taskId,
+        "search": searchedText,
+      }).then((value) => {operationsSalesData = value, update()});
+    } catch (e) {
       printError();
     }
   }

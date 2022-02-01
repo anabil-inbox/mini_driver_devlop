@@ -25,6 +25,7 @@ class HomeCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Get.to(() => WhLoading(
+              index: index,
               task: task,
             ));
       },

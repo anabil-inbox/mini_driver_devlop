@@ -9,10 +9,11 @@ import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/constance.dart';
 
 class WhSearchBar extends StatelessWidget {
-  const WhSearchBar({Key? key, this.isHaveScan = true}) : super(key: key);
+  const WhSearchBar({Key? key, this.isHaveScan = true , required this.onChange ,  this.textEditingController}) : super(key: key);
 
   final bool isHaveScan;
-
+  final Function onChange;
+  final TextEditingController? textEditingController;
   @override
   Widget build(BuildContext context) {
     if (isHaveScan) {
@@ -94,13 +95,16 @@ class WhSearchBar extends StatelessWidget {
   // to do this for search Widget ::
   Widget get searchWidget => CustomTextFormFiled(
         iconSize: sizeRadius20,
+        controller: textEditingController??TextEditingController(),
         maxLine: Constance.maxLineOne,
         icon: Icons.search,
         iconColor: colorHint2,
         textInputAction: TextInputAction.search,
         keyboardType: TextInputType.text,
         onSubmitted: (_) {},
-        onChange: (value) {},
+        onChange: (value) {
+          onChange;
+        },
         isSmallPadding: false,
         isSmallPaddingWidth: true,
         fillColor: colorBackground,
