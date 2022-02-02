@@ -6,7 +6,6 @@ import 'dart:io';
 import 'dart:math' as Math;
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
@@ -142,18 +141,44 @@ openwhatsapp({required String phoneNumber}) async {
     if (await canLaunch(whatappIos)) {
       await launch(whatappIos, forceSafariVC: false);
     } else {
-      ScaffoldMessenger.of(Get.context!)
-          .showSnackBar(const SnackBar(content: Text("whatsapp no installed")));
+      ScaffoldMessenger.of(Get.context!).showSnackBar(
+          const SnackBar(content: Text("whatsapp is not installed")));
     }
   } else {
     // android , web
     if (await canLaunch(whatsappAndroid)) {
       await launch(whatsappAndroid);
     } else {
-      ScaffoldMessenger.of(Get.context!)
-          .showSnackBar(const SnackBar(content: Text("whatsapp no installed")));
+      ScaffoldMessenger.of(Get.context!).showSnackBar(
+          const SnackBar(content: Text("whatsapp is not installed")));
     }
   }
+}
+
+sendSmsOnMyWay({required String phoneNumber}) async {
+  String number = phoneNumber;
+  String sms = 'sms:$number?body=I\'m%20on%20my%20way';
+  launch(sms);
+}
+
+sendSmsArrivedHereOutside({required String phoneNumber}) async {
+  String number = phoneNumber;
+  String sms = 'sms:$number?body=I%20arrived%20here%20outside';
+  launch(sms);
+}
+
+sendSmsNoShow({required String phoneNumber}) async {
+  String number = phoneNumber;
+  String sms = 'sms:$number?body=I\'ll%20report%20"no show"%20within 5 mins';
+  launch(sms);
+}
+
+sendCustomizeSMS({required String phoneNumber}) async {
+  String number = phoneNumber;
+  String message = '';
+
+  String sms = 'sms:$number?body=$message';
+  launch(sms);
 }
 
 Future<void> startPhoneCall({required String phoneNumber}) async {

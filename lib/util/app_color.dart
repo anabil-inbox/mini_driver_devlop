@@ -28,6 +28,7 @@ var colorGryBackgroundContainer =const Color(0xFFD8D8D8);
 var colorBlack =const Color(0xFF000000);
 var colorBackground =const Color(0xFFFFFFFF);
 var colorTrans = Colors.transparent;
+const colorDark =  Color(0xFF6D7278);
 
 //todo this  Bottom Sheets
 var colorBottomSheetContainer =const Color(0xFFE1E1E3);

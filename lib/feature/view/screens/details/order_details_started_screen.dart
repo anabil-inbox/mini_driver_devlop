@@ -4,10 +4,10 @@ import 'package:inbox_driver/feature/model/home/sales_data.dart';
 import 'package:inbox_driver/feature/model/home/sales_order.dart';
 import 'package:inbox_driver/feature/model/home/task_model.dart';
 import 'package:inbox_driver/feature/view/screens/details/widget/address_box_widget.dart';
+import 'package:inbox_driver/feature/view/screens/details/widget/location_far_widget.dart';
 import 'package:inbox_driver/feature/view/screens/details/widget/name_box_widget.dart';
 import 'package:inbox_driver/feature/view/screens/details/widget/order_list_widget.dart';
 import 'package:inbox_driver/feature/view/screens/details/widget/schedule%20_box_widget.dart';
-import 'package:inbox_driver/feature/view/screens/home/instant_order/instant_order_view.dart';
 import 'package:inbox_driver/feature/view/widgets/appbar/custom_app_bar_widget.dart';
 import 'package:inbox_driver/feature/view/widgets/bottom_sheet_widget/no_show_report_bottom_sheet.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
@@ -69,58 +69,76 @@ class OrderDetailsStarted extends StatelessWidget {
         )),
       );
 
-  Widget get primaryButton {
+  Widget primaryButton({required HomeViewModel home}) {
     if (index == 0) {
-      if (salesOrder.status == Constance.taskStart) {
-        return Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              PrimaryButton(
-                isExpanded: false,
-                isLoading: false,
-                onClicked: () {
-                  Get.to(() => const InstantOrder());
-                },
-                textButton: "Delivered",
-              ),
-              SizedBox(
-                width: sizeW12,
-              ),
-              SizedBox(
-                width: sizeW150,
-                child: SeconderyFormButton(
-                  buttonText: "No Show",
-                  onClicked: () {
-                    showModalBottomSheet(
-                      context: Get.context!,
-                      builder: (BuildContext context) =>
-                          const NoShowReportBottomSheet(),
-                      isScrollControlled: true,
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(20),
-                      )),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
+      if (task.taskName!
+          .toLowerCase()
+          .contains(Constance.taskWarehouseLoading.toLowerCase()) || task.taskName!
+          .toLowerCase()
+          .contains(Constance.taskWarehouseClosure.toLowerCase())) {
+        return PrimaryButton(
+          isExpanded: true,
+          isLoading: home.isLoading,
+          textButton: txtReceived.tr,
+          onClicked: () async {
+            // await home.updateTaskStatus(
+            //   newStatus: Constance.taskStart,
+            //   taskId: salesOrder.taskId ?? "",
+            // );
+            await home.recivedBoxes(
+                serial: home.operationsSalesData!.salesOrders![index].orderId ?? "",
+                taskName: Constance.taskWarehouseLoading);
+          },
         );
-      } else {
-        return GetBuilder<HomeViewModel>(
-          builder: (home) {
-            return PrimaryButton(
-              isExpanded: true,
+      } else if (salesOrder.taskStatus == Constance.taskStart) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            PrimaryButton(
+              isExpanded: false,
+              width: sizeW150,
               isLoading: home.isLoading,
-              textButton: txtButtonStart.tr,
               onClicked: () async {
+                // Get.to(() => const InstantOrder());
                 await home.updateTaskStatus(
-                  newStatus: Constance.taskStart,
+                  newStatus: Constance.taskdelivered,
                   taskId: salesOrder.taskId ?? "",
                 );
               },
+              textButton: "Delivered",
+            ),
+            SizedBox(
+              width: sizeW12,
+            ),
+            SizedBox(
+              width: sizeW150,
+              child: SeconderyFormButton(
+                buttonText: "No Show",
+                onClicked: () {
+                  showModalBottomSheet(
+                    context: Get.context!,
+                    builder: (BuildContext context) =>
+                        const NoShowReportBottomSheet(),
+                    isScrollControlled: true,
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(20),
+                    )),
+                  );
+                },
+              ),
+            ),
+          ],
+        );
+      } else {
+        return PrimaryButton(
+          isExpanded: true,
+          isLoading: home.isLoading,
+          textButton: txtButtonStart.tr,
+          onClicked: () async {
+            await home.updateTaskStatus(
+              newStatus: Constance.taskStart,
+              taskId: salesOrder.taskId ?? "",
             );
           },
         );
@@ -191,7 +209,9 @@ class OrderDetailsStarted extends StatelessWidget {
                         // const OrderSummeryWidget(),
                         SizedBox(height: sizeH10),
                         // todo for order list scenario
-                        const OrderList(),
+                        OrderList(
+                          orderItems: salesOrder.orderItems ?? [],
+                        ),
                         SizedBox(height: sizeH30),
                         // PhysicalModel(
                         //   color: colorPrimary,
@@ -200,7 +220,6 @@ class OrderDetailsStarted extends StatelessWidget {
                         //   elevation: 10,
                         //   child: primaryButton),
                         //   SizedBox(height: sizeH30),
-                        primaryButton,
                         SizedBox(height: sizeH10),
                       ],
                     ),
@@ -252,6 +271,27 @@ class OrderDetailsStarted extends StatelessWidget {
                 ],
               ),
             ),
+            Positioned(
+              bottom: padding20,
+              right: padding20,
+              left: padding20,
+              child: GetBuilder<HomeViewModel>(builder: (home) {
+                return primaryButton(home: home);
+              }),
+            ),
+            
+            // Positioned(
+            //     right: 0,
+            //     left: 0,
+            //     bottom: 0,
+            //     child: Column(
+            //       children:  [
+            //         const LocationFarWdiget(),
+            //         SizedBox(height: sizeH80,)
+            //       ],
+            //     ),
+            //   ),
+            
             // todo for order previous Task bar scenario
             if (index != 0)
               Positioned(

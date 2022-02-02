@@ -93,6 +93,7 @@ class WhSearchBar extends StatelessWidget {
   //     );
 
   // to do this for search Widget ::
+ 
   Widget get searchWidget => CustomTextFormFiled(
         iconSize: sizeRadius20,
         controller: textEditingController??TextEditingController(),

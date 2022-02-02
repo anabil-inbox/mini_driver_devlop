@@ -9,7 +9,8 @@ class ApiSettings {
         this.contactInfo,
         this.companySectors,
         this.notAllowed,
-        this.languges
+        this.languges,
+        this.borderFactor
     });
 
     String? customerType;
@@ -19,9 +20,11 @@ class ApiSettings {
     List<CompanySector>? companySectors;
     List<dynamic>? notAllowed;
     List<Language>? languges;
+    num? borderFactor;
     factory ApiSettings.fromJson(Map<String, dynamic> json) => ApiSettings(
         customerType: json["customer_type"],
         aboutUs: json["about_us"] ?? "",
+        borderFactor: json["border_factor"] ?? 1,
         termOfConditions: json["term_of_conditions"],
         contactInfo: json["contact_info"] == null ? null: ContactInfo.fromJson(json["contact_info"]),
         companySectors: json["company_sectors"] == null ? null : List<CompanySector>.from(json["company_sectors"].map((x) => CompanySector.fromJson(x))),
@@ -32,6 +35,7 @@ class ApiSettings {
     Map<String, dynamic> toJson() => {
         "customer_type": customerType,
         "about_us": aboutUs,
+        "border_factor": borderFactor,
         "term_of_conditions": termOfConditions,
         "contact_info": contactInfo!.toJson(),
         "company_sectors": List<dynamic>.from(companySectors!.map((x) => x.toJson())),

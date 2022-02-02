@@ -15,6 +15,7 @@ class SalesOrder {
     this.totalReceived,
     this.orderDoc,
     this.orderItems,
+    this.taskStatus,
   });
 
   String? orderId;
@@ -22,6 +23,7 @@ class SalesOrder {
   String? contentStatus;
   String? customerId;
   dynamic customerMobile;
+  String? taskStatus;
   String? orderType;
   num? totalPrice;
   String? orderShippingAddress;
@@ -41,6 +43,7 @@ class SalesOrder {
         customerMobile: json["customer_mobile"],
         orderType: json["order_type"],
         totalPrice: json["total_price"],
+        taskStatus: json["task_status"],
         orderShippingAddress: json["order_shipping_address"],
         orderWarehouseAddress: json["order_warehouse_address"],
         deliveryDate: DateTime.parse(json["delivery_date"]),
@@ -60,6 +63,7 @@ class SalesOrder {
         "customer_mobile": customerMobile,
         "order_type": orderType,
         "total_price": totalPrice,
+        "task_status": taskStatus,
         "order_shipping_address": orderShippingAddress,
         "order_warehouse_address": orderWarehouseAddress,
         "delivery_date":

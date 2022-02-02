@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 
 import 'package:get/utils.dart';
@@ -5,11 +7,13 @@ import 'package:inbox_driver/feature/model/app_setting_modle.dart';
 import 'package:inbox_driver/feature/model/driver_modle.dart';
 import 'package:inbox_driver/feature/model/language.dart';
 import 'package:inbox_driver/util/constance.dart';
+import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPref {
   static SharedPref instance = SharedPref._();
+  
   final String appSettingKey = "settings";
   final String languageKey = "language";
   final String isShowKey = "loading";
@@ -142,8 +146,7 @@ class SharedPref {
 
   setUserLoginState(String state) async {
     try {
-      SharedPreferences pref = await SharedPreferences.getInstance();
-      pref.setString('$loginKey', '$state');
+      _prefs?.setString('$loginKey', '$state');
     } catch (e) {
       return "not Logined";
     }
@@ -152,7 +155,7 @@ class SharedPref {
 
   getUserLoginState() {
     try {
-      return SharedPref._prefs!.getString('$loginKey');
+      return SharedPref._prefs!.getString(loginKey);
     } catch (e) {
       printError();
       return "";
@@ -165,8 +168,7 @@ class SharedPref {
 
   setFCMToken(String fcmToken) async {
     try {
-      SharedPreferences pref = await SharedPreferences.getInstance();
-      pref.setString(fcmKey, fcmToken);
+      _prefs?.setString(fcmKey, fcmToken);
     } catch (e) {
       printError();
     }
@@ -179,7 +181,7 @@ class SharedPref {
   setUserToken(String token) async {
     try {
       if (!GetUtils.isNull(token)) {
-        _prefs!.setString("$tokenKey", token);
+        _prefs!.setString(tokenKey, token);
       }
     } catch (e) {
       printError();
@@ -194,4 +196,13 @@ class SharedPref {
       return "";
     }
   }
+
+
+String getPriceWithFormate({required num price}) {
+  final numberFormatter = NumberFormat("###.00#", "en_US");
+  const num initNumber = 0.00;
+  print("getting Price ${numberFormatter.format(initNumber + price)}");
+  return numberFormatter.format(initNumber + price) +
+      " ${Constance.qrCoin}";
+}
 }

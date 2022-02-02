@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
   Widget get tabBar => const HomeTabBar();
   List<Widget> tabs = [const CurrentScreen(), const CompletedScreen()];
 
-  HomeViewModel homeViewModel = Get.put(HomeViewModel());
+  HomeViewModel homeViewModel = Get.put(HomeViewModel(), permanent: true);
 
   @override
   Widget build(BuildContext context) {

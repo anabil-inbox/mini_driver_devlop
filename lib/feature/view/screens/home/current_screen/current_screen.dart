@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
@@ -27,10 +25,16 @@ class CurrentScreen extends StatelessWidget {
                         .asMap()
                         .map((i, element) => MapEntry(
                             i,
-                            HomeCard(
-                              index: i,
-                              task: element,
-                            )))
+                            (home.tdSearchHome.text.isEmpty ||
+                                    element.taskName!
+                                        .toLowerCase()
+                                        .contains(
+                                            home.tdSearchHome.text.toLowerCase()))
+                                ? HomeCard(
+                                    index: i,
+                                    task: element,
+                                  )
+                                : const SizedBox()))
                         .values
                         .toList()));
           })

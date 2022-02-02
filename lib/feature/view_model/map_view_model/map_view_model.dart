@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:math';
 import 'dart:typed_data';
-import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -12,24 +10,24 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:inbox_driver/network/utils/constance_netwoek.dart';
 import 'dart:ui' as ui;
 
 import 'package:inbox_driver/util/app_color.dart';
-import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/constance/constance.dart';
 import 'package:inbox_driver/util/location_helper.dart';
 import 'package:inbox_driver/util/sh_util.dart';
+import 'package:location/location.dart';
 import 'package:logger/logger.dart';
+import 'dart:math';
 
 class MapViewModel extends GetxController {
   Completer<GoogleMapController>? controller = Completer();
   GoogleMapController? mapController;
 
   CameraPosition initialCameraPosition = const CameraPosition(
-  target: LatLng(25.320004788193835, 51.189434716459175),
-  zoom: 14.4746,
-  tilt: 59.440717697143555,
+    target: LatLng(25.320004788193835, 51.189434716459175),
+    zoom: 14.4746,
+    tilt: 59.440717697143555,
   );
 
   Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = Set()
@@ -53,19 +51,9 @@ class MapViewModel extends GetxController {
   LatLng customerLatLng = const LatLng(25.320004788193835, 51.189434716459175);
 
   @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
   void onClose() {
     super.onClose();
     controller = null;
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
   }
 
   // Future<void> goToTheLake() async {
@@ -94,7 +82,8 @@ class MapViewModel extends GetxController {
 
   onMapTaped(LatLng argument) {}
 
-  Future<BitmapDescriptor> _getMarkerImageFromUrl(String url, {int? targetWidth, Color? color}) async {
+  Future<BitmapDescriptor> _getMarkerImageFromUrl(String url,
+      {int? targetWidth, Color? color}) async {
     final File markerImageFile = await DefaultCacheManager().getSingleFile(url);
     if (targetWidth != null) {
       return _convertImageFileToBitmapDescriptor(markerImageFile,
@@ -105,7 +94,13 @@ class MapViewModel extends GetxController {
     }
   }
 
-  Future<BitmapDescriptor> _convertImageFileToBitmapDescriptor(File imageFile,{int size = 100, bool addBorder = false, Color borderColor = Colors.white, double borderSize = 10, Color titleColor = Colors.transparent, Color titleBackgroundColor = Colors.transparent}) async {
+  Future<BitmapDescriptor> _convertImageFileToBitmapDescriptor(File imageFile,
+      {int size = 100,
+      bool addBorder = false,
+      Color borderColor = Colors.white,
+      double borderSize = 10,
+      Color titleColor = Colors.transparent,
+      Color titleBackgroundColor = Colors.transparent}) async {
     final ui.PictureRecorder pictureRecorder = ui.PictureRecorder();
     final Canvas canvas = Canvas(pictureRecorder);
     final Paint paint = Paint()..color;
@@ -150,13 +145,17 @@ class MapViewModel extends GetxController {
     // markers.clear();
     final Marker marker = Marker(
       markerId: const MarkerId("{e.id.toString()}"),
-      icon: await _getMarkerImageFromUrl("${SharedPref.instance.getCurrentUserData()?.image ?? "https://scontent.fjrs2-2.fna.fbcdn.net/v/t39.30808-6/258867044_1337774763328553_6721770954985841116_n.jpg?_nc_cat=110&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=HRPRVV5a1Q0AX_AqbjN&_nc_ht=scontent.fjrs2-2.fna&oh=00_AT_lk4raRmMFBvU74Dp4FZ9bySLd2ZCfr__aCUbNlWbrIw&oe=61F286A2"}",
+      icon: await _getMarkerImageFromUrl(
+          "${SharedPref.instance.getCurrentUserData()?.image ?? "https://scontent.fjrs2-2.fna.fbcdn.net/v/t39.30808-6/258867044_1337774763328553_6721770954985841116_n.jpg?_nc_cat=110&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=HRPRVV5a1Q0AX_AqbjN&_nc_ht=scontent.fjrs2-2.fna&oh=00_AT_lk4raRmMFBvU74Dp4FZ9bySLd2ZCfr__aCUbNlWbrIw&oe=61F286A2"}",
           targetWidth: 180,
           color: colorTrans),
       position: myLatLng,
-      infoWindow: InfoWindow(title: "Osama"  ,/*anchor:const  Offset(1.0, 0.7),*/onTap: () {
-        Logger().d("");
-      },) ,
+      infoWindow: InfoWindow(
+        title: "Osama",
+        /*anchor:const  Offset(1.0, 0.7),*/ onTap: () {
+          Logger().d("");
+        },
+      ),
       // onTap: () {
       //
       // },
@@ -175,9 +174,12 @@ class MapViewModel extends GetxController {
           targetWidth: 180,
           color: colorTrans),
       position: customerLatLng,
-      infoWindow: InfoWindow(title: "Osama"  /*,anchor:const  Offset(1.0, 1.0)*/,onTap: () {
-        Logger().d("");
-      },) ,
+      infoWindow: InfoWindow(
+        title: "Osama" /*,anchor:const  Offset(1.0, 1.0)*/,
+        onTap: () {
+          Logger().d("");
+        },
+      ),
       // onTap: () {
       // },
     );
@@ -185,7 +187,8 @@ class MapViewModel extends GetxController {
     update();
   }
 
-  foucCameraOnUsers(GoogleMapController mapController, LatLng pickUp, LatLng destination) async {
+  foucCameraOnUsers(GoogleMapController mapController, LatLng pickUp,
+      LatLng destination) async {
     //todo this for make map camera fouc on the to marker in the map
     await addLinesToMap(pickUp, destination);
     LatLngBounds bounds;
@@ -215,30 +218,28 @@ class MapViewModel extends GetxController {
     PolylinePoints polylinePoints = PolylinePoints();
     List<LatLng> listPoints = <LatLng>[];
 
-
     try {
       PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-            ConstanceApp.googleMapKey.toString(),
-            PointLatLng(pickUp.latitude, pickUp.longitude),
-            PointLatLng(destination.latitude, pickUp.longitude),
-            travelMode: TravelMode.driving,
-          );
+        ConstanceApp.googleMapKey.toString(),
+        PointLatLng(pickUp.latitude, pickUp.longitude),
+        PointLatLng(destination.latitude, pickUp.longitude),
+        travelMode: TravelMode.driving,
+      );
 
       var status = result.status;
       var errorMessage = result.errorMessage;
       Logger().d("$status $errorMessage");
-      if(result.status?.toLowerCase() == "ok" ){
-            if (result.points.isNotEmpty) {
-              for (var point in result.points) {
-                Logger().d("listPoints_${point.latitude}");
-                listPoints.add(LatLng(point.latitude, point.longitude));
-              }
-            }
+      if (result.status?.toLowerCase() == "ok") {
+        if (result.points.isNotEmpty) {
+          for (var point in result.points) {
+            Logger().d("listPoints_${point.latitude}");
+            listPoints.add(LatLng(point.latitude, point.longitude));
           }
+        }
+      }
     } catch (e) {
       Logger().d(e);
     }
-
 
     Polyline polyline = Polyline(
         polylineId: const PolylineId("poly"),
@@ -252,12 +253,99 @@ class MapViewModel extends GetxController {
     update();
   }
 
-
-  getMyCurrentPosition()async{
+  getMyCurrentPosition() async {
     await LocationHelper.instance.getCurrentPosition().then((Position value) {
       myLatLng = LatLng(value.latitude, value.longitude);
       //if we need we can make animate for camera
       update();
     });
   }
+
+  PolylinePoints polylinePoints = PolylinePoints();
+
+  String googleAPiKey = "AIzaSyDma7ThRPGokuU_cJ2Q_qFvowIpK35RAPs";
+
+  // Set<Marker> markers = {};
+  Map<PolylineId, Polyline> polylines = {}; //polylines to show direction
+
+  LatLng startLocation = const LatLng(27.6683619, 85.3101895);
+  LatLng endLocation = const LatLng(27.6875436, 85.2751138);
+
+  double distance = 0.0;
+
+  getDirections() async {
+    List<LatLng> polylineCoordinates = [];
+
+    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+      googleAPiKey,
+      PointLatLng(startLocation.latitude, startLocation.longitude),
+      PointLatLng(endLocation.latitude, endLocation.longitude),
+      travelMode: TravelMode.driving,
+    );
+
+    if (result.points.isNotEmpty) {
+      result.points.forEach((PointLatLng point) {
+        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+      });
+    } else {
+      print(result.errorMessage);
+    }
+
+    //polulineCoordinates is the List of longitute and latidtude.
+    double totalDistance = 0;
+    for (var i = 0; i < polylineCoordinates.length - 1; i++) {
+      totalDistance += calculateDistance(
+          lat1: polylineCoordinates[i].latitude,
+          lon1: polylineCoordinates[i].longitude,
+          lat2: polylineCoordinates[i + 1].latitude,
+          lon2: polylineCoordinates[i + 1].longitude);
+    }
+    print(totalDistance);
+
+    distance = totalDistance;
+
+    //add to the list of poly line coordinates
+    addPolyLine(polylineCoordinates);
+  }
+
+  addPolyLine(List<LatLng> polylineCoordinates) {
+    PolylineId id = const PolylineId("poly");
+    Polyline polyline = Polyline(
+      polylineId: id,
+      color: Colors.deepPurpleAccent,
+      points: polylineCoordinates,
+      width: 8,
+    );
+    polylines[id] = polyline;
+  }
+
+  //to do For Real Time Location Data;
+
+  LocationData? currentLocation;
+
+  // to do this function we need to get the distance between two points
+
+  double calculateDistance(
+      {required double lat1,
+      required double lon1,
+      required double lat2,
+      required double lon2}) {
+    num p = 0.017453292519943295;
+    num a = 0.5 -
+        cos((lat2 - lat1) * p) / 2 +
+        cos(lat1 * p) * cos(lat2 * p) * (1 - cos((lon2 - lon1) * p)) / 2;
+    Logger().e("msg_Map : From $lat1 , $lon1 to $lat2 , $lon2");
+    Logger().e("msg_Map : The distance is : ${12742 * asin(sqrt(a))}");
+    return 12742 * asin(sqrt(a));
+  }
+
+  // @override
+  // void onInit() {
+  //   super.onInit();
+  //   // location = Location();
+  //   // polylinePoints = PolylinePoints();
+  //   //  location.onLocationChanged().listen((LocationData cLoc) {
+  //   //     currentLocation = cLoc;
+  //   //  });
+  // }
 }

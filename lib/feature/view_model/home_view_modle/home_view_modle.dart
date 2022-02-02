@@ -8,6 +8,9 @@ import 'package:inbox_driver/feature/model/home/emergencey/emergency_case.dart';
 import 'package:inbox_driver/feature/model/home/sales_data.dart';
 import 'package:inbox_driver/feature/model/home/task_model.dart';
 import 'package:inbox_driver/feature/view/screens/home/Widgets/secondery_button.dart';
+import 'package:inbox_driver/feature/view/screens/home/instant_order/Widgets/scan_delivered_box.dart';
+import 'package:inbox_driver/feature/view/screens/home/instant_order/instant_order_screen.dart';
+import 'package:inbox_driver/feature/view_model/instance_order_view_model/instance_order_view_model.dart';
 import 'package:inbox_driver/network/api/feature/home_helper.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
@@ -137,7 +140,7 @@ class HomeViewModel extends GetxController {
               {
                 operationsSalesData?.totalReceived =
                     (operationsSalesData?.totalReceived ?? 0) + 1,
-                 onInit(),
+                onInit(),
                 snackSuccess("$txtSuccess", "${value.status!.message}")
               }
             else
@@ -312,22 +315,41 @@ class HomeViewModel extends GetxController {
   Future<void> updateTaskStatus(
       {required String newStatus, required String taskId}) async {
     try {
+      startLoading();
       await HomeHelper.getInstance.updateTaskStatus(body: {
         Constance.taskId: taskId,
         Constance.status: newStatus
       }).then((value) => {
             if (value.status!.success!)
-              {snackSuccess(txtSuccess!.tr, value.status!.message!), Get.back()}
+              {
+                snackSuccess(txtSuccess!.tr, value.status!.message!),
+                operationsSalesData?.salesOrders?.forEach((element) {
+                  if (element.taskId == taskId) {
+                    if (newStatus == Constance.taskdelivered) {
+                      Get.put(InstanceOrderViewModel(), permanent: true);
+                      Get.to(() => InstantOrderScreen(
+                            isNewCustomer: value.data["is_new"] ?? false,
+                          ));
+                    } else {
+                      element.taskStatus = newStatus;
+                    }
+                  }
+                }),
+                update()
+                // operationsSalesData.
+              }
             else
               {snackError(txtSuccess!.tr, value.status!.message!)}
           });
     } catch (e) {
       printError();
     }
+    endLoading();
   }
 
   TextEditingController tdSearchWhLoading = TextEditingController();
-  
+  TextEditingController tdSearchHome = TextEditingController();
+
   search({required String searchedText, required String taskId}) async {
     try {
       HomeHelper.getInstance.search(body: {
@@ -337,7 +359,7 @@ class HomeViewModel extends GetxController {
     } catch (e) {
       printError();
     }
-  }
+  } 
 
   @override
   void onInit() async {

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:inbox_driver/feature/view/widgets/bottom_sheet_widget/map_bottom_sheet.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
+import 'package:inbox_driver/feature/view_model/map_view_model/map_view_model.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_style.dart';
@@ -71,6 +73,7 @@ class AddressBox extends StatelessWidget {
 
   void _goToMap() {
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      Get.put(MapViewModel());
       Get.bottomSheet(const MapBottomSheet(),
           enableDrag: true,
           isScrollControlled: true,

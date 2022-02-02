@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:inbox_driver/feature/view/screens/home/new_customer/Widgets/balance_widget.dart';
+import 'package:inbox_driver/feature/view/screens/home/new_customer/Widgets/contract_signature_widget.dart';
 import 'package:inbox_driver/feature/view/screens/home/new_customer/Widgets/scan_products_widget.dart';
+import 'package:inbox_driver/feature/view/screens/home/new_customer/new_customer_view.dart';
 import 'package:inbox_driver/feature/view/widgets/appbar/custom_app_bar_widget.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/feature/view/widgets/primary_button.dart';
@@ -15,14 +17,11 @@ import 'Widgets/customer_signature_instant_order.dart';
 import 'Widgets/scan_box_instant_order.dart';
 import 'Widgets/scan_delivered_box.dart';
 
-class InstantOrder extends StatelessWidget {
-  const InstantOrder({Key? key}) : super(key: key);
+class InstantOrderScreen extends StatelessWidget {
+  const InstantOrderScreen({Key? key, this.isNewCustomer = false})
+      : super(key: key);
 
-  Widget get scanDeliveredBox => const ScanDeliveredBox();
-  Widget get scanBox => const ScanBoxInstantOrder();
-  Widget get scanProducts => const ScanProducts();
-  Widget get balance => const Balance();
-  Widget get customerSignature => const CustomerSignatureInstantOrder();
+  final bool isNewCustomer;
   Widget get waitingTime => Container(
         height: sizeH80,
         decoration: BoxDecoration(
@@ -67,15 +66,18 @@ class InstantOrder extends StatelessWidget {
               child: ListView(
                 children: [
                   SizedBox(height: sizeH27),
-                  scanDeliveredBox,
+                  if (isNewCustomer) const ContractSignature(),
+                  if (isNewCustomer) SizedBox(height: sizeH10),
+                  if (isNewCustomer) const NewCustomer(),
+                  const ScanDeliveredBox(),
                   SizedBox(height: sizeH10),
-                  scanBox,
+                  const ScanBoxInstantOrder(),
                   SizedBox(height: sizeH10),
-                  scanProducts,
+                  const ScanProducts(),
                   SizedBox(height: sizeH10),
-                  balance,
+                  const Balance(),
                   SizedBox(height: sizeH10),
-                  customerSignature,
+                  const CustomerSignatureInstantOrder(),
                   SizedBox(height: sizeH10),
                   waitingTime,
                 ],

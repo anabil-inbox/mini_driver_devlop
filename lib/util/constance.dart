@@ -40,5 +40,7 @@ abstract class Constance {
   static String taskStart = "start";
   static String taskdelivered = "delivered";
   static String taskNoShow = "no show";
-  
+
+  // to add here constance Price ::
+  static String qrCoin = "QR";
 }

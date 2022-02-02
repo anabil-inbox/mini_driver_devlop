@@ -45,32 +45,37 @@ class CallBottomSheet extends StatelessWidget {
             BottomSheetCard(
               text: txtPhoneCall!.tr,
               onClicked: () {
-              //  startPhoneCall(phoneNumber: phoneNumber);
-              callNumber(phoneNumber: phoneNumber);
+                //  startPhoneCall(phoneNumber: phoneNumber);
+                callNumber(phoneNumber: phoneNumber);
               },
             ),
             SizedBox(height: sizeH10),
             BottomSheetCard(
               text: txtSMSOnMyWay!.tr,
               onClicked: () {
-
+                sendSmsOnMyWay(phoneNumber: phoneNumber);
               },
             ),
             SizedBox(height: sizeH10),
             BottomSheetCard(
               text: txtSMSArrivedOutside!.tr,
               onClicked: () {
-
+                sendSmsArrivedHereOutside(phoneNumber: phoneNumber);
               },
             ),
             SizedBox(height: sizeH10),
             BottomSheetCard(
               text: txtSMSReportNoShow!.tr,
               onClicked: () {
-                
+                sendSmsNoShow(phoneNumber: phoneNumber);
               },
             ),
             SizedBox(height: sizeH10),
+            BottomSheetCard(
+                text: "Customize sms",
+                onClicked: () {
+                  sendCustomizeSMS(phoneNumber: phoneNumber);
+                }),
             SizedBox(
               height: sizeH18,
             ),

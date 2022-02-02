@@ -11,7 +11,6 @@ import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
-import 'package:inbox_driver/util/font_dimne.dart';
 import 'package:inbox_driver/util/string.dart';
 import 'Widgets/balance_widget.dart';
 import 'Widgets/contract_signature_widget.dart';
@@ -20,12 +19,14 @@ import 'Widgets/customer_signature_widget.dart';
 import 'Widgets/scan_products_widget.dart';
 
 class NewCustomer extends StatelessWidget {
-  Widget get contract => ContractSignature();
+ const NewCustomer({Key? key}) : super(key: key);
+
+  Widget get contract => const ContractSignature();
   Widget get scanBox => const ScanBox();
   Widget get scanProducts => const ScanProducts();
   Widget get balance => const Balance();
   Widget get customerSignature => const CustomerSignature();
-  HomeViewModel homeViewModel = Get.find<HomeViewModel>();
+ static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
   Widget get idVerification => Container(
     height: sizeH50,
     padding: EdgeInsets.symmetric(horizontal: sizeW15!, vertical: sizeH13!),

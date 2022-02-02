@@ -9,6 +9,8 @@ import 'package:inbox_driver/util/string.dart';
 import 'package:get/get.dart';
 
 class ContractSignature extends StatelessWidget {
+  const ContractSignature({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     screenUtil(context);
