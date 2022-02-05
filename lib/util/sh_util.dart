@@ -20,7 +20,7 @@ class SharedPref {
   final String currentUser = "currentUser";
   final String loginKey = "login";
   final String fcmKey = "fcm";
-  final String tokenKey = "token";
+  final String tokenKey = "token_driver";
   final String customrKey = "customerKey";
   final String userDataKey = "userData";
 

@@ -85,12 +85,14 @@ class WHCurrentScreen extends StatelessWidget {
   }
 
   Widget get flowChart {
-    if (GetUtils.isNull(homeViewModel.operationsSalesData)) {
+    if (GetUtils.isNull(homeViewModel.operationsSalesData) ||
+        task.taskName!
+            .toLowerCase()
+            .contains(Constance.taskCustomerVisit.toLowerCase())) {
       return const SizedBox();
     } else {
       double greenValue = 0;
       double redValue = 0;
-
       if ((homeViewModel.operationsSalesData?.totalReceived == 0 &&
               homeViewModel.operationsSalesData?.totalBoxes == 0) ||
           (homeViewModel.operationsSalesData?.totalReceived ==
@@ -144,6 +146,8 @@ class WHCurrentScreen extends StatelessWidget {
   //     );
 
   // Widget get chart => WhLoadingChart();
+  
+  
   Widget get searchWidget => Row(
         children: [
           !(task.taskName!
@@ -208,9 +212,6 @@ class WHCurrentScreen extends StatelessWidget {
             height: sizeH10,
           ),
           searchWidget,
-          SizedBox(
-            height: sizeH10,
-          ),
           flowChart,
           lvSalesOrder
         ],

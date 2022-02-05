@@ -50,6 +50,7 @@ class HomeViewModel extends GetxController {
         await scanBox(
             serial: data.code ?? "",
             taskName: operationsSalesData?.taskName ?? "");
+        
         Get.back();
       });
     } catch (e) {

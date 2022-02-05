@@ -13,7 +13,8 @@ import 'Widgets/wh_loading_appbar.dart';
 
 // ignore: must_be_immutable
 class WhLoading extends StatelessWidget {
-  const WhLoading({Key? key, required this.task , required this.index}) : super(key: key);
+  const WhLoading({Key? key, required this.task, required this.index})
+      : super(key: key);
 
   Widget get appBar => WhLoadingAppBar(
         title: task.taskName ?? "",
@@ -40,21 +41,27 @@ class WhLoading extends StatelessWidget {
               if (logic.isLoading) {
                 return const LoadingCircle();
               } else {
-                return Column(
-                  children: [
-                    WhLoadingAppBar(
-                      title: task.taskName ?? "",
-                    ),
-                    const Divider(height: 3),
-                    tabBar,
-                    Expanded(
-                        child: logic.selectedTab == 0
-                            ? WHCurrentScreen(
-                                i: index,
-                                task: task,
-                              )
-                            : const WHCompletedScreen()),
-                  ],
+                return RefreshIndicator(
+                  color: colorPrimary,
+                  onRefresh: () async {
+                    return homeViewModel.getSpecificTask(taskId: task.id ?? "");
+                  },
+                  child: Column(
+                    children: [
+                      WhLoadingAppBar(
+                        title: task.taskName ?? "",
+                      ),
+                      const Divider(height: 3),
+                      tabBar,
+                      Expanded(
+                          child: logic.selectedTab == 0
+                              ? WHCurrentScreen(
+                                  i: index,
+                                  task: task,
+                                )
+                              : const WHCompletedScreen()),
+                    ],
+                  ),
                 );
               }
             }));

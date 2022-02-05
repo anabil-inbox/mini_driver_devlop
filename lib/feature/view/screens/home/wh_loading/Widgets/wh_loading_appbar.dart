@@ -67,8 +67,7 @@ class WhLoadingAppBar extends StatelessWidget {
        
         actionsWidgets: [
           Padding(
-            padding:
-                EdgeInsets.symmetric(horizontal: sizeW2!, vertical: sizeH7!),
+            padding:  EdgeInsets.symmetric(horizontal: sizeW2!, vertical: sizeH7!),
             child: IconBtn(
               icon: "assets/svgs/Call Missed.svg",
               iconColor: colorRed,
