@@ -4,7 +4,6 @@ import 'package:inbox_driver/feature/model/home/Task_model.dart';
 import 'package:inbox_driver/feature/view/screens/home/Widgets/home_tabbar.dart';
 import 'package:inbox_driver/feature/view/screens/home/wh_loading/Widgets/chart_widget.dart';
 import 'package:inbox_driver/feature/view/screens/home/wh_loading/Widgets/wh_search_bar.dart';
-import 'package:inbox_driver/feature/view/screens/visit_tasks/widget/visit_lv_item_widget.dart';
 import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
@@ -19,15 +18,8 @@ import 'Widgets/wh_loading_card.dart';
 class WhLoading extends StatelessWidget {
   const WhLoading({Key? key, required this.task}) : super(key: key);
 
-  Widget get appBar => WhLoadingAppBar(
-        title: task.taskName ?? "",
-      );
   Widget get tabBar => const HomeTabBar();
-  Widget get searchBar => WhSearchBar(
-        isHaveScan: !(task.taskName!
-            .toLowerCase()
-            .contains(Constance.taskCustomerVisit.toLowerCase())),
-      );
+  Widget get searchBar => const WhSearchBar();
   // Widget get chart => WhLoadingChart();
   static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
   final Task task;
@@ -37,42 +29,30 @@ class WhLoading extends StatelessWidget {
     if (GetUtils.isNull(homeViewModel.operationsSalesData)) {
       return const SizedBox();
     } else {
-      return ListView.builder(
-          shrinkWrap: true,
-          primary: false,
-          itemCount: homeViewModel.operationsSalesData!.salesOrders?.length,
-          itemBuilder: (context, index) {
-            if (task.taskName!
-                    .toLowerCase()
-                    .contains(Constance.taskWarehouseLoading.toLowerCase()) ||
-                task.taskName!
-                    .toLowerCase()
-                    .contains(Constance.taskWarehouseClosure.toLowerCase())) {
-              return WhLoadingCard(
-                salesData: homeViewModel.operationsSalesData!,
-                salesOrder:
-                    homeViewModel.operationsSalesData!.salesOrders![index],
-                onRecivedClick: () async {
-                  await homeViewModel.recivedBoxes(
-                      serial: homeViewModel.operationsSalesData!
-                              .salesOrders![index].orderId ??
-                          "",
-                      taskName: task.taskName ?? "");
-                },
-              );
-            } else if (task.taskName!
-                .toLowerCase()
-                .contains(Constance.taskCustomerVisit.toLowerCase())) {
-              return VisitLvItemWidget(
-                salesData: homeViewModel.operationsSalesData!,
-                salesOrder:
-                    homeViewModel.operationsSalesData!.salesOrders![index],
-                isBlockContainer: index == 0 ? false : true,
-              );
-            } else {
-              return const Text("Else Case");
-            }
-          });
+      return ListView(
+        shrinkWrap: true,
+        primary: false,
+        children: homeViewModel.operationsSalesData!.salesOrders!.map((e) {
+          if (task.taskName!
+                  .toLowerCase()
+                  .contains(Constance.taskWarehouseLoading.toLowerCase()) ||
+              task.taskName!
+                  .toLowerCase()
+                  .contains(Constance.taskWarehouseClosure.toLowerCase())) {
+            return WhLoadingCard(
+              salesData: homeViewModel.operationsSalesData!,
+              salesOrder: e,
+              onRecivedClick: () {},
+            );
+          } else if (task.taskName!
+              .toLowerCase()
+              .contains(Constance.taskCustomerVisit.toLowerCase())) {
+            return const Text("Customer Vist");
+          } else {
+            return const Text("Else Case");
+          }
+        }).toList(),
+      );
     }
   }
 

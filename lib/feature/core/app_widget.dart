@@ -75,7 +75,7 @@ class AppWidget extends StatelessWidget {
             TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
           }),
         ),
-       home: const SplashScreen()
+        home: const SplashScreen()
         // home: const ProfileScreen(),
       ),
     );

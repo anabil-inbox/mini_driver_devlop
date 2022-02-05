@@ -46,7 +46,7 @@ class HomeViewModel extends GetxController {
       }).onData((data) async {
         controller.dispose();
         await scanBox(
-            serial: data.code ?? "",
+            serial: "SAL-ORD-2022-00216" /* data.code ?? "" */ ,
             taskName: operationsSalesData?.taskName ?? "");
         Get.back();
       });
