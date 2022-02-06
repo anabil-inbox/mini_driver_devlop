@@ -16,15 +16,13 @@ import 'package:inbox_driver/util/font_dimne.dart';
 import 'package:inbox_driver/util/string.dart';
 
 class WhLoadingCard extends StatelessWidget {
-
   const WhLoadingCard(
       {Key? key,
       required this.onRecivedClick,
       required this.salesOrder,
       required this.salesData,
       required this.index,
-      required this.task
-      })
+      required this.task})
       : super(key: key);
 
   final Function onRecivedClick;
@@ -38,8 +36,13 @@ class WhLoadingCard extends StatelessWidget {
     return Column(
       children: [
         InkWell(
-          onTap: (){
-            Get.to(() => OrderDetailsStarted(index: index, salesOrder: salesOrder, salesData: salesData , task: task,));
+          onTap: () {
+            Get.to(() => OrderDetailsStarted(
+                  index: index,
+                  salesOrder: salesOrder,
+                  salesData: salesData,
+                  task: task,
+                ));
           },
           child: Container(
             decoration: BoxDecoration(
@@ -84,7 +87,8 @@ class WhLoadingCard extends StatelessWidget {
                               CustomTextView(
                                 txt: salesOrder.contentStatus,
                                 textStyle: textStyleNormal()?.copyWith(
-                                    fontSize: fontSize12, color: colorGreenText),
+                                    fontSize: fontSize12,
+                                    color: colorGreenText),
                               ),
                             ],
                           ),
@@ -107,21 +111,23 @@ class WhLoadingCard extends StatelessWidget {
                   ),
                   SizedBox(height: sizeH4),
                   CustomTextView(
-                    txt: DateUtility.getChatTime(
-                        salesOrder.deliveryDate.toString()),
-                    textStyle: textStyleNormal()?.copyWith(fontSize: fontSize12),
+                    txt:salesOrder.deliveryDate.toString().split(" ")[0],
+                    textStyle:
+                        textStyleNormal()?.copyWith(fontSize: fontSize12),
                   ),
                   SizedBox(
                     height: sizeH10,
                   ),
                   GetBuilder<HomeViewModel>(
                     builder: (builder) {
-                      return PrimaryBorderButton(
-                          isLoading: builder.isLoading,
-                          buttonText: txtReceived,
-                          function: () {
-                            onRecivedClick();
-                          });
+                      return salesOrder.totalBoxes == salesOrder.totalReceived
+                          ? const SizedBox()
+                          : PrimaryBorderButton(
+                              isLoading: builder.isLoading,
+                              buttonText: txtReceived,
+                              function: () {
+                                onRecivedClick();
+                              });
                     },
                   ),
                   SizedBox(height: sizeH16),

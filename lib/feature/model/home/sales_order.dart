@@ -43,7 +43,7 @@ class SalesOrder {
         customerMobile: json["customer_mobile"],
         orderType: json["order_type"],
         totalPrice: json["total_price"],
-        taskStatus: json["task_status"],
+        taskStatus: json["task_status"].toString().toLowerCase(),
         orderShippingAddress: json["order_shipping_address"],
         orderWarehouseAddress: json["order_warehouse_address"],
         deliveryDate: DateTime.parse(json["delivery_date"]),
@@ -77,18 +77,18 @@ class SalesOrder {
 }
 
 class OrderItem {
-  OrderItem({
-    this.itemParent,
-    this.item,
-    this.needAdviser,
-    this.price,
-    this.quantity,
-    this.totalPrice,
-    this.groupId,
-    this.isParent,
-    this.itemsList,
-    this.itemStatus,
-  });
+  OrderItem(
+      {this.itemParent,
+      this.item,
+      this.needAdviser,
+      this.price,
+      this.quantity,
+      this.totalPrice,
+      this.groupId,
+      this.isParent,
+      this.itemsList,
+      this.itemStatus,
+      this.options});
 
   String? itemParent;
   String? item;
@@ -98,6 +98,8 @@ class OrderItem {
   num? totalPrice;
   String? groupId;
   String? isParent;
+  List<String>? options;
+
   List<ItemsList>? itemsList;
   String? itemStatus;
 
@@ -109,6 +111,9 @@ class OrderItem {
         quantity: json["quantity"],
         totalPrice: json["totalPrice"],
         groupId: json["group_id"],
+        options: json["options"] == null
+            ? []
+            : List<String>.from(json["options"].map((x) => x)),
         isParent: json["is_parent"] == null ? null : json["is_parent"],
         itemsList: json["items_list"] == null
             ? null

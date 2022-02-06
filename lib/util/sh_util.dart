@@ -12,6 +12,7 @@ import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPref {
+  
   static SharedPref instance = SharedPref._();
   
   final String appSettingKey = "settings";
@@ -28,7 +29,7 @@ class SharedPref {
 
   SharedPref._();
 
-  static late SharedPreferences? _prefs;
+  static  SharedPreferences? _prefs;
 
   setAppSetting(var json) async {
     String prfApiSettings = jsonEncode(json);
@@ -41,10 +42,10 @@ class SharedPref {
 
   String getLocalization() {
     try {
-      return _prefs?.getString(_localizationKey) ?? Constance.arabicKey;
+      return _prefs?.getString(_localizationKey) ?? Constance.englishKey;
     } catch (e) {
       print(e);
-      return Constance.arabicKey;
+      return Constance.englishKey;
     }
   }
 
@@ -124,7 +125,7 @@ class SharedPref {
 
   setAppLanguage(var local) async {
     _prefs?.setString(languageKey, local.toString());
-    print("exxx:${local.toString()}");
+    print("exxx: ${local.toString()}");
   }
 
   String getAppLanguageMain() {

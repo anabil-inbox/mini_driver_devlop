@@ -27,6 +27,7 @@ class CompletedScreen extends StatelessWidget {
                         .map((i, element) => MapEntry(
                             i,
                             HomeCard(
+                              isFromCompleted: true,
                               index: i,
                               task: element,
                             )))

@@ -18,10 +18,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await AppFcm.fcmInstance.init();
-  await SharedPref.instance.init();
   portraitOrientation();
   DioManagerClass.getInstance.init();
   enableHybridComposition();
+  await SharedPref.instance.init();
   runApp(const AppWidget());
 }
 

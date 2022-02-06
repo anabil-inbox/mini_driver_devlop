@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:inbox_driver/feature/core/loading_circle.dart';
 import 'package:inbox_driver/feature/model/home/task_model.dart';
 import 'package:inbox_driver/feature/view/screens/home/qr_scan/scan_screen.dart';
 import 'package:inbox_driver/feature/view/screens/visit_tasks/widget/visit_lv_item_widget.dart';
@@ -10,7 +11,6 @@ import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/constance.dart';
-import 'package:inbox_driver/util/date/date_time_util.dart';
 import 'package:inbox_driver/util/string.dart';
 
 import 'Widgets/chart_widget.dart';
@@ -25,7 +25,8 @@ class WHCurrentScreen extends StatelessWidget {
   final int i;
 
   Widget get lvSalesOrder {
-    if (GetUtils.isNull(homeViewModel.operationsSalesData)) {
+    if (GetUtils.isNull(homeViewModel.operationsSalesData) ||
+        GetUtils.isNull(homeViewModel.operationsSalesData!.salesOrders)) {
       return const SizedBox();
     } else {
       return ListView.builder(
@@ -54,12 +55,32 @@ class WHCurrentScreen extends StatelessWidget {
                                       .salesOrders![index].orderId ??
                                   "",
                               taskName: Constance.taskWarehouseLoading);
+                          await homeViewModel.getSpecificTask(
+                              taskId: task.id ?? "",
+                              taskSatus: Constance.inProgress);
+                          await homeViewModel.getSpecificTask(
+                              taskId: task.id ?? "", taskSatus: Constance.done);
+                          await homeViewModel.getHomeTasks(
+                              taskType: Constance.done);
+                          await homeViewModel.getHomeTasks(
+                              taskType: Constance.inProgress);
+                          homeViewModel.update();
                         } else {
                           await homeViewModel.recivedBoxes(
                               serial: homeViewModel.operationsSalesData!
                                       .salesOrders![index].orderId ??
                                   "",
                               taskName: Constance.taskWarehouseClosure);
+                          await homeViewModel.getSpecificTask(
+                              taskId: task.id ?? "",
+                              taskSatus: Constance.inProgress);
+                          await homeViewModel.getSpecificTask(
+                              taskId: task.id ?? "", taskSatus: Constance.done);
+                          await homeViewModel.getHomeTasks(
+                              taskType: Constance.done);
+                          await homeViewModel.getHomeTasks(
+                              taskType: Constance.inProgress);
+                          homeViewModel.update();
                         }
                       }
                     : () {
@@ -84,7 +105,7 @@ class WHCurrentScreen extends StatelessWidget {
     }
   }
 
-  Widget get flowChart {
+  Widget flowChart({required HomeViewModel homeViewModel}) {
     if (GetUtils.isNull(homeViewModel.operationsSalesData) ||
         task.taskName!
             .toLowerCase()
@@ -94,39 +115,44 @@ class WHCurrentScreen extends StatelessWidget {
       double greenValue = 0;
       double redValue = 0;
       if ((homeViewModel.operationsSalesData?.totalReceived == 0 &&
+          homeViewModel.operationsSalesData?.totalBoxes == 0)) {
+        return const SizedBox();
+      } else if ((homeViewModel.operationsSalesData?.totalReceived == 0 &&
               homeViewModel.operationsSalesData?.totalBoxes == 0) ||
           (homeViewModel.operationsSalesData?.totalReceived ==
               homeViewModel.operationsSalesData?.totalBoxes)) {
         greenValue = 100;
         redValue = 0;
+      } else if ((homeViewModel.operationsSalesData!.totalReceived! > 0 &&
+          homeViewModel.operationsSalesData?.totalBoxes == 0)) {
+        greenValue = 100;
+        redValue = 0;
       } else {
         greenValue = ((homeViewModel.operationsSalesData?.totalReceived ?? 1) /
             (homeViewModel.operationsSalesData?.totalBoxes ?? 1));
-        //[(New Price - Old Price)/Old Price] x 100
-        // redValue = 50;
-        // greenValue = ((homeViewModel.operationsSalesData?.totalReceived ?? 1) -
-        //         (homeViewModel.operationsSalesData?.totalBoxes ?? 1)) *
-        //     100;
-
         num i = (homeViewModel.operationsSalesData?.totalBoxes ?? 1) -
             (homeViewModel.operationsSalesData?.totalReceived ?? 1);
         redValue = double.parse(i.toString());
-
         greenValue = double.parse(
             homeViewModel.operationsSalesData!.totalReceived.toString());
       }
 
-      return ChartWidget(
-        firstGreenValue: greenValue,
-        firstRedValue: redValue,
-        firstTitle:
-            "${homeViewModel.operationsSalesData?.totalReceived ?? 0} / ${homeViewModel.operationsSalesData?.totalBoxes ?? 0} \nBoxes",
-        secondGreenValue: 30,
-        isHaveItems: false,
-        secondRedValue: 100,
-        secondTitle: "4/5 \nOthers",
-        mainTitle: DateUtility.getChatTime(
-            homeViewModel.operationsSalesData!.lastUpdate.toString()),
+      return GetBuilder<HomeViewModel>(
+        builder: (_) {
+        var d=homeViewModel.operationsSalesData?.totalBoxes;
+      d=  (homeViewModel.operationsSalesData?.totalBoxes ==0)?homeViewModel.operationsSalesData?.totalReceived:homeViewModel.operationsSalesData?.totalBoxes;
+          return ChartWidget(
+            firstGreenValue: greenValue,
+            firstRedValue: redValue,
+            firstTitle:
+                "${homeViewModel.operationsSalesData?.totalReceived ?? 0} / ${d ?? 0} \nBoxes",
+            secondGreenValue: 30,
+            isHaveItems: false,
+            secondRedValue: 100,
+            secondTitle: "4/5 \nOthers",
+            mainTitle: "",
+          );
+        },
       );
     }
   }
@@ -146,8 +172,7 @@ class WHCurrentScreen extends StatelessWidget {
   //     );
 
   // Widget get chart => WhLoadingChart();
-  
-  
+
   Widget get searchWidget => Row(
         children: [
           !(task.taskName!
@@ -159,7 +184,7 @@ class WHCurrentScreen extends StatelessWidget {
                   height: sizeH48,
                   backgroundColor: colorRed,
                   onPressed: () {
-                    Get.to(() => const ScanScreen());
+                    Get.to(() => ScanScreen(taskModel: task));
                   },
                   borderColor: colorTrans,
                   icon: "assets/svgs/Scan.svg",
@@ -203,18 +228,39 @@ class WHCurrentScreen extends StatelessWidget {
     screenUtil(context);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: padding20!),
-      child: ListView(
-        padding: EdgeInsets.all(padding0!),
-        primary: true,
-        shrinkWrap: true,
-        children: [
-          SizedBox(
-            height: sizeH10,
-          ),
-          searchWidget,
-          flowChart,
-          lvSalesOrder
-        ],
+      child: GetBuilder<HomeViewModel>(
+        initState: (_) async {
+          WidgetsBinding.instance?.addPostFrameCallback((timeStamp) async {
+            await homeViewModel.getSpecificTask(
+                taskId: task.id ?? "", taskSatus: Constance.done);
+            await homeViewModel.getSpecificTask(
+                taskId: task.id ?? "", taskSatus: Constance.inProgress);
+          });
+        },
+        builder: (build) {
+          if (build.isLoading) {
+            return const LoadingCircle();
+          } else {
+            return ListView(
+              padding: EdgeInsets.all(padding0!),
+              primary: true,
+              shrinkWrap: true,
+              children: [
+                SizedBox(
+                  height: sizeH10,
+                ),
+                searchWidget,
+                SizedBox(
+                  height: sizeH10,
+                ),
+                GetBuilder<HomeViewModel>(builder: (build) {
+                  return flowChart(homeViewModel: build);
+                }),
+                lvSalesOrder
+              ],
+            );
+          }
+        },
       ),
     );
   }

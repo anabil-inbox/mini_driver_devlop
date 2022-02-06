@@ -40,7 +40,7 @@ class HomeViewModel extends GetxController {
   QRViewController? controller;
 
   onQRViewCreated(QRViewController controller,
-      {bool? isFromAtHome, int? index}) {
+      {bool? isFromAtHome, int? index, TaskModel? taskModel}) {
     try {
       this.controller = controller;
       controller.scannedDataStream.listen((scanData) {
@@ -50,8 +50,12 @@ class HomeViewModel extends GetxController {
         await scanBox(
             serial: data.code ?? "",
             taskName: operationsSalesData?.taskName ?? "");
-        
-        Get.back();
+        await getSpecificTask(
+            taskId: taskModel?.id ?? "", taskSatus: Constance.inProgress);
+        await getSpecificTask(
+            taskId: taskModel?.id ?? "", taskSatus: Constance.done);
+        await getHomeTasks(taskType: Constance.inProgress);
+        await getHomeTasks(taskType: Constance.done);
       });
     } catch (e) {
       printError();
@@ -116,14 +120,27 @@ class HomeViewModel extends GetxController {
   // to do here getting Specfice Task With Id :
 
   SalesData? operationsSalesData;
+  SalesData? operationsSalesDataCompleted;
 
-  Future<void> getSpecificTask({required String taskId}) async {
+  Future<void> getSpecificTask(
+      {required String taskId, required String taskSatus}) async {
+    operationsSalesData = SalesData();
+    operationsSalesDataCompleted = SalesData();
     try {
       startLoading();
-      await HomeHelper.getInstance
-          .getSpecificTask(taskId: {Constance.taskId: taskId}).then((value) => {
+      await HomeHelper.getInstance.getSpecificTask(taskId: {
+        Constance.taskId: taskId,
+        Constance.status: taskSatus
+      }).then((value) => {
+            if (taskSatus == Constance.inProgress)
+              {
                 operationsSalesData = value,
-              });
+              }
+            else
+              {
+                operationsSalesDataCompleted = value,
+              }
+          });
     } catch (e) {
       endLoading();
       printError();
@@ -284,8 +301,7 @@ class HomeViewModel extends GetxController {
     }
   }
 
-  Future<void> recivedBoxes(
-      {required String serial, required String taskName}) async {
+  Future<void> recivedBoxes({required String serial, required String taskName}) async {
     try {
       startLoading();
       HomeHelper.getInstance.reciveBoxess(body: {
@@ -310,6 +326,7 @@ class HomeViewModel extends GetxController {
     } catch (e) {
       printError();
     }
+    update();
     endLoading();
   }
 
@@ -324,19 +341,19 @@ class HomeViewModel extends GetxController {
             if (value.status!.success!)
               {
                 snackSuccess(txtSuccess!.tr, value.status!.message!),
+                if (newStatus == Constance.taskdelivered)
+                  {
+                    Get.close(2),
+                  },
                 operationsSalesData?.salesOrders?.forEach((element) {
+                  Logger().e(element);
+
                   if (element.taskId == taskId) {
-                    if (newStatus == Constance.taskdelivered) {
-                      Get.put(InstanceOrderViewModel(), permanent: true);
-                      Get.to(() => InstantOrderScreen(
-                            isNewCustomer: value.data["is_new"] ?? false,
-                          ));
-                    } else {
-                      element.taskStatus = newStatus;
-                    }
+                    element.taskStatus = newStatus;
+                    update();
                   }
                 }),
-                update()
+
                 // operationsSalesData.
               }
             else
@@ -360,7 +377,7 @@ class HomeViewModel extends GetxController {
     } catch (e) {
       printError();
     }
-  } 
+  }
 
   @override
   void onInit() async {

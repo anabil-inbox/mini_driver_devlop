@@ -59,7 +59,10 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
             Navigator.pop(Get.context!);
           },
           icon: isArabicLang()
-              ? SvgPicture.asset("assets/svgs/back_arrow_ar.svg")
+              ? Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SvgPicture.asset("assets/svgs/back_arrow_ar.svg"),
+              )
               : SvgPicture.asset("assets/svgs/back_arrow.svg"),
         ),
         centerTitle: true,

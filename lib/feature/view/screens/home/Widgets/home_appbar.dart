@@ -29,10 +29,10 @@ class HomeAppBar extends StatelessWidget {
             decoration: const BoxDecoration(shape: BoxShape.circle),
             child: imageNetwork(
                 url: "${SharedPref.instance.getCurrentUserData()?.image}"))
-        : Container(
-            clipBehavior: Clip.hardEdge,
-            decoration: const BoxDecoration(shape: BoxShape.circle),
-            child: Image.asset('assets/png/profile.png'));
+        : CircleAvatar(
+          backgroundColor: colorPrimary,
+          radius: 30,
+        );
   }
 
   @override

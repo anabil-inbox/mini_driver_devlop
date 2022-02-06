@@ -12,7 +12,6 @@ import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
-import 'package:inbox_driver/util/date/date_time_util.dart';
 import 'package:inbox_driver/util/font_dimne.dart';
 
 class VisitLvItemWidget extends StatelessWidget {
@@ -136,8 +135,7 @@ class VisitLvItemWidget extends StatelessWidget {
                 ),
                 SizedBox(height: sizeH10),
                 CustomTextView(
-                  txt: DateUtility.getChatTime(
-                      salesOrder.deliveryDate.toString()),
+                  txt: salesOrder.deliveryDate.toString().split(" ")[0],
                   textStyle: textStyleNormal()?.copyWith(
                       fontSize: fontSize12,
                       color: colorTextHint.withOpacity(0.7)),

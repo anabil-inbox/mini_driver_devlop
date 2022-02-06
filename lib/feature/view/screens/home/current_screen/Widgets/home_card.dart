@@ -7,27 +7,34 @@ import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
-import 'package:inbox_driver/util/date/date_time_util.dart';
 import 'package:inbox_driver/util/font_dimne.dart';
 import 'package:inbox_driver/util/string.dart';
 import 'package:get/get.dart';
 
 class HomeCard extends StatelessWidget {
-  const HomeCard({Key? key, required this.task, required this.index})
+  const HomeCard(
+      {Key? key,
+      required this.task,
+      required this.index,
+      required this.isFromCompleted})
       : super(key: key);
 
   final TaskModel task;
   final int index;
+  final bool isFromCompleted;
 
   @override
   Widget build(BuildContext context) {
     screenUtil(context);
     return GestureDetector(
       onTap: () {
-        Get.to(() => WhLoading(
-              index: index,
-              task: task,
-            ));
+ 
+          Get.to(() => WhLoading(
+                isFromCurrent: !isFromCompleted,
+                index: index,
+                task: task,
+              ));
+        
       },
       child: Container(
         margin: EdgeInsets.only(
@@ -58,7 +65,7 @@ class HomeCard extends StatelessWidget {
                 ),
                 SizedBox(height: sizeH5),
                 CustomTextView(
-                  txt: DateUtility.getChatTime(task.date.toString()),
+                  txt: task.date.toString().split(" ")[0],
                   textStyle: textStyleNormal(),
                 ),
                 SizedBox(height: sizeH7),

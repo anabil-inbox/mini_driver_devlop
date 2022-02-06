@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/feature/view/widgets/appbar/custom_app_bar_widget.dart';
@@ -8,14 +9,14 @@ import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_style.dart';
 
 class WhLoadingAppBar extends StatelessWidget {
-  const WhLoadingAppBar({Key? key , required this.title}) : super(key: key);
+  const WhLoadingAppBar({Key? key, required this.title}) : super(key: key);
 
   final String title;
   @override
   Widget build(BuildContext context) {
     screenUtil(context);
     return SizedBox(
-     // height: sizeH50,
+      // height: sizeH50,
       child: CustomAppBarWidget(
         elevation: 0,
         appBarColor: colorBackground,
@@ -24,7 +25,19 @@ class WhLoadingAppBar extends StatelessWidget {
           txt: title,
           textStyle: textStyleBlack16(),
         ),
-        
+        onBackBtnClick: () {
+          Navigator.pop(context);
+        },
+        leadingWidget: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: isArabicLang()
+              ? SvgPicture.asset("assets/svgs/back_arrow_ar.svg")
+              : SvgPicture.asset("assets/svgs/back_arrow.svg"),
+              
+        ),
+
         // leadingWidget: GestureDetector(
         //   onTap: () {
         //     Get.back();
@@ -63,11 +76,12 @@ class WhLoadingAppBar extends StatelessWidget {
         //   //   icon: "assets/svgs/Scan.svg",
         //   // ),
         // ),
-       // leadingWidth: sizeW48,
-       
+        // leadingWidth: sizeW48,
+
         actionsWidgets: [
           Padding(
-            padding:  EdgeInsets.symmetric(horizontal: sizeW2!, vertical: sizeH7!),
+            padding:
+                EdgeInsets.symmetric(horizontal: sizeW2!, vertical: sizeH7!),
             child: IconBtn(
               icon: "assets/svgs/Call Missed.svg",
               iconColor: colorRed,
@@ -80,7 +94,9 @@ class WhLoadingAppBar extends StatelessWidget {
               borderColor: colorRed,
             ),
           ),
-          SizedBox(width: sizeW20,)
+          SizedBox(
+            width: sizeW20,
+          )
         ],
       ),
     );

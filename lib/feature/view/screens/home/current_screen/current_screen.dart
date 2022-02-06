@@ -31,6 +31,7 @@ class CurrentScreen extends StatelessWidget {
                                         .contains(
                                             home.tdSearchHome.text.toLowerCase()))
                                 ? HomeCard(
+                                    isFromCompleted: false,
                                     index: i,
                                     task: element,
                                   )

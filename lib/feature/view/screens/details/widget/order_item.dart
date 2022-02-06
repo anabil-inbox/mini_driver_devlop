@@ -52,8 +52,6 @@ class OrderListItem extends StatelessWidget {
                   ),
                 ),
               )
-            
-            
             ],
           ),
           SizedBox(height: sizeH10),
@@ -62,27 +60,47 @@ class OrderListItem extends StatelessWidget {
             textStyle: textStyleNormal()?.copyWith(color: colorBlack),
           ),
           SizedBox(height: sizeH5),
-          Row(
-            children: [
-              SvgPicture.asset('assets/svgs/check_true.svg'),
-              SizedBox(width: sizeW7),
-              CustomTextView(
-                txt: txtValuableItem.tr,
-                textStyle: textStyleNormal()?.copyWith(fontSize: fontSize13),
-              ),
-            ],
+          ListView.separated(
+            shrinkWrap: true,
+            primary: false,
+            separatorBuilder: (context, index) => SizedBox(height: sizeH10),
+            itemCount: orderItem.options!.length,
+            itemBuilder: (context, index) {
+              return Row(
+                children: [
+                  SvgPicture.asset('assets/svgs/check_true.svg'),
+                  SizedBox(width: sizeW7),
+                  CustomTextView(
+                    txt: orderItem.options?[index],
+                    textStyle:
+                        textStyleNormal()?.copyWith(fontSize: fontSize13),
+                  ),
+                ],
+              );
+            },
           ),
-          SizedBox(height: sizeH10),
-          Row(
-            children: [
-              SvgPicture.asset('assets/svgs/check_true.svg'),
-              SizedBox(width: sizeW7),
-              CustomTextView(
-                txt: txtValuableItem.tr,
-                textStyle: textStyleNormal()?.copyWith(fontSize: fontSize13),
-              ),
-            ],
-          ),
+
+          // Row(
+          //   children: [
+          //     SvgPicture.asset('assets/svgs/check_true.svg'),
+          //     SizedBox(width: sizeW7),
+          //     CustomTextView(
+          //       txt: txtValuableItem.tr,
+          //       textStyle: textStyleNormal()?.copyWith(fontSize: fontSize13),
+          //     ),
+          //   ],
+          // ),
+          // SizedBox(height: sizeH10),
+          // Row(
+          //   children: [
+          //     SvgPicture.asset('assets/svgs/check_true.svg'),
+          //     SizedBox(width: sizeW7),
+          //     CustomTextView(
+          //       txt: txtValuableItem.tr,
+          //       textStyle: textStyleNormal()?.copyWith(fontSize: fontSize13),
+          //     ),
+          //   ],
+          // ),
         ],
       ),
     );

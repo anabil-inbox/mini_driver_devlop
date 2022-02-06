@@ -19,8 +19,9 @@ abstract class Constance {
 
   // to add here Tasks Constance ::
 
-  static String inProgress = "In processing";
-  static String done = "Done";
+
+
+  static String done = "done";
   static String taskStatus = "task_status";
   static String taskId = "task_id";
   static String serial = "serial";
@@ -40,7 +41,9 @@ abstract class Constance {
   static String taskStart = "start";
   static String taskdelivered = "delivered";
   static String taskNoShow = "no show";
-
+  static String taskDone = "done";
+  static String inProgress = "in processing";
+  
   // to add here constance Price ::
   static String qrCoin = "QR";
 }

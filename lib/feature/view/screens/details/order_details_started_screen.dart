@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:inbox_driver/feature/model/home/sales_data.dart';
 import 'package:inbox_driver/feature/model/home/sales_order.dart';
 import 'package:inbox_driver/feature/model/home/task_model.dart';
 import 'package:inbox_driver/feature/view/screens/details/widget/address_box_widget.dart';
-import 'package:inbox_driver/feature/view/screens/details/widget/location_far_widget.dart';
 import 'package:inbox_driver/feature/view/screens/details/widget/name_box_widget.dart';
 import 'package:inbox_driver/feature/view/screens/details/widget/order_list_widget.dart';
 import 'package:inbox_driver/feature/view/screens/details/widget/schedule%20_box_widget.dart';
@@ -16,6 +16,7 @@ import 'package:inbox_driver/feature/view/widgets/secondery_form_button.dart';
 import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
+import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/font_dimne.dart';
@@ -72,10 +73,11 @@ class OrderDetailsStarted extends StatelessWidget {
   Widget primaryButton({required HomeViewModel home}) {
     if (index == 0) {
       if (task.taskName!
-          .toLowerCase()
-          .contains(Constance.taskWarehouseLoading.toLowerCase()) || task.taskName!
-          .toLowerCase()
-          .contains(Constance.taskWarehouseClosure.toLowerCase())) {
+              .toLowerCase()
+              .contains(Constance.taskWarehouseLoading.toLowerCase()) ||
+          task.taskName!
+              .toLowerCase()
+              .contains(Constance.taskWarehouseClosure.toLowerCase())) {
         return PrimaryButton(
           isExpanded: true,
           isLoading: home.isLoading,
@@ -88,6 +90,30 @@ class OrderDetailsStarted extends StatelessWidget {
             await home.recivedBoxes(
                 serial: home.operationsSalesData!.salesOrders![index].orderId ?? "",
                 taskName: Constance.taskWarehouseLoading);
+            await home.getSpecificTask(
+                taskId: task.id ?? "", taskSatus: Constance.inProgress);
+            await home.getSpecificTask(
+                taskId: task.id ?? "", taskSatus: Constance.done);
+            await home.getHomeTasks(taskType: Constance.done);
+            await home.getHomeTasks(taskType: Constance.inProgress);
+          },
+        );
+      } else if (salesOrder.taskStatus == Constance.inProgress) {
+        return PrimaryButton(
+          isExpanded: true,
+          isLoading: false,
+          textButton: txtButtonStart.tr,
+          onClicked: () async {
+            await home.updateTaskStatus(
+              newStatus: Constance.taskStart,
+              taskId: salesOrder.taskId ?? "",
+            );
+            await home.getSpecificTask(
+                taskId: task.id ?? "", taskSatus: Constance.inProgress);
+            await home.getSpecificTask(
+                taskId: task.id ?? "", taskSatus: Constance.done);
+            await home.getHomeTasks(taskType: Constance.done);
+            await home.getHomeTasks(taskType: Constance.inProgress);
           },
         );
       } else if (salesOrder.taskStatus == Constance.taskStart) {
@@ -104,6 +130,12 @@ class OrderDetailsStarted extends StatelessWidget {
                   newStatus: Constance.taskdelivered,
                   taskId: salesOrder.taskId ?? "",
                 );
+                await home.getSpecificTask(
+                    taskId: task.id ?? "", taskSatus: Constance.inProgress);
+                await home.getSpecificTask(
+                    taskId: task.id ?? "", taskSatus: Constance.done);
+                await home.getHomeTasks(taskType: Constance.done);
+                await home.getHomeTasks(taskType: Constance.inProgress);
               },
               textButton: "Delivered",
             ),
@@ -131,17 +163,7 @@ class OrderDetailsStarted extends StatelessWidget {
           ],
         );
       } else {
-        return PrimaryButton(
-          isExpanded: true,
-          isLoading: home.isLoading,
-          textButton: txtButtonStart.tr,
-          onClicked: () async {
-            await home.updateTaskStatus(
-              newStatus: Constance.taskStart,
-              taskId: salesOrder.taskId ?? "",
-            );
-          },
-        );
+      return const SizedBox();
       }
     } else if (index != 0) {
       return Stack(
@@ -176,6 +198,14 @@ class OrderDetailsStarted extends StatelessWidget {
             textStyle: textStyleAppBarTitle(),
           ),
           isCenterTitle: true,
+          leadingWidget: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: isArabicLang()
+                ? SvgPicture.asset("assets/svgs/back_arrow_ar.svg")
+                : SvgPicture.asset("assets/svgs/back_arrow.svg"),
+          ),
         ),
         body: Stack(
           children: [
@@ -279,7 +309,7 @@ class OrderDetailsStarted extends StatelessWidget {
                 return primaryButton(home: home);
               }),
             ),
-            
+
             // Positioned(
             //     right: 0,
             //     left: 0,
@@ -291,7 +321,7 @@ class OrderDetailsStarted extends StatelessWidget {
             //       ],
             //     ),
             //   ),
-            
+
             // todo for order previous Task bar scenario
             if (index != 0)
               Positioned(

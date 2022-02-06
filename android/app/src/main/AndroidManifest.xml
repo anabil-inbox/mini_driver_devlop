@@ -28,7 +28,7 @@
 </queries>
 
    <application
-        android:label="inbox_driver"
+        android:label="inbox driver"
         android:icon="@mipmap/ic_launcher">
 
        <!--todo this for google maps-->

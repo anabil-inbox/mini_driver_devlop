@@ -32,7 +32,7 @@ class HomeHelper {
   }
 
   Future<SalesData> getSpecificTask(
-      {required Map<String, dynamic> taskId}) async {
+      {required Map<String, dynamic> taskId }) async {
     try {
       var response = await HomeApi.getInstance.getSpecificTask(
           body: taskId,

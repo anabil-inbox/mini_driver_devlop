@@ -127,7 +127,6 @@ class AuthViewModle extends GetxController {
               isLoading = false,
               Get.put(AuthViewModle()),
               update(),
-              snackSuccess(txtSuccess!.tr, "${value.status!.message}"),
               Get.to(() => VerficationScreen(
                     id: value.data["Driver"]["id"],
                     mobileNumber: user.mobileNumber!,
@@ -158,7 +157,6 @@ class AuthViewModle extends GetxController {
     }).then((value) => {
           if (value.status!.success!)
             {
-              snackSuccess(txtSuccess!.tr, "${value.status!.message}"),
               Get.offAll(() => HomeScreen()),
               Get.put(AuthViewModle()),
               Get.put(ProfileViewModle()),
@@ -191,7 +189,7 @@ class AuthViewModle extends GetxController {
               startTimerCounter = 60,
               startTimer(),
               update(),
-              snackSuccess(txtSuccess!.tr, "${value.status!.message}"),
+              
               isFromChange
                   ? Get.to(() => VerficationScreen(
                         id: id ?? "",

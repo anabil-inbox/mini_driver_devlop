@@ -32,8 +32,12 @@ class HeaderCodeVerfication extends StatelessWidget {
             onPressed: () {
               Get.back();
             },
-               iconSize: 48, icon: isArabicLang()?SvgPicture.asset("assets/svgs/back_arrow_ar.svg",width: 40,height: 40,)
-                  :SvgPicture.asset("assets/svgs/back_arrow.svg",width: 40,height: 40,),
+               iconSize: 48, icon: isArabicLang()
+              ? Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SvgPicture.asset("assets/svgs/back_arrow_ar.svg"),
+              )
+              : SvgPicture.asset("assets/svgs/back_arrow.svg"),
           )),
           PositionedDirectional(
             start: padding104,

@@ -13,12 +13,17 @@ class BackBtnWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     screenUtil(context);
     return InkWell(
-        onTap: onTap ??_getBack,
+        onTap: onTap ?? _getBack,
         child: Padding(
           padding: const EdgeInsets.all(6.0),
-          child: SvgPicture.asset(isArabicLang()?"assets/svgs/back_arrow_ar.svg":"assets/svgs/back_btn_widget.svg" , width: sizeW36,height: sizeH34,),
+          child: isArabicLang()
+              ? Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SvgPicture.asset("assets/svgs/back_arrow_ar.svg"),
+                )
+              : SvgPicture.asset("assets/svgs/back_arrow.svg"),
         ));
   }
 
-  _getBack()=> Get.back();
+  _getBack() => Get.back();
 }

@@ -540,8 +540,7 @@ void changeLanguageBottomSheet() {
                         .toLowerCase()
                         .contains("en")) {
                       LocalizationService().changeLocale(Constance.englishKey);
-                      await SharedPref.instance
-                          .setLocalization(Constance.englishKey);
+                      await SharedPref.instance.setLocalization(Constance.englishKey);
                     } else {}
 
                     Get.back();
@@ -580,6 +579,7 @@ class CustomMaterialPageRoute extends MaterialPageRoute {
 }
 
 bool isArabicLang() {
-  return (SharedPref.instance.getAppLanguageMain() == "ar" ? true : false);
+  Logger().e(SharedPref.instance.getLocalization() == "Arabic" ? true : false);
+  return (SharedPref.instance.getLocalization() == "Arabic" ? true : false);
   // return isRTL;
 }
