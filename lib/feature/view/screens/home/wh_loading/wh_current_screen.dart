@@ -12,6 +12,7 @@ import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/string.dart';
+import 'package:logger/logger.dart';
 
 import 'Widgets/chart_widget.dart';
 import 'Widgets/wh_loading_card.dart';
@@ -34,13 +35,9 @@ class WHCurrentScreen extends StatelessWidget {
           primary: false,
           itemCount: homeViewModel.operationsSalesData!.salesOrders?.length,
           itemBuilder: (context, index) {
-            if (task.taskName!
-                    .toLowerCase()
-                    .contains(Constance.taskWarehouseLoading.toLowerCase()) ||
-                task.taskName!
-                    .toLowerCase()
-                    .contains(Constance.taskWarehouseClosure.toLowerCase())) {
+            if (homeViewModel.isTaskWarwhouseLoadingOrClousre(task: task)) {
               return WhLoadingCard(
+                isFromCompelted: true,
                 task: task,
                 index: i,
                 salesData: homeViewModel.operationsSalesData!,
@@ -48,49 +45,31 @@ class WHCurrentScreen extends StatelessWidget {
                     homeViewModel.operationsSalesData!.salesOrders![index],
                 onRecivedClick: i == 0
                     ? () async {
-                        if (task.taskName!.toLowerCase().contains(
-                            Constance.taskWarehouseLoading.toLowerCase())) {
+                        if (homeViewModel.isTaskWareHouseLoading(task: task)) {
                           await homeViewModel.recivedBoxes(
                               serial: homeViewModel.operationsSalesData!
                                       .salesOrders![index].orderId ??
                                   "",
                               taskName: Constance.taskWarehouseLoading);
-                          await homeViewModel.getSpecificTask(
-                              taskId: task.id ?? "",
-                              taskSatus: Constance.inProgress);
-                          await homeViewModel.getSpecificTask(
-                              taskId: task.id ?? "", taskSatus: Constance.done);
-                          await homeViewModel.getHomeTasks(
-                              taskType: Constance.done);
-                          await homeViewModel.getHomeTasks(
-                              taskType: Constance.inProgress);
-                          homeViewModel.update();
-                        } else {
+                        } else if (homeViewModel.isTaskWorahouseClousre(
+                            task: task)) {
                           await homeViewModel.recivedBoxes(
                               serial: homeViewModel.operationsSalesData!
                                       .salesOrders![index].orderId ??
                                   "",
                               taskName: Constance.taskWarehouseClosure);
-                          await homeViewModel.getSpecificTask(
-                              taskId: task.id ?? "",
-                              taskSatus: Constance.inProgress);
-                          await homeViewModel.getSpecificTask(
-                              taskId: task.id ?? "", taskSatus: Constance.done);
-                          await homeViewModel.getHomeTasks(
-                              taskType: Constance.done);
-                          await homeViewModel.getHomeTasks(
-                              taskType: Constance.inProgress);
-                          homeViewModel.update();
-                        }
+                        } else {}
+                        await homeViewModel.getSpecificTask(
+                            taskId: task.id ?? "",
+                            taskSatus: Constance.inProgress);
                       }
                     : () {
                         snackError(txtError!.tr, txtPreviousTask.tr);
                       },
               );
-            } else if (task.taskName!
-                .toLowerCase()
-                .contains(Constance.taskCustomerVisit.toLowerCase())) {
+            } else if (homeViewModel.isTaskCustomerVist(task: task)) {
               return VisitLvItemWidget(
+                isFromCompleted: false,
                 task: task,
                 index: i,
                 salesData: homeViewModel.operationsSalesData!,
@@ -109,7 +88,8 @@ class WHCurrentScreen extends StatelessWidget {
     if (GetUtils.isNull(homeViewModel.operationsSalesData) ||
         task.taskName!
             .toLowerCase()
-            .contains(Constance.taskCustomerVisit.toLowerCase())) {
+            .contains(Constance.taskCustomerVisit.toLowerCase()) ||
+        GetUtils.isNull(homeViewModel.operationsSalesData?.taskName)) {
       return const SizedBox();
     } else {
       double greenValue = 0;
@@ -139,8 +119,10 @@ class WHCurrentScreen extends StatelessWidget {
 
       return GetBuilder<HomeViewModel>(
         builder: (_) {
-        var d=homeViewModel.operationsSalesData?.totalBoxes;
-      d=  (homeViewModel.operationsSalesData?.totalBoxes ==0)?homeViewModel.operationsSalesData?.totalReceived:homeViewModel.operationsSalesData?.totalBoxes;
+          var d = homeViewModel.operationsSalesData?.totalBoxes;
+          d = (homeViewModel.operationsSalesData?.totalBoxes == 0)
+              ? homeViewModel.operationsSalesData?.totalReceived
+              : homeViewModel.operationsSalesData?.totalBoxes;
           return ChartWidget(
             firstGreenValue: greenValue,
             firstRedValue: redValue,
@@ -185,6 +167,7 @@ class WHCurrentScreen extends StatelessWidget {
                   backgroundColor: colorRed,
                   onPressed: () {
                     Get.to(() => ScanScreen(taskModel: task));
+                    
                   },
                   borderColor: colorTrans,
                   icon: "assets/svgs/Scan.svg",
@@ -232,8 +215,6 @@ class WHCurrentScreen extends StatelessWidget {
         initState: (_) async {
           WidgetsBinding.instance?.addPostFrameCallback((timeStamp) async {
             await homeViewModel.getSpecificTask(
-                taskId: task.id ?? "", taskSatus: Constance.done);
-            await homeViewModel.getSpecificTask(
                 taskId: task.id ?? "", taskSatus: Constance.inProgress);
           });
         },
@@ -256,7 +237,9 @@ class WHCurrentScreen extends StatelessWidget {
                 GetBuilder<HomeViewModel>(builder: (build) {
                   return flowChart(homeViewModel: build);
                 }),
-                lvSalesOrder
+                GetBuilder<HomeViewModel>(builder: (homeBuilder) {
+                  return lvSalesOrder;
+                })
               ],
             );
           }

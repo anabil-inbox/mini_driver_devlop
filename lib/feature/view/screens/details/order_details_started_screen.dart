@@ -28,13 +28,15 @@ class OrderDetailsStarted extends StatelessWidget {
       required this.index,
       required this.salesOrder,
       required this.salesData,
-      required this.task})
+      required this.task,
+      required this.isFromCompleted})
       : super(key: key);
 
   final int index;
   final SalesOrder salesOrder;
   final SalesData salesData;
   final TaskModel task;
+  final bool isFromCompleted;
 
   Widget get orderStatus => Row(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -71,7 +73,9 @@ class OrderDetailsStarted extends StatelessWidget {
       );
 
   Widget primaryButton({required HomeViewModel home}) {
-    if (index == 0) {
+    if (isFromCompleted) {
+      return const SizedBox();
+    } else if (index == 0) {
       if (task.taskName!
               .toLowerCase()
               .contains(Constance.taskWarehouseLoading.toLowerCase()) ||
@@ -163,7 +167,7 @@ class OrderDetailsStarted extends StatelessWidget {
           ],
         );
       } else {
-      return const SizedBox();
+        return const SizedBox();
       }
     } else if (index != 0) {
       return Stack(

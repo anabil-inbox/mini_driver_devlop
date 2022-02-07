@@ -8,6 +8,7 @@ import 'package:inbox_driver/feature/model/home/emergencey/emergency_case.dart';
 import 'package:inbox_driver/feature/model/home/sales_data.dart';
 import 'package:inbox_driver/feature/model/home/task_model.dart';
 import 'package:inbox_driver/feature/view/screens/home/Widgets/secondery_button.dart';
+import 'package:inbox_driver/feature/view/screens/home/home_screen.dart';
 import 'package:inbox_driver/feature/view/screens/home/instant_order/Widgets/scan_delivered_box.dart';
 import 'package:inbox_driver/feature/view/screens/home/instant_order/instant_order_screen.dart';
 import 'package:inbox_driver/feature/view_model/instance_order_view_model/instance_order_view_model.dart';
@@ -42,20 +43,21 @@ class HomeViewModel extends GetxController {
   onQRViewCreated(QRViewController controller,
       {bool? isFromAtHome, int? index, TaskModel? taskModel}) {
     try {
+      // if (this.controller == null) {
+      //   this.controller = controller;
+      // }
+      int i = 0;
       this.controller = controller;
       controller.scannedDataStream.listen((scanData) {
         result = scanData;
       }).onData((data) async {
-        controller.dispose();
-        await scanBox(
-            serial: data.code ?? "",
-            taskName: operationsSalesData?.taskName ?? "");
-        await getSpecificTask(
-            taskId: taskModel?.id ?? "", taskSatus: Constance.inProgress);
-        await getSpecificTask(
-            taskId: taskModel?.id ?? "", taskSatus: Constance.done);
-        await getHomeTasks(taskType: Constance.inProgress);
-        await getHomeTasks(taskType: Constance.done);
+        i = i + 1;
+        if (i == 1) {
+          await scanBox(
+              serial: data.code ?? "",
+              taskName: operationsSalesData?.taskName ?? "");
+          Get.back();
+        }
       });
     } catch (e) {
       printError();
@@ -135,11 +137,33 @@ class HomeViewModel extends GetxController {
             if (taskSatus == Constance.inProgress)
               {
                 operationsSalesData = value,
+                update(),
               }
             else
               {
                 operationsSalesDataCompleted = value,
+                update(),
               }
+          });
+    } catch (e) {
+      endLoading();
+      printError();
+    }
+    endLoading();
+  }
+
+  SalesData? completedSalesData;
+
+  Future<void> getSpecificCompleted(
+      {required String taskId, required String taskSatus}) async {
+    completedSalesData = SalesData();
+    try {
+      startLoading();
+      await HomeHelper.getInstance.getSpecificTask(taskId: {
+        Constance.taskId: taskId,
+        Constance.status: taskSatus
+      }).then((value) => {
+            completedSalesData = value,
           });
     } catch (e) {
       endLoading();
@@ -153,12 +177,13 @@ class HomeViewModel extends GetxController {
       await HomeHelper.getInstance.scanBox(body: {
         Constance.serial: serial,
         Constance.taskName: taskName
-      }).then((value) => {
+      }).then((value) async => {
             if (value.status!.success!)
               {
                 operationsSalesData?.totalReceived =
                     (operationsSalesData?.totalReceived ?? 0) + 1,
-                onInit(),
+                await refrshHome(),
+                update(),
                 snackSuccess("$txtSuccess", "${value.status!.message}")
               }
             else
@@ -170,7 +195,6 @@ class HomeViewModel extends GetxController {
     } catch (e) {
       printError();
     }
-    update();
   }
 
   EmergencyCase? selectedEmergencyCase;
@@ -301,10 +325,11 @@ class HomeViewModel extends GetxController {
     }
   }
 
-  Future<void> recivedBoxes({required String serial, required String taskName}) async {
+  Future<void> recivedBoxes(
+      {required String serial, required String taskName}) async {
     try {
       startLoading();
-      HomeHelper.getInstance.reciveBoxess(body: {
+      await HomeHelper.getInstance.reciveBoxess(body: {
         "id": serial,
         Constance.taskName: taskName
       }).then((value) => {
@@ -326,8 +351,19 @@ class HomeViewModel extends GetxController {
     } catch (e) {
       printError();
     }
+    await refrshHome();
     update();
     endLoading();
+  }
+
+  // to do for Refrsh Home Task:
+  Future<void> refrshHome() async {
+    try {
+      await getHomeTasks(taskType: Constance.inProgress);
+      await getHomeTasks(taskType: Constance.done);
+    } catch (e) {
+      printError();
+    }
   }
 
   Future<void> updateTaskStatus(
@@ -343,26 +379,29 @@ class HomeViewModel extends GetxController {
                 snackSuccess(txtSuccess!.tr, value.status!.message!),
                 if (newStatus == Constance.taskdelivered)
                   {
-                    Get.close(2),
+                    // Get.close(2),
                   },
+                Logger().e(GetUtils.isNull(operationsSalesData?.salesOrders)),
                 operationsSalesData?.salesOrders?.forEach((element) {
                   Logger().e(element);
-
+                  Logger().e("MSG_TASK_TASK_iD ${element.taskId}");
+                  Logger().e("MSG__TASK-NEW__STATE $newStatus");
+                  Logger().e("MSG__TASK-NEW__ID_2 $taskId");
                   if (element.taskId == taskId) {
                     element.taskStatus = newStatus;
                     update();
                   }
                 }),
-
+                endLoading(),
                 // operationsSalesData.
               }
             else
-              {snackError(txtSuccess!.tr, value.status!.message!)}
+              {snackError(txtSuccess!.tr, value.status!.message!), endLoading()}
           });
     } catch (e) {
+      endLoading();
       printError();
     }
-    endLoading();
   }
 
   TextEditingController tdSearchWhLoading = TextEditingController();
@@ -377,6 +416,46 @@ class HomeViewModel extends GetxController {
     } catch (e) {
       printError();
     }
+  }
+
+  // to check if Task Type if Task Warwhouse Loading Or WareHouse Clouser :
+  bool isTaskWarwhouseLoadingOrClousre({required TaskModel task}) {
+    if (task.taskName!
+            .toLowerCase()
+            .contains(Constance.taskWarehouseLoading.toLowerCase()) ||
+        task.taskName!
+            .toLowerCase()
+            .contains(Constance.taskWarehouseClosure.toLowerCase())) {
+      return true;
+    }
+    return false;
+  }
+
+  bool isTaskCustomerVist({required TaskModel task}) {
+    if (task.taskName!
+        .toLowerCase()
+        .contains(Constance.taskCustomerVisit.toLowerCase())) {
+      return true;
+    }
+    return false;
+  }
+
+  bool isTaskWorahouseClousre({required TaskModel task}) {
+    if (task.taskName!
+        .toLowerCase()
+        .contains(Constance.taskWarehouseClosure.toLowerCase())) {
+      return true;
+    }
+    return false;
+  }
+
+  bool isTaskWareHouseLoading({required TaskModel task}) {
+    if (task.taskName!
+        .toLowerCase()
+        .contains(Constance.taskWarehouseLoading.toLowerCase())) {
+      return true;
+    }
+    return false;
   }
 
   @override

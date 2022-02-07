@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:inbox_driver/feature/core/loading_circle.dart';
 import 'package:inbox_driver/feature/model/home/task_model.dart';
 import 'package:inbox_driver/feature/view/screens/home/wh_loading/Widgets/wh_loading_tabbar.dart';
 import 'package:inbox_driver/feature/view/screens/home/wh_loading/wh_completed_screen.dart';
 import 'package:inbox_driver/feature/view/screens/home/wh_loading/wh_current_screen.dart';
-import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:get/get.dart';
-import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
-import 'package:inbox_driver/util/font_dimne.dart';
 import 'package:inbox_driver/util/string.dart';
-import 'package:logger/logger.dart';
 
 import 'Widgets/wh_loading_appbar.dart';
 
 // ignore: must_be_immutable
 class WhLoading extends StatelessWidget {
-  const WhLoading({Key? key, required this.task, required this.index , required this.isFromCurrent})
+  const WhLoading(
+      {Key? key,
+      required this.task,
+      required this.index,
+      required this.isFromCurrent})
       : super(key: key);
 
   Widget get appBar => WhLoadingAppBar(
@@ -51,18 +50,33 @@ class WhLoading extends StatelessWidget {
                   labelColor: Colors.black,
                   indicatorColor: colorPrimary,
                   labelPadding: const EdgeInsets.all(0),
-                  onTap: (index){
-                    Logger().e(index);
+                  onTap: (index) async {
+                    if (index == 0) {
+                      WidgetsBinding.instance
+                          ?.addPostFrameCallback((timeStamp) async {
+                        await homeViewModel.getSpecificTask(
+                            taskId: task.id ?? "",
+                            taskSatus: Constance.inProgress);
+                      });
+                    } else {
+                      WidgetsBinding.instance
+                          ?.addPostFrameCallback((timeStamp) async {
+                        await homeViewModel.getSpecificTask(
+                            taskId: task.id ?? "", taskSatus: Constance.done);
+                      });
+                    }
                   },
                   tabs: [
-                    Tab(text: txtCurrent.tr ),
-                    Tab(text: txtCompleted.tr,
+                    Tab(text: txtCurrent.tr),
+                    Tab(
+                      text: txtCompleted.tr,
                     ),
                   ],
                 ),
               ),
               Expanded(
                 child: TabBarView(
+                  physics: const NeverScrollableScrollPhysics(),
                   children: [
                     RefreshIndicator(
                       color: colorPrimary,

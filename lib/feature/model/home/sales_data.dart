@@ -18,7 +18,7 @@ class SalesData {
   double? latituide;
 
   factory SalesData.fromJson(Map<String, dynamic> json) => SalesData(
-      taskName: json["task_name"] ?? "",
+      taskName: json["task_name"],
       totalBoxes: json["total_boxes"] ?? 0,
       totalReceived: json["total_received"] ?? 0,
       lastUpdate: DateTime.parse(json["last_update"]),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inbox_driver/feature/model/home/task_model.dart';
+import 'package:inbox_driver/feature/view/screens/home/completed_screen/completed_level_one_screen.dart';
 import 'package:inbox_driver/feature/view/screens/home/wh_loading/wh_loading.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/util/app_color.dart';
@@ -28,13 +29,18 @@ class HomeCard extends StatelessWidget {
     screenUtil(context);
     return GestureDetector(
       onTap: () {
- 
+        if (isFromCompleted) {
+          Get.to(() => CompletedLevelOneScreen(
+                taskModel: task,
+                title: task.id ?? "",
+              ));
+        } else {
           Get.to(() => WhLoading(
                 isFromCurrent: !isFromCompleted,
                 index: index,
                 task: task,
               ));
-        
+        }
       },
       child: Container(
         margin: EdgeInsets.only(

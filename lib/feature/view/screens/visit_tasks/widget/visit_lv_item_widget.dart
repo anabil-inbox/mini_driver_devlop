@@ -21,7 +21,9 @@ class VisitLvItemWidget extends StatelessWidget {
       required this.salesData,
       required this.salesOrder,
       required this.task,
-      required this.index})
+      required this.index,
+      required this.isFromCompleted
+      })
       : super(key: key);
   final bool? isBlockContainer;
 
@@ -29,6 +31,7 @@ class VisitLvItemWidget extends StatelessWidget {
   final SalesData salesData;
   final int index;
   final TaskModel task;
+  final bool isFromCompleted;
 
   Widget chipStatusWidget(
           {var title,
@@ -77,6 +80,7 @@ class VisitLvItemWidget extends StatelessWidget {
         InkWell(
           onTap: () {
             Get.to(() => OrderDetailsStarted(
+                  isFromCompleted: isFromCompleted,
                   task: task,
                   salesData: salesData,
                   salesOrder: salesOrder,
@@ -84,7 +88,7 @@ class VisitLvItemWidget extends StatelessWidget {
                 ));
           },
           child: Container(
-            // margin: EdgeInsets.only(left: sizeW10!, right: sizeW10!, top: sizeH10!),
+             margin: EdgeInsets.only(bottom: padding12!),
             padding:
                 EdgeInsets.symmetric(horizontal: sizeW20!, vertical: sizeH17!),
             decoration: BoxDecoration(

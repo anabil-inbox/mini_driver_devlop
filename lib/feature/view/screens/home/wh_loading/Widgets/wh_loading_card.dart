@@ -22,7 +22,9 @@ class WhLoadingCard extends StatelessWidget {
       required this.salesOrder,
       required this.salesData,
       required this.index,
-      required this.task})
+      required this.task,
+      required this.isFromCompelted
+      })
       : super(key: key);
 
   final Function onRecivedClick;
@@ -30,6 +32,7 @@ class WhLoadingCard extends StatelessWidget {
   final SalesData salesData;
   final int index;
   final TaskModel task;
+  final bool isFromCompelted;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +41,7 @@ class WhLoadingCard extends StatelessWidget {
         InkWell(
           onTap: () {
             Get.to(() => OrderDetailsStarted(
+                  isFromCompleted: isFromCompelted,
                   index: index,
                   salesOrder: salesOrder,
                   salesData: salesData,
