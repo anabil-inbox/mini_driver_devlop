@@ -361,8 +361,8 @@ class AuthViewModle extends GetxController {
     bool canCheckBiometrics = false;
     try {
       canCheckBiometrics = await auth.canCheckBiometrics;
-    } on PlatformException catch (e) {
-      print(e);
+    } on PlatformException catch (_) {
+      printError();
     }
 
     _canCheckBiometrics = canCheckBiometrics;
@@ -373,8 +373,8 @@ class AuthViewModle extends GetxController {
     List<BiometricType> availableBiometrics = <BiometricType>[];
     try {
       availableBiometrics = await auth.getAvailableBiometrics();
-    } on PlatformException catch (e) {
-      print(e);
+    } on PlatformException catch (_) {
+     printError();
     }
 
     _availableBiometrics = availableBiometrics;
@@ -390,8 +390,8 @@ class AuthViewModle extends GetxController {
         biometricOnly: true,
         stickyAuth: false,
       );
-    } on PlatformException catch (e) {
-      print(e);
+    } on PlatformException catch (_) {
+      printError();
     }
     _authorized = authenticated ? 'Authorized' : 'Not Authorized';
     isAuth = authenticated ? true : false;

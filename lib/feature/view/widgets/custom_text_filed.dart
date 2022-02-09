@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:inbox_driver/util/app_color.dart';
@@ -100,7 +99,6 @@ class CustomTextFormFiled extends StatelessWidget /*with AppDimen, AppStyle */ {
           FocusScope.of(context).requestFocus(nexFocusNode /*?? FocusNode()*/);
           onSubmitted!(value);
         } catch (e) {
-          print(e);
           focusNode?.unfocus();
         }
       },
@@ -114,7 +112,7 @@ class CustomTextFormFiled extends StatelessWidget /*with AppDimen, AppStyle */ {
       keyboardType: keyboardType ?? TextInputType.emailAddress,
 
       inputFormatters: isInputFormatters!
-          ? [FilteringTextInputFormatter.digitsOnly, new CustomInputFormatter()]
+          ? [FilteringTextInputFormatter.digitsOnly, CustomInputFormatter()]
           : [],
     );
   }
@@ -127,15 +125,15 @@ class CustomTextFormFiled extends StatelessWidget /*with AppDimen, AppStyle */ {
           size: iconSize,
         ),
         prefixIconConstraints: icon == null
-            ? BoxConstraints(maxWidth: 0, minWidth: 0)
-            : BoxConstraints(
+            ? const BoxConstraints(maxWidth: 0, minWidth: 0)
+            : const BoxConstraints(
                 minWidth: 38,
                 minHeight: 25,
               ),
         counterText: "",
         isDense: true,
         filled: isFill,
-        errorStyle: TextStyle(
+        errorStyle: const TextStyle(
             /*  height: 0,*/ /*backgroundColor: colorBackground*/
             ),
         enabledBorder: isFill!
@@ -230,7 +228,7 @@ class CustomInputFormatter extends TextInputFormatter {
       return newValue;
     }
 
-    var buffer = new StringBuffer();
+    var buffer =  StringBuffer();
     for (int i = 0; i < text.length; i++) {
       buffer.write(text[i]);
       var nonZeroIndex = i + 1;
@@ -243,6 +241,6 @@ class CustomInputFormatter extends TextInputFormatter {
     var string = buffer.toString();
     return newValue.copyWith(
         text: string,
-        selection: new TextSelection.collapsed(offset: string.length));
+        selection: TextSelection.collapsed(offset: string.length));
   }
 }

@@ -1,4 +1,6 @@
 
+// ignore_for_file: prefer_if_null_operators
+
 import 'package:get/utils.dart';
 import 'package:logger/logger.dart';
 
@@ -22,7 +24,6 @@ class AppResponse {
         );
       }
     } catch (e) {
-      
       return AppResponse(status: Status(
         message: "$e",
         code: 403,

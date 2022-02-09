@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
@@ -5,7 +7,6 @@ import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
-import 'package:inbox_driver/util/date/date_time_util.dart';
 import 'package:inbox_driver/util/string.dart';
 
 class ScheduleBox extends StatelessWidget {

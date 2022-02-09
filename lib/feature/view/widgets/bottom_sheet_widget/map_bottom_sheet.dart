@@ -7,9 +7,11 @@ import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 
 class MapBottomSheet extends StatelessWidget {
-  const MapBottomSheet({Key? key}) : super(key: key);
+  const MapBottomSheet({Key? key , required this.latuide , required this.longtuide}) : super(key: key);
 
   static MapViewModel get mapViewModel => Get.find<MapViewModel>();
+  final double latuide;
+  final double longtuide;
 
   Widget get closeBtnWidget => InkWell(
         child: SvgPicture.asset("assets/svgs/Close.svg"),
@@ -20,18 +22,12 @@ class MapBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     screenUtil(context);
-
     return GetBuilder<MapViewModel>(
         init: MapViewModel(),
         initState: (_) async {
-          
-          // mapViewModel.calculateDistance(
-          //   lat1: 40.689202777778,
-          //   lon1: -74.044219444444,
-          //   lat2: 38.889069444444,
-          //   lon2: -77.034502777778,
-          // );
-
+          mapViewModel.getDirections();
+          mapViewModel.customerLatLng = LatLng(latuide, longtuide);
+          mapViewModel.update();
         },
         builder: (logic) {
           return Container(
@@ -58,7 +54,6 @@ class MapBottomSheet extends StatelessWidget {
                                   topRight: Radius.circular(sizeRadius25!),
                                   topLeft: Radius.circular(sizeRadius25!)),
                               child: GoogleMap(
-                                
                                 myLocationButtonEnabled: true,
                                 initialCameraPosition:
                                     logic.initialCameraPosition,

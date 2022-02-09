@@ -22,7 +22,7 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: isExpanded ? double.infinity : width??sizeW165,
       height: height??sizeH50,
       child: ElevatedButton(
@@ -33,9 +33,9 @@ class PrimaryButton extends StatelessWidget {
               }
             : () {},
         child: isLoading
-            ? ThreeSizeDot()
+            ? const ThreeSizeDot()
             : Text(
-                "$textButton",
+                textButton,
                 style: textStylePrimary()!.copyWith(
                     fontWeight: FontWeight.bold,
                     fontSize: fontSize16,
@@ -63,7 +63,7 @@ class PrimaryButtonOpacityColor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: isExpanded ? double.infinity : sizeW165,
       height: sizeH50,
       child: ElevatedButton(
@@ -74,9 +74,9 @@ class PrimaryButtonOpacityColor extends StatelessWidget {
               }
             : () {},
         child: isLoading
-            ? ThreeSizeDot()
+            ? const ThreeSizeDot()
             : Text(
-                "$textButton",
+                textButton,
                 style: textStylePrimary()!.copyWith(
                     fontWeight: FontWeight.normal,
                     fontSize: fontSize15,

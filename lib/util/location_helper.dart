@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
@@ -45,7 +44,7 @@ class LocationHelper {
       }
     }
 
-    Logger().i("Test_getCurrentPositionPlatform 3 ${permission}");
+    Logger().i("Test_getCurrentPositionPlatform 3 $permission");
     if (permission == LocationPermission.deniedForever) {
       Logger().i("Test_getCurrentPositionPlatform 5");
       permission = await _geolocatorPlatform.requestPermission();
@@ -58,7 +57,7 @@ class LocationHelper {
       Logger().i("Test_getCurrentPositionPlatform 8");
       permission = await _geolocatorPlatform.requestPermission();
       // Permissions are denied forever, handle appropriately.
-      Logger().d("Test_getCurrentPositionPlatform ${permission}");
+      Logger().d("Test_getCurrentPositionPlatform $permission");
      openLocationSettings();
       return Future.error('Location permissions are permanently denied, we cannot request permissions.');
     }
@@ -74,26 +73,20 @@ class LocationHelper {
         timeLimit: null);
   }
 
-  void openAppSettings() async {
-    final opened = await _geolocatorPlatform.openAppSettings();
-    String displayValue;
-
-    if (opened) {
-      displayValue = 'Opened Application Settings.';
-    } else {
-      displayValue = 'Error opening Application Settings.';
-    }
-
-  }
+  // void openAppSettings() async {
+  //   final opened = await _geolocatorPlatform.openAppSettings();
+  //   String displayValue = "";
+  //   if (opened) {
+  //     displayValue = 'Opened Application Settings.';
+  //   } else {
+  //     displayValue = 'Error opening Application Settings.';
+  //   }
+  // }
 
    openLocationSettings() async {
     final opened = await _geolocatorPlatform.openLocationSettings();
-    String displayValue;
-
     if (opened) {
-      displayValue = 'Opened Location Settings';
     } else {
-      displayValue = 'Error opening Location Settings';
     }
   }
 

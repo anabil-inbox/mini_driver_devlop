@@ -150,7 +150,7 @@ class HomeAppBar extends StatelessWidget {
         label: txtSearchHere.tr,
       );
 
-  void _goToFilterNameView() {
-    // Get.to(() => SearchScreen());
-  }
+  // void _goToFilterNameView() {
+  //   // Get.to(() => SearchScreen());
+  // }
 }

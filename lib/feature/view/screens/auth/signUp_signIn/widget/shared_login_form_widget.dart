@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 import 'package:get/utils.dart';
 import 'package:inbox_driver/feature/model/driver_modle.dart';
@@ -62,7 +60,6 @@ class LoginForm extends GetWidget<AuthViewModle> {
                           init: AuthViewModle(),
                           initState: (_) {},
                           builder: (value) {
-                            print("msg_ ${value.defCountry}");
                             return Text(
                               value.defCountry.prefix ?? "+974",
                               textDirection: TextDirection.ltr,

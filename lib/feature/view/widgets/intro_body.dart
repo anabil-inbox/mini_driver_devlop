@@ -41,7 +41,7 @@ class IntroBody extends StatelessWidget {
             top: padding160,
             left: padding32,
             right: padding32,
-            child: Image.network("$imagePath",height: sizeH300,)),
+            child: Image.network(imagePath,height: sizeH300,)),
         Positioned.fill(
           child: Align(
               alignment: Alignment.bottomCenter,
@@ -52,7 +52,7 @@ class IntroBody extends StatelessWidget {
                     height: sizeH300,
                   ),
                   Text(
-                    "$title",
+                    title,
                     style:
                         textStyleIntroTitle()!.copyWith(fontSize: fontSize21),
                   ),
@@ -62,7 +62,7 @@ class IntroBody extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: sizeW12!),
                     child: CustomTextView(
-                      txt:  "$description",
+                      txt:  description,
                       textAlign: TextAlign.center,
                       textStyle: textStyleIntroBody()!
                           .copyWith(height: 1.5, fontSize: fontSize14),

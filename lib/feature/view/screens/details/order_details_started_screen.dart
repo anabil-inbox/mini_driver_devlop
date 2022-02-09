@@ -14,6 +14,7 @@ import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/feature/view/widgets/primary_button.dart';
 import 'package:inbox_driver/feature/view/widgets/secondery_form_button.dart';
 import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
+import 'package:inbox_driver/feature/view_model/map_view_model/map_view_model.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
@@ -37,6 +38,8 @@ class OrderDetailsStarted extends StatelessWidget {
   final SalesData salesData;
   final TaskModel task;
   final bool isFromCompleted;
+  static MapViewModel mapViewModel = Get.find<MapViewModel>();
+  static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
 
   Widget get orderStatus => Row(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -76,12 +79,7 @@ class OrderDetailsStarted extends StatelessWidget {
     if (isFromCompleted) {
       return const SizedBox();
     } else if (index == 0) {
-      if (task.taskName!
-              .toLowerCase()
-              .contains(Constance.taskWarehouseLoading.toLowerCase()) ||
-          task.taskName!
-              .toLowerCase()
-              .contains(Constance.taskWarehouseClosure.toLowerCase())) {
+      if (home.isTaskWarwhouseLoadingOrClousre(task: task)) {
         return PrimaryButton(
           isExpanded: true,
           isLoading: home.isLoading,
@@ -92,7 +90,8 @@ class OrderDetailsStarted extends StatelessWidget {
             //   taskId: salesOrder.taskId ?? "",
             // );
             await home.recivedBoxes(
-                serial: home.operationsSalesData!.salesOrders![index].orderId ?? "",
+                serial:
+                    home.operationsSalesData!.salesOrders![index].orderId ?? "",
                 taskName: Constance.taskWarehouseLoading);
             await home.getSpecificTask(
                 taskId: task.id ?? "", taskSatus: Constance.inProgress);
@@ -129,15 +128,12 @@ class OrderDetailsStarted extends StatelessWidget {
               width: sizeW150,
               isLoading: home.isLoading,
               onClicked: () async {
-                // Get.to(() => const InstantOrder());
                 await home.updateTaskStatus(
                   newStatus: Constance.taskdelivered,
                   taskId: salesOrder.taskId ?? "",
                 );
-                await home.getSpecificTask(
-                    taskId: task.id ?? "", taskSatus: Constance.inProgress);
-                await home.getSpecificTask(
-                    taskId: task.id ?? "", taskSatus: Constance.done);
+                await home.getSpecificTask(taskId: task.id ?? "", taskSatus: Constance.inProgress);
+                await home.getSpecificTask(taskId: task.id ?? "", taskSatus: Constance.done);
                 await home.getHomeTasks(taskType: Constance.done);
                 await home.getHomeTasks(taskType: Constance.inProgress);
               },
@@ -192,6 +188,41 @@ class OrderDetailsStarted extends StatelessWidget {
     return const SizedBox();
   }
 
+  Widget blockDeleiverd() {
+    if (!homeViewModel.isTaskCustomerVist(task: task) ||
+        salesOrder.taskStatus?.toLowerCase() ==
+            Constance.inProgress.toLowerCase()) {
+      return const SizedBox();
+    } else if (mapViewModel.isAllowToDeliver(
+      lat1: mapViewModel.myLatLng.latitude,
+      lon1: mapViewModel.myLatLng.latitude,
+      lat2: salesOrder.latituide ?? 0,
+      lon2: salesOrder.longitude ?? 0,
+    )) {
+      return const SizedBox();
+    } else {
+      return const SizedBox();
+      // return Positioned(
+      //   right: 0,
+      //   left: 0,
+      //   bottom: 0,
+      //   child: Container(
+      //     color: colorBackground.withOpacity(0.5),
+      //     child: Column(
+      //       children: [
+      //         const LocationFarWdiget(),
+      //         SizedBox(
+      //           height: sizeH80,
+      //         )
+      //       ],
+      //     ),
+      //   ),
+      // );
+
+    }
+    // return const SizedBox();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -222,14 +253,13 @@ class OrderDetailsStarted extends StatelessWidget {
                     child: ListView(
                       children: [
                         SizedBox(height: sizeH17),
-                        // todo for order order Status scenario
-                        //  orderStatus,
-                        //   SizedBox(height: sizeH10),
                         NameClient(
                           clientName: salesOrder.customerId ?? "",
                         ),
                         SizedBox(height: sizeH10),
                         AddressBox(
+                          latuide: salesOrder.latituide ?? 0,
+                          longtuide: salesOrder.longitude ?? 0,
                           address: salesOrder.orderShippingAddress ??
                               salesOrder.orderWarehouseAddress ??
                               "",
@@ -238,70 +268,15 @@ class OrderDetailsStarted extends StatelessWidget {
                         ScheduleBox(
                           dateTime: salesData.lastUpdate.toString(),
                         ),
-                        // SizedBox(height: sizeH10),
-                        // to Limit This Anthor Senario :
-                        // const OrderSummeryWidget(),
                         SizedBox(height: sizeH10),
-                        // todo for order list scenario
                         OrderList(
                           orderItems: salesOrder.orderItems ?? [],
                         ),
                         SizedBox(height: sizeH30),
-                        // PhysicalModel(
-                        //   color: colorPrimary,
-                        //   clipBehavior: Clip.hardEdge,
-                        // //  shape: BoxShape(),
-                        //   elevation: 10,
-                        //   child: primaryButton),
-                        //   SizedBox(height: sizeH30),
                         SizedBox(height: sizeH10),
                       ],
                     ),
                   ),
-                  // Visibility(
-                  //   visible: true,
-                  //   child: Center(
-                  //     child: Row(
-                  //       mainAxisAlignment: MainAxisAlignment.center,
-                  //       children: [
-                  //         PrimaryButton(
-                  //           isExpanded: false,
-                  //           isLoading: false,
-                  //           onClicked: () {
-                  //             Get.to(() => const InstantOrder());
-                  //             logic.isSelected = !logic.isSelected;
-                  //             logic.update();
-                  //           },
-                  //           textButton: "Delivered",
-                  //         ),
-                  //         SizedBox(
-                  //           width: sizeW12,
-                  //         ),
-                  //         SizedBox(
-                  //           width: sizeW150,
-                  //           child: SeconderyFormButton(
-                  //             buttonText: "No Show",
-                  //             onClicked: () {
-                  //               showModalBottomSheet(
-                  //                 context: context,
-                  //                 builder: (BuildContext context) =>
-                  //                     const NoShowReportBottomSheet(),
-                  //                 isScrollControlled: true,
-                  //                 shape: const RoundedRectangleBorder(
-                  //                     borderRadius: BorderRadius.vertical(
-                  //                   top: Radius.circular(20),
-                  //                 )),
-                  //               );
-                  //             },
-                  //           ),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
-                  // SizedBox(
-                  //   height: sizeH27,
-                  // ),
                 ],
               ),
             ),
@@ -314,17 +289,7 @@ class OrderDetailsStarted extends StatelessWidget {
               }),
             ),
 
-            // Positioned(
-            //     right: 0,
-            //     left: 0,
-            //     bottom: 0,
-            //     child: Column(
-            //       children:  [
-            //         const LocationFarWdiget(),
-            //         SizedBox(height: sizeH80,)
-            //       ],
-            //     ),
-            //   ),
+            blockDeleiverd(),
 
             // todo for order previous Task bar scenario
             if (index != 0)

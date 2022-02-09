@@ -77,7 +77,9 @@ class ProfileViewModle extends BaseController {
                 Get.put(AuthViewModle())
               }
           });
-    } catch (e) {}
+    } catch (e) {
+      printError();
+    }
   }
 
 //   //-- for user Edit profile:
@@ -87,7 +89,7 @@ class ProfileViewModle extends BaseController {
     update();
     File? myImg;
     hideFocus(Get.context!);
-    Map<String, dynamic> myMap = Map<String, dynamic>();
+    Map<String, dynamic> myMap = {};
     if (img != null) {
       myImg = await compressImage(img!);
     }
@@ -116,7 +118,9 @@ class ProfileViewModle extends BaseController {
                 snackError(txtError!.tr, "${value.status!.message}")
               }
           });
-    } catch (e) {}
+    } catch (e) {
+      printError();
+    }
   }
 
   void getImageBottomSheet() {

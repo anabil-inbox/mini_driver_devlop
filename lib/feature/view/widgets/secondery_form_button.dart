@@ -34,7 +34,7 @@ class SeconderyFormButton extends StatelessWidget {
           //    Get.off(() => RegisterCompanyScreen());
           //  }
         },
-        child: Text("$buttonText" , style: textStyleHint()!.copyWith(color: colorHint , fontWeight: FontWeight.bold,fontSize: 15),),
+        child: Text(buttonText , style: textStyleHint()!.copyWith(color: colorHint , fontWeight: FontWeight.bold,fontSize: 15),),
       ),
     );
   }

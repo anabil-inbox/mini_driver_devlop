@@ -29,7 +29,7 @@ class PrimaryBorderButton extends StatelessWidget {
             function();
           },
           child: isLoading
-              ? ThreeSizeDot()
+              ? const ThreeSizeDot()
               : Text(
                   buttonText,
                   style: textStyleBorderButton(),

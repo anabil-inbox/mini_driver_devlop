@@ -3,7 +3,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'dart:math' as Math;
+import 'dart:math' as math;
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:image/image.dart' as Img;
+import 'package:image/image.dart' as img;
 import 'package:inbox_driver/feature/core/dialog_loading.dart';
 import 'package:inbox_driver/feature/view/screens/auth/signUp_signIn/widget/language_item_widget.dart';
 import 'package:inbox_driver/feature/view/widgets/primary_button.dart';
@@ -97,7 +97,7 @@ emailValid(String val) {
 }
 
 phoneVaild(String value) {
-  if (value == null || value.isEmpty) {
+  if (value.isEmpty) {
     return txtErrorMobileNumber.tr;
   } else if (value.length > 10 || value.length < 8) {
     return txtErrorMobileNumber.tr;
@@ -216,33 +216,33 @@ callNumber({required String phoneNumber}) async {
 // }
 
 snackSuccess(String title, String body) {
-  Future.delayed(Duration(seconds: 0)).then((value) {
+  Future.delayed(const Duration(seconds: 0)).then((value) {
     Get.snackbar(title, body,
         colorText: Colors.white,
-        margin: EdgeInsets.all(8),
+        margin: const EdgeInsets.all(8),
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Color(0xFF10C995));
+        backgroundColor: const Color(0xFF10C995));
   });
 }
 
 snackError(String title, String body) {
-  Future.delayed(Duration(seconds: 0)).then((value) {
+  Future.delayed(const Duration(seconds: 0)).then((value) {
     Get.snackbar(title, body,
         colorText: Colors.white,
-        margin: EdgeInsets.all(8),
+        margin: const EdgeInsets.all(8),
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Color(0xFFF2AE56).withAlpha(150));
+        backgroundColor: const Color(0xFFF2AE56).withAlpha(150));
   });
 }
 
 snackConnection() {
-  Future.delayed(Duration(seconds: 0)).then((value) {
+  Future.delayed(const Duration(seconds: 0)).then((value) {
     Get.snackbar("$txtConnection", "$txtConnectionNote",
         colorText: Colors.white,
-        duration: Duration(seconds: 7),
-        margin: EdgeInsets.all(8),
+        duration: const Duration(seconds: 7),
+        margin: const EdgeInsets.all(8),
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Color(0xFF000000).withAlpha(150));
+        backgroundColor: const Color(0xFF000000).withAlpha(150));
   });
 }
 
@@ -251,7 +251,7 @@ showAnimatedDialog(dialog) {
     barrierLabel: "Label",
     barrierDismissible: true,
     barrierColor: Colors.black.withOpacity(0.5),
-    transitionDuration: Duration(milliseconds: 700),
+    transitionDuration: const Duration(milliseconds: 700),
     context: Get.context!,
     pageBuilder: (context, anim1, anim2) {
       return Align(
@@ -261,7 +261,8 @@ showAnimatedDialog(dialog) {
     },
     transitionBuilder: (context, anim1, anim2, child) {
       return SlideTransition(
-        position: Tween(begin: Offset(0, 1), end: Offset(0, 0)).animate(anim1),
+        position: Tween(begin: const Offset(0, 1), end: const Offset(0, 0))
+            .animate(anim1),
         child: child,
       );
     },
@@ -293,15 +294,15 @@ Widget imageNetwork({double? width, double? height, String? url}) {
     fit: BoxFit.cover,
     placeholder: (context, String? url) {
       return Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
                 "assets/gif/loading_shimmer.gif") /* CachedNetworkImageProvider(url ?? urlUserPlacholder!)*/,
             fit: BoxFit.cover,
           ),
         ),
-        child: Center(
-          child: Container(
+        child: const Center(
+          child: SizedBox(
               width: 20,
               height: 20,
               child: CircularProgressIndicator(
@@ -401,20 +402,10 @@ hideFocus(context) {
   }
 }
 
-showProgress() async {
-  await SharedPref.instance.isShowProgress(true);
-  Future.delayed(Duration(seconds: 0)).then((value) {
-    showDialog(
-      context: Get.context!,
-      builder: (context) => DialogLoading(),
-    );
-  });
-}
-
 mainShowProgress() {
   showDialog(
     context: Get.context!,
-    builder: (context) => DialogLoading(),
+    builder: (context) => const DialogLoading(),
   );
 }
 
@@ -431,7 +422,6 @@ mainHideProgress() {
 //todo this is second
 Future<String>? convertToBase64(File file) async {
   List<int> imageBytes = file.readAsBytesSync();
-  print(imageBytes);
   String base64Image = base64Encode(imageBytes);
   return base64Image;
 }
@@ -440,15 +430,15 @@ Future<String>? convertToBase64(File file) async {
 Future<File>? compressImage(File file) async {
   final tempDir = await getTemporaryDirectory();
   final path = tempDir.path;
-  int rand = new Math.Random().nextInt(10000);
+  int rand =  math.Random().nextInt(10000);
 
-  Img.Image? images = Img.decodeImage(file.readAsBytesSync());
-  Img.Image? smallerImage = Img.copyResize(images!,
+  img.Image? images = img.decodeImage(file.readAsBytesSync());
+  img.Image? smallerImage = img.copyResize(images!,
       width: 500,
       height: 500); // choose the size here, it will maintain aspect ratio
 
   var compressedImage = File('$path/img_$rand.jpg')
-    ..writeAsBytesSync(Img.encodeJpg(/*image*/ smallerImage, quality: 85));
+    ..writeAsBytesSync(img.encodeJpg(/*image*/ smallerImage, quality: 85));
   return compressedImage;
 }
 
@@ -540,7 +530,8 @@ void changeLanguageBottomSheet() {
                         .toLowerCase()
                         .contains("en")) {
                       LocalizationService().changeLocale(Constance.englishKey);
-                      await SharedPref.instance.setLocalization(Constance.englishKey);
+                      await SharedPref.instance
+                          .setLocalization(Constance.englishKey);
                     } else {}
 
                     Get.back();
@@ -560,6 +551,7 @@ void changeLanguageBottomSheet() {
 }
 
 class CustomMaterialPageRoute extends MaterialPageRoute {
+  @override
   @protected
   bool get hasScopedWillPopCallback {
     return false;

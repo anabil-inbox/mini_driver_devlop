@@ -1,22 +1,25 @@
+// ignore_for_file: prefer_if_null_operators
+
 class SalesOrder {
-  SalesOrder({
-    this.orderId,
-    this.taskId,
-    this.contentStatus,
-    this.customerId,
-    this.customerMobile,
-    this.orderType,
-    this.totalPrice,
-    this.orderShippingAddress,
-    this.orderWarehouseAddress,
-    this.deliveryDate,
-    this.status,
-    this.totalBoxes,
-    this.totalReceived,
-    this.orderDoc,
-    this.orderItems,
-    this.taskStatus,
-  });
+  SalesOrder(
+      {this.orderId,
+      this.taskId,
+      this.contentStatus,
+      this.customerId,
+      this.customerMobile,
+      this.orderType,
+      this.totalPrice,
+      this.orderShippingAddress,
+      this.orderWarehouseAddress,
+      this.deliveryDate,
+      this.status,
+      this.totalBoxes,
+      this.totalReceived,
+      this.orderDoc,
+      this.orderItems,
+      this.taskStatus,
+      this.latituide,
+      this.longitude});
 
   String? orderId;
   String? taskId;
@@ -34,6 +37,8 @@ class SalesOrder {
   num? totalReceived;
   String? orderDoc;
   List<OrderItem>? orderItems;
+  double? latituide;
+  double? longitude;
 
   factory SalesOrder.fromJson(Map<String, dynamic> json) => SalesOrder(
         orderId: json["order_id"],
@@ -41,6 +46,8 @@ class SalesOrder {
         contentStatus: json["content_status"],
         customerId: json["customer_id"],
         customerMobile: json["customer_mobile"],
+        longitude: json["longitude"],
+        latituide: json["latitude"],
         orderType: json["order_type"],
         totalPrice: json["total_price"],
         taskStatus: json["task_status"].toString().toLowerCase(),

@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -5,7 +7,6 @@ import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
-import 'package:inbox_driver/feature/view/widgets/bottom_sheet_widget/call_bottom_sheet.dart';
 import 'package:inbox_driver/feature/view/widgets/bottom_sheet_widget/emergency_bottom_sheet.dart';
 import 'package:inbox_driver/feature/view/widgets/bottom_sheet_widget/instant_order_bottom_sheet.dart';
 import 'package:inbox_driver/feature/view/widgets/bottom_sheet_widget/no_show_report_bottom_sheet.dart';

@@ -324,7 +324,7 @@ ButtonStyle get borderPrimaryButtonStyle => ButtonStyle(
     );
 
 ButtonStyle? get buttonStyle => ButtonStyle(
-    padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 12)),
+    padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 12)),
     backgroundColor: MaterialStateProperty.all(colorPrimaryDark),
     shape: MaterialStateProperty.all(
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(6))));
@@ -351,7 +351,7 @@ ButtonStyle? get seconderyCustomButtonStyle => ButtonStyle(
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(6))));
 
 ButtonStyle? get seconderyButtonBothFormStyle => ButtonStyle(
-    textStyle: MaterialStateProperty.all(TextStyle(color: Colors.black)),
+    textStyle: MaterialStateProperty.all(const TextStyle(color: Colors.black)),
     padding:
         MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: padding12!)),
     backgroundColor: MaterialStateProperty.all(colorUnSelectedWidget),
@@ -375,14 +375,14 @@ ButtonStyle? get textButtonStyle => ButtonStyle(
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(6))));
 
 ScrollPhysics? customScrollViewIOS() =>
-    BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics());
+    const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics());
 
 BoxShadow? boxShadowAppTheme() {
   return BoxShadow(
       color: colorPrimary.withOpacity(.3),
       blurRadius: 5.0, // soften the shadow
       spreadRadius: 3.0, //extend the shadow
-      offset: Offset(
+      offset: const Offset(
         0.0, // Move to right 10  horizontally
         0.10, // Move to bottom 10 Vertically
       ));

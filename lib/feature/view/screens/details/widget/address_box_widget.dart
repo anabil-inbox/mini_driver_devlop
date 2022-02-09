@@ -13,9 +13,11 @@ import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/string.dart';
 
 class AddressBox extends StatelessWidget {
-  const AddressBox({Key? key , required this.address}) : super(key: key);
+  const AddressBox({Key? key , required this.address , required this.latuide , required this.longtuide}) : super(key: key);
 
   final String address;
+  final double latuide;
+  final double longtuide;
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +76,10 @@ class AddressBox extends StatelessWidget {
   void _goToMap() {
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
       Get.put(MapViewModel());
-      Get.bottomSheet(const MapBottomSheet(),
+      Get.bottomSheet(MapBottomSheet(
+        latuide: latuide,
+        longtuide: longtuide,
+      ),
           enableDrag: true,
           isScrollControlled: true,
           clipBehavior: Clip.hardEdge);

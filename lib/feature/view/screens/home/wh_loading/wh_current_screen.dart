@@ -12,7 +12,6 @@ import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/string.dart';
-import 'package:logger/logger.dart';
 
 import 'Widgets/chart_widget.dart';
 import 'Widgets/wh_loading_card.dart';

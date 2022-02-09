@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, prefer_typing_uninitialized_variables
 
 import 'dart:convert';
 
@@ -81,7 +81,7 @@ class SharedPref {
 
   getAppSetting() {
     try {
-      Object appSetting = _prefs!.get("$appSettingKey")!;
+      Object appSetting = _prefs!.get(appSettingKey)!;
       return appSetting;
     } catch (e) {
       log.d("$e");
@@ -104,20 +104,14 @@ class SharedPref {
               json.decode(_prefs!.get(appSettingKey).toString()))
           .languges;
     } catch (e) {
-      // ignore: avoid_print
       print(e);
     }
   }
 
-  isShowProgress(bool? isShow) {
-    // ignore: unnecessary_statements
-    isShow == null ? isShow = false : isShow;
-    _prefs?.setBool("$isShowKey", isShow);
-  }
 
   getShowProgress() {
     try {
-      return _prefs?.getBool("$isShowKey") ?? false;
+      return _prefs?.getBool(isShowKey) ?? false;
     } catch (e) {
       print(e);
     }
@@ -138,16 +132,16 @@ class SharedPref {
   }
 
   getUserType() {
-    return _prefs!.getString("$customrKey");
+    return _prefs!.getString(customrKey);
   }
 
   setUserType(String customerType) {
-    _prefs!.setString("$customrKey", customerType);
+    _prefs!.setString(customrKey, customerType);
   }
 
   setUserLoginState(String state) async {
     try {
-      _prefs?.setString('$loginKey', '$state');
+      _prefs?.setString(loginKey, state);
     } catch (e) {
       return "not Logined";
     }
@@ -176,7 +170,7 @@ class SharedPref {
   }
 
   String getFCMToken() {
-    return _prefs!.getString("$fcmKey") ?? "";
+    return _prefs!.getString(fcmKey) ?? "";
   }
 
   setUserToken(String token) async {
@@ -191,7 +185,7 @@ class SharedPref {
 
   getUserToken() {
     try {
-      return _prefs!.getString('$tokenKey');
+      return _prefs!.getString(tokenKey);
     } catch (e) {
       print(e);
       return "";

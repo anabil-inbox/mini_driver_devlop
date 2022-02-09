@@ -7,6 +7,7 @@ import 'package:inbox_driver/feature/model/home/task_model.dart';
 import 'package:inbox_driver/feature/view/screens/details/order_details_started_screen.dart';
 import 'package:inbox_driver/feature/view/widgets/bottom_sheet_widget/call_bottom_sheet.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
+import 'package:inbox_driver/feature/view_model/map_view_model/map_view_model.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
@@ -22,8 +23,7 @@ class VisitLvItemWidget extends StatelessWidget {
       required this.salesOrder,
       required this.task,
       required this.index,
-      required this.isFromCompleted
-      })
+      required this.isFromCompleted})
       : super(key: key);
   final bool? isBlockContainer;
 
@@ -79,6 +79,7 @@ class VisitLvItemWidget extends StatelessWidget {
       children: [
         InkWell(
           onTap: () {
+            Get.put(MapViewModel(), permanent: true);
             Get.to(() => OrderDetailsStarted(
                   isFromCompleted: isFromCompleted,
                   task: task,
@@ -88,7 +89,7 @@ class VisitLvItemWidget extends StatelessWidget {
                 ));
           },
           child: Container(
-             margin: EdgeInsets.only(bottom: padding12!),
+            margin: EdgeInsets.only(bottom: padding12!),
             padding:
                 EdgeInsets.symmetric(horizontal: sizeW20!, vertical: sizeH17!),
             decoration: BoxDecoration(

@@ -28,7 +28,7 @@ class PrimaryButtonFingerPinter extends StatelessWidget {
             
             onClicked();
         } : (){},
-        child: isLoading ? ThreeSizeDot() :
+        child: isLoading ? const ThreeSizeDot() :
          Text(textButton , style: textStyleTitle()!.copyWith(fontSize:15,color: colorTextWhite , fontWeight: FontWeight.bold)),
       ),
     );

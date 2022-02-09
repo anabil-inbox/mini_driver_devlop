@@ -33,12 +33,6 @@ class CompletedScreen extends StatelessWidget {
                             )))
                         .values
                         .toList()),
-                // child: ListView.builder(
-                //     shrinkWrap: true,
-                //     itemCount: 2,
-                //     itemBuilder: (context, index) {
-                //       return HomeCard();
-                //     }),
               );
             },
           )

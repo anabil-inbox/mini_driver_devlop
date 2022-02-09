@@ -1,4 +1,7 @@
+// ignore_for_file: avoid_function_literals_in_foreach_calls
+
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -10,6 +13,7 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:inbox_driver/feature/model/app_setting_modle.dart';
 import 'dart:ui' as ui;
 
 import 'package:inbox_driver/util/app_color.dart';
@@ -18,7 +22,6 @@ import 'package:inbox_driver/util/location_helper.dart';
 import 'package:inbox_driver/util/sh_util.dart';
 import 'package:location/location.dart';
 import 'package:logger/logger.dart';
-import 'dart:math';
 
 class MapViewModel extends GetxController {
   Completer<GoogleMapController>? controller = Completer();
@@ -30,7 +33,7 @@ class MapViewModel extends GetxController {
     tilt: 59.440717697143555,
   );
 
-  Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = Set()
+  Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers = {}
     ..add(Factory<PanGestureRecognizer>(() => PanGestureRecognizer()))
     ..add(
       Factory<VerticalDragGestureRecognizer>(
@@ -47,7 +50,7 @@ class MapViewModel extends GetxController {
   Set<Marker> markers = {};
   Set<Polyline> polyLines = {};
 
-  LatLng myLatLng = const LatLng(25.320004788193835, 51.189434716459175);
+  LatLng myLatLng = const LatLng(40.689202777778, -74.044219444444);
   LatLng customerLatLng = const LatLng(25.320004788193835, 51.189434716459175);
 
   @override
@@ -69,7 +72,7 @@ class MapViewModel extends GetxController {
     //todo here we use two method first for me and another for the user
     //todo me = driver
     await getMyCurrentPosition();
-    getMyCurrentMarkers();
+    getStreamLocation();
     getUserMarkers();
     Future.delayed(const Duration(seconds: 0)).then((value) async {
       await foucCameraOnUsers(
@@ -94,20 +97,22 @@ class MapViewModel extends GetxController {
     }
   }
 
-  Future<BitmapDescriptor> _convertImageFileToBitmapDescriptor(File imageFile,
-      {int size = 100,
-      bool addBorder = false,
-      Color borderColor = Colors.white,
-      double borderSize = 10,
-      Color titleColor = Colors.transparent,
-      Color titleBackgroundColor = Colors.transparent}) async {
+  Future<BitmapDescriptor> _convertImageFileToBitmapDescriptor(
+    File imageFile, {
+    int size = 100,
+    // bool addBorder = false,
+    // Color borderColor = Colors.white,
+    // double borderSize = 10,
+    Color titleColor = Colors.transparent,
+    // Color titleBackgroundColor = Colors.transparent
+  }) async {
     final ui.PictureRecorder pictureRecorder = ui.PictureRecorder();
     final Canvas canvas = Canvas(pictureRecorder);
-    final Paint paint = Paint()..color;
-    final TextPainter textPainter = TextPainter(
-      textDirection: TextDirection.ltr,
-    );
-    final double radius = size / 2;
+    // final Paint paint = Paint()..color;
+    // final TextPainter textPainter = TextPainter(
+    //   textDirection: TextDirection.ltr,
+    // );
+    //  final double radius = size / 2;
 
     //make canvas clip path to prevent image drawing over the circle
     final Path clipPath = Path();
@@ -151,7 +156,7 @@ class MapViewModel extends GetxController {
           color: colorTrans),
       position: myLatLng,
       infoWindow: InfoWindow(
-        title: "Osama",
+        title: SharedPref.instance.getCurrentUserData()?.driverName ?? "",
         /*anchor:const  Offset(1.0, 0.7),*/ onTap: () {
           Logger().d("");
         },
@@ -166,7 +171,6 @@ class MapViewModel extends GetxController {
 
   getUserMarkers() async {
     // markers.clear();
-
     final Marker marker = Marker(
       markerId: const MarkerId("{e.id.toString()س}"),
       icon: await _getMarkerImageFromUrl(
@@ -254,11 +258,32 @@ class MapViewModel extends GetxController {
   }
 
   getMyCurrentPosition() async {
-    await LocationHelper.instance.getCurrentPosition().then((Position value) {
+    await LocationHelper.instance
+        .getCurrentPosition()
+        .then((Position value) async {
       myLatLng = LatLng(value.latitude, value.longitude);
       //if we need we can make animate for camera
+      await getMyCurrentMarkers();
       update();
     });
+  }
+
+  // to do for stream Location
+
+  getStreamLocation() async {
+    try {
+      Geolocator.getPositionStream().listen((event) {
+        myLatLng = LatLng(event.latitude, event.longitude);
+        isAllowToDeliver(
+            lat1: myLatLng.latitude,
+            lon1: myLatLng.longitude,
+            lat2: customerLatLng.latitude,
+            lon2: customerLatLng.longitude);
+        update();
+      });
+    } catch (e) {
+      printError();
+    }
   }
 
   PolylinePoints polylinePoints = PolylinePoints();
@@ -275,7 +300,6 @@ class MapViewModel extends GetxController {
 
   getDirections() async {
     List<LatLng> polylineCoordinates = [];
-
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
       googleAPiKey,
       PointLatLng(startLocation.latitude, startLocation.longitude),
@@ -288,7 +312,7 @@ class MapViewModel extends GetxController {
         polylineCoordinates.add(LatLng(point.latitude, point.longitude));
       });
     } else {
-      print(result.errorMessage);
+      printError();
     }
 
     //polulineCoordinates is the List of longitute and latidtude.
@@ -300,8 +324,7 @@ class MapViewModel extends GetxController {
           lat2: polylineCoordinates[i + 1].latitude,
           lon2: polylineCoordinates[i + 1].longitude);
     }
-    print(totalDistance);
-
+    Logger().e(totalDistance);
     distance = totalDistance;
 
     //add to the list of poly line coordinates
@@ -330,22 +353,47 @@ class MapViewModel extends GetxController {
       required double lon1,
       required double lat2,
       required double lon2}) {
-    num p = 0.017453292519943295;
-    num a = 0.5 -
-        cos((lat2 - lat1) * p) / 2 +
-        cos(lat1 * p) * cos(lat2 * p) * (1 - cos((lon2 - lon1) * p)) / 2;
+    // num p = 0.017453292519943295;
+    // num a = 0.5 -
+    //     cos((lat2 - lat1) * p) / 2 +
+    //     cos(lat1 * p) * cos(lat2 * p) * (1 - cos((lon2 - lon1) * p)) / 2;
     Logger().e("msg_Map : From $lat1 , $lon1 to $lat2 , $lon2");
-    Logger().e("msg_Map : The distance is : ${12742 * asin(sqrt(a))}");
-    return 12742 * asin(sqrt(a));
+    // Logger().e("msg_Map : The distance is : ${12742 * asin(sqrt(a))}");
+    Logger().e(
+        "msg_Map : The distance From GeoLoacator : ${Geolocator.distanceBetween(lat1, lon1, lat2, lon2) / 1000}");
+    //  Geolocator.getPositionStream();
+    return Geolocator.distanceBetween(lat1, lon1, lat2, lon2) / 1000;
   }
 
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  //   // location = Location();
-  //   // polylinePoints = PolylinePoints();
-  //   //  location.onLocationChanged().listen((LocationData cLoc) {
-  //   //     currentLocation = cLoc;
-  //   //  });
-  // }
+  // to do here check if is Allowed to Deliver or not
+  bool isAllowToDeliver(
+      {required double lat1,
+      required double lon1,
+      required double lat2,
+      required double lon2}) {
+    ApiSettings settings =
+        ApiSettings.fromJson(json.decode(SharedPref.instance.getAppSetting()));
+    try {
+      if (settings.deliveryFactor! >
+          calculateDistance(lat1: lat1, lon1: lon1, lat2: lat2, lon2: lon2)) {
+        Logger().e("msg_Map : isAllow to Dilivery true");
+        return true;
+      } else {
+        Logger().e("msg_Map : isAllow to Dilivery false");
+        return false;
+      }
+    } catch (e) {
+      Logger().e(e);
+      return false;
+    }
+  }
+
+  // to do here Refresh the Map Position
+
+  refreshMapPosition() async {
+    Position currentPosition = await Geolocator.getCurrentPosition();
+    if (currentLocation != null) {
+      myLatLng = LatLng(currentPosition.latitude, currentPosition.longitude);
+    }
+  }
 }

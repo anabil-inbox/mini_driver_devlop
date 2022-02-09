@@ -22,8 +22,8 @@ class SalesData {
       totalBoxes: json["total_boxes"] ?? 0,
       totalReceived: json["total_received"] ?? 0,
       lastUpdate: DateTime.parse(json["last_update"]),
-      longtuide: json["longtuide"],
-      latituide: json["latituide"],
+      longtuide: json["longitude"],
+      latituide: json["latitude"],
       salesOrders: json["Sales Orders"] == null
           ? []
           : List<SalesOrder>.from(

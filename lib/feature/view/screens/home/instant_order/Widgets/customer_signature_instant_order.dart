@@ -62,7 +62,7 @@ class CustomerSignatureInstantOrder extends StatelessWidget {
             ),
           ],
         ),
-        collapsed: SizedBox.shrink(),
+        collapsed: const SizedBox.shrink(),
         expanded: Column(
           children: [
             SizedBox(height: sizeH14),

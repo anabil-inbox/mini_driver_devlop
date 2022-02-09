@@ -8,10 +8,7 @@ import 'package:inbox_driver/feature/model/home/emergencey/emergency_case.dart';
 import 'package:inbox_driver/feature/model/home/sales_data.dart';
 import 'package:inbox_driver/feature/model/home/task_model.dart';
 import 'package:inbox_driver/feature/view/screens/home/Widgets/secondery_button.dart';
-import 'package:inbox_driver/feature/view/screens/home/home_screen.dart';
-import 'package:inbox_driver/feature/view/screens/home/instant_order/Widgets/scan_delivered_box.dart';
 import 'package:inbox_driver/feature/view/screens/home/instant_order/instant_order_screen.dart';
-import 'package:inbox_driver/feature/view_model/instance_order_view_model/instance_order_view_model.dart';
 import 'package:inbox_driver/network/api/feature/home_helper.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
@@ -377,21 +374,22 @@ class HomeViewModel extends GetxController {
             if (value.status!.success!)
               {
                 snackSuccess(txtSuccess!.tr, value.status!.message!),
-                if (newStatus == Constance.taskdelivered)
-                  {
-                    // Get.close(2),
-                  },
-                Logger().e(GetUtils.isNull(operationsSalesData?.salesOrders)),
+                // if (newStatus == Constance.taskdelivered)
+                //   {
+                //     // Get.close(2),
+                //   },
                 operationsSalesData?.salesOrders?.forEach((element) {
-                  Logger().e(element);
-                  Logger().e("MSG_TASK_TASK_iD ${element.taskId}");
-                  Logger().e("MSG__TASK-NEW__STATE $newStatus");
-                  Logger().e("MSG__TASK-NEW__ID_2 $taskId");
                   if (element.taskId == taskId) {
                     element.taskStatus = newStatus;
-                    update();
                   }
                 }),
+                if (newStatus == Constance.taskdelivered)
+                  {
+                    Get.to(() => const InstantOrderScreen(
+                          isNewCustomer: true,
+                        ))
+                  },
+                update(),
                 endLoading(),
                 // operationsSalesData.
               }

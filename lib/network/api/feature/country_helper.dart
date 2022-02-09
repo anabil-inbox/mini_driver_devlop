@@ -17,7 +17,6 @@ class CountryHelper {
         List data = response.data["items"];
         return data.map((e) => Country.fromJson(e)).toSet();
       } else {
-        print("get_in_Eels");
         return {
         };
       }

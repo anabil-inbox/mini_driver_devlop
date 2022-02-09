@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:inbox_driver/feature/view/screens/home/new_customer/Widgets/scan_box_widget.dart';
@@ -27,6 +26,7 @@ class NewCustomer extends StatelessWidget {
   Widget get balance => const Balance();
   Widget get customerSignature => const CustomerSignature();
  static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
+
   Widget get idVerification => Container(
     height: sizeH50,
     padding: EdgeInsets.symmetric(horizontal: sizeW15!, vertical: sizeH13!),
