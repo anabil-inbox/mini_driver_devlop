@@ -6,15 +6,15 @@ import 'package:get/utils.dart';
 import 'package:inbox_driver/feature/model/app_setting_modle.dart';
 import 'package:inbox_driver/feature/model/driver_modle.dart';
 import 'package:inbox_driver/feature/model/language.dart';
+import 'package:inbox_driver/feature/model/tasks/task_response.dart';
 import 'package:inbox_driver/util/constance.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPref {
-  
   static SharedPref instance = SharedPref._();
-  
+
   final String appSettingKey = "settings";
   final String languageKey = "language";
   final String isShowKey = "loading";
@@ -24,16 +24,30 @@ class SharedPref {
   final String tokenKey = "token_driver";
   final String customrKey = "customerKey";
   final String userDataKey = "userData";
+  final String taskKey = "taskKey";
 
   var log = Logger();
 
   SharedPref._();
 
-  static  SharedPreferences? _prefs;
+  static SharedPreferences? _prefs;
 
   setAppSetting(var json) async {
     String prfApiSettings = jsonEncode(json);
     _prefs?.setString(appSettingKey, prfApiSettings);
+  }
+
+  setCurrentTaskResponse({required String taskResponse}) {
+    _prefs?.setString(taskKey, taskResponse);
+  }
+
+  TaskResponse? getCurrentTaskResponse() {
+    try {
+      String? objectStr = _prefs?.getString(taskKey);
+      return TaskResponse.fromJson(json.decode(objectStr!));
+    } catch (e) {
+      return null;
+    }
   }
 
   setLocalization(String lang) {
@@ -68,8 +82,8 @@ class SharedPref {
       if (GetUtils.isNull(json.decode(string!)["data"]["Driver"])) {
         print("get Current user if");
         decode = json.decode(string)["data"];
-      }else{
-       decode = json.decode(string)["data"]["Driver"];
+      } else {
+        decode = json.decode(string)["data"]["Driver"];
       }
       Driver profileData = Driver.fromJson(decode);
       return profileData;
@@ -108,7 +122,6 @@ class SharedPref {
     }
   }
 
-
   getShowProgress() {
     try {
       return _prefs?.getBool(isShowKey) ?? false;
@@ -124,7 +137,7 @@ class SharedPref {
 
   String getAppLanguageMain() {
     try {
-      Object appLanguage = _prefs!.get(languageKey)?? "en";
+      Object appLanguage = _prefs!.get(languageKey) ?? "en";
       return appLanguage.toString();
     } catch (e) {
       return "en";
@@ -146,6 +159,7 @@ class SharedPref {
       return "not Logined";
     }
   }
+
   final String _localizationKey = "Localization";
 
   getUserLoginState() {
@@ -192,12 +206,10 @@ class SharedPref {
     }
   }
 
-
-String getPriceWithFormate({required num price}) {
-  final numberFormatter = NumberFormat("###.00#", "en_US");
-  const num initNumber = 0.00;
-  print("getting Price ${numberFormatter.format(initNumber + price)}");
-  return numberFormatter.format(initNumber + price) +
-      " ${Constance.qrCoin}";
-}
+  String getPriceWithFormate({required num price}) {
+    final numberFormatter = NumberFormat("###.00#", "en_US");
+    const num initNumber = 0.00;
+    print("getting Price ${numberFormatter.format(initNumber + price)}");
+    return numberFormatter.format(initNumber + price) + " ${Constance.qrCoin}";
+  }
 }

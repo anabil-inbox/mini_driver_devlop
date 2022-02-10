@@ -5,9 +5,11 @@ import 'package:inbox_driver/feature/model/home/sales_data.dart';
 import 'package:inbox_driver/feature/model/home/sales_order.dart';
 import 'package:inbox_driver/feature/model/home/task_model.dart';
 import 'package:inbox_driver/feature/view/screens/details/widget/address_box_widget.dart';
+import 'package:inbox_driver/feature/view/screens/details/widget/my_order_box_item.dart';
 import 'package:inbox_driver/feature/view/screens/details/widget/name_box_widget.dart';
-import 'package:inbox_driver/feature/view/screens/details/widget/order_list_widget.dart';
+import 'package:inbox_driver/feature/view/screens/details/widget/new_order_item.dart';
 import 'package:inbox_driver/feature/view/screens/details/widget/schedule%20_box_widget.dart';
+import 'package:inbox_driver/feature/view/screens/home/instant_order/instant_order_screen.dart';
 import 'package:inbox_driver/feature/view/widgets/appbar/custom_app_bar_widget.dart';
 import 'package:inbox_driver/feature/view/widgets/bottom_sheet_widget/no_show_report_bottom_sheet.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
@@ -102,21 +104,25 @@ class OrderDetailsStarted extends StatelessWidget {
           },
         );
       } else if (salesOrder.taskStatus == Constance.inProgress) {
-        return PrimaryButton(
-          isExpanded: true,
-          isLoading: false,
-          textButton: txtButtonStart.tr,
-          onClicked: () async {
-            await home.updateTaskStatus(
-              newStatus: Constance.taskStart,
-              taskId: salesOrder.taskId ?? "",
+        return GetBuilder<HomeViewModel>(
+          builder: (home) {
+            return PrimaryButton(
+              isExpanded: true,
+              isLoading: home.isLoading,
+              textButton: txtButtonStart.tr,
+              onClicked: () async {
+                await home.updateTaskStatus(
+                  newStatus: Constance.taskStart,
+                  taskId: salesOrder.taskId ?? "",
+                );
+                await home.getSpecificTask(
+                    taskId: task.id ?? "", taskSatus: Constance.inProgress);
+                await home.getSpecificTask(
+                    taskId: task.id ?? "", taskSatus: Constance.done);
+                await home.getHomeTasks(taskType: Constance.done);
+                await home.getHomeTasks(taskType: Constance.inProgress);
+              },
             );
-            await home.getSpecificTask(
-                taskId: task.id ?? "", taskSatus: Constance.inProgress);
-            await home.getSpecificTask(
-                taskId: task.id ?? "", taskSatus: Constance.done);
-            await home.getHomeTasks(taskType: Constance.done);
-            await home.getHomeTasks(taskType: Constance.inProgress);
           },
         );
       } else if (salesOrder.taskStatus == Constance.taskStart) {
@@ -132,8 +138,10 @@ class OrderDetailsStarted extends StatelessWidget {
                   newStatus: Constance.taskdelivered,
                   taskId: salesOrder.taskId ?? "",
                 );
-                await home.getSpecificTask(taskId: task.id ?? "", taskSatus: Constance.inProgress);
-                await home.getSpecificTask(taskId: task.id ?? "", taskSatus: Constance.done);
+                await home.getSpecificTask(
+                    taskId: task.id ?? "", taskSatus: Constance.inProgress);
+                await home.getSpecificTask(
+                    taskId: task.id ?? "", taskSatus: Constance.done);
                 await home.getHomeTasks(taskType: Constance.done);
                 await home.getHomeTasks(taskType: Constance.inProgress);
               },
@@ -162,6 +170,17 @@ class OrderDetailsStarted extends StatelessWidget {
             ),
           ],
         );
+      } else if (salesOrder.taskStatus == Constance.taskdelivered) {
+        return PrimaryButton(
+            textButton: "Complete Detailes",
+            isLoading: false,
+            onClicked: () {
+              Get.to(() => InstantOrderScreen(
+                    isNewCustomer: true,
+                    taskId: salesOrder.taskId ?? "",
+                  ));
+            },
+            isExpanded: true);
       } else {
         return const SizedBox();
       }
@@ -223,6 +242,31 @@ class OrderDetailsStarted extends StatelessWidget {
     // return const SizedBox();
   }
 
+  Widget lvOrderItems() {
+    return ListView(
+      primary: false,
+      shrinkWrap: true,
+      children: salesOrder.orderItems!
+          .asMap()
+          .map((i, element) => MapEntry(i, GetBuilder<HomeViewModel>(
+                builder: (controller) {
+                  if (element.item == "shipping_sv") {
+                    return const SizedBox();
+                  } else if (controller.isTask(orderItem: element.item ?? "")) {
+                    return NewOrderItemTask(
+                      index: i,
+                      orderItem: element,
+                    );
+                  } else {
+                    return MyOrderBoxItem(orderItem: element);
+                  }
+                },
+              )))
+          .values
+          .toList(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -269,9 +313,10 @@ class OrderDetailsStarted extends StatelessWidget {
                           dateTime: salesData.lastUpdate.toString(),
                         ),
                         SizedBox(height: sizeH10),
-                        OrderList(
-                          orderItems: salesOrder.orderItems ?? [],
-                        ),
+                        // OrderList(
+                        //   orderItems: salesOrder.orderItems ?? [],
+                        // ),
+                        lvOrderItems(),
                         SizedBox(height: sizeH30),
                         SizedBox(height: sizeH10),
                       ],

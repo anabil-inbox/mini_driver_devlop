@@ -60,6 +60,9 @@ abstract class ConstanceNetwork {
   static String updateBoxTaskEndpoint = "inbox_app.driver.task_management.update_task_status";
   static String searchEndPoint = "inbox_app.driver.task_management.search_tasks";
 
+
+  // to do here for User Uploads Certificates :
+  static String uploadCustomerId = "inbox_app.driver.task_management.attach_id";
   
   static Map<String, String> header(int typeToken) {
     Map<String, String> headers = {};

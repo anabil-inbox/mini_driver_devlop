@@ -569,6 +569,26 @@ class CustomMaterialPageRoute extends MaterialPageRoute {
           fullscreenDialog: fullscreenDialog,
         );
 }
+String getPriceWithFormate({required num price}) {
+  final numberFormatter = NumberFormat("###.00#", "en_US");
+  const num initNumber = 0.00;
+  return numberFormatter.format(initNumber + price) +
+      " ${Constance.qrCoin}";
+}
+
+
+String formatStringWithCurrency(var data, String currency) {
+  try {
+    var number = data.toString().replaceAll("\$", "").replaceAll(",", "");
+    number =
+        "${currency.isEmpty ? "QR" : currency} ${NumberFormat("#0.00", "en_US").format(double.parse(number))}";
+    //var numbers = "${currency}${double.parse(number).toStringAsFixed(2)}";
+    return number.toString();
+  } catch (e) {
+    return "0.00";
+  }
+}
+
 
 bool isArabicLang() {
   Logger().e(SharedPref.instance.getLocalization() == "Arabic" ? true : false);

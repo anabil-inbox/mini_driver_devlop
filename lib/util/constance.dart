@@ -44,6 +44,20 @@ abstract class Constance {
   static String taskDone = "done";
   static String inProgress = "in processing";
   
+
+  // tasks typs const
+    // to do here constance for task Ids:
+  static String pickupId = "Pickup_sv";
+  static String destroyId = "Destroy_sv";
+  static String terminateId = "Terminate_sv";
+  static String giveawayId = "Give Away_sv";
+  static String fetchId = "Fetch_sv";
+  static String recallId = "Recall_sv";
+  static String newStorageSv = "New Storage_sv";
+  static String newNewStorageSpaceSv = "New Storage Space_sv";
+  static String newStorageItemSv = "New Storage Item_sv";
+
+
   // to add here constance Price ::
   static String qrCoin = "QR";
 }

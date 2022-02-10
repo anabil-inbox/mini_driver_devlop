@@ -64,27 +64,25 @@ class NewCustomer extends StatelessWidget {
         ),
         isCenterTitle: true,
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: padding20!),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: sizeH20),
-              contract,
-              SizedBox(height: sizeH10),
-              idVerification,
-              SizedBox(height: sizeH10),
-              scanBox,
-              SizedBox(height: sizeH10),
-              scanProducts,
-              SizedBox(height: sizeH10),
-              balance,
-              SizedBox(height: sizeH10),
-              customerSignature,
-            ],
-          ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: padding20!),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: sizeH20),
+            contract,
+            SizedBox(height: sizeH10),
+            idVerification,
+            SizedBox(height: sizeH10),
+            scanBox,
+            SizedBox(height: sizeH10),
+            scanProducts,
+            SizedBox(height: sizeH10),
+            balance,
+            SizedBox(height: sizeH10),
+            customerSignature,
+          ],
         ),
       ),
     );

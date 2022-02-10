@@ -32,7 +32,7 @@ class HomeHelper {
   }
 
   Future<SalesData> getSpecificTask(
-      {required Map<String, dynamic> taskId }) async {
+      {required Map<String, dynamic> taskId}) async {
     try {
       var response = await HomeApi.getInstance.getSpecificTask(
           body: taskId,
@@ -156,4 +156,20 @@ class HomeHelper {
     }
   }
 
+  Future<AppResponse> uploadCustomerId({required var body}) async {
+    try {
+      var response = await HomeApi.getInstance.uploadCustomerId(
+          body: body,
+          url: ConstanceNetwork.uploadCustomerId,
+          header: ConstanceNetwork.header(4));
+      if (response.status?.success == true) {
+        return response;
+      } else {
+        return response;
+      }
+    } catch (e) {
+      log.d(e.toString());
+      return AppResponse.fromJson({});
+    }
+  }
 }

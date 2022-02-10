@@ -191,6 +191,15 @@ TextStyle? textStylebodyBlack() {
       fontSize: fontSize14);
 }
 
+TextStyle? textStyleMeduimPrimaryText() {
+  return TextStyle(color: colorPrimary, fontSize: fontSize13);
+}
+
+TextStyle? textStylePrimarySmall() {
+  return TextStyle(
+      color: colorPrimary, fontSize: fontSize15, fontWeight: FontWeight.normal);
+}
+
 TextStyle? mediumHintTextStyle() {
   return TextStyle(
     fontSize: fontSize15,

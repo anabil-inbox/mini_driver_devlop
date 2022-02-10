@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
+import 'package:inbox_driver/util/sh_util.dart';
 import 'package:inbox_driver/util/string.dart';
 import 'package:logger/logger.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -305,12 +307,40 @@ class HomeViewModel extends GetxController {
 
   final picker = ImagePicker();
 
-  Future getImage(ImageSource source) async {
+  Future getImage(ImageSource source, {String? customerId}) async {
     final pickedImage = await picker.pickImage(source: source);
     if (pickedImage != null) {
       img = File(pickedImage.path);
       update();
     }
+
+    if (customerId != null && pickedImage != null) {
+      await uploadVerficationId(customerId: customerId);
+    }
+  }
+
+  Future<void> uploadVerficationId({required String customerId}) async {
+    startLoading();
+    try {
+      if (img != null) {
+        img = await compressImage(img!);
+      }
+      HomeHelper.getInstance.uploadCustomerId(body: {
+        "image":
+            img != null ? multipart.MultipartFile.fromFileSync(img!.path) : "",
+        "customer": customerId
+      }).then((value) => {
+            if (value.status!.success!)
+              {
+                snackSuccess(txtSuccess!.tr, value.status!.message!)
+              }
+            else
+              {snackError(txtSuccess!.tr, value.status!.message!)}
+          });
+    } catch (e) {
+      printError();
+    }
+    endLoading();
   }
 
   bool validationEmergency() {
@@ -385,9 +415,10 @@ class HomeViewModel extends GetxController {
                 }),
                 if (newStatus == Constance.taskdelivered)
                   {
-                    Get.to(() => const InstantOrderScreen(
-                          isNewCustomer: true,
-                        ))
+                    SharedPref.instance.setCurrentTaskResponse(
+                        taskResponse: jsonEncode(value.data)),
+                    Get.to(() =>
+                        InstantOrderScreen(isNewCustomer: true, taskId: taskId))
                   },
                 update(),
                 endLoading(),
@@ -451,6 +482,17 @@ class HomeViewModel extends GetxController {
     if (task.taskName!
         .toLowerCase()
         .contains(Constance.taskWarehouseLoading.toLowerCase())) {
+      return true;
+    }
+    return false;
+  }
+
+  bool isTask({required String orderItem}) {
+    if (orderItem == Constance.destroyId ||
+        orderItem == Constance.terminateId ||
+        orderItem == Constance.pickupId ||
+        orderItem == Constance.giveawayId ||
+        orderItem == Constance.fetchId) {
       return true;
     }
     return false;

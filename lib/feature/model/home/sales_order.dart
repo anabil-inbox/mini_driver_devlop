@@ -95,6 +95,7 @@ class OrderItem {
       this.isParent,
       this.itemsList,
       this.itemStatus,
+      this.boxes,
       this.options});
 
   String? itemParent;
@@ -106,6 +107,7 @@ class OrderItem {
   String? groupId;
   String? isParent;
   List<String>? options;
+  List<String>? boxes;
 
   List<ItemsList>? itemsList;
   String? itemStatus;
@@ -118,6 +120,9 @@ class OrderItem {
         quantity: json["quantity"],
         totalPrice: json["totalPrice"],
         groupId: json["group_id"],
+        boxes: json["boxes"] == null
+            ? []
+            : List<String>.from(json["boxes"].map((x) => x)),
         options: json["options"] == null
             ? []
             : List<String>.from(json["options"].map((x) => x)),
