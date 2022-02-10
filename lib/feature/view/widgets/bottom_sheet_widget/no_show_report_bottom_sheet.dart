@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/feature/view/widgets/primary_button.dart';
 import 'package:inbox_driver/feature/view_model/auht_view_modle/auth_view_modle.dart';
+import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
@@ -37,11 +38,15 @@ class NoShowReportBottomSheet extends StatelessWidget {
                 style: textStyleTitle(),
               ),
               SizedBox(height: sizeH12),
-              Center(
-                child: CustomTextView(
-                  txt: txtTimer,
-                  textStyle: textStyleLargeText()?.copyWith(fontSize: 48),
-                ),
+              GetBuilder<HomeViewModel>(
+                builder: (home) {
+                  return Center(
+                    child: CustomTextView(
+                      txt: home.start.toString(),
+                      textStyle: textStyleLargeText()?.copyWith(fontSize: 48),
+                    ),
+                  );
+                },
               ),
               SizedBox(height: sizeH20),
               BottomSheetCard(

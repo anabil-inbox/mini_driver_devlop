@@ -1,3 +1,5 @@
+import 'package:inbox_driver/feature/model/payment/payment.dart';
+
 import 'language.dart';
 
 class ApiSettings {
@@ -10,6 +12,8 @@ class ApiSettings {
       this.notAllowed,
       this.languges,
       this.borderFactor,
+      this.paymentMethod,
+      this.waitingTime,
       this.deliveryFactor});
 
   String? customerType;
@@ -21,12 +25,20 @@ class ApiSettings {
   List<Language>? languges;
   num? borderFactor;
   num? deliveryFactor;
+  int? waitingTime;
+  List<PaymentMethod>? paymentMethod;
+
   factory ApiSettings.fromJson(Map<String, dynamic> json) => ApiSettings(
         customerType: json["customer_type"],
         aboutUs: json["about_us"] ?? "",
+        waitingTime: json["waiting_time"],
         deliveryFactor: json["delivery_factor"] ?? 1,
         borderFactor: json["border_factor"] ?? 1,
         termOfConditions: json["term_of_conditions"],
+        paymentMethod: (json["payment_method"] == [] || json["payment_method"] == null)
+          ? []
+          : List<PaymentMethod>.from(
+              json["payment_method"].map((x) => PaymentMethod.fromJson(x))),
         contactInfo: json["contact_info"] == null
             ? null
             : ContactInfo.fromJson(json["contact_info"]),

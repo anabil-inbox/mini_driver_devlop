@@ -23,6 +23,7 @@ import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/font_dimne.dart';
+import 'package:inbox_driver/util/sh_util.dart';
 import 'package:inbox_driver/util/string.dart';
 
 class OrderDetailsStarted extends StatelessWidget {
@@ -112,7 +113,7 @@ class OrderDetailsStarted extends StatelessWidget {
               textButton: txtButtonStart.tr,
               onClicked: () async {
                 await home.updateTaskStatus(
-                  taskStatusId: task.id ?? "" ,
+                  taskStatusId: task.id ?? "",
                   newStatus: Constance.taskStart,
                   taskId: salesOrder.taskId ?? "",
                 );
@@ -136,7 +137,7 @@ class OrderDetailsStarted extends StatelessWidget {
               isLoading: home.isLoading,
               onClicked: () async {
                 await home.updateTaskStatus(
-                  taskStatusId: task.id ?? "" ,
+                  taskStatusId: task.id ?? "",
                   newStatus: Constance.taskdelivered,
                   taskId: salesOrder.taskId ?? "",
                 );
@@ -157,6 +158,8 @@ class OrderDetailsStarted extends StatelessWidget {
               child: SeconderyFormButton(
                 buttonText: "No Show",
                 onClicked: () {
+                  homeViewModel.startTimer();
+                  SharedPref.instance.setIsStartedTimerKey(isStarted: true);
                   showModalBottomSheet(
                     context: Get.context!,
                     builder: (BuildContext context) =>
@@ -178,7 +181,7 @@ class OrderDetailsStarted extends StatelessWidget {
             isLoading: false,
             onClicked: () {
               Get.to(() => InstantOrderScreen(
-                    taskStatusId: task.id ?? "" ,
+                    taskStatusId: task.id ?? "",
                     isNewCustomer: true,
                     taskId: salesOrder.taskId ?? "",
                   ));

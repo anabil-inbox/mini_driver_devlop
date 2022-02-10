@@ -5,6 +5,7 @@ class TaskResponse {
     this.total,
     this.totalPaid,
     this.totalDue,
+    this.paymentMethod
   });
 
   bool? isNew;
@@ -12,11 +13,13 @@ class TaskResponse {
   num? total;
   num? totalPaid;
   num? totalDue;
+  String? paymentMethod;
 
   factory TaskResponse.fromJson(Map<String, dynamic> json) => TaskResponse(
         isNew: json["is_new"],
         customerId: json["customer_id"],
         total: json["total"],
+        paymentMethod: json["payment_method"],
         totalPaid: json["total_paid"],
         totalDue: json["total_due"],
       );
@@ -25,6 +28,7 @@ class TaskResponse {
         "is_new": isNew,
         "customer_id": customerId,
         "total": total,
+        "payment_method" : paymentMethod,
         "total_paid": totalPaid,
         "total_due": totalDue,
       };

@@ -13,6 +13,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image/image.dart' as img;
 import 'package:inbox_driver/feature/core/dialog_loading.dart';
+import 'package:inbox_driver/feature/model/app_setting_modle.dart';
+import 'package:inbox_driver/feature/model/payment/payment.dart';
 import 'package:inbox_driver/feature/view/screens/auth/signUp_signIn/widget/language_item_widget.dart';
 import 'package:inbox_driver/feature/view/widgets/primary_button.dart';
 import 'package:inbox_driver/feature/view_model/auht_view_modle/auth_view_modle.dart';
@@ -52,6 +54,15 @@ var safeAreaLight =
   statusBarIconBrightness: Brightness.dark,
   systemNavigationBarIconBrightness: Brightness.dark,
 ));
+
+List<PaymentMethod> getPaymentMethod() {
+  List<PaymentMethod> list =
+      ApiSettings.fromJson(json.decode(SharedPref.instance.getAppSetting()))
+              .paymentMethod ??
+          [];
+  return list;
+}
+
 
 var safeAreaDark =
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(

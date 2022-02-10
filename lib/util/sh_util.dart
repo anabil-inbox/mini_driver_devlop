@@ -25,6 +25,8 @@ class SharedPref {
   final String customrKey = "customerKey";
   final String userDataKey = "userData";
   final String taskKey = "taskKey";
+  final String isStartedTimerKey = "isStartedTimerKey";
+  final String timerValueKey = "timerValueKey";
 
   var log = Logger();
 
@@ -39,6 +41,25 @@ class SharedPref {
 
   setCurrentTaskResponse({required String taskResponse}) {
     _prefs?.setString(taskKey, taskResponse);
+  }
+
+  setIsStartedTimerKey({required bool isStarted}) {
+    _prefs?.setBool(isStartedTimerKey, isStarted);
+  }
+
+  bool getIsStartedTimerKey() {
+    return _prefs?.getBool(isStartedTimerKey) ?? false;
+  }
+
+  setTimeValue({required int timerNewValue}) {
+    _prefs?.setInt(timerValueKey, timerNewValue);
+  }
+
+  int getTimerValue() {
+    return _prefs?.getInt(timerValueKey) ??
+        ApiSettings.fromJson(json.decode(SharedPref.instance.getAppSetting()))
+            .waitingTime ??
+        5 * 60;
   }
 
   TaskResponse? getCurrentTaskResponse() {

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart' as multipart;
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:inbox_driver/feature/model/app_setting_modle.dart';
 import 'package:inbox_driver/feature/model/home/emergencey/emergency_case.dart';
 import 'package:inbox_driver/feature/model/home/sales_data.dart';
 import 'package:inbox_driver/feature/model/home/task_model.dart';
@@ -395,7 +397,10 @@ class HomeViewModel extends GetxController {
     }
   }
 
-  Future<void> updateTaskStatus({required String newStatus, required String taskId , required String taskStatusId}) async {
+  Future<void> updateTaskStatus(
+      {required String newStatus,
+      required String taskId,
+      required String taskStatusId}) async {
     try {
       startLoading();
       await HomeHelper.getInstance.updateTaskStatus(body: {
@@ -416,9 +421,9 @@ class HomeViewModel extends GetxController {
                     SharedPref.instance.setCurrentTaskResponse(
                         taskResponse: jsonEncode(value.data)),
                     Get.to(() => InstantOrderScreen(
-                      taskStatusId: taskStatusId,
-                      isNewCustomer: true,
-                      taskId: taskId))
+                        taskStatusId: taskStatusId,
+                        isNewCustomer: true,
+                        taskId: taskId))
                   },
 
                 update(),
@@ -503,11 +508,50 @@ class HomeViewModel extends GetxController {
     return false;
   }
 
+// todo Here for count down timer ;
+  ApiSettings settings =
+      ApiSettings.fromJson(json.decode(SharedPref.instance.getAppSetting()));
+
+  Timer? _timer;
+  int start = 200;
+
+  void startTimer() {
+    // if (SharedPref.instance.getIsStartedTimerKey()) {
+    //   // to do here change start Value With Saved in Shared Preferace Value
+    //   start = SharedPref.instance.getTimerValue();
+    // } else {
+    //   start = settings.waitingTime ?? 10;
+    // }
+
+    if (_timer?.isActive ?? false) {
+    } else {
+      const oneSec = Duration(seconds: 1);
+      _timer = Timer.periodic(
+        oneSec,
+        (Timer timer) {
+          if (start == 0) {
+            timer.cancel();
+          } else {
+            start--;
+          }
+          SharedPref.instance.setTimeValue(timerNewValue: start * 60);
+          update();
+        },
+      );
+    }
+  }
+
   @override
   void onInit() async {
     super.onInit();
     await getHomeTasks(taskType: Constance.inProgress);
     await getHomeTasks(taskType: Constance.done);
     await getEmergancy();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 }

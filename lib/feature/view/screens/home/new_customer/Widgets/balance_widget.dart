@@ -1,75 +1,67 @@
 import 'package:flutter/material.dart';
+import 'package:inbox_driver/feature/view/screens/home/instant_order/Widgets/payment_widget.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
-import 'package:inbox_driver/util/font_dimne.dart';
+import 'package:inbox_driver/util/sh_util.dart';
 import 'package:inbox_driver/util/string.dart';
 import 'package:get/get.dart';
 
 class Balance extends StatelessWidget {
   const Balance({Key? key}) : super(key: key);
 
-  Widget get btn => Row(
-    children: <Widget>[
-      GestureDetector(
-        onTap: () {},
-        child: Container(
-          height: sizeH34,
-          width: sizeW95,
-          decoration: BoxDecoration(
-            color: colorRed,
-            borderRadius: BorderRadius.circular(5),
-          ),
-          child: Center(
-            child: CustomTextView(
-              txt: txtCash.tr,
-              textStyle: textStyleBtn(),
-            ),
-          ),
-        ),
-      ),
-      SizedBox(width: sizeW15),
-      GestureDetector(
-        onTap: () {},
-        child: Container(
-          height: sizeH34,
-          width: sizeW95,
-          decoration: BoxDecoration(
-            color: colorTextWhite,
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(color: colorBtnGray),
-          ),
-          child: Center(
-            child: CustomTextView(
-              txt: txtCard.tr,
-              textStyle: textStyleNormal(),
-            ),
-          ),
-        ),
-      ),
-      SizedBox(width: sizeW15),
-      GestureDetector(
-        onTap: () {},
-        child: Container(
-          height: sizeH34,
-          width: sizeW95,
-          decoration: BoxDecoration(
-            color: colorTextWhite,
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(color: colorBtnGray),
-          ),
-          child: Center(
-            child: CustomTextView(
-              txt: txtApplication.tr,
-              textStyle: textStyleNormal(),
-            ),
-          ),
-        ),
-      ),
-    ],
-  );
+  // Widget get btn => Row(
+  //       children: [
+  //         Container(
+  //           height: sizeH34,
+  //           width: sizeW95,
+  //           decoration: BoxDecoration(
+  //             color: colorRed,
+  //             borderRadius: BorderRadius.circular(5),
+  //           ),
+  //           child: Center(
+  //             child: CustomTextView(
+  //               txt: txtCash.tr,
+  //               textStyle: textStyleBtn(),
+  //             ),
+  //           ),
+  //         ),
+  //         SizedBox(width: sizeW15),
+  //         Container(
+  //           height: sizeH34,
+  //           width: sizeW95,
+  //           decoration: BoxDecoration(
+  //             color: colorTextWhite,
+  //             borderRadius: BorderRadius.circular(5),
+  //             border: Border.all(color: colorBtnGray),
+  //           ),
+  //           child: Center(
+  //             child: CustomTextView(
+  //               txt: txtCard.tr,
+  //               textStyle: textStyleNormal(),
+  //             ),
+  //           ),
+  //         ),
+  //         SizedBox(width: sizeW15),
+  //         Container(
+  //           height: sizeH34,
+  //           width: sizeW95,
+  //           decoration: BoxDecoration(
+  //             color: colorTextWhite,
+  //             borderRadius: BorderRadius.circular(5),
+  //             border: Border.all(color: colorBtnGray),
+  //           ),
+  //           child: Center(
+  //             child: CustomTextView(
+  //               txt: txtApplication.tr,
+  //               textStyle: textStyleNormal(),
+  //             ),
+  //           ),
+  //         ),
+  //       ],
+  //     );
 
   @override
   Widget build(BuildContext context) {
@@ -99,16 +91,8 @@ class Balance extends StatelessWidget {
               ),
               const Spacer(),
               CustomTextView(
-                txt: '150 ',
-                textStyle: textStylePrimaryBold(),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: sizeH7!),
-                child: CustomTextView(
-                  txt: txtQR.tr,
-                  textStyle:
-                      textStylePrimaryBold()?.copyWith(fontSize: fontSize16),
-                ),
+                txt: getPriceWithFormate(price: SharedPref.instance.getCurrentTaskResponse()?.total ?? 0),
+                textStyle: textStyleMeduimPrimaryBold(),
               ),
             ],
           ),
@@ -123,16 +107,8 @@ class Balance extends StatelessWidget {
               ),
               const Spacer(),
               CustomTextView(
-                txt: '100 ',
-                textStyle: textStylePrimaryBold(),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: sizeH7!),
-                child: CustomTextView(
-                  txt: txtQR.tr,
-                  textStyle:
-                      textStylePrimaryBold()?.copyWith(fontSize: fontSize16),
-                ),
+                txt: getPriceWithFormate(price: SharedPref.instance.getCurrentTaskResponse()?.totalPaid ?? 0),
+                textStyle:  textStyleMeduimPrimaryBold(),
               ),
             ],
           ),
@@ -147,25 +123,27 @@ class Balance extends StatelessWidget {
               ),
               const Spacer(),
               CustomTextView(
-                txt: '50 ',
-                textStyle: textStylePrimaryBold(),
+                txt: getPriceWithFormate(
+                    price: SharedPref.instance
+                            .getCurrentTaskResponse()
+                            ?.totalDue ??
+                        0),
+                textStyle: textStyleMeduimPrimaryBold(),
               ),
-              Padding(
-                padding: EdgeInsets.only(top: sizeH7!),
-                child: CustomTextView(
-                  txt: txtQR.tr,
-                  textStyle:
-                      textStylePrimaryBold()?.copyWith(fontSize: fontSize16),
-                ),
-              ),
+              // Padding(
+              //   padding: EdgeInsets.only(top: sizeH7!),
+              //   child: CustomTextView(
+              //     txt: txtQR.tr,
+              //     textStyle:
+              //         textStylePrimaryBold()?.copyWith(fontSize: fontSize16),
+              //   ),
+              // ),
             ],
           ),
           SizedBox(height: sizeH22),
-          btn,
+          const PaymentWidget(),
         ],
       ),
     );
   }
-
-
 }

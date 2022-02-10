@@ -263,6 +263,14 @@ TextStyle? textStylePrimaryBold() {
   );
 }
 
+TextStyle? textStyleMeduimPrimaryBold() {
+  return TextStyle(
+    color: colorPrimary,
+    fontSize: fontSize20,
+    fontWeight: FontWeight.bold,
+  );
+}
+
 TextStyle? textStyleIntroBody() {
   return TextStyle(
       color: Colors.black,
@@ -284,6 +292,13 @@ TextStyle? textStyleAppBarTitle() {
       fontSize: fontSize17,
       fontFamily: Constance.Font_regular,
       fontWeight: FontWeight.normal);
+}
+
+TextStyle? textStylebodyWhite() {
+  return TextStyle(
+      color: colorTextWhite,
+      fontFamily: Constance.Font_regular,
+      fontSize: fontSize14);
 }
 
 TextStyle? textStylePrimary() {
