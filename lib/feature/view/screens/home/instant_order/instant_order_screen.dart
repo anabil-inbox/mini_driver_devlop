@@ -20,7 +20,7 @@ import 'Widgets/scan_delivered_box.dart';
 
 class InstantOrderScreen extends StatelessWidget {
   const InstantOrderScreen(
-      {Key? key, this.isNewCustomer = false, required this.taskId})
+      {Key? key, this.isNewCustomer = false, required this.taskId , required this.taskStatusId})
       : super(key: key);
   static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
 
@@ -78,6 +78,7 @@ class InstantOrderScreen extends StatelessWidget {
         ),
       );
   final String taskId;
+  final String taskStatusId;
 
   @override
   Widget build(BuildContext context) {
@@ -131,11 +132,10 @@ class InstantOrderScreen extends StatelessWidget {
                         await home.updateTaskStatus(
                           newStatus: Constance.done,
                           taskId: taskId,
+                          taskStatusId: taskStatusId
                         );
-                        await home.getSpecificTask(
-                            taskId: taskId, taskSatus: Constance.inProgress);
-                        await home.getSpecificTask(
-                            taskId: taskId, taskSatus: Constance.done);
+                        await home.getSpecificTask(taskId: taskStatusId, taskSatus: Constance.inProgress);
+                        await home.getSpecificTask(taskId: taskStatusId, taskSatus: Constance.done);
                         await home.getHomeTasks(taskType: Constance.done);
                         await home.getHomeTasks(taskType: Constance.inProgress);
                       },

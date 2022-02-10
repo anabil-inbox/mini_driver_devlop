@@ -125,8 +125,12 @@ class HomeViewModel extends GetxController {
 
   Future<void> getSpecificTask(
       {required String taskId, required String taskSatus}) async {
-    operationsSalesData = SalesData();
-    operationsSalesDataCompleted = SalesData();
+    if (taskSatus == Constance.inProgress) {
+      operationsSalesData = SalesData();
+    } else {
+      operationsSalesDataCompleted = SalesData();
+    }
+
     try {
       startLoading();
       await HomeHelper.getInstance.getSpecificTask(taskId: {
@@ -331,9 +335,7 @@ class HomeViewModel extends GetxController {
         "customer": customerId
       }).then((value) => {
             if (value.status!.success!)
-              {
-                snackSuccess(txtSuccess!.tr, value.status!.message!)
-              }
+              {snackSuccess(txtSuccess!.tr, value.status!.message!)}
             else
               {snackError(txtSuccess!.tr, value.status!.message!)}
           });
@@ -393,8 +395,7 @@ class HomeViewModel extends GetxController {
     }
   }
 
-  Future<void> updateTaskStatus(
-      {required String newStatus, required String taskId}) async {
+  Future<void> updateTaskStatus({required String newStatus, required String taskId , required String taskStatusId}) async {
     try {
       startLoading();
       await HomeHelper.getInstance.updateTaskStatus(body: {
@@ -404,10 +405,7 @@ class HomeViewModel extends GetxController {
             if (value.status!.success!)
               {
                 snackSuccess(txtSuccess!.tr, value.status!.message!),
-                // if (newStatus == Constance.taskdelivered)
-                //   {
-                //     // Get.close(2),
-                //   },
+
                 operationsSalesData?.salesOrders?.forEach((element) {
                   if (element.taskId == taskId) {
                     element.taskStatus = newStatus;
@@ -417,11 +415,18 @@ class HomeViewModel extends GetxController {
                   {
                     SharedPref.instance.setCurrentTaskResponse(
                         taskResponse: jsonEncode(value.data)),
-                    Get.to(() =>
-                        InstantOrderScreen(isNewCustomer: true, taskId: taskId))
+                    Get.to(() => InstantOrderScreen(
+                      taskStatusId: taskStatusId,
+                      isNewCustomer: true,
+                      taskId: taskId))
                   },
+
                 update(),
                 endLoading(),
+                if (newStatus == Constance.done)
+                  {
+                    Get.close(2),
+                  },
                 // operationsSalesData.
               }
             else

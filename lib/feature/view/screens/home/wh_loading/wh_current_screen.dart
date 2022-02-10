@@ -24,23 +24,23 @@ class WHCurrentScreen extends StatelessWidget {
   final TaskModel task;
   final int i;
 
-  Widget get lvSalesOrder {
-    if (GetUtils.isNull(homeViewModel.operationsSalesData) ||
-        GetUtils.isNull(homeViewModel.operationsSalesData!.salesOrders)) {
+  Widget lvSalesOrder({required HomeViewModel home}) {
+    if (GetUtils.isNull(home.operationsSalesData) ||
+        GetUtils.isNull(home.operationsSalesData!.salesOrders)) {
       return const SizedBox();
     } else {
       return ListView.builder(
           shrinkWrap: true,
           primary: false,
-          itemCount: homeViewModel.operationsSalesData!.salesOrders?.length,
+          itemCount: home.operationsSalesData!.salesOrders?.length,
           itemBuilder: (context, index) {
-            if (homeViewModel.isTaskWarwhouseLoadingOrClousre(task: task)) {
+            if (home.isTaskWarwhouseLoadingOrClousre(task: task)) {
               return WhLoadingCard(
                 isFromCompelted: true,
                 task: task,
                 index: i,
-                salesData: homeViewModel.operationsSalesData!,
-                salesOrder: homeViewModel.operationsSalesData!.salesOrders![index],
+                salesData: home.operationsSalesData!,
+                salesOrder: home.operationsSalesData!.salesOrders![index],
                 onRecivedClick: i == 0
                     ? () async {
                         if (homeViewModel.isTaskWareHouseLoading(task: task)) {
@@ -65,7 +65,7 @@ class WHCurrentScreen extends StatelessWidget {
                         snackError(txtError!.tr, txtPreviousTask.tr);
                       },
               );
-            } else if (homeViewModel.isTaskCustomerVist(task: task)) {
+            } else if (home.isTaskCustomerVist(task: task)) {
               return VisitLvItemWidget(
                 isFromCompleted: false,
                 task: task,
@@ -235,7 +235,7 @@ class WHCurrentScreen extends StatelessWidget {
                   return flowChart(homeViewModel: build);
                 }),
                 GetBuilder<HomeViewModel>(builder: (homeBuilder) {
-                  return lvSalesOrder;
+                  return lvSalesOrder(home: homeBuilder);
                 })
               ],
             );

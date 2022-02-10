@@ -112,6 +112,7 @@ class OrderDetailsStarted extends StatelessWidget {
               textButton: txtButtonStart.tr,
               onClicked: () async {
                 await home.updateTaskStatus(
+                  taskStatusId: task.id ?? "" ,
                   newStatus: Constance.taskStart,
                   taskId: salesOrder.taskId ?? "",
                 );
@@ -135,6 +136,7 @@ class OrderDetailsStarted extends StatelessWidget {
               isLoading: home.isLoading,
               onClicked: () async {
                 await home.updateTaskStatus(
+                  taskStatusId: task.id ?? "" ,
                   newStatus: Constance.taskdelivered,
                   taskId: salesOrder.taskId ?? "",
                 );
@@ -176,6 +178,7 @@ class OrderDetailsStarted extends StatelessWidget {
             isLoading: false,
             onClicked: () {
               Get.to(() => InstantOrderScreen(
+                    taskStatusId: task.id ?? "" ,
                     isNewCustomer: true,
                     taskId: salesOrder.taskId ?? "",
                   ));
