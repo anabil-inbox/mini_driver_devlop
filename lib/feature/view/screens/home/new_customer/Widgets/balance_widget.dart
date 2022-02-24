@@ -12,57 +12,6 @@ import 'package:get/get.dart';
 class Balance extends StatelessWidget {
   const Balance({Key? key}) : super(key: key);
 
-  // Widget get btn => Row(
-  //       children: [
-  //         Container(
-  //           height: sizeH34,
-  //           width: sizeW95,
-  //           decoration: BoxDecoration(
-  //             color: colorRed,
-  //             borderRadius: BorderRadius.circular(5),
-  //           ),
-  //           child: Center(
-  //             child: CustomTextView(
-  //               txt: txtCash.tr,
-  //               textStyle: textStyleBtn(),
-  //             ),
-  //           ),
-  //         ),
-  //         SizedBox(width: sizeW15),
-  //         Container(
-  //           height: sizeH34,
-  //           width: sizeW95,
-  //           decoration: BoxDecoration(
-  //             color: colorTextWhite,
-  //             borderRadius: BorderRadius.circular(5),
-  //             border: Border.all(color: colorBtnGray),
-  //           ),
-  //           child: Center(
-  //             child: CustomTextView(
-  //               txt: txtCard.tr,
-  //               textStyle: textStyleNormal(),
-  //             ),
-  //           ),
-  //         ),
-  //         SizedBox(width: sizeW15),
-  //         Container(
-  //           height: sizeH34,
-  //           width: sizeW95,
-  //           decoration: BoxDecoration(
-  //             color: colorTextWhite,
-  //             borderRadius: BorderRadius.circular(5),
-  //             border: Border.all(color: colorBtnGray),
-  //           ),
-  //           child: Center(
-  //             child: CustomTextView(
-  //               txt: txtApplication.tr,
-  //               textStyle: textStyleNormal(),
-  //             ),
-  //           ),
-  //         ),
-  //       ],
-  //     );
-
   @override
   Widget build(BuildContext context) {
     screenUtil(context);
@@ -73,8 +22,8 @@ class Balance extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           CustomTextView(
             txt: txtBoxes.tr,
@@ -82,8 +31,8 @@ class Balance extends StatelessWidget {
           ),
           SizedBox(height: sizeH13),
           Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CustomTextView(
                 txt: txtTotal.tr,
@@ -91,15 +40,18 @@ class Balance extends StatelessWidget {
               ),
               const Spacer(),
               CustomTextView(
-                txt: getPriceWithFormate(price: SharedPref.instance.getCurrentTaskResponse()?.total ?? 0),
+                txt: getPriceWithFormate(
+                    price:
+                        SharedPref.instance.getCurrentTaskResponse()?.total ??
+                            0),
                 textStyle: textStyleMeduimPrimaryBold(),
               ),
             ],
           ),
           SizedBox(height: sizeH14),
           Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CustomTextView(
                 txt: txtPaid.tr,
@@ -107,8 +59,12 @@ class Balance extends StatelessWidget {
               ),
               const Spacer(),
               CustomTextView(
-                txt: getPriceWithFormate(price: SharedPref.instance.getCurrentTaskResponse()?.totalPaid ?? 0),
-                textStyle:  textStyleMeduimPrimaryBold(),
+                txt: getPriceWithFormate(
+                    price: SharedPref.instance
+                            .getCurrentTaskResponse()
+                            ?.totalPaid ??
+                        0),
+                textStyle: textStyleMeduimPrimaryBold(),
               ),
             ],
           ),
@@ -130,14 +86,6 @@ class Balance extends StatelessWidget {
                         0),
                 textStyle: textStyleMeduimPrimaryBold(),
               ),
-              // Padding(
-              //   padding: EdgeInsets.only(top: sizeH7!),
-              //   child: CustomTextView(
-              //     txt: txtQR.tr,
-              //     textStyle:
-              //         textStylePrimaryBold()?.copyWith(fontSize: fontSize16),
-              //   ),
-              // ),
             ],
           ),
           SizedBox(height: sizeH22),

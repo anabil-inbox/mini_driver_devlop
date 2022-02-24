@@ -581,7 +581,7 @@ class CustomMaterialPageRoute extends MaterialPageRoute {
         );
 }
 String getPriceWithFormate({required num price}) {
-  final numberFormatter = NumberFormat("###.00#", "en_US");
+  final numberFormatter = NumberFormat("##0.00#", "en_US");
   const num initNumber = 0.00;
   return numberFormatter.format(initNumber + price) +
       " ${Constance.qrCoin}";

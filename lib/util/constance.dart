@@ -27,7 +27,9 @@ abstract class Constance {
   static String serial = "serial";
   static String taskName = "task_name";
   static String salesOrder = "Sales Orders";
-
+  static String productCode = "product_code";
+  static String qty = "qty";
+  static String size = "size";
   // to add here  Tasks Types constance ::
 
   static String taskCustomerVisit = "Customer Visit";

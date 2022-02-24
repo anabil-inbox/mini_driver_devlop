@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -42,11 +43,11 @@ class HomeViewModel extends GetxController {
   QRViewController? controller;
 
   onQRViewCreated(QRViewController controller,
-      {bool? isFromAtHome, int? index, TaskModel? taskModel}) {
+      {bool? isFromAtHome,
+      int? index,
+      TaskModel? taskModel,
+      required bool isFromScanSalesBoxs}) {
     try {
-      // if (this.controller == null) {
-      //   this.controller = controller;
-      // }
       int i = 0;
       this.controller = controller;
       controller.scannedDataStream.listen((scanData) {
@@ -54,10 +55,15 @@ class HomeViewModel extends GetxController {
       }).onData((data) async {
         i = i + 1;
         if (i == 1) {
-          await scanBox(
-              serial: data.code ?? "",
-              taskName: operationsSalesData?.taskName ?? "");
-          Get.back();
+          if (isFromScanSalesBoxs) {
+            await scanBoxOrder(serial: data.code ?? "");
+            Get.back();
+          } else {
+            await scanBox(
+                serial: data.code ?? "",
+                taskName: operationsSalesData?.taskName ?? "");
+            Get.back();
+          }
         }
       });
     } catch (e) {
@@ -313,7 +319,8 @@ class HomeViewModel extends GetxController {
 
   final picker = ImagePicker();
 
-  Future getImage(ImageSource source, {String? customerId}) async {
+  Future getImage(ImageSource source,
+      {String? customerId, String? taskId}) async {
     final pickedImage = await picker.pickImage(source: source);
     if (pickedImage != null) {
       img = File(pickedImage.path);
@@ -321,11 +328,12 @@ class HomeViewModel extends GetxController {
     }
 
     if (customerId != null && pickedImage != null) {
-      await uploadVerficationId(customerId: customerId);
+      await uploadVerficationId(customerId: customerId, taskId: taskId ?? "");
     }
   }
 
-  Future<void> uploadVerficationId({required String customerId}) async {
+  Future<void> uploadVerficationId(
+      {required String customerId, required String taskId}) async {
     startLoading();
     try {
       if (img != null) {
@@ -334,10 +342,15 @@ class HomeViewModel extends GetxController {
       HomeHelper.getInstance.uploadCustomerId(body: {
         "image":
             img != null ? multipart.MultipartFile.fromFileSync(img!.path) : "",
-        "customer": customerId
+        "customer": customerId,
+        "task_id": taskId,
       }).then((value) => {
             if (value.status!.success!)
-              {snackSuccess(txtSuccess!.tr, value.status!.message!)}
+              {
+                SharedPref.instance.setCurrentTaskResponse(
+                    taskResponse: jsonEncode(value.data)),
+                snackSuccess(txtSuccess!.tr, value.status!.message!)
+              }
             else
               {snackError(txtSuccess!.tr, value.status!.message!)}
           });
@@ -553,5 +566,47 @@ class HomeViewModel extends GetxController {
   void dispose() {
     _timer?.cancel();
     super.dispose();
+  }
+
+  Future<void> scanBoxOrder({required String serial}) async {
+    await HomeHelper.getInstance.scanSalesBox(body: {
+      Constance.serial: serial,
+      "sales_order":
+          SharedPref.instance.getCurrentTaskResponse()?.salesOrder ?? ""
+    }).then((value) async => {
+          if (value.status!.success!)
+            {
+              await refrshHome(),
+              update(),
+              snackSuccess("$txtSuccess", "${value.status!.message}")
+            }
+          else
+            {
+              Logger().i(value.toJson()),
+              snackError("$txtError", "${value.status!.message}")
+            }
+        });
+  }
+
+  Future<void> scanProudct({required String productCode}) async {
+    await HomeHelper.getInstance.scanProduct(body: {
+      Constance.productCode: productCode,
+      Constance.qty: "1",
+      Constance.size: "1",
+      "sales_order":
+          SharedPref.instance.getCurrentTaskResponse()?.salesOrder ?? ""
+    }).then((value) async => {
+          if (value.status!.success!)
+            {
+              await refrshHome(),
+              update(),
+              snackSuccess("$txtSuccess", "${value.status!.message}")
+            }
+          else
+            {
+              Logger().i(value.toJson()),
+              snackError("$txtError", "${value.status!.message}")
+            }
+        });
   }
 }

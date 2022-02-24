@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:inbox_driver/feature/view/screens/home/new_customer/Widgets/balance_widget.dart';
+import 'package:inbox_driver/feature/view/screens/home/new_customer/Widgets/contract_signature_widget.dart';
 import 'package:inbox_driver/feature/view/screens/home/new_customer/Widgets/scan_products_widget.dart';
 import 'package:inbox_driver/feature/view/widgets/appbar/custom_app_bar_widget.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
@@ -16,12 +17,15 @@ import 'package:inbox_driver/util/string.dart';
 import 'package:get/get.dart';
 import 'Widgets/customer_signature_instant_order.dart';
 import 'Widgets/scan_box_instant_order.dart';
-import 'Widgets/scan_delivered_box.dart';
 
 class InstantOrderScreen extends StatelessWidget {
   const InstantOrderScreen(
-      {Key? key, this.isNewCustomer = false, required this.taskId , required this.taskStatusId})
+      {Key? key,
+      this.isNewCustomer = false,
+      required this.taskId,
+      required this.taskStatusId})
       : super(key: key);
+
   static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
 
   Widget get idVerification => Container(
@@ -31,24 +35,31 @@ class InstantOrderScreen extends StatelessWidget {
           color: colorTextWhite,
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Row(
-          children: [
-            CustomTextView(
-              txt: txtIDVerification.tr,
-              textStyle: textStyleNormal()?.copyWith(color: colorBlack),
-            ),
-            const Spacer(),
-            GestureDetector(
-              onTap: () async {
-                await homeViewModel.getImage(ImageSource.camera,
-                    customerId: SharedPref.instance
-                        .getCurrentTaskResponse()
-                        ?.customerId);
-              },
-              child: SvgPicture.asset("assets/svgs/Scan.svg",
-                  color: colorRed, width: sizeW20, height: sizeH17),
-            ),
-          ],
+        child: GetBuilder<HomeViewModel>(
+          builder: (_) {
+            return Row(
+              children: [
+                CustomTextView(
+                  txt: txtIDVerification.tr,
+                  textStyle: textStyleNormal()?.copyWith(color: colorBlack),
+                ),
+                const Spacer(),
+                SharedPref.instance.getCurrentTaskResponse()?.isNew ?? false
+                    ? GestureDetector(
+                        onTap: () async {
+                          await homeViewModel.getImage(ImageSource.camera,
+                              customerId: SharedPref.instance
+                                  .getCurrentTaskResponse()
+                                  ?.customerId,
+                              taskId: taskId);
+                        },
+                        child: SvgPicture.asset("assets/svgs/Scan.svg",
+                            color: colorRed, width: sizeW20, height: sizeH17),
+                      )
+                    : SvgPicture.asset("assets/svgs/check.svg"),
+              ],
+            );
+          },
         ),
       );
 
@@ -93,31 +104,66 @@ class InstantOrderScreen extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: padding20!),
-            child: ListView(
-              shrinkWrap: true,
-              children: [
-                SizedBox(height: sizeH27),
-                // if (SharedPref.instance.getCurrentTaskResponse()?.isNew ??
-                //     false)
-                // const ContractSignature(),
-                idVerification,
-                SizedBox(height: sizeH10),
-                const ScanDeliveredBox(),
-                SizedBox(height: sizeH10),
-                const ScanBoxInstantOrder(),
-                SizedBox(height: sizeH10),
-                const ScanProducts(),
-                SizedBox(height: sizeH10),
-                const Balance(),
-                SizedBox(height: sizeH10),
-                const CustomerSignatureInstantOrder(),
-                SizedBox(height: sizeH10),
-                waitingTime,
-                SizedBox(height: sizeH100),
-              ],
-            ),
+          GetBuilder<HomeViewModel>(
+            builder: (home) {
+              if (SharedPref.instance.getCurrentTaskResponse()?.proccessType ==
+                  Constance.newStorageSv) {
+                return Padding(
+                  padding: EdgeInsets.symmetric(horizontal: padding20!),
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: [
+                      SizedBox(height: sizeH27),
+                      const ContractSignature(),
+                      SizedBox(height: sizeH10),
+                      idVerification,
+                      // SizedBox(height: sizeH10),
+                      // const ScanDeliveredBox(),
+                      SizedBox(height: sizeH10),
+                      const ScanBoxInstantOrder(),
+                      SizedBox(height: sizeH10),
+                      const ScanProducts(),
+                      SizedBox(height: sizeH10),
+                      const Balance(),
+                      SizedBox(height: sizeH10),
+                      const CustomerSignatureInstantOrder(),
+                      SizedBox(height: sizeH10),
+                      waitingTime,
+                      SizedBox(height: sizeH100),
+                    ],
+                  ),
+                );
+              }
+              // else if(){
+              //   }else{
+              //   return const SizedBox();
+              // }
+              return Padding(
+                padding: EdgeInsets.symmetric(horizontal: padding20!),
+                child: ListView(
+                  shrinkWrap: true,
+                  children: [
+                    SizedBox(height: sizeH27),
+                    const ContractSignature(),
+                    SizedBox(height: sizeH10),
+                    idVerification,
+                    // SizedBox(height: sizeH10),
+                    // const ScanDeliveredBox(),
+                    SizedBox(height: sizeH10),
+                    const ScanBoxInstantOrder(),
+                    SizedBox(height: sizeH10),
+                    const ScanProducts(),
+                    SizedBox(height: sizeH10),
+                    const Balance(),
+                    SizedBox(height: sizeH10),
+                    const CustomerSignatureInstantOrder(),
+                    SizedBox(height: sizeH10),
+                    waitingTime,
+                    SizedBox(height: sizeH100),
+                  ],
+                ),
+              );
+            },
           ),
           Positioned(
               bottom: padding20,
@@ -130,12 +176,14 @@ class InstantOrderScreen extends StatelessWidget {
                       isLoading: homeViewModel.isLoading,
                       onClicked: () async {
                         await home.updateTaskStatus(
-                          newStatus: Constance.done,
-                          taskId: taskId,
-                          taskStatusId: taskStatusId
-                        );
-                        await home.getSpecificTask(taskId: taskStatusId, taskSatus: Constance.inProgress);
-                        await home.getSpecificTask(taskId: taskStatusId, taskSatus: Constance.done);
+                            newStatus: Constance.done,
+                            taskId: taskId,
+                            taskStatusId: taskStatusId);
+                        await home.getSpecificTask(
+                            taskId: taskStatusId,
+                            taskSatus: Constance.inProgress);
+                        await home.getSpecificTask(
+                            taskId: taskStatusId, taskSatus: Constance.done);
                         await home.getHomeTasks(taskType: Constance.done);
                         await home.getHomeTasks(taskType: Constance.inProgress);
                       },

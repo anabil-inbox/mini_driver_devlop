@@ -43,7 +43,9 @@ class NewCustomer extends StatelessWidget {
         const Spacer(),
         GestureDetector(
           onTap: () {
-            Get.to(() => const ScanScreen());
+            Get.to(() => const ScanScreen(
+               isBoxSalesScan: false,
+            ));
           },
           child: SvgPicture.asset("assets/svgs/Scan.svg",
               color: colorRed, width: sizeW20, height: sizeH17),

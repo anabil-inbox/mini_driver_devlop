@@ -10,7 +10,7 @@ class PaymentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: padding16!),
+       padding: EdgeInsets.symmetric(horizontal: padding16!),
       decoration: BoxDecoration(
           color: colorTextWhite,
           borderRadius: BorderRadius.circular(padding6!)),
@@ -21,10 +21,14 @@ class PaymentWidget extends StatelessWidget {
             child: ListView(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
-              children: getPaymentMethod().map((e) => PaymentItem(paymentMethod: e,)).toList(),
+              children: getPaymentMethod()
+                  .map((e) => PaymentItem(
+                        paymentMethod: e,
+                      ))
+                  .toList(),
             ),
           ),
-           SizedBox(
+          SizedBox(
             height: sizeH25,
           ),
         ],

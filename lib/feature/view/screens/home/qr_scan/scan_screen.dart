@@ -7,11 +7,13 @@ import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class ScanScreen extends StatelessWidget {
-  const ScanScreen({Key? key, this.taskModel}) : super(key: key);
+  const ScanScreen({Key? key, this.taskModel, required this.isBoxSalesScan})
+      : super(key: key);
 
   static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
   static GlobalKey<FormState> qrKey = GlobalKey<FormState>();
   final TaskModel? taskModel;
+  final bool isBoxSalesScan;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,8 +21,10 @@ class ScanScreen extends StatelessWidget {
         children: [
           QRView(
             key: qrKey,
-            onQRViewCreated: (controller) =>
-                homeViewModel.onQRViewCreated(controller, taskModel: taskModel),
+            onQRViewCreated: (controller) => homeViewModel.onQRViewCreated(
+                controller,
+                taskModel: taskModel,
+                isFromScanSalesBoxs: isBoxSalesScan),
             overlay: QrScannerOverlayShape(
                 borderColor: colorRed,
                 borderRadius: padding12!,
@@ -30,6 +34,7 @@ class ScanScreen extends StatelessWidget {
             onPermissionSet: (ctrl, p) =>
                 homeViewModel.onPermissionSet(context, ctrl, p),
           ),
+
           // Positioned(
           //     top: padding40,
           //     right: padding20,

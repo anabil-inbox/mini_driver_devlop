@@ -5,6 +5,7 @@ import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
+import 'package:inbox_driver/util/sh_util.dart';
 import 'package:inbox_driver/util/string.dart';
 import 'package:get/get.dart';
 
@@ -36,7 +37,12 @@ class ContractSignature extends StatelessWidget {
                     height: sizeH30,
                     decoration: BoxDecoration(
                       border: Border.all(
-                          color: logic.isSelected ? colorRed : colorBtnGray),
+                          color: SharedPref.instance
+                                      .getCurrentTaskResponse()
+                                      ?.isNew ??
+                                  false
+                              ? colorRed
+                              : colorBtnGray),
                       shape: BoxShape.circle,
                     ),
                     child: Padding(
@@ -47,8 +53,12 @@ class ContractSignature extends StatelessWidget {
                         child: Container(
                             decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color:
-                              logic.isSelected ? colorRed : Colors.transparent,
+                          color: SharedPref.instance
+                                      .getCurrentTaskResponse()
+                                      ?.isNew ??
+                                  false
+                              ? Colors.transparent
+                              : colorRed,
                         )),
                         // backgroundColor: colorRed,
                       ),

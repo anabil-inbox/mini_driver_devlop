@@ -33,7 +33,9 @@ class WhSearchBar extends StatelessWidget {
                 height: sizeH48,
                 backgroundColor: colorRed,
                 onPressed: () {
-                  Get.to(() => const ScanScreen());
+                  Get.to(() => const ScanScreen(
+                     isBoxSalesScan: false,
+                  ));
                 },
                 borderColor: colorTrans,
                 icon: "assets/svgs/Scan.svg",
