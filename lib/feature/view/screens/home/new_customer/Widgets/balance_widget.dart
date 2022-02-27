@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inbox_driver/feature/view/screens/home/instant_order/Widgets/payment_widget.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
+import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
@@ -39,12 +40,17 @@ class Balance extends StatelessWidget {
                 textStyle: textStyleNormal(),
               ),
               const Spacer(),
-              CustomTextView(
-                txt: getPriceWithFormate(
-                    price:
-                        SharedPref.instance.getCurrentTaskResponse()?.total ??
+              GetBuilder<HomeViewModel>(
+                builder: (_) {
+                  return CustomTextView(
+                    txt: getPriceWithFormate(
+                        price: SharedPref.instance
+                                .getCurrentTaskResponse()
+                                ?.total ??
                             0),
-                textStyle: textStyleMeduimPrimaryBold(),
+                    textStyle: textStyleMeduimPrimaryBold(),
+                  );
+                },
               ),
             ],
           ),
@@ -58,13 +64,17 @@ class Balance extends StatelessWidget {
                 textStyle: textStyleNormal(),
               ),
               const Spacer(),
-              CustomTextView(
-                txt: getPriceWithFormate(
-                    price: SharedPref.instance
-                            .getCurrentTaskResponse()
-                            ?.totalPaid ??
-                        0),
-                textStyle: textStyleMeduimPrimaryBold(),
+              GetBuilder<HomeViewModel>(
+                builder: (_) {
+                  return CustomTextView(
+                    txt: getPriceWithFormate(
+                        price: SharedPref.instance
+                                .getCurrentTaskResponse()
+                                ?.totalPaid ??
+                            0),
+                    textStyle: textStyleMeduimPrimaryBold(),
+                  );
+                },
               ),
             ],
           ),
@@ -78,13 +88,17 @@ class Balance extends StatelessWidget {
                 textStyle: textStyleNormal(),
               ),
               const Spacer(),
-              CustomTextView(
-                txt: getPriceWithFormate(
-                    price: SharedPref.instance
-                            .getCurrentTaskResponse()
-                            ?.totalDue ??
-                        0),
-                textStyle: textStyleMeduimPrimaryBold(),
+              GetBuilder<HomeViewModel>(
+                builder: (_) {
+                  return CustomTextView(
+                    txt: getPriceWithFormate(
+                        price: SharedPref.instance
+                                .getCurrentTaskResponse()
+                                ?.totalDue ??
+                            0),
+                    textStyle: textStyleMeduimPrimaryBold(),
+                  );
+                },
               ),
             ],
           ),

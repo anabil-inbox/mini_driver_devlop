@@ -163,7 +163,7 @@ class WHCurrentScreen extends StatelessWidget {
                   height: sizeH48,
                   backgroundColor: colorRed,
                   onPressed: () {
-                    Get.to(() => ScanScreen(taskModel: task , isBoxSalesScan: false,));
+                    Get.to(() => ScanScreen(taskModel: task , isBoxSalesScan: false, isProductScan: false,));
                     
                   },
                   borderColor: colorTrans,

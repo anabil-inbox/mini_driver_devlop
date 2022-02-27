@@ -57,6 +57,7 @@ class CustomerSignatureInstantOrder extends StatelessWidget {
               onTap: () {
                 Get.to(() => const ScanScreen(
                    isBoxSalesScan: false,
+                    isProductScan: false,
                 ));
               },
               child: SvgPicture.asset("assets/svgs/Scan.svg",

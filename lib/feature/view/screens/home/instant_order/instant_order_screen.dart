@@ -106,7 +106,7 @@ class InstantOrderScreen extends StatelessWidget {
         children: [
           GetBuilder<HomeViewModel>(
             builder: (home) {
-              if (SharedPref.instance.getCurrentTaskResponse()?.proccessType ==
+              if (SharedPref.instance.getCurrentTaskResponse()?.processType ==
                   Constance.newStorageSv) {
                 return Padding(
                   padding: EdgeInsets.symmetric(horizontal: padding20!),

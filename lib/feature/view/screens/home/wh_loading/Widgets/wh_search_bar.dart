@@ -35,6 +35,7 @@ class WhSearchBar extends StatelessWidget {
                 onPressed: () {
                   Get.to(() => const ScanScreen(
                      isBoxSalesScan: false,
+                      isProductScan: false,
                   ));
                 },
                 borderColor: colorTrans,

@@ -10,6 +10,8 @@ import 'package:inbox_driver/feature/model/app_setting_modle.dart';
 import 'package:inbox_driver/feature/model/home/emergencey/emergency_case.dart';
 import 'package:inbox_driver/feature/model/home/sales_data.dart';
 import 'package:inbox_driver/feature/model/home/task_model.dart';
+import 'package:inbox_driver/feature/model/tasks/box_model.dart';
+import 'package:inbox_driver/feature/model/tasks/product_model.dart';
 import 'package:inbox_driver/feature/view/screens/home/Widgets/secondery_button.dart';
 import 'package:inbox_driver/feature/view/screens/home/instant_order/instant_order_screen.dart';
 import 'package:inbox_driver/network/api/feature/home_helper.dart';
@@ -45,6 +47,7 @@ class HomeViewModel extends GetxController {
       {bool? isFromAtHome,
       int? index,
       TaskModel? taskModel,
+      required bool isProductScan,
       required bool isFromScanSalesBoxs}) {
     try {
       int i = 0;
@@ -56,6 +59,9 @@ class HomeViewModel extends GetxController {
         if (i == 1) {
           if (isFromScanSalesBoxs) {
             await scanBoxOrder(serial: data.code ?? "");
+            Get.back();
+          } else if (isProductScan) {
+            await scanProudct(productCode: data.code ?? "");
             Get.back();
           } else {
             await scanBox(
@@ -567,6 +573,9 @@ class HomeViewModel extends GetxController {
     super.dispose();
   }
 
+  List<BoxModel> scaanedBoxes = [];
+  // List<ProductModel> scaanedProducts = [];
+
   Future<void> scanBoxOrder({required String serial}) async {
     await HomeHelper.getInstance.scanSalesBox(body: {
       Constance.serial: serial,
@@ -575,6 +584,8 @@ class HomeViewModel extends GetxController {
     }).then((value) async => {
           if (value.status!.success!)
             {
+              Logger().e(value.data),
+              scaanedBoxes.add(BoxModel.fromJson(value.data)),
               await refrshHome(),
               update(),
               snackSuccess("$txtSuccess", "${value.status!.message}")
@@ -591,12 +602,32 @@ class HomeViewModel extends GetxController {
     await HomeHelper.getInstance.scanProduct(body: {
       Constance.productCode: productCode,
       Constance.qty: "1",
-      Constance.size: "1",
-      "sales_order":
-          SharedPref.instance.getCurrentTaskResponse()?.salesOrder ?? ""
+      Constance.size: SharedPref.instance
+              .getCurrentTaskResponse()!
+              .childOrder!
+              .items!
+              .isEmpty
+          ? 1
+          : SharedPref.instance
+                  .getCurrentTaskResponse()!
+                  .childOrder!
+                  .items!
+                  .length +
+              1,
+      "sales_order": SharedPref.instance
+              .getCurrentTaskResponse()!
+              .childOrder!
+              .items!
+              .isNotEmpty
+          ? SharedPref.instance.getCurrentTaskResponse()!.childOrder!.id
+          : SharedPref.instance.getCurrentTaskResponse()?.salesOrder ?? ""
     }).then((value) async => {
           if (value.status!.success!)
             {
+              // scaanedProducts.add(ProductModel.fromJson(value.data)),
+              SharedPref.instance
+                  .setCurrentTaskResponse(taskResponse: jsonEncode(value.data)),
+                  Logger().e(value.data),
               await refrshHome(),
               update(),
               snackSuccess("$txtSuccess", "${value.status!.message}")

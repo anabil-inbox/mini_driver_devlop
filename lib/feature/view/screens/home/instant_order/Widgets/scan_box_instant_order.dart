@@ -3,10 +3,10 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter_svg/svg.dart';
 import 'dart:math' as math;
 import 'package:get/get.dart';
+import 'package:inbox_driver/feature/view/screens/home/instant_order/Widgets/box_on_order_item.dart';
 import 'package:inbox_driver/feature/view/screens/home/qr_scan/scan_screen.dart';
-import 'package:inbox_driver/feature/view/widgets/bottom_sheet_widget/instant_order_bottom_sheet.dart';
-import 'package:inbox_driver/feature/view/widgets/custom_text_filed.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
+import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
@@ -58,6 +58,7 @@ class ScanBoxInstantOrder extends StatelessWidget {
               onTap: () {
                 Get.to(() => const ScanScreen(
                       isBoxSalesScan: true,
+                       isProductScan: false,
                     ));
               },
               child: SvgPicture.asset("assets/svgs/Scan.svg",
@@ -76,96 +77,21 @@ class ScanBoxInstantOrder extends StatelessWidget {
                 color: colorSearchBox,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Column(
-                children: [
-                  Row(
-                    children: <Widget>[
-                      SvgPicture.asset('assets/svgs/Folder_Shared.svg'),
-                      SizedBox(width: sizeW5),
-                      CustomTextView(
-                        txt: txtBoxes.tr,
-                        textStyle:
-                            textStyleNormal()?.copyWith(color: colorBlack),
-                      )
-                    ],
-                  ),
-                  SizedBox(height: sizeH10),
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: sizeW10!, vertical: sizeH9!),
-                    decoration: BoxDecoration(
-                      color: colorTextWhite,
-                      border: Border.all(color: colorBtnGray),
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Row(
-                      children: <Widget>[
-                        GestureDetector(
-                          onTap: () {
-                            showModalBottomSheet(
-                              context: context,
-                              builder: (BuildContext context) =>
-                                  const InstantOrderBottomSheet(),
-                              isScrollControlled: true,
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(20),
-                              )),
-                            );
-                          },
-                          child: Row(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: colorBtnGray.withOpacity(0.4),
-                                  shape: BoxShape.circle,
-                                ),
-                                padding: EdgeInsets.all(padding4!),
-                                child: Transform.rotate(
-                                  angle: 180 * math.pi / 180,
-                                  child: Icon(
-                                    Icons.keyboard_arrow_up,
-                                    color: colorBlack,
-                                    size: 20,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: sizeW10),
-                              CustomTextView(
-                                txt: txtSealed.tr,
-                                textStyle: textStyleNormal()
-                                    ?.copyWith(color: colorBlack),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const Spacer(),
-                        GestureDetector(
-                          onTap: () {
-                            Get.to(() => const ScanScreen(
-                                  isBoxSalesScan: false,
-                                ));
-                          },
-                          child: SvgPicture.asset("assets/svgs/Scan.svg",
-                              color: colorRed, width: sizeW20, height: sizeH17),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: sizeH10),
-                  CustomTextFormFiled(
-                    label: txtWriteDownCaseRemarks,
-                    isSmallPadding: true,
-                    isSmallPaddingWidth: true,
-                    isBorder: false,
-                    isFill: true,
-                    enabledBorderColor: colorBtnGray,
-                    fillColor: colorTextWhite,
-                    maxLine: 5,
-                    minLine: 3,
-                  ),
-                  SizedBox(height: sizeH10),
-                ],
+              child: GetBuilder<HomeViewModel>(
+                builder: (home) {
+                  if (home.scaanedBoxes.isEmpty) {
+                    return const SizedBox();
+                  } else {
+                    return ListView(
+                        shrinkWrap: true,
+                        primary: false,
+                        children: home.scaanedBoxes
+                            .map((e) => BoxOnOrderItem(
+                                  boxModel: e,
+                                ))
+                            .toList());
+                  }
+                },
               ),
             ),
             SizedBox(height: sizeH10),
