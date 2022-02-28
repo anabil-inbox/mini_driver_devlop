@@ -3,9 +3,7 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter_svg/svg.dart';
 import 'dart:math' as math;
 import 'package:get/get.dart';
-import 'package:inbox_driver/feature/model/tasks/product_model.dart';
 import 'package:inbox_driver/feature/view/screens/home/new_customer/Widgets/product_on_order_item.dart';
-import 'package:inbox_driver/feature/view/screens/home/qr_scan/scan_screen.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
 import 'package:inbox_driver/util/app_color.dart';
@@ -14,10 +12,11 @@ import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/sh_util.dart';
 import 'package:inbox_driver/util/string.dart';
-import 'package:logger/logger.dart';
 
 class ScanProducts extends StatelessWidget {
   const ScanProducts({Key? key}) : super(key: key);
+
+  static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -59,10 +58,7 @@ class ScanProducts extends StatelessWidget {
             const Spacer(),
             GestureDetector(
               onTap: () {
-                Get.to(() => const ScanScreen(
-                      isBoxSalesScan: false,
-                      isProductScan: true,
-                    ));
+                ScanProducts.homeViewModel.showQtyBottomSheet();
               },
               child: SvgPicture.asset("assets/svgs/Scan.svg",
                   color: colorRed, width: sizeW20, height: sizeH17),
@@ -72,11 +68,6 @@ class ScanProducts extends StatelessWidget {
         collapsed: const SizedBox.shrink(),
         expanded: GetBuilder<HomeViewModel>(
           builder: (home) {
-            Logger().e(SharedPref.instance
-                .getCurrentTaskResponse()!
-                .childOrder!
-                .items!
-                .length);
             if (SharedPref.instance
                 .getCurrentTaskResponse()!
                 .childOrder!
@@ -84,17 +75,27 @@ class ScanProducts extends StatelessWidget {
                 .isEmpty) {
               return const SizedBox();
             } else {
-              return ListView(
+              return ListView.builder(
                 shrinkWrap: true,
                 primary: false,
-                children: SharedPref.instance
+                itemBuilder: (context, index) {
+                  if (home.deletedElements.contains(
+                      "${SharedPref.instance.getCurrentTaskResponse()!.childOrder!.items![index].name}$index")) {
+                    return const SizedBox();
+                  }
+                  return ProductOnOrderItem(
+                    index: index,
+                    productModel: SharedPref.instance
+                        .getCurrentTaskResponse()!
+                        .childOrder!
+                        .items![index],
+                  );
+                },
+                itemCount: SharedPref.instance
                     .getCurrentTaskResponse()!
                     .childOrder!
                     .items!
-                    .map((e) => ProductOnOrderItem(
-                          productModel: e,
-                        ))
-                    .toList(),
+                    .length,
               );
             }
           },

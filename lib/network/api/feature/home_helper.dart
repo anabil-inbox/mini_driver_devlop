@@ -207,4 +207,22 @@ class HomeHelper {
     }
   }
 
+
+ Future<AppResponse> deleteProduct({required var body}) async {
+    try {
+      var response = await HomeApi.getInstance.deleteProduct(
+          body: body,
+          url: ConstanceNetwork.deleteProductEndPoint,
+          header: ConstanceNetwork.header(4));
+      if (response.status?.success == true) {
+        return response;
+      } else {
+        return response;
+      }
+    } catch (e) {
+      log.d(e.toString());
+      return AppResponse.fromJson({});
+    }
+  }
+
 }

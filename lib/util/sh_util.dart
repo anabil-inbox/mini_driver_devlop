@@ -6,6 +6,7 @@ import 'package:get/utils.dart';
 import 'package:inbox_driver/feature/model/app_setting_modle.dart';
 import 'package:inbox_driver/feature/model/driver_modle.dart';
 import 'package:inbox_driver/feature/model/language.dart';
+import 'package:inbox_driver/feature/model/tasks/box_model.dart';
 import 'package:inbox_driver/feature/model/tasks/task_response.dart';
 import 'package:inbox_driver/util/constance.dart';
 import 'package:intl/intl.dart';
@@ -27,6 +28,7 @@ class SharedPref {
   final String taskKey = "taskKey";
   final String isStartedTimerKey = "isStartedTimerKey";
   final String timerValueKey = "timerValueKey";
+  final String boxessKey = "boxessKey";
 
   var log = Logger();
 
@@ -40,7 +42,13 @@ class SharedPref {
   }
 
   setCurrentTaskResponse({required String taskResponse}) {
-    _prefs?.setString(taskKey, taskResponse);
+    try {
+      _prefs?.remove(taskKey);
+      Logger().e(taskResponse);
+      _prefs?.setString(taskKey, taskResponse);
+    } catch (e) {
+      Logger().e(e);
+    }
   }
 
   setIsStartedTimerKey({required bool isStarted}) {
@@ -65,7 +73,7 @@ class SharedPref {
   TaskResponse? getCurrentTaskResponse() {
     try {
       String? objectStr = _prefs?.getString(taskKey);
-      return TaskResponse.fromJson(json.decode(objectStr!));
+      return TaskResponse.fromJson(jsonDecode(objectStr!));
     } catch (e) {
       return null;
     }
@@ -189,6 +197,29 @@ class SharedPref {
     } catch (e) {
       printError();
       return "";
+    }
+  }
+
+  setBoxesList({required List<BoxModel> boxes}) {
+    removeBoxess();
+    _prefs?.setString(boxessKey, jsonEncode(boxes));
+  }
+
+  List<BoxModel> getBoxesList() {
+    try {
+      String? objectStr = _prefs?.getString(boxessKey);
+      return List<BoxModel>.from(
+          json.decode(objectStr!).map((x) => BoxModel.fromJson(x)));
+    } catch (e) {
+      return [];
+    }
+  }
+
+  removeBoxess() async {
+    try {
+      await _prefs?.remove(boxessKey);
+    } catch (e) {
+      Logger().e(e);
     }
   }
 

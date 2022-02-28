@@ -18,6 +18,15 @@ class BoxModel {
         "box_operations":
             List<dynamic>.from(boxOperations!.map((x) => x.toJson())),
       };
+
+        @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is BoxModel && runtimeType == other.runtimeType && boxId == other.boxId;
+
+  @override
+  int get hashCode => boxId.hashCode;
+
 }
 
 class BoxOperation {

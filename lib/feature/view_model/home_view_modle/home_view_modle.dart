@@ -11,9 +11,10 @@ import 'package:inbox_driver/feature/model/home/emergencey/emergency_case.dart';
 import 'package:inbox_driver/feature/model/home/sales_data.dart';
 import 'package:inbox_driver/feature/model/home/task_model.dart';
 import 'package:inbox_driver/feature/model/tasks/box_model.dart';
-import 'package:inbox_driver/feature/model/tasks/product_model.dart';
+import 'package:inbox_driver/feature/model/tasks/task_response.dart';
 import 'package:inbox_driver/feature/view/screens/home/Widgets/secondery_button.dart';
 import 'package:inbox_driver/feature/view/screens/home/instant_order/instant_order_screen.dart';
+import 'package:inbox_driver/feature/view/screens/home/new_customer/Widgets/qty_bottom_sheet.dart';
 import 'package:inbox_driver/network/api/feature/home_helper.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
@@ -62,7 +63,8 @@ class HomeViewModel extends GetxController {
             Get.back();
           } else if (isProductScan) {
             await scanProudct(productCode: data.code ?? "");
-            Get.back();
+            tdQty.clear();
+            Get.close(2);
           } else {
             await scanBox(
                 serial: data.code ?? "",
@@ -573,7 +575,7 @@ class HomeViewModel extends GetxController {
     super.dispose();
   }
 
-  List<BoxModel> scaanedBoxes = [];
+  Set<BoxModel> scaanedBoxes = {};
   // List<ProductModel> scaanedProducts = [];
 
   Future<void> scanBoxOrder({required String serial}) async {
@@ -586,6 +588,7 @@ class HomeViewModel extends GetxController {
             {
               Logger().e(value.data),
               scaanedBoxes.add(BoxModel.fromJson(value.data)),
+              SharedPref.instance.setBoxesList(boxes: scaanedBoxes.toList()),
               await refrshHome(),
               update(),
               snackSuccess("$txtSuccess", "${value.status!.message}")
@@ -598,10 +601,12 @@ class HomeViewModel extends GetxController {
         });
   }
 
+  final tdQty = TextEditingController();
+
   Future<void> scanProudct({required String productCode}) async {
     await HomeHelper.getInstance.scanProduct(body: {
       Constance.productCode: productCode,
-      Constance.qty: "1",
+      Constance.qty: tdQty.text,
       Constance.size: SharedPref.instance
               .getCurrentTaskResponse()!
               .childOrder!
@@ -627,7 +632,7 @@ class HomeViewModel extends GetxController {
               // scaanedProducts.add(ProductModel.fromJson(value.data)),
               SharedPref.instance
                   .setCurrentTaskResponse(taskResponse: jsonEncode(value.data)),
-                  Logger().e(value.data),
+              Logger().e(value.data),
               await refrshHome(),
               update(),
               snackSuccess("$txtSuccess", "${value.status!.message}")
@@ -638,5 +643,39 @@ class HomeViewModel extends GetxController {
               snackError("$txtError", "${value.status!.message}")
             }
         });
+  }
+
+  Future showQtyBottomSheet() async {
+    Get.bottomSheet(QtyBottomSheet(), isScrollControlled: true);
+  }
+
+  List<String> deletedElements = [];
+
+  Future<void> deleteProduct({required Item productModel , required int index }) async {
+    try {
+      await HomeHelper.getInstance.deleteProduct(body: {
+        "sales_order":
+            SharedPref.instance.getCurrentTaskResponse()?.childOrder?.id,
+        "product_code": productModel.product,
+      }).then((value) async {
+        if (value.status!.success!) {
+          deletedElements.add("${productModel.name}$index");
+           Logger().i(value.toJson());
+          TaskResponse taskResponse =
+              SharedPref.instance.getCurrentTaskResponse() ??
+                  TaskResponse(childOrder: ChildOrder(items: []));
+          taskResponse.childOrder!.items?.remove(productModel);
+         await SharedPref.instance
+              .setCurrentTaskResponse(taskResponse: jsonEncode(taskResponse));
+          update();
+          snackSuccess("$txtSuccess", "${value.status!.message}");
+        } else {
+          Logger().i(value.toJson());
+          snackError("$txtError", "${value.status!.message}");
+        }
+      });
+    } catch (e) {
+      printError();
+    }
   }
 }

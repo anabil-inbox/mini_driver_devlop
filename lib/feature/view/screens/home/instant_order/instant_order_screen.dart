@@ -128,8 +128,8 @@ class InstantOrderScreen extends StatelessWidget {
                       SizedBox(height: sizeH10),
                       const CustomerSignatureInstantOrder(),
                       SizedBox(height: sizeH10),
-                      waitingTime,
-                      SizedBox(height: sizeH100),
+                      // waitingTime,
+                      // SizedBox(height: sizeH100),
                     ],
                   ),
                 );
@@ -175,6 +175,7 @@ class InstantOrderScreen extends StatelessWidget {
                       textButton: "Done",
                       isLoading: homeViewModel.isLoading,
                       onClicked: () async {
+                        homeViewModel.scaanedBoxes.clear();
                         await home.updateTaskStatus(
                             newStatus: Constance.done,
                             taskId: taskId,
