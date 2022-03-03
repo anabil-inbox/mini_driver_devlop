@@ -258,7 +258,7 @@ snackError(String? title, String? body) {
 }
 
 mainSnack({String? title, required String body, Color? backgroundColor}) {
-  WidgetsBinding.instance?.addPostFrameCallback((timeStamp) async {
+ Future.delayed(const Duration(seconds: 0)).then((value) {
     Get.showSnackbar(
       GetSnackBar(
         backgroundColor: backgroundColor ?? const Color(0xFF303030),
@@ -625,7 +625,6 @@ String formatStringWithCurrency(var data, String currency) {
 }
 
 bool isArabicLang() {
-  Logger().e(SharedPref.instance.getLocalization() == "Arabic" ? true : false);
   return (SharedPref.instance.getLocalization() == "Arabic" ? true : false);
   // return isRTL;
 }

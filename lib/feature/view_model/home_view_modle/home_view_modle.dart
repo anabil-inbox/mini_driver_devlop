@@ -644,8 +644,7 @@ class HomeViewModel extends GetxController {
           if (value.status!.success!)
             {
               // scaanedProducts.add(ProductModel.fromJson(value.data)),
-              SharedPref.instance
-                  .setCurrentTaskResponse(taskResponse: jsonEncode(value.data)),
+              SharedPref.instance.setCurrentTaskResponse(taskResponse: jsonEncode(value.data)),
               Logger().e(value.data),
               await refrshHome(),
               update(),

@@ -24,7 +24,6 @@ class PaymentWidget extends StatelessWidget {
             height: sizeH38,
             child: GetBuilder<HomeViewModel>(
               builder: (_) {
-                Logger().e("MSG_TOTAL_DUE ${SharedPref.instance.getCurrentTaskResponse()!.totalDue!}");
                 if (SharedPref.instance.getCurrentTaskResponse()!.totalDue! <=
                     0) {
                   return const SizedBox();

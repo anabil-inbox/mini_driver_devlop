@@ -73,10 +73,6 @@ class ScanProducts extends StatelessWidget {
                   shrinkWrap: true,
                   primary: false,
                   itemBuilder: (context, index) {
-                    if (home.deletedElements.contains(
-                        "${SharedPref.instance.getCurrentTaskResponse()!.childOrder!.items![index].name}$index")) {
-                      return const SizedBox();
-                    }
                     return ProductOnOrderItem(
                       index: index,
                       productModel: SharedPref.instance

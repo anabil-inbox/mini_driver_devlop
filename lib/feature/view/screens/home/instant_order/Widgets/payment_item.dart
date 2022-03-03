@@ -22,9 +22,6 @@ class PaymentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Logger().e(
-        "MSG_PAYMENT_METHOD ${SharedPref.instance.getCurrentTaskResponse()?.paymentMethod}");
-
     return InkWell(
       onTap: () {
         TaskResponse taskResponse =
