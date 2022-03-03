@@ -41,6 +41,8 @@
 //       };
 // }
 
+// ignore_for_file: prefer_if_null_operators, prefer_null_aware_operators
+
 class TaskResponse {
   TaskResponse({
     this.childOrderId,

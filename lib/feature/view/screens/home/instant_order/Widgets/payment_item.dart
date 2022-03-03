@@ -12,7 +12,6 @@ import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/font_dimne.dart';
 import 'package:inbox_driver/util/sh_util.dart';
-import 'package:logger/logger.dart';
 
 class PaymentItem extends StatelessWidget {
   const PaymentItem({Key? key, required this.paymentMethod}) : super(key: key);
