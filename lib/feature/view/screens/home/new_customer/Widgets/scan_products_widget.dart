@@ -28,6 +28,7 @@ class ScanProducts extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: GetBuilder<HomeViewModel>(builder: (home) {
+
         return ExpandablePanel(
           theme: const ExpandableThemeData(
             hasIcon: false,
