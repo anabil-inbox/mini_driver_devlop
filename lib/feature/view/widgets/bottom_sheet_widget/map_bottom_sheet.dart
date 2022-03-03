@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:inbox_driver/feature/model/home/sales_order.dart';
 import 'package:inbox_driver/feature/view_model/map_view_model/map_view_model.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 
 class MapBottomSheet extends StatelessWidget {
-  const MapBottomSheet({Key? key , required this.latuide , required this.longtuide}) : super(key: key);
+  const MapBottomSheet({Key? key, required this.salesOrder}) : super(key: key);
 
   static MapViewModel get mapViewModel => Get.find<MapViewModel>();
-  final double latuide;
-  final double longtuide;
+
+  final SalesOrder salesOrder;
 
   Widget get closeBtnWidget => InkWell(
         child: SvgPicture.asset("assets/svgs/Close.svg"),
@@ -26,7 +27,8 @@ class MapBottomSheet extends StatelessWidget {
         init: MapViewModel(),
         initState: (_) async {
           mapViewModel.getDirections();
-          mapViewModel.customerLatLng = LatLng(latuide, longtuide);
+          mapViewModel.customerLatLng =
+              LatLng(salesOrder.latituide ?? 0, salesOrder.longitude ?? 0);
           mapViewModel.update();
         },
         builder: (logic) {
@@ -70,7 +72,8 @@ class MapBottomSheet extends StatelessWidget {
                                 gestureRecognizers: logic.gestureRecognizers,
                                 onMapCreated:
                                     (GoogleMapController controller) =>
-                                        logic.onMapCreated(controller),
+                                        logic.onMapCreated(controller,
+                                            salesOrder: salesOrder),
                               ),
                             ),
                           ),

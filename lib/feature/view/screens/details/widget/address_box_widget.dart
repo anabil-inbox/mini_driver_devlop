@@ -3,6 +3,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:inbox_driver/feature/model/home/sales_order.dart';
 import 'package:inbox_driver/feature/view/widgets/bottom_sheet_widget/map_bottom_sheet.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/feature/view_model/map_view_model/map_view_model.dart';
@@ -13,11 +14,9 @@ import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/string.dart';
 
 class AddressBox extends StatelessWidget {
-  const AddressBox({Key? key , required this.address , required this.latuide , required this.longtuide}) : super(key: key);
+  const AddressBox({Key? key, required this.salesOrder}) : super(key: key);
 
-  final String address;
-  final double latuide;
-  final double longtuide;
+  final SalesOrder salesOrder;
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +46,10 @@ class AddressBox extends StatelessWidget {
                   height: sizeH1,
                 ),
                 InkWell(
-                  onTap: _goToMap,
+                  onTap: () => _goToMap(salesOrder: salesOrder),
                   child: CustomTextView(
-                    txt: address,
+                    txt: salesOrder.orderShippingAddress ??
+                        salesOrder.orderWarehouseAddress,
                     maxLine: Constance.maxLineOne,
                     textStyle: textStyleNormal(),
                   ),
@@ -61,7 +61,9 @@ class AddressBox extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: _goToMap,
+            onTap: () => 
+              _goToMap(salesOrder: salesOrder),
+            
             child: Image.asset(
               "assets/png/Location.png",
               height: sizeH32,
@@ -73,13 +75,13 @@ class AddressBox extends StatelessWidget {
     );
   }
 
-  void _goToMap() {
+  void _goToMap({required SalesOrder salesOrder}) {
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
       Get.put(MapViewModel());
-      Get.bottomSheet(MapBottomSheet(
-        latuide: latuide,
-        longtuide: longtuide,
-      ),
+      Get.bottomSheet(
+          MapBottomSheet(
+            salesOrder: salesOrder,
+          ),
           enableDrag: true,
           isScrollControlled: true,
           clipBehavior: Clip.hardEdge);

@@ -26,10 +26,6 @@ class Balance extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // CustomTextView(
-          //   txt: txtBoxes.tr,
-          //   textStyle: textStyleNormal()?.copyWith(color: colorBlack),
-          // ),
           SizedBox(height: sizeH13),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -103,7 +99,7 @@ class Balance extends StatelessWidget {
             ],
           ),
           SizedBox(height: sizeH22),
-          const PaymentWidget(),
+           const PaymentWidget(),
         ],
       ),
     );

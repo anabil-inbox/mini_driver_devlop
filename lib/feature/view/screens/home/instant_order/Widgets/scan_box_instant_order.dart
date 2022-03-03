@@ -11,6 +11,7 @@ import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
+import 'package:inbox_driver/util/sh_util.dart';
 import 'package:inbox_driver/util/string.dart';
 
 class ScanBoxInstantOrder extends StatelessWidget {
@@ -58,7 +59,7 @@ class ScanBoxInstantOrder extends StatelessWidget {
               onTap: () {
                 Get.to(() => const ScanScreen(
                       isBoxSalesScan: true,
-                       isProductScan: false,
+                      isProductScan: false,
                     ));
               },
               child: SvgPicture.asset("assets/svgs/Scan.svg",
@@ -79,13 +80,14 @@ class ScanBoxInstantOrder extends StatelessWidget {
               ),
               child: GetBuilder<HomeViewModel>(
                 builder: (home) {
-                  if (home.scaanedBoxes.isEmpty) {
+                  if (SharedPref.instance.getBoxesList().isEmpty) {
                     return const SizedBox();
                   } else {
                     return ListView(
                         shrinkWrap: true,
                         primary: false,
-                        children: home.scaanedBoxes
+                        children: SharedPref.instance
+                            .getBoxesList()
                             .map((e) => BoxOnOrderItem(
                                   boxModel: e,
                                 ))

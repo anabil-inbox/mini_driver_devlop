@@ -62,4 +62,11 @@ abstract class Constance {
 
   // to add here constance Price ::
   static String qrCoin = "QR";
-}
+  static String googleMapKey = "AIzaSyAzBtxE3NluLYNrUajTg9OnG7X_luzESvU";
+  static String defoultImageMarker = "https://drive.google.com/file/d/121FQ8BdhQ_yoYeGaDZ4tvA719tzSL94k/view?usp=sharing";
+
+  static String id = "id";
+
+  static String application = "Application";
+
+  }

@@ -14,9 +14,12 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:inbox_driver/feature/model/app_setting_modle.dart';
+import 'package:inbox_driver/feature/model/home/sales_order.dart';
+import 'package:inbox_driver/network/utils/constance_netwoek.dart';
 import 'dart:ui' as ui;
 
 import 'package:inbox_driver/util/app_color.dart';
+import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/constance/constance.dart';
 import 'package:inbox_driver/util/location_helper.dart';
 import 'package:inbox_driver/util/sh_util.dart';
@@ -64,7 +67,8 @@ class MapViewModel extends GetxController {
   //   controllers.animateCamera(CameraUpdate.newCameraPosition(myLatLng));
   // }
 
-  onMapCreated(GoogleMapController controllerMap) async {
+  onMapCreated(GoogleMapController controllerMap,
+      {required SalesOrder salesOrder}) async {
     if (!controller!.isCompleted) {
       controller?.complete(controllerMap);
     }
@@ -73,7 +77,7 @@ class MapViewModel extends GetxController {
     //todo me = driver
     await getMyCurrentPosition();
     getStreamLocation();
-    getUserMarkers();
+    getUserMarkers(salesOrder: salesOrder);
     Future.delayed(const Duration(seconds: 0)).then((value) async {
       await foucCameraOnUsers(
           /*controllerMap*/
@@ -149,9 +153,9 @@ class MapViewModel extends GetxController {
   getMyCurrentMarkers() async {
     // markers.clear();
     final Marker marker = Marker(
-      markerId: const MarkerId("{e.id.toString()}"),
+      markerId: MarkerId("${SharedPref.instance.getCurrentUserData()?.id}"),
       icon: await _getMarkerImageFromUrl(
-          "${SharedPref.instance.getCurrentUserData()?.image ?? "https://scontent.fjrs2-2.fna.fbcdn.net/v/t39.30808-6/258867044_1337774763328553_6721770954985841116_n.jpg?_nc_cat=110&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=HRPRVV5a1Q0AX_AqbjN&_nc_ht=scontent.fjrs2-2.fna&oh=00_AT_lk4raRmMFBvU74Dp4FZ9bySLd2ZCfr__aCUbNlWbrIw&oe=61F286A2"}",
+          "${SharedPref.instance.getCurrentUserData()?.image ?? Constance.defoultImageMarker}",
           targetWidth: 180,
           color: colorTrans),
       position: myLatLng,
@@ -169,17 +173,19 @@ class MapViewModel extends GetxController {
     update();
   }
 
-  getUserMarkers() async {
+  getUserMarkers({required SalesOrder salesOrder}) async {
     // markers.clear();
     final Marker marker = Marker(
-      markerId: const MarkerId("{e.id.toString()س}"),
+      markerId: MarkerId("${salesOrder.customerId}"),
       icon: await _getMarkerImageFromUrl(
-          "https://scontent.fjrs2-2.fna.fbcdn.net/v/t1.6435-9/159622889_1167941780311853_4697952185015179188_n.jpg?_nc_cat=100&ccb=1-5&_nc_sid=174925&_nc_ohc=oY6Z0ijF12gAX-1BfZL&_nc_ht=scontent.fjrs2-2.fna&oh=00_AT8TzHQ2hjLTV7thzU8g3aNifCmySibPkY6Y9PVA3aY6tw&oe=62139BC9",
+          salesOrder.customerImage == null
+              ? Constance.defoultImageMarker
+              : (ConstanceNetwork.imageUrl + (salesOrder.customerImage ?? "")),
           targetWidth: 180,
           color: colorTrans),
       position: customerLatLng,
       infoWindow: InfoWindow(
-        title: "Osama" /*,anchor:const  Offset(1.0, 1.0)*/,
+        title: salesOrder.customerId,
         onTap: () {
           Logger().d("");
         },
@@ -271,19 +277,19 @@ class MapViewModel extends GetxController {
   // to do for stream Location
 
   getStreamLocation() async {
-    try {
-      Geolocator.getPositionStream().listen((event) {
-        myLatLng = LatLng(event.latitude, event.longitude);
-        isAllowToDeliver(
-            lat1: myLatLng.latitude,
-            lon1: myLatLng.longitude,
-            lat2: customerLatLng.latitude,
-            lon2: customerLatLng.longitude);
-        update();
-      });
-    } catch (e) {
-      printError();
-    }
+    // try {
+    //   Geolocator.getPositionStream().listen((event) {
+    //     myLatLng = LatLng(event.latitude, event.longitude);
+    //     isAllowToDeliver(
+    //         lat1: myLatLng.latitude,
+    //         lon1: myLatLng.longitude,
+    //         lat2: customerLatLng.latitude,
+    //         lon2: customerLatLng.longitude);
+    //     update();
+    //   });
+    // } catch (e) {
+    //   printError();
+    // }
   }
 
   PolylinePoints polylinePoints = PolylinePoints();

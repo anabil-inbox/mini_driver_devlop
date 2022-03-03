@@ -140,6 +140,7 @@ class HomeViewModel extends GetxController {
 
   Future<void> getSpecificTask(
       {required String taskId, required String taskSatus}) async {
+
     if (taskSatus == Constance.inProgress) {
       operationsSalesData = SalesData();
     } else {
@@ -444,6 +445,11 @@ class HomeViewModel extends GetxController {
                         taskStatusId: taskStatusId,
                         isNewCustomer: true,
                         taskId: taskId))
+                  }
+                else if (newStatus == Constance.taskDone)
+                  {
+                    SharedPref.instance.removeBoxess(),
+                    scaanedBoxes.clear(),
                   },
 
                 update(),
@@ -575,29 +581,36 @@ class HomeViewModel extends GetxController {
     super.dispose();
   }
 
-  Set<BoxModel> scaanedBoxes = {};
+  Set<BoxModel> scaanedBoxes = SharedPref.instance.getBoxesList().toSet();
   // List<ProductModel> scaanedProducts = [];
 
   Future<void> scanBoxOrder({required String serial}) async {
-    await HomeHelper.getInstance.scanSalesBox(body: {
-      Constance.serial: serial,
-      "sales_order":
-          SharedPref.instance.getCurrentTaskResponse()?.salesOrder ?? ""
-    }).then((value) async => {
-          if (value.status!.success!)
-            {
-              Logger().e(value.data),
-              scaanedBoxes.add(BoxModel.fromJson(value.data)),
-              SharedPref.instance.setBoxesList(boxes: scaanedBoxes.toList()),
-              await refrshHome(),
-              update(),
-              snackSuccess("$txtSuccess", "${value.status!.message}")
-            }
-          else
-            {
-              Logger().i(value.toJson()),
-              snackError("$txtError", "${value.status!.message}")
-            }
+    await HomeHelper.getInstance
+        .scanSalesBox(body: {
+          Constance.serial: serial,
+          "sales_order":
+              SharedPref.instance.getCurrentTaskResponse()?.salesOrder ?? ""
+        })
+        .then((value) async => {
+              if (value.status!.success!)
+                {
+                  Logger().e(value.data),
+                  scaanedBoxes.add(BoxModel.fromJson(value.data)),
+                  SharedPref.instance
+                      .setBoxesList(boxes: scaanedBoxes.toList()),
+                  await refrshHome(),
+                  update(),
+                  snackSuccess("$txtSuccess", "${value.status!.message}")
+                }
+              else
+                {
+                  Logger().i(value.toJson()),
+                  snackError("$txtError", "${value.status!.message}"),
+                }
+            })
+        .catchError((e) {
+          Logger().i(e);
+          snackError("$txtError", "$e");
         });
   }
 
@@ -651,7 +664,8 @@ class HomeViewModel extends GetxController {
 
   List<String> deletedElements = [];
 
-  Future<void> deleteProduct({required Item productModel , required int index }) async {
+  Future<void> deleteProduct(
+      {required Item productModel, required int index}) async {
     try {
       await HomeHelper.getInstance.deleteProduct(body: {
         "sales_order":
@@ -660,13 +674,12 @@ class HomeViewModel extends GetxController {
       }).then((value) async {
         if (value.status!.success!) {
           deletedElements.add("${productModel.name}$index");
-           Logger().i(value.toJson());
+          Logger().i(value.toJson());
           TaskResponse taskResponse =
               SharedPref.instance.getCurrentTaskResponse() ??
                   TaskResponse(childOrder: ChildOrder(items: []));
           taskResponse.childOrder!.items?.remove(productModel);
-         await SharedPref.instance
-              .setCurrentTaskResponse(taskResponse: jsonEncode(taskResponse));
+          await SharedPref.instance.setCurrentTaskResponse(taskResponse: jsonEncode(taskResponse));
           update();
           snackSuccess("$txtSuccess", "${value.status!.message}");
         } else {
@@ -674,6 +687,26 @@ class HomeViewModel extends GetxController {
           snackError("$txtError", "${value.status!.message}");
         }
       });
+    } catch (e) {
+      printError();
+    }
+  }
+
+  Future<void> sendPaymentRequest() async {
+    try {
+      await HomeHelper.getInstance.paymentRequest(body: {
+        Constance.id:
+            SharedPref.instance.getCurrentTaskResponse()?.childOrder?.id
+      }).then((value) => {
+            if (value.status!.success!)
+              {
+                snackSuccess("$txtSuccess", "${value.status!.message}"),
+              }
+            else
+              {
+                snackError("$txtError", "${value.status!.message}"),
+              }
+          });
     } catch (e) {
       printError();
     }

@@ -13,7 +13,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image/image.dart' as img;
 import 'package:inbox_driver/feature/core/dialog_loading.dart';
-import 'package:inbox_driver/feature/model/app_setting_modle.dart';
 import 'package:inbox_driver/feature/model/payment/payment.dart';
 import 'package:inbox_driver/feature/view/screens/auth/signUp_signIn/widget/language_item_widget.dart';
 import 'package:inbox_driver/feature/view/widgets/primary_button.dart';
@@ -56,13 +55,17 @@ var safeAreaLight =
 ));
 
 List<PaymentMethod> getPaymentMethod() {
-  List<PaymentMethod> list =
-      ApiSettings.fromJson(json.decode(SharedPref.instance.getAppSetting()))
-              .paymentMethod ??
-          [];
+  // List<PaymentMethod> list =
+  //     ApiSettings.fromJson(json.decode(SharedPref.instance.getAppSetting()))
+  //             .paymentMethod ??
+  //         [];
+  List<PaymentMethod> list = [
+    PaymentMethod(id: "Cash", name: "Cash"),
+    PaymentMethod(id: "Application", name: "Application"),
+    PaymentMethod(id: "Card", name: "Card"),
+  ];
   return list;
 }
-
 
 var safeAreaDark =
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
@@ -226,23 +229,45 @@ callNumber({required String phoneNumber}) async {
 //   }
 // }
 
-snackSuccess(String title, String body) {
-  Future.delayed(const Duration(seconds: 0)).then((value) {
-    Get.snackbar(title, body,
-        colorText: Colors.white,
-        margin: const EdgeInsets.all(8),
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: const Color(0xFF10C995));
-  });
+// snackSuccess(String title, String body) {
+//   Future.delayed(const Duration(seconds: 0)).then((value) {
+//     Get.snackbar(title, body,
+//         colorText: Colors.white,
+//         margin: const EdgeInsets.all(8),
+//         snackPosition: SnackPosition.BOTTOM,
+//         backgroundColor: const Color(0xFF10C995));
+//   });
+// }
+
+// snackError(String title, String body) {
+//   Future.delayed(const Duration(seconds: 0)).then((value) {
+//     Get.snackbar(title, body,
+//         colorText: Colors.white,
+//         margin: const EdgeInsets.all(8),
+//         snackPosition: SnackPosition.BOTTOM,
+//         backgroundColor: const Color(0xFFF2AE56).withAlpha(150));
+//   });
+// }
+
+snackSuccess(String? title, String? body) {
+  mainSnack(body: body ?? "", backgroundColor: successColor);
 }
 
-snackError(String title, String body) {
-  Future.delayed(const Duration(seconds: 0)).then((value) {
-    Get.snackbar(title, body,
-        colorText: Colors.white,
-        margin: const EdgeInsets.all(8),
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: const Color(0xFFF2AE56).withAlpha(150));
+snackError(String? title, String? body) {
+  mainSnack(body: body ?? "", backgroundColor: errorColor);
+}
+
+mainSnack({String? title, required String body, Color? backgroundColor}) {
+  WidgetsBinding.instance?.addPostFrameCallback((timeStamp) async {
+    Get.showSnackbar(
+      GetSnackBar(
+        backgroundColor: backgroundColor ?? const Color(0xFF303030),
+        message: body,
+        duration: const Duration(seconds: 2),
+        borderRadius: 10,
+        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      ),
+    );
   });
 }
 
@@ -441,7 +466,7 @@ Future<String>? convertToBase64(File file) async {
 Future<File>? compressImage(File file) async {
   final tempDir = await getTemporaryDirectory();
   final path = tempDir.path;
-  int rand =  math.Random().nextInt(10000);
+  int rand = math.Random().nextInt(10000);
 
   img.Image? images = img.decodeImage(file.readAsBytesSync());
   img.Image? smallerImage = img.copyResize(images!,
@@ -580,13 +605,12 @@ class CustomMaterialPageRoute extends MaterialPageRoute {
           fullscreenDialog: fullscreenDialog,
         );
 }
+
 String getPriceWithFormate({required num price}) {
   final numberFormatter = NumberFormat("##0.00#", "en_US");
   const num initNumber = 0.00;
-  return numberFormatter.format(initNumber + price) +
-      " ${Constance.qrCoin}";
+  return numberFormatter.format(initNumber + price) + " ${Constance.qrCoin}";
 }
-
 
 String formatStringWithCurrency(var data, String currency) {
   try {
@@ -599,7 +623,6 @@ String formatStringWithCurrency(var data, String currency) {
     return "0.00";
   }
 }
-
 
 bool isArabicLang() {
   Logger().e(SharedPref.instance.getLocalization() == "Arabic" ? true : false);

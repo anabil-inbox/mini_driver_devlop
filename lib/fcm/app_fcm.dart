@@ -8,7 +8,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/sh_util.dart';
 import 'package:logger/logger.dart';
 
@@ -136,7 +135,7 @@ class AppFcm {
                   autoCancel: true,
                   importance: Importance.max,
                   priority:Priority.high ,
-                  color: colorPrimaryDark),
+                 ),
             ),
             payload: "${message.data}");
       }

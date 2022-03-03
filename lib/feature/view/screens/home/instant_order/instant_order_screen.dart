@@ -102,96 +102,88 @@ class InstantOrderScreen extends StatelessWidget {
         ),
         isCenterTitle: true,
       ),
-      body: Stack(
-        children: [
-          GetBuilder<HomeViewModel>(
-            builder: (home) {
-              if (SharedPref.instance.getCurrentTaskResponse()?.processType ==
-                  Constance.newStorageSv) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: padding20!),
-                  child: ListView(
-                    shrinkWrap: true,
-                    children: [
-                      SizedBox(height: sizeH27),
-                      const ContractSignature(),
-                      SizedBox(height: sizeH10),
-                      idVerification,
-                      // SizedBox(height: sizeH10),
-                      // const ScanDeliveredBox(),
-                      SizedBox(height: sizeH10),
-                      const ScanBoxInstantOrder(),
-                      SizedBox(height: sizeH10),
-                      const ScanProducts(),
-                      SizedBox(height: sizeH10),
-                      const Balance(),
-                      SizedBox(height: sizeH10),
-                      const CustomerSignatureInstantOrder(),
-                      SizedBox(height: sizeH10),
-                      // waitingTime,
-                      // SizedBox(height: sizeH100),
-                    ],
-                  ),
-                );
-              }
-              // else if(){
-              //   }else{
-              //   return const SizedBox();
-              // }
-              return Padding(
-                padding: EdgeInsets.symmetric(horizontal: padding20!),
-                child: ListView(
-                  shrinkWrap: true,
-                  children: [
-                    SizedBox(height: sizeH27),
-                    const ContractSignature(),
-                    SizedBox(height: sizeH10),
-                    idVerification,
-                    // SizedBox(height: sizeH10),
-                    // const ScanDeliveredBox(),
-                    SizedBox(height: sizeH10),
-                    const ScanBoxInstantOrder(),
-                    SizedBox(height: sizeH10),
-                    const ScanProducts(),
-                    SizedBox(height: sizeH10),
-                    const Balance(),
-                    SizedBox(height: sizeH10),
-                    const CustomerSignatureInstantOrder(),
-                    SizedBox(height: sizeH10),
-                    waitingTime,
-                    SizedBox(height: sizeH100),
-                  ],
-                ),
-              );
-            },
-          ),
-          Positioned(
-              bottom: padding20,
-              right: padding20,
-              left: padding20,
-              child: GetBuilder<HomeViewModel>(
-                builder: (home) {
-                  return PrimaryButton(
-                      textButton: "Done",
-                      isLoading: homeViewModel.isLoading,
-                      onClicked: () async {
-                        homeViewModel.scaanedBoxes.clear();
-                        await home.updateTaskStatus(
-                            newStatus: Constance.done,
-                            taskId: taskId,
-                            taskStatusId: taskStatusId);
-                        await home.getSpecificTask(
-                            taskId: taskStatusId,
-                            taskSatus: Constance.inProgress);
-                        await home.getSpecificTask(
-                            taskId: taskStatusId, taskSatus: Constance.done);
-                        await home.getHomeTasks(taskType: Constance.done);
-                        await home.getHomeTasks(taskType: Constance.inProgress);
-                      },
-                      isExpanded: true);
-                },
-              ))
-        ],
+      body: GetBuilder<HomeViewModel>(
+        builder: (home) {
+          if (SharedPref.instance.getCurrentTaskResponse()?.processType ==
+              Constance.newStorageSv) {
+            return Padding(
+              padding: EdgeInsets.symmetric(horizontal: padding20!),
+              child: ListView(
+                shrinkWrap: true,
+                children: [
+                  SizedBox(height: sizeH27),
+                  const ContractSignature(),
+                  SizedBox(height: sizeH10),
+                  idVerification,
+                  // SizedBox(height: sizeH10),
+                  // const ScanDeliveredBox(),
+                  SizedBox(height: sizeH10),
+                  const ScanBoxInstantOrder(),
+                  SizedBox(height: sizeH10),
+                  const ScanProducts(),
+                  SizedBox(height: sizeH10),
+                  const Balance(),
+                  SizedBox(height: sizeH10),
+                  const CustomerSignatureInstantOrder(),
+                  SizedBox(height: sizeH20),
+                  GetBuilder<HomeViewModel>(
+                    builder: (home) {
+                      return PrimaryButton(
+                          textButton: "Done",
+                          isLoading: homeViewModel.isLoading,
+                          onClicked: () async {
+                            await home.updateTaskStatus(
+                                newStatus: Constance.done,
+                                taskId: taskId,
+                                taskStatusId: taskStatusId);
+                            await home.getSpecificTask(
+                                taskId: taskStatusId,
+                                taskSatus: Constance.inProgress);
+                            await home.getSpecificTask(
+                                taskId: taskStatusId,
+                                taskSatus: Constance.done);
+                            await home.getHomeTasks(taskType: Constance.done);
+                            await home.getHomeTasks(
+                                taskType: Constance.inProgress);
+                            
+                          },
+                          isExpanded: true);
+                    },
+                  )
+                ],
+              ),
+            );
+          }
+          // else if(){
+          //   }else{
+          //   return const SizedBox();
+          // }
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: padding20!),
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                SizedBox(height: sizeH27),
+                const ContractSignature(),
+                SizedBox(height: sizeH10),
+                idVerification,
+                // SizedBox(height: sizeH10),
+                // const ScanDeliveredBox(),
+                SizedBox(height: sizeH10),
+                const ScanBoxInstantOrder(),
+                SizedBox(height: sizeH10),
+                const ScanProducts(),
+                SizedBox(height: sizeH10),
+                const Balance(),
+                SizedBox(height: sizeH10),
+                const CustomerSignatureInstantOrder(),
+                SizedBox(height: sizeH10),
+                waitingTime,
+                SizedBox(height: sizeH100),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

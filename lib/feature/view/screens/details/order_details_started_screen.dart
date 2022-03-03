@@ -308,11 +308,7 @@ class OrderDetailsStarted extends StatelessWidget {
                         ),
                         SizedBox(height: sizeH10),
                         AddressBox(
-                          latuide: salesOrder.latituide ?? 0,
-                          longtuide: salesOrder.longitude ?? 0,
-                          address: salesOrder.orderShippingAddress ??
-                              salesOrder.orderWarehouseAddress ??
-                              "",
+                          salesOrder: salesOrder,
                         ),
                         SizedBox(height: sizeH10),
                         ScheduleBox(

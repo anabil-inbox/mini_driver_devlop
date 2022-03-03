@@ -264,4 +264,8 @@ class SharedPref {
     print("getting Price ${numberFormatter.format(initNumber + price)}");
     return numberFormatter.format(initNumber + price) + " ${Constance.qrCoin}";
   }
+
+  clear() {
+    removeBoxess();
+  }
 }

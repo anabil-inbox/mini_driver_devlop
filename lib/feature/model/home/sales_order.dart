@@ -16,6 +16,7 @@ class SalesOrder {
       this.totalBoxes,
       this.totalReceived,
       this.orderDoc,
+      this.customerImage,
       this.orderItems,
       this.taskStatus,
       this.latituide,
@@ -25,6 +26,7 @@ class SalesOrder {
   String? taskId;
   String? contentStatus;
   String? customerId;
+  String? customerImage;
   dynamic customerMobile;
   String? taskStatus;
   String? orderType;
@@ -45,6 +47,7 @@ class SalesOrder {
         taskId: json["task_id"],
         contentStatus: json["content_status"],
         customerId: json["customer_id"],
+        customerImage: json["customer_image"] == null ? null :  json["customer_image"],
         customerMobile: json["customer_mobile"],
         longitude: json["longitude"],
         latituide: json["latitude"],

@@ -72,7 +72,6 @@ class HomeHelper {
       var response = await HomeApi.getInstance.getEmergencyCasses(
           url: ConstanceNetwork.getEmergencyCassesEndPoint,
           header: ConstanceNetwork.header(4));
-      Logger().i(response.toJson());
       if (response.status?.success == true) {
         List data = response.data;
         return data.map((e) => EmergencyCase.fromJson(e)).toList();
@@ -213,6 +212,23 @@ class HomeHelper {
       var response = await HomeApi.getInstance.deleteProduct(
           body: body,
           url: ConstanceNetwork.deleteProductEndPoint,
+          header: ConstanceNetwork.header(4));
+      if (response.status?.success == true) {
+        return response;
+      } else {
+        return response;
+      }
+    } catch (e) {
+      log.d(e.toString());
+      return AppResponse.fromJson({});
+    }
+  }
+
+   Future<AppResponse> paymentRequest({required var body}) async {
+    try {
+      var response = await HomeApi.getInstance.paymentRequest(
+          body: body,
+          url: ConstanceNetwork.paymentRequestEndPoint,
           header: ConstanceNetwork.header(4));
       if (response.status?.success == true) {
         return response;
