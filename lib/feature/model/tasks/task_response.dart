@@ -94,20 +94,20 @@ class TaskResponse {
       );
 
   Map<String, dynamic> toJson() => {
-        "child_order_id": childOrderId,
-        "product_code": productCode,
-        "qty": qty,
-        "product_price": productPrice,
-        "product_image": productImage,
-        "sales_order": salesOrder,
-        "is_new": isNew,
-        "customer_id": customerId,
-        "process_type": processType,
-        "payment_method": paymentMethod,
-        "child_order": childOrder?.toJson(),
-        "total": total,
-        "total_paid": totalPaid,
-        "total_due": totalDue,
+        "child_order_id": childOrderId == null ? null: childOrderId,
+        "product_code": productCode == null ? null: productCode,
+        "qty": qty == null ? null: qty,
+        "product_price": productPrice == null ? null: productPrice,
+        "product_image": productImage == null ? null: productImage,
+        "sales_order": salesOrder == null ? null: salesOrder,
+        "is_new": isNew == null ? null: isNew,
+        "customer_id": customerId == null ? null: customerId,
+        "process_type": processType == null ? null: processType,
+        "payment_method": paymentMethod == null ? null: paymentMethod,
+        "child_order":  childOrder == null ? null:childOrder?.toJson(),
+        "total": total == null ? null: total,
+        "total_paid": totalPaid == null ? null: totalPaid,
+        "total_due": totalDue == null ? null: totalDue,
       };
 }
 
@@ -128,8 +128,8 @@ class ChildOrder {
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "items": List<dynamic>.from(items!.map((x) => x.toJson())),
+        "id":id == null ? null:  id,
+        "items":items == null ? null:  List<dynamic>.from(items!.map((x) => x.toJson())),
       };
 }
 
