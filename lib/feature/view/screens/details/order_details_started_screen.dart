@@ -180,7 +180,7 @@ class OrderDetailsStarted extends StatelessWidget {
             textButton: "Complete Details",
             isLoading: false,
             onClicked: () async {
-              await homeViewModel.checkTaskStatus(taskId: task.id ?? "");
+              await homeViewModel.checkTaskStatus(taskId: salesOrder.taskId ?? "");
               Get.to(() => InstantOrderScreen(
                     taskStatusId: task.id ?? "",
                     isNewCustomer: true,

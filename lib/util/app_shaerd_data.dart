@@ -314,16 +314,16 @@ Widget imageNetwork({double? width, double? height, String? url}) {
         decoration: BoxDecoration(
           // border: Border.all(color: colorBorderLight),
           image: DecorationImage(
-            image: CachedNetworkImageProvider(url ?? urlUserPlacholder!),
+            image: CachedNetworkImageProvider(url ?? urlUserPlaceholder!),
             fit: BoxFit.contain,
           ),
         ),
       );
     },
-    imageUrl: urlUserPlacholder!,
+    imageUrl: urlUserPlaceholder!,
     errorWidget: (context, url, error) {
       return CachedNetworkImage(
-          imageUrl: urlUserPlacholder!, fit: BoxFit.contain);
+          imageUrl: urlUserPlaceholder!, fit: BoxFit.contain);
     },
     width: width ?? 74,
     height: height ?? 74,
