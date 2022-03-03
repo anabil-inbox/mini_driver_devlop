@@ -69,10 +69,8 @@ class HomeApi {
       return AppResponse.fromJson(message);
     }
   }
-  
 
-    Future<AppResponse> reciveBoxess(
-      {var url, var header, var body}) async {
+  Future<AppResponse> reciveBoxess({var url, var header, var body}) async {
     try {
       var response = await DioManagerClass.getInstance
           .dioPostFormMethod(url: url, header: header, body: body);
@@ -84,8 +82,7 @@ class HomeApi {
     }
   }
 
-    Future<AppResponse> updateTaskStatus(
-      {var url, var header, var body}) async {
+  Future<AppResponse> updateTaskStatus({var url, var header, var body}) async {
     try {
       var response = await DioManagerClass.getInstance
           .dioPostFormMethod(url: url, header: header, body: body);
@@ -97,8 +94,7 @@ class HomeApi {
     }
   }
 
-      Future<AppResponse> search(
-      {var url, var header, var body}) async {
+  Future<AppResponse> search({var url, var header, var body}) async {
     try {
       var response = await DioManagerClass.getInstance
           .dioPostFormMethod(url: url, header: header, body: body);
@@ -110,9 +106,7 @@ class HomeApi {
     }
   }
 
-
-  Future<AppResponse> uploadCustomerId(
-      {var url, var header, var body}) async {
+  Future<AppResponse> uploadCustomerId({var url, var header, var body}) async {
     try {
       var response = await DioManagerClass.getInstance
           .dioPostFormMethod(url: url, header: header, body: body);
@@ -124,8 +118,7 @@ class HomeApi {
     }
   }
 
-    Future<AppResponse> scanSalesBox(
-      {var url, var header, var body}) async {
+  Future<AppResponse> scanSalesBox({var url, var header, var body}) async {
     try {
       var response = await DioManagerClass.getInstance
           .dioPostFormMethod(url: url, header: header, body: body);
@@ -137,8 +130,7 @@ class HomeApi {
     }
   }
 
-     Future<AppResponse> scanProduct(
-      {var url, var header, var body}) async {
+  Future<AppResponse> scanProduct({var url, var header, var body}) async {
     try {
       var response = await DioManagerClass.getInstance
           .dioPostFormMethod(url: url, header: header, body: body);
@@ -150,8 +142,7 @@ class HomeApi {
     }
   }
 
-     Future<AppResponse> deleteProduct(
-      {var url, var header, var body}) async {
+  Future<AppResponse> deleteProduct({var url, var header, var body}) async {
     try {
       var response = await DioManagerClass.getInstance
           .dioPostFormMethod(url: url, header: header, body: body);
@@ -163,8 +154,19 @@ class HomeApi {
     }
   }
 
-       Future<AppResponse> paymentRequest(
-      {var url, var header, var body}) async {
+  Future<AppResponse> paymentRequest({var url, var header, var body}) async {
+    try {
+      var response = await DioManagerClass.getInstance
+          .dioPostFormMethod(url: url, header: header, body: body);
+      return AppResponse.fromJson(json.decode(response.toString()));
+    } on DioError catch (ex) {
+      var message = json.decode(ex.response.toString());
+      Logger().e(message);
+      return AppResponse.fromJson(message);
+    }
+  }
+
+  Future<AppResponse> checkTaskStatus({var url, var header, var body}) async {
     try {
       var response = await DioManagerClass.getInstance
           .dioPostFormMethod(url: url, header: header, body: body);

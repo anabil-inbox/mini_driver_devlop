@@ -32,9 +32,9 @@ import 'constance.dart';
 import 'localization/localization_service.dart';
 import 'string.dart';
 
-String? urlPlacholder =
+String? urlPlaceholder =
     "https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png";
-String? urlUserPlacholder =
+String? urlUserPlaceholder =
     "https://jenalk.ahdtech.com/dev/assets/img/no-user.png";
 
 screenUtil(BuildContext context) {

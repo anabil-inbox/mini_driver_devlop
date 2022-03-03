@@ -177,9 +177,10 @@ class OrderDetailsStarted extends StatelessWidget {
         );
       } else if (salesOrder.taskStatus == Constance.taskdelivered) {
         return PrimaryButton(
-            textButton: "Complete Detailes",
+            textButton: "Complete Details",
             isLoading: false,
-            onClicked: () {
+            onClicked: () async {
+              await homeViewModel.checkTaskStatus(taskId: task.id ?? "");
               Get.to(() => InstantOrderScreen(
                     taskStatusId: task.id ?? "",
                     isNewCustomer: true,
@@ -213,7 +214,7 @@ class OrderDetailsStarted extends StatelessWidget {
     return const SizedBox();
   }
 
-  Widget blockDeleiverd() {
+  Widget blockDelivered() {
     if (!homeViewModel.isTaskCustomerVist(task: task) ||
         salesOrder.taskStatus?.toLowerCase() ==
             Constance.inProgress.toLowerCase()) {
@@ -336,7 +337,7 @@ class OrderDetailsStarted extends StatelessWidget {
               }),
             ),
 
-            blockDeleiverd(),
+            blockDelivered(),
 
             // todo for order previous Task bar scenario
             if (index != 0)

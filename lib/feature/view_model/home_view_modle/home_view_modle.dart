@@ -140,7 +140,6 @@ class HomeViewModel extends GetxController {
 
   Future<void> getSpecificTask(
       {required String taskId, required String taskSatus}) async {
-
     if (taskSatus == Constance.inProgress) {
       operationsSalesData = SalesData();
     } else {
@@ -679,7 +678,8 @@ class HomeViewModel extends GetxController {
               SharedPref.instance.getCurrentTaskResponse() ??
                   TaskResponse(childOrder: ChildOrder(items: []));
           taskResponse.childOrder!.items?.remove(productModel);
-          await SharedPref.instance.setCurrentTaskResponse(taskResponse: jsonEncode(taskResponse));
+          await SharedPref.instance
+              .setCurrentTaskResponse(taskResponse: jsonEncode(taskResponse));
           update();
           snackSuccess("$txtSuccess", "${value.status!.message}");
         } else {
@@ -709,6 +709,19 @@ class HomeViewModel extends GetxController {
           });
     } catch (e) {
       printError();
+    }
+  }
+
+  Future<void> checkTaskStatus({required String taskId}) async {
+    try {
+      await HomeHelper.getInstance
+          .checkTaskStatus(body: {Constance.taskId: taskId}).then((value) => {
+                SharedPref.instance
+                    .setCurrentTaskResponse(taskResponse: value.data)
+              });
+      update();
+    } catch (e) {
+      Logger().e(e);
     }
   }
 }

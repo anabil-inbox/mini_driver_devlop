@@ -172,7 +172,7 @@ class HomeHelper {
     }
   }
 
-    Future<AppResponse> scanSalesBox({required var body}) async {
+  Future<AppResponse> scanSalesBox({required var body}) async {
     try {
       var response = await HomeApi.getInstance.scanSalesBox(
           body: body,
@@ -189,7 +189,7 @@ class HomeHelper {
     }
   }
 
-      Future<AppResponse> scanProduct({required var body}) async {
+  Future<AppResponse> scanProduct({required var body}) async {
     try {
       var response = await HomeApi.getInstance.scanProduct(
           body: body,
@@ -206,8 +206,7 @@ class HomeHelper {
     }
   }
 
-
- Future<AppResponse> deleteProduct({required var body}) async {
+  Future<AppResponse> deleteProduct({required var body}) async {
     try {
       var response = await HomeApi.getInstance.deleteProduct(
           body: body,
@@ -224,7 +223,7 @@ class HomeHelper {
     }
   }
 
-   Future<AppResponse> paymentRequest({required var body}) async {
+  Future<AppResponse> paymentRequest({required var body}) async {
     try {
       var response = await HomeApi.getInstance.paymentRequest(
           body: body,
@@ -241,4 +240,20 @@ class HomeHelper {
     }
   }
 
+  Future<AppResponse> checkTaskStatus({required var body}) async {
+    try {
+      var response = await HomeApi.getInstance.checkTaskStatus(
+          body: body,
+          url: ConstanceNetwork.checkTaskStatusEndPoint,
+          header: ConstanceNetwork.header(4));
+      if (response.status?.success == true) {
+        return response;
+      } else {
+        return response;
+      }
+    } catch (e) {
+      log.d(e.toString());
+      return AppResponse.fromJson({});
+    }
+  }
 }

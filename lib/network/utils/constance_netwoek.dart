@@ -66,7 +66,10 @@ abstract class ConstanceNetwork {
   static String productScanEndPoint = "inbox_app.driver.task_management.scan_product";
   static String deleteProductEndPoint = "inbox_app.driver.task_management.delete_product";
   static String paymentRequestEndPoint = "inbox_app.driver.task_management.notify_customer_to_pay";
-  
+  // todo for task status:: 
+
+  static String checkTaskStatusEndPoint = "inbox_app.driver.task_management.check_task_status";
+
   // to do here for User Uploads Certificates :
   static String uploadCustomerId = "inbox_app.driver.task_management.attach_id";
   
