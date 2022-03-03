@@ -617,6 +617,7 @@ class HomeViewModel extends GetxController {
   final tdQty = TextEditingController();
 
   Future<void> scanProudct({required String productCode}) async {
+    Logger().i("${SharedPref.instance.getCurrentTaskResponse()?.toJson()}");
     await HomeHelper.getInstance.scanProduct(body: {
       Constance.productCode: productCode,
       Constance.qty: tdQty.text,
@@ -662,12 +663,12 @@ class HomeViewModel extends GetxController {
         if (value.status!.success!) {
           deletedElements.add("${productModel.name}$index");
           Logger().i(value.toJson());
-          TaskResponse taskResponse =
-              SharedPref.instance.getCurrentTaskResponse() ??
-                  TaskResponse(childOrder: ChildOrder(items: []));
-          taskResponse.childOrder!.items?.remove(productModel);
+          // TaskResponse taskResponse =
+          //     SharedPref.instance.getCurrentTaskResponse() ??
+          //         TaskResponse(childOrder: ChildOrder(items: []));
+          // taskResponse.childOrder!.items?.remove(productModel);
           await SharedPref.instance
-              .setCurrentTaskResponse(taskResponse: jsonEncode(taskResponse));
+              .setCurrentTaskResponse(taskResponse: jsonEncode(value.data));
           update();
           snackSuccess("$txtSuccess", "${value.status!.message}");
         } else {
