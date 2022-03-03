@@ -42,4 +42,6 @@ class BindingsController extends Bindings {
     Get.lazyPut(() => ProfileViewModle());
     Get.lazyPut(() => HomeViewModel());
   }
+
+
 }
