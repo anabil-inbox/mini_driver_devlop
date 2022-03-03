@@ -54,7 +54,7 @@ class Status {
   bool? success;
 
   factory Status.fromJson(Map<String, dynamic> json) => Status(
-        message: json["message"] ?? "",
+        message: json["message"] .toString(),
         code: json["code"] ?? "",
         success: json["success"] ?? "",
       );

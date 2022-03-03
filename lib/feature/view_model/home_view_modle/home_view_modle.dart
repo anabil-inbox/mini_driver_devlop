@@ -619,31 +619,19 @@ class HomeViewModel extends GetxController {
     await HomeHelper.getInstance.scanProduct(body: {
       Constance.productCode: productCode,
       Constance.qty: tdQty.text,
-      Constance.size: SharedPref.instance
-              .getCurrentTaskResponse()!
-              .childOrder!
-              .items!
-              .isEmpty
+      Constance.size: SharedPref.instance.getCurrentTaskResponse()!.childOrder!.items!.isEmpty
           ? 1
-          : SharedPref.instance
-                  .getCurrentTaskResponse()!
-                  .childOrder!
-                  .items!
-                  .length +
-              1,
-      "sales_order": SharedPref.instance
-              .getCurrentTaskResponse()!
-              .childOrder!
-              .items!
-              .isNotEmpty
+          : SharedPref.instance.getCurrentTaskResponse()!.childOrder!.items!.length + 1,
+      "sales_order": SharedPref.instance.getCurrentTaskResponse()!.childOrder!.items!.isNotEmpty
           ? SharedPref.instance.getCurrentTaskResponse()!.childOrder!.id
           : SharedPref.instance.getCurrentTaskResponse()?.salesOrder ?? ""
     }).then((value) async => {
+        Logger().i("scanProduct_${value.data}"),
           if (value.status!.success!)
             {
               // scaanedProducts.add(ProductModel.fromJson(value.data)),
-              SharedPref.instance
-                  .setCurrentTaskResponse(taskResponse: jsonEncode(value.data)),
+
+              SharedPref.instance.setCurrentTaskResponse(taskResponse: jsonEncode(value.data)),
               Logger().e(value.data),
               await refrshHome(),
               update(),
@@ -667,8 +655,7 @@ class HomeViewModel extends GetxController {
       {required Item productModel, required int index}) async {
     try {
       await HomeHelper.getInstance.deleteProduct(body: {
-        "sales_order":
-            SharedPref.instance.getCurrentTaskResponse()?.childOrder?.id,
+        "sales_order": SharedPref.instance.getCurrentTaskResponse()?.childOrder?.id,
         "product_code": productModel.product,
       }).then((value) async {
         if (value.status!.success!) {
