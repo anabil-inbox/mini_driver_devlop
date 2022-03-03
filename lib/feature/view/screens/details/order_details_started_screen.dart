@@ -176,18 +176,23 @@ class OrderDetailsStarted extends StatelessWidget {
           ],
         );
       } else if (salesOrder.taskStatus == Constance.taskdelivered) {
-        return PrimaryButton(
-            textButton: "Complete Details",
-            isLoading: false,
-            onClicked: () async {
-              await homeViewModel.checkTaskStatus(taskId: salesOrder.taskId ?? "");
-              Get.to(() => InstantOrderScreen(
-                    taskStatusId: task.id ?? "",
-                    isNewCustomer: true,
-                    taskId: salesOrder.taskId ?? "",
-                  ));
-            },
-            isExpanded: true);
+        return GetBuilder<HomeViewModel>(
+          builder: (home) {
+            return PrimaryButton(
+                textButton: "Complete Details",
+                isLoading: home.isLoading,
+                onClicked: () async {
+                  await homeViewModel.checkTaskStatus(
+                      taskId: salesOrder.taskId ?? "");
+                  Get.to(() => InstantOrderScreen(
+                        taskStatusId: task.id ?? "",
+                        isNewCustomer: true,
+                        taskId: salesOrder.taskId ?? "",
+                      ));
+                },
+                isExpanded: true);
+          },
+        );
       } else {
         return const SizedBox();
       }

@@ -713,15 +713,17 @@ class HomeViewModel extends GetxController {
   }
 
   Future<void> checkTaskStatus({required String taskId}) async {
-    // try {
+    try {
+      startLoading();
       await HomeHelper.getInstance
           .checkTaskStatus(body: {Constance.taskId: taskId}).then((value) => {
-                SharedPref.instance
-                    .setCurrentTaskResponse(taskResponse: jsonEncode(value.data))
+                SharedPref.instance.setCurrentTaskResponse(
+                    taskResponse: jsonEncode(value.data))
               });
-      update();
-    // } catch (e) {
-    //   Logger().e(e);
-    // }
+    } catch (e) {
+      endLoading();
+      Logger().e(e);
+    }
+    endLoading();
   }
 }
