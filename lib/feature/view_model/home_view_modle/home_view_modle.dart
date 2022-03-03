@@ -63,6 +63,7 @@ class HomeViewModel extends GetxController {
             Get.back();
           } else if (isProductScan) {
             await scanProudct(productCode: data.code ?? "");
+
             tdQty.clear();
             Get.close(2);
           } else {
