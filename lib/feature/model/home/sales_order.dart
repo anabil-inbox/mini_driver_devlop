@@ -1,26 +1,36 @@
 // ignore_for_file: prefer_if_null_operators
 
+import 'package:inbox_driver/feature/model/tasks/box_model.dart';
+
 class SalesOrder {
-  SalesOrder(
-      {this.orderId,
-      this.taskId,
-      this.contentStatus,
-      this.customerId,
-      this.customerMobile,
-      this.orderType,
-      this.totalPrice,
-      this.orderShippingAddress,
-      this.orderWarehouseAddress,
-      this.deliveryDate,
-      this.status,
-      this.totalBoxes,
-      this.totalReceived,
-      this.orderDoc,
-      this.customerImage,
-      this.orderItems,
-      this.taskStatus,
-      this.latituide,
-      this.longitude});
+  SalesOrder({
+    this.orderId,
+    this.taskId,
+    this.contentStatus,
+    this.customerId,
+    this.customerMobile,
+    this.orderType,
+    this.totalPrice,
+    this.orderShippingAddress,
+    this.orderWarehouseAddress,
+    this.deliveryDate,
+    this.status,
+    this.totalBoxes,
+    this.totalReceived,
+    this.orderDoc,
+    this.customerImage,
+    this.orderItems,
+    this.taskStatus,
+    this.latituide,
+    this.longitude,
+    this.boxes,
+    this.buildingNo,
+    this.fromTime,
+    this.paymentMethod,
+    this.street,
+    this.toTime,
+    this.unitNo,
+  });
 
   String? orderId;
   String? taskId;
@@ -41,13 +51,21 @@ class SalesOrder {
   List<OrderItem>? orderItems;
   double? latituide;
   double? longitude;
+  String? buildingNo;
+  String? unitNo;
+  String? street;
+  String? fromTime;
+  String? toTime;
+  String? paymentMethod;
+  List<BoxModel>? boxes;
 
   factory SalesOrder.fromJson(Map<String, dynamic> json) => SalesOrder(
         orderId: json["order_id"],
         taskId: json["task_id"],
         contentStatus: json["content_status"],
         customerId: json["customer_id"],
-        customerImage: json["customer_image"] == null ? null :  json["customer_image"],
+        customerImage:
+            json["customer_image"] == null ? null : json["customer_image"],
         customerMobile: json["customer_mobile"],
         longitude: json["longitude"],
         latituide: json["latitude"],
@@ -61,6 +79,14 @@ class SalesOrder {
         totalBoxes: json["total_boxes"],
         totalReceived: json["total_received"],
         orderDoc: json["order_doc"],
+        buildingNo: json["building_no"],
+        unitNo: json["unit_no"],
+        street: json["street"],
+        fromTime: json["from_time"].toString().split(".")[0],
+        toTime: json["to_time"].toString().split(".")[0],
+        paymentMethod: json["payment_method"],
+        boxes:
+            List<BoxModel>.from(json["boxes"].map((x) => BoxModel.fromJson(x))),
         orderItems: List<OrderItem>.from(
             json["order_items"].map((x) => OrderItem.fromJson(x))),
       );
@@ -74,6 +100,12 @@ class SalesOrder {
         "order_type": orderType,
         "total_price": totalPrice,
         "task_status": taskStatus,
+        "building_no": buildingNo,
+        "unit_no": unitNo,
+        "street": street,
+        "from_time": fromTime,
+        "to_time": toTime,
+        "payment_method": paymentMethod,
         "order_shipping_address": orderShippingAddress,
         "order_warehouse_address": orderWarehouseAddress,
         "delivery_date":

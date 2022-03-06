@@ -363,11 +363,11 @@ class MapViewModel extends GetxController {
     // num a = 0.5 -
     //     cos((lat2 - lat1) * p) / 2 +
     //     cos(lat1 * p) * cos(lat2 * p) * (1 - cos((lon2 - lon1) * p)) / 2;
-    Logger().e("msg_Map : From $lat1 , $lon1 to $lat2 , $lon2");
+   // Logger().e("msg_Map : From $lat1 , $lon1 to $lat2 , $lon2");
     // Logger().e("msg_Map : The distance is : ${12742 * asin(sqrt(a))}");
-    Logger().e(
-        "msg_Map : The distance From GeoLoacator : ${Geolocator.distanceBetween(lat1, lon1, lat2, lon2) / 1000}");
-    //  Geolocator.getPositionStream();
+    // Logger().e(
+    //     "msg_Map : The distance From GeoLoacator : ${Geolocator.distanceBetween(lat1, lon1, lat2, lon2) / 1000}");
+    // //  Geolocator.getPositionStream();
     return Geolocator.distanceBetween(lat1, lon1, lat2, lon2) / 1000;
   }
 
@@ -382,10 +382,10 @@ class MapViewModel extends GetxController {
     try {
       if (settings.deliveryFactor! >
           calculateDistance(lat1: lat1, lon1: lon1, lat2: lat2, lon2: lon2)) {
-        Logger().e("msg_Map : isAllow to Dilivery true");
+       // Logger().e("msg_Map : isAllow to Dilivery true");
         return true;
       } else {
-        Logger().e("msg_Map : isAllow to Dilivery false");
+       // Logger().e("msg_Map : isAllow to Dilivery false");
         return false;
       }
     } catch (e) {

@@ -1,7 +1,8 @@
 import 'package:inbox_driver/feature/model/home/sales_order.dart';
 
 class SalesData {
-  SalesData({this.taskName,
+  SalesData(
+      {this.taskName,
       this.totalBoxes,
       this.totalReceived,
       this.lastUpdate,
@@ -21,7 +22,9 @@ class SalesData {
       taskName: json["task_name"],
       totalBoxes: json["total_boxes"] ?? 0,
       totalReceived: json["total_received"] ?? 0,
-      lastUpdate: DateTime.parse(json["last_update"]),
+      lastUpdate: json["last_update"] == null
+          ? null
+          : DateTime.parse(json["last_update"]),
       longtuide: json["longitude"],
       latituide: json["latitude"],
       salesOrders: json["Sales Orders"] == null

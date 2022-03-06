@@ -9,9 +9,19 @@ import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/sh_util.dart';
 import 'package:inbox_driver/util/string.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 
 class Balance extends StatelessWidget {
   const Balance({Key? key}) : super(key: key);
+
+  Widget paymentMethod({required HomeViewModel homeViewModel}) {
+    Logger().e(SharedPref.instance.getCurrentTaskResponse()?.totalDue);
+    if ((SharedPref.instance.getCurrentTaskResponse()?.totalDue ?? 0) > 0) {
+      return const PaymentWidget();
+    } else {
+      return const SizedBox();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +109,11 @@ class Balance extends StatelessWidget {
             ],
           ),
           SizedBox(height: sizeH22),
-           const PaymentWidget(),
+          GetBuilder<HomeViewModel>(
+            builder: (homeViewModel) {
+              return paymentMethod(homeViewModel: homeViewModel);
+            },
+          ),
         ],
       ),
     );

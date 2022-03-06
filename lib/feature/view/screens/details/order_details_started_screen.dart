@@ -25,6 +25,7 @@ import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/font_dimne.dart';
 import 'package:inbox_driver/util/sh_util.dart';
 import 'package:inbox_driver/util/string.dart';
+import 'package:logger/logger.dart';
 
 class OrderDetailsStarted extends StatelessWidget {
   const OrderDetailsStarted(
@@ -270,7 +271,7 @@ class OrderDetailsStarted extends StatelessWidget {
                       orderItem: element,
                     );
                   } else {
-                    return MyOrderBoxItem(orderItem: element);
+                    return MyOrderBoxItem(orderItem: element , boxes: salesOrder.boxes ?? [],);
                   }
                 },
               )))
@@ -279,8 +280,11 @@ class OrderDetailsStarted extends StatelessWidget {
     );
   }
 
+
   @override
   Widget build(BuildContext context) {
+    Logger().e(task.id ?? "");
+    Logger().e(salesOrder.taskId ?? "");
     return Scaffold(
         appBar: CustomAppBarWidget(
           titleWidget: CustomTextView(
@@ -321,12 +325,8 @@ class OrderDetailsStarted extends StatelessWidget {
                           dateTime: salesData.lastUpdate.toString(),
                         ),
                         SizedBox(height: sizeH10),
-                        // OrderList(
-                        //   orderItems: salesOrder.orderItems ?? [],
-                        // ),
                         lvOrderItems(),
-                        SizedBox(height: sizeH30),
-                        SizedBox(height: sizeH10),
+                        SizedBox(height: sizeH40),
                       ],
                     ),
                   ),

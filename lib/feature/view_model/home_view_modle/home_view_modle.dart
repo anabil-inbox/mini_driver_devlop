@@ -63,13 +63,16 @@ class HomeViewModel extends GetxController {
             Get.back();
           } else if (isProductScan) {
             await scanProudct(productCode: data.code ?? "");
-
             tdQty.clear();
             Get.close(2);
           } else {
             await scanBox(
                 serial: data.code ?? "",
                 taskName: operationsSalesData?.taskName ?? "");
+            await getSpecificTask(
+                taskId: taskModel?.id ?? "", taskSatus: Constance.inProgress);
+            await getSpecificTask(
+                taskId: taskModel?.id ?? "", taskSatus: Constance.done);
             Get.back();
           }
         }
@@ -147,7 +150,7 @@ class HomeViewModel extends GetxController {
       operationsSalesDataCompleted = SalesData();
     }
 
-    try {
+   // try {
       startLoading();
       await HomeHelper.getInstance.getSpecificTask(taskId: {
         Constance.taskId: taskId,
@@ -164,10 +167,10 @@ class HomeViewModel extends GetxController {
                 update(),
               }
           });
-    } catch (e) {
-      endLoading();
-      printError();
-    }
+    // } catch (e) {
+    //   endLoading();
+    //   printError();
+    // }
     endLoading();
   }
 
@@ -567,12 +570,16 @@ class HomeViewModel extends GetxController {
     }
   }
 
+  Duration wateTime = const Duration();
+
   @override
   void onInit() async {
     super.onInit();
     await getHomeTasks(taskType: Constance.inProgress);
     await getHomeTasks(taskType: Constance.done);
     await getEmergancy();
+    wateTime = Duration(minutes: settings.waitingTime ?? 9);
+    //wateTime =
   }
 
   @override
@@ -644,7 +651,8 @@ class HomeViewModel extends GetxController {
           if (value.status!.success!)
             {
               // scaanedProducts.add(ProductModel.fromJson(value.data)),
-              SharedPref.instance.setCurrentTaskResponse(taskResponse: jsonEncode(value.data)),
+              SharedPref.instance
+                  .setCurrentTaskResponse(taskResponse: jsonEncode(value.data)),
               Logger().e(value.data),
               await refrshHome(),
               update(),

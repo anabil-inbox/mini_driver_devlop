@@ -1,32 +1,38 @@
 class BoxModel {
-  BoxModel({this.boxId, this.boxName, this.boxOperations});
+  BoxModel(
+      {this.boxId, this.boxName, this.boxOperations, required this.serial});
 
   String? boxId;
   String? boxName;
   List<BoxOperation>? boxOperations;
-
+  String? serial;
   factory BoxModel.fromJson(Map<String, dynamic> json) => BoxModel(
         boxId: json["box_id"],
+        serial: json["serial"],
         boxName: json["box_name"],
-        boxOperations: List<BoxOperation>.from(
-            json["box_operations"].map((x) => BoxOperation.fromJson(x))),
+        boxOperations: json["box_operations"] == null
+            ? []
+            : List<BoxOperation>.from(
+                json["box_operations"].map((x) => BoxOperation.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "box_id": boxId,
         "box_name": boxName,
+        "serial": serial,
         "box_operations":
             List<dynamic>.from(boxOperations!.map((x) => x.toJson())),
       };
 
-        @override
+  @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is BoxModel && runtimeType == other.runtimeType && boxId == other.boxId;
+      other is BoxModel &&
+          runtimeType == other.runtimeType &&
+          boxId == other.boxId;
 
   @override
   int get hashCode => boxId.hashCode;
-
 }
 
 class BoxOperation {
