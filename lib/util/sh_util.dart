@@ -71,12 +71,13 @@ class SharedPref {
   }
 
   TaskResponse? getCurrentTaskResponse() {
-    try {
+    // try {
       String? objectStr = _prefs?.getString(taskKey);
       return TaskResponse.fromJson(jsonDecode(objectStr!));
-    } catch (e) {
-      return null;
-    }
+    // } catch (e) {
+    //   Logger().e(e);
+    //   return null;
+    // }
   }
 
   setLocalization(String lang) {

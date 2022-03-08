@@ -27,6 +27,7 @@ abstract class Constance {
   static String serial = "serial";
   static String taskName = "task_name";
   static String salesOrder = "Sales Orders";
+  static String salesOrderUnderScoure = "sales_order";
   static String productCode = "product_code";
   static String qty = "qty";
   static String size = "size";
@@ -69,4 +70,8 @@ abstract class Constance {
 
   static String application = "Application";
 
+  static String image = "image";
+
+  static String onClientSide = "on client side";
+  static String onDriverSide = "Driver Side";
   }

@@ -40,6 +40,9 @@ const String txtCustomerToWH = "Customer to WH";
 const String txtHelena = "Helena Brauer";
 const String txtAddress = "20 Wadi Alsail, 918 Alreef st. Building no.10";
 const String txtReceived = "Received";
+const String txtADD = "Add";
+const String txtAddSignature = "Add Signature";
+
 
 //todo this for New Customer
 const String txtNewCustomer = "New Customer";

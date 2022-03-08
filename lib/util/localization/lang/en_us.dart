@@ -14,6 +14,8 @@ Map<String, String> enUS = {
   txtSearchForCountry: "Search For Country",
   txtEditProfile: "Edit Profile",
   txtLog: "Log",
+  txtADD: "Add",
+  txtAddSignature: "Add Signature",
   txtLogOut: "Log Out",
   txtSetting: "Settings",
   txtFullName: "full name",

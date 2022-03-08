@@ -15,6 +15,7 @@ class Balance extends StatelessWidget {
   const Balance({Key? key}) : super(key: key);
 
   Widget paymentMethod({required HomeViewModel homeViewModel}) {
+    Logger().e(SharedPref.instance.getCurrentTaskResponse()?.total);
     Logger().e(SharedPref.instance.getCurrentTaskResponse()?.totalDue);
     if ((SharedPref.instance.getCurrentTaskResponse()?.totalDue ?? 0) > 0) {
       return const PaymentWidget();

@@ -14,6 +14,8 @@ Map<String, String> arSU = {
   txtSearchForCountry: "ابحث عن الدولة",
   txtEditProfile: "تعديل الملف الشخصي",
   txtLog: "السجل",
+  txtADD: "اضافة",
+  txtAddSignature: "اضافة توقيع",
   txtLogOut: "تسجيل خروج",
   txtSetting: "الاعدادات",
   txtFullName: "الاسم",

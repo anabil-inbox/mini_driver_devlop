@@ -67,7 +67,13 @@ class ScanProducts extends StatelessWidget {
             ],
           ),
           collapsed: const SizedBox.shrink(),
-          expanded: (SharedPref.instance.getCurrentTaskResponse()!.childOrder!.items!.isEmpty)
+          expanded: (SharedPref.instance.getCurrentTaskResponse()?.childOrder ==
+                      null) ||
+                  (SharedPref.instance
+                      .getCurrentTaskResponse()!
+                      .childOrder!
+                      .items!
+                      .isEmpty)
               ? const SizedBox()
               : ListView.builder(
                   shrinkWrap: true,
@@ -87,38 +93,6 @@ class ScanProducts extends StatelessWidget {
                       .items!
                       .length,
                 ),
-          // GetBuilder<HomeViewModel>(
-          //   builder: (home) {
-          //     if (SharedPref.instance.getCurrentTaskResponse()!.childOrder!
-          //         .items!.isEmpty) {
-          //       return const SizedBox();
-          //     } else {
-          //       return ListView.builder(
-          //         shrinkWrap: true,
-          //         primary: false,
-          //         itemBuilder: (context, index) {
-          //           if (home.deletedElements.contains(
-          //               "${SharedPref.instance.getCurrentTaskResponse()!
-          //                   .childOrder!.items![index].name}$index")) {
-          //             return const SizedBox();
-          //           }
-          //           return ProductOnOrderItem(
-          //             index: index,
-          //             productModel: SharedPref.instance
-          //                 .getCurrentTaskResponse()!
-          //                 .childOrder!
-          //                 .items![index],
-          //           );
-          //         },
-          //         itemCount: SharedPref.instance
-          //             .getCurrentTaskResponse()!
-          //             .childOrder!
-          //             .items!
-          //             .length,
-          //       );
-          //     }
-          //   },
-          // ),
         );
       }),
     );

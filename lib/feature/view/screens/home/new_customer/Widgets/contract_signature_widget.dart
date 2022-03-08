@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inbox_driver/feature/view/widgets/bottom_sheet_widget/signature_bottom_sheet.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/feature/view_model/auht_view_modle/auth_view_modle.dart';
 import 'package:inbox_driver/util/app_color.dart';
@@ -30,6 +31,9 @@ class ContractSignature extends StatelessWidget {
               onTap: () {
                 logic.isSelected = !logic.isSelected;
                 logic.update();
+                if(logic.isSelected){
+                  SignatureBottomSheet.showSignatureBottomSheet();
+                }
               },
               child: Row(
                 children: <Widget>[

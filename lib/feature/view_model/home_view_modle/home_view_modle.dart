@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart' as multipart;
@@ -10,6 +11,7 @@ import 'package:inbox_driver/feature/model/app_setting_modle.dart';
 import 'package:inbox_driver/feature/model/home/emergencey/emergency_case.dart';
 import 'package:inbox_driver/feature/model/home/sales_data.dart';
 import 'package:inbox_driver/feature/model/home/task_model.dart';
+import 'package:inbox_driver/feature/model/signature_item_model.dart';
 import 'package:inbox_driver/feature/model/tasks/box_model.dart';
 import 'package:inbox_driver/feature/model/tasks/task_response.dart';
 import 'package:inbox_driver/feature/view/screens/home/Widgets/secondery_button.dart';
@@ -24,6 +26,7 @@ import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/sh_util.dart';
 import 'package:inbox_driver/util/string.dart';
 import 'package:logger/logger.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class HomeViewModel extends GetxController {
@@ -69,12 +72,11 @@ class HomeViewModel extends GetxController {
             await scanBox(
                 serial: data.code ?? "",
                 taskName: operationsSalesData?.taskName ?? "");
-                 Get.back();
+            Get.back();
             await getSpecificTask(
                 taskId: taskModel?.id ?? "", taskSatus: Constance.inProgress);
             await getSpecificTask(
                 taskId: taskModel?.id ?? "", taskSatus: Constance.done);
-           
           }
         }
       });
@@ -150,7 +152,7 @@ class HomeViewModel extends GetxController {
     } else {
       operationsSalesDataCompleted = SalesData();
     }
-   try {
+    try {
       startLoading();
       await HomeHelper.getInstance.getSpecificTask(taskId: {
         Constance.taskId: taskId,
@@ -734,5 +736,57 @@ class HomeViewModel extends GetxController {
       Logger().e(e);
     }
     endLoading();
+  }
+
+  // to do here for signature code
+  SignatureItemModel? selectedSignatureItemModel;
+  dynamic signatureOutput;
+
+  Future<void> uploadCustomerSignature() async {
+    Uint8List imageInUnit8List = signatureOutput;
+    final tempDir = await getTemporaryDirectory();
+    File file = await File('${tempDir.path}/image.png').create();
+    file.writeAsBytesSync(imageInUnit8List);
+
+    try {
+      await HomeHelper.getInstance.uploadCustomerSignature(body: {
+        Constance.salesOrderUnderScoure:
+            SharedPref.instance.getCurrentTaskResponse()?.salesOrder ?? "",
+        Constance.image: multipart.MultipartFile.fromFileSync(file.path)
+      }).then((value) => {
+            if (value.status!.success!)
+              {
+                snackSuccess("$txtSuccess", "${value.status!.message}"),
+              }
+            else
+              {
+                snackError("$txtError", "${value.status!.message}"),
+              }
+          });
+    } catch (e) {
+      Logger().e(e);
+    }
+  }
+
+  Future<void> notifyForSign() async {
+    try {
+      await HomeHelper.getInstance.notifyForSign(body: {
+        Constance.id:
+            SharedPref.instance.getCurrentTaskResponse()?.salesOrder ?? "",
+      }).then((value) => {
+            if (value.status!.success!)
+              {
+                SharedPref.instance.setCurrentTaskResponse(
+                    taskResponse: jsonEncode(value.data)),
+                snackSuccess("$txtSuccess", "${value.status!.message}"),
+              }
+            else
+              {
+                snackError("$txtError", "${value.status!.message}"),
+              }
+          });
+    } catch (e) {
+      printError();
+    }
   }
 }

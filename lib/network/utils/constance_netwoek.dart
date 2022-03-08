@@ -72,6 +72,8 @@ abstract class ConstanceNetwork {
 
   // to do here for User Uploads Certificates :
   static String uploadCustomerId = "inbox_app.driver.task_management.attach_id";
+  static String uploadCustomerSignatureEndPoint = "inbox_app.driver.task_management.upload_customer_singnature";
+  static String notifyForSignEndpoint = "inbox_app.driver.task_management.notify_customer_sign_side"; 
   
   static Map<String, String> header(int typeToken) {
     Map<String, String> headers = {};
