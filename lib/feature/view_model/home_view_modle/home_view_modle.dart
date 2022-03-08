@@ -69,11 +69,12 @@ class HomeViewModel extends GetxController {
             await scanBox(
                 serial: data.code ?? "",
                 taskName: operationsSalesData?.taskName ?? "");
+                 Get.back();
             await getSpecificTask(
                 taskId: taskModel?.id ?? "", taskSatus: Constance.inProgress);
             await getSpecificTask(
                 taskId: taskModel?.id ?? "", taskSatus: Constance.done);
-            Get.back();
+           
           }
         }
       });
@@ -149,8 +150,7 @@ class HomeViewModel extends GetxController {
     } else {
       operationsSalesDataCompleted = SalesData();
     }
-
-   // try {
+   try {
       startLoading();
       await HomeHelper.getInstance.getSpecificTask(taskId: {
         Constance.taskId: taskId,
@@ -167,10 +167,10 @@ class HomeViewModel extends GetxController {
                 update(),
               }
           });
-    // } catch (e) {
-    //   endLoading();
-    //   printError();
-    // }
+    } catch (e) {
+      endLoading();
+      printError();
+    }
     endLoading();
   }
 
