@@ -729,7 +729,9 @@ class HomeViewModel extends GetxController {
       await HomeHelper.getInstance
           .checkTaskStatus(body: {Constance.taskId: taskId}).then((value) => {
                 SharedPref.instance.setCurrentTaskResponse(
-                    taskResponse: jsonEncode(value.data))
+                    taskResponse: jsonEncode(value.data)),
+            
+
               });
     } catch (e) {
       endLoading();
@@ -739,7 +741,7 @@ class HomeViewModel extends GetxController {
   }
 
   // to do here for signature code
-  SignatureItemModel? selectedSignatureItemModel;
+  SignatureItemModel selectedSignatureItemModel = SignatureItemModel();
   dynamic signatureOutput;
 
   Future<void> uploadCustomerSignature() async {
@@ -768,11 +770,11 @@ class HomeViewModel extends GetxController {
     }
   }
 
-  Future<void> notifyForSign() async {
+  Future<void> notifyForSign({required String type}) async {
     try {
       await HomeHelper.getInstance.notifyForSign(body: {
-        Constance.id:
-            SharedPref.instance.getCurrentTaskResponse()?.salesOrder ?? "",
+        Constance.id: SharedPref.instance.getCurrentTaskResponse()?.salesOrder ?? "",
+        Constance.type: type 
       }).then((value) => {
             if (value.status!.success!)
               {

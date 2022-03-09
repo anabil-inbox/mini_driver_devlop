@@ -85,14 +85,16 @@ class CustomerSignatureInstantOrder extends StatelessWidget {
           SignatureItem(
             title: Constance.onDriverSide,
             onSelected: () async {
-              homeViewModel.notifyForSign();
+              homeViewModel.notifyForSign(type: Constance.onDriverSide);
               SignatureBottomSheet.showSignatureBottomSheet();
             },
           ),
           SizedBox(height: sizeH10),
           SignatureItem(
             title: Constance.onClientSide,
-            onSelected: () {},
+            onSelected: () {
+              homeViewModel.notifyForSign(type: Constance.onClientSide);
+            },
           ),
 
           // Container(
@@ -150,7 +152,9 @@ class CustomerSignatureInstantOrder extends StatelessWidget {
           SizedBox(height: sizeH10),
           SignatureItem(
             title: "Fingerprint",
-            onSelected: () {},
+            onSelected: () {
+              homeViewModel.notifyForSign(type: "Fingerprint");
+            },
           ),
           // Container(
           //   height: sizeH50,

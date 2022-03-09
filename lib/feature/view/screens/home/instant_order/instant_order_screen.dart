@@ -145,11 +145,11 @@ class InstantOrderScreen extends StatelessWidget {
                             await home.getHomeTasks(taskType: Constance.done);
                             await home.getHomeTasks(
                                 taskType: Constance.inProgress);
-                            
                           },
                           isExpanded: true);
                     },
-                  )
+                  ),
+                  SizedBox(height: sizeH20),
                 ],
               ),
             );

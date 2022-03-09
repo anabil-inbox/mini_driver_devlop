@@ -19,8 +19,6 @@ abstract class Constance {
 
   // to add here Tasks Constance ::
 
-
-
   static String done = "done";
   static String taskStatus = "task_status";
   static String taskId = "task_id";
@@ -46,10 +44,9 @@ abstract class Constance {
   static String taskNoShow = "no show";
   static String taskDone = "done";
   static String inProgress = "in processing";
-  
 
   // tasks typs const
-    // to do here constance for task Ids:
+  // to do here constance for task Ids:
   static String pickupId = "Pickup_sv";
   static String destroyId = "Destroy_sv";
   static String terminateId = "Terminate_sv";
@@ -60,11 +57,11 @@ abstract class Constance {
   static String newNewStorageSpaceSv = "New Storage Space_sv";
   static String newStorageItemSv = "New Storage Item_sv";
 
-
   // to add here constance Price ::
   static String qrCoin = "QR";
   static String googleMapKey = "AIzaSyAzBtxE3NluLYNrUajTg9OnG7X_luzESvU";
-  static String defoultImageMarker = "https://drive.google.com/file/d/121FQ8BdhQ_yoYeGaDZ4tvA719tzSL94k/view?usp=sharing";
+  static String defoultImageMarker =
+      "https://drive.google.com/file/d/121FQ8BdhQ_yoYeGaDZ4tvA719tzSL94k/view?usp=sharing";
 
   static String id = "id";
 
@@ -72,6 +69,13 @@ abstract class Constance {
 
   static String image = "image";
 
-  static String onClientSide = "on client side";
+  static String onClientSide = "Client Side";
   static String onDriverSide = "Driver Side";
-  }
+
+  static String type = "type";
+
+
+  // Notifications Ids:
+
+  static String userSignature = "20";
+}

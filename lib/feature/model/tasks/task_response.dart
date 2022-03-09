@@ -11,6 +11,7 @@ class TaskResponse {
       this.total,
       this.totalPaid,
       this.totalDue,
+      this.type,
       this.signatureFile,
       this.signatureType,
       this.boxes,
@@ -29,10 +30,12 @@ class TaskResponse {
   List<BoxModel>? boxes;
   dynamic totalDue;
   dynamic notificationId;
+  String? type;
 
   factory TaskResponse.fromJson(Map<String, dynamic> json) => TaskResponse(
       salesOrder: json["sales_order"],
       isNew: json["is_new"],
+      type: json["type"],
       customerId: json["customer_id"],
       processType: json["process_type"],
       paymentMethod: json["payment_method"],
@@ -59,6 +62,7 @@ class TaskResponse {
         "total": total,
         "total_paid": totalPaid,
         "total_due": totalDue,
+        "type": type,
         "notificationId": notificationId
       };
 }
