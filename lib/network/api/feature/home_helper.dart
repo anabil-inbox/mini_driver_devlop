@@ -290,4 +290,21 @@ class HomeHelper {
       return AppResponse.fromJson({});
     }
   }
+
+      Future<AppResponse> createNewSeal({required var body}) async {
+    try {
+      var response = await HomeApi.getInstance.createNewSeal(
+          body: body,
+          url: ConstanceNetwork.createNewSealEndPoint,
+          header: ConstanceNetwork.header(4));
+      if (response.status?.success == true) {
+        return response;
+      } else {
+        return response;
+      }
+    } catch (e) {
+      log.d(e.toString());
+      return AppResponse.fromJson({});
+    }
+  }
 }

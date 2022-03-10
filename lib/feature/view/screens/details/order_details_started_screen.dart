@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:inbox_driver/feature/model/home/sales_data.dart';
 import 'package:inbox_driver/feature/model/home/sales_order.dart';
 import 'package:inbox_driver/feature/model/home/task_model.dart';
+import 'package:inbox_driver/feature/model/signature_item_model.dart';
 import 'package:inbox_driver/feature/view/screens/details/widget/address_box_widget.dart';
 import 'package:inbox_driver/feature/view/screens/details/widget/my_order_box_item.dart';
 import 'package:inbox_driver/feature/view/screens/details/widget/name_box_widget.dart';
@@ -185,6 +186,10 @@ class OrderDetailsStarted extends StatelessWidget {
                 onClicked: () async {
                   await homeViewModel.checkTaskStatus(
                       taskId: salesOrder.taskId ?? "");
+                  home.selectedSignatureItemModel = SignatureItemModel(
+                      title: SharedPref.instance
+                          .getCurrentTaskResponse()
+                          ?.signatureType);
                   Get.to(() => InstantOrderScreen(
                         taskStatusId: task.id ?? "",
                         isNewCustomer: true,
@@ -271,7 +276,10 @@ class OrderDetailsStarted extends StatelessWidget {
                       orderItem: element,
                     );
                   } else {
-                    return MyOrderBoxItem(orderItem: element , boxes: salesOrder.boxes ?? [],);
+                    return MyOrderBoxItem(
+                      orderItem: element,
+                      boxes: salesOrder.boxes ?? [],
+                    );
                   }
                 },
               )))
@@ -279,7 +287,6 @@ class OrderDetailsStarted extends StatelessWidget {
           .toList(),
     );
   }
-
 
   @override
   Widget build(BuildContext context) {

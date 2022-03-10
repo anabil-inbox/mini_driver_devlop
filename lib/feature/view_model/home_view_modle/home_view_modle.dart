@@ -33,6 +33,9 @@ class HomeViewModel extends GetxController {
   bool isSelected = true;
 
   int selectedTab = 0;
+
+  BoxOperation? selectedBoxOperation;
+  
   void changeTab(int x) {
     selectedTab = x;
     update();
@@ -605,8 +608,7 @@ class HomeViewModel extends GetxController {
                 {
                   Logger().e(value.data),
                   scaanedBoxes.add(BoxModel.fromJson(value.data)),
-                  SharedPref.instance
-                      .setBoxesList(boxes: scaanedBoxes.toList()),
+                  SharedPref.instance.setBoxesList(boxes: scaanedBoxes.toList()),
                   await refrshHome(),
                   update(),
                   snackSuccess("$txtSuccess", "${value.status!.message}")
@@ -730,8 +732,6 @@ class HomeViewModel extends GetxController {
           .checkTaskStatus(body: {Constance.taskId: taskId}).then((value) => {
                 SharedPref.instance.setCurrentTaskResponse(
                     taskResponse: jsonEncode(value.data)),
-            
-
               });
     } catch (e) {
       endLoading();
@@ -773,13 +773,37 @@ class HomeViewModel extends GetxController {
   Future<void> notifyForSign({required String type}) async {
     try {
       await HomeHelper.getInstance.notifyForSign(body: {
-        Constance.id: SharedPref.instance.getCurrentTaskResponse()?.salesOrder ?? "",
-        Constance.type: type 
+        Constance.id:
+            SharedPref.instance.getCurrentTaskResponse()?.salesOrder ?? "",
+        Constance.type: type
       }).then((value) => {
             if (value.status!.success!)
               {
                 SharedPref.instance.setCurrentTaskResponse(
                     taskResponse: jsonEncode(value.data)),
+                snackSuccess("$txtSuccess", "${value.status!.message}"),
+              }
+            else
+              {
+                snackError("$txtError", "${value.status!.message}"),
+              }
+          });
+    } catch (e) {
+      printError();
+    }
+  }
+
+  final tdBoxOperaion = TextEditingController();
+  final tdNewSeal = TextEditingController();
+  
+  Future<void> createNewSeal({required String serial, required String newSeal}) async {
+    try {
+     await HomeHelper.getInstance.createNewSeal(body: {
+        Constance.serial: serial,
+        Constance.newSeal: newSeal
+      }).then((value) => {
+            if (value.status!.success!)
+              {
                 snackSuccess("$txtSuccess", "${value.status!.message}"),
               }
             else

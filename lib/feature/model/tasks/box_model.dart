@@ -1,26 +1,33 @@
+
 class BoxModel {
   BoxModel(
-      {this.boxId, this.boxName, this.boxOperations, required this.serial});
+      {this.boxId,
+      this.boxName,
+      this.boxOperations,
+      this.serial,
+      this.newBoxOperation
+  });
 
   String? boxId;
   String? boxName;
   List<BoxOperation>? boxOperations;
   String? serial;
+  String? newBoxOperation;
   factory BoxModel.fromJson(Map<String, dynamic> json) => BoxModel(
         boxId: json["box_id"],
         serial: json["serial"],
         boxName: json["box_name"],
-        boxOperations: json["box_operations"] == null
+        boxOperations: json["active_operations"] == null
             ? []
             : List<BoxOperation>.from(
-                json["box_operations"].map((x) => BoxOperation.fromJson(x))),
+                json["active_operations"].map((x) => BoxOperation.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "box_id": boxId,
         "box_name": boxName,
         "serial": serial,
-        "box_operations":
+        "active_operations":
             List<dynamic>.from(boxOperations!.map((x) => x.toJson())),
       };
 

@@ -25,32 +25,37 @@ class TaskResponse {
   ChildOrder? childOrder;
   String? signatureType;
   String? signatureFile;
-  dynamic total;
+  num? total;
   dynamic totalPaid;
   List<BoxModel>? boxes;
-  dynamic totalDue;
-  dynamic notificationId;
+  num? totalDue;
+  String? notificationId;
   String? type;
 
   factory TaskResponse.fromJson(Map<String, dynamic> json) => TaskResponse(
       salesOrder: json["sales_order"],
-      isNew: json["is_new"],
+      isNew: json["is_new"] is String && json["is_new"] == "false"
+          ? false
+          : json["is_new"] is String && json["is_new"] == "true"
+              ? true
+              : false,
       type: json["type"],
       customerId: json["customer_id"],
       processType: json["process_type"],
       paymentMethod: json["payment_method"],
       signatureType: json["signature_type"],
       signatureFile: json["signature_file"],
-      boxes: json["boxes"] == null
-          ? []
-          : List<BoxModel>.from(json["boxes"].map((x) => BoxModel.fromJson(x))),
+      boxes: [],
+      // boxes: json["boxes"] == null
+      //     ? []
+      //     : List<BoxModel>.from(json["boxes"].map((x) => BoxModel.fromJson(jsonDecode(x)))),
       childOrder: json["child_order"] == null
           ? ChildOrder(items: [])
           : ChildOrder.fromJson(json["child_order"]),
-      total: json["total"],
-      totalPaid: json["total_paid"],
-      totalDue: json["total_due"],
-      notificationId: json["id"]);
+      total: num.tryParse(json["total"].toString()),
+      totalPaid: num.tryParse(json["total_paid"].toString()),
+      totalDue: num.tryParse(json["total_due"].toString()),
+      notificationId: json["id"].toString());
 
   Map<String, dynamic> toJson() => {
         "sales_order": salesOrder,
@@ -59,11 +64,12 @@ class TaskResponse {
         "process_type": processType,
         "payment_method": paymentMethod,
         "child_order": childOrder?.toJson(),
-        "total": total,
-        "total_paid": totalPaid,
-        "total_due": totalDue,
+        "total": total.toString(),
+        "total_paid": totalPaid.toString(),
+        "total_due": totalDue.toString(),
         "type": type,
-        "notificationId": notificationId
+        "boxes" : [],
+        "notificationId": notificationId.toString()
       };
 }
 

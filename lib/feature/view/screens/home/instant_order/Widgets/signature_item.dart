@@ -12,7 +12,6 @@ import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/font_dimne.dart';
 import 'package:inbox_driver/util/sh_util.dart';
-import 'package:logger/logger.dart';
 
 class SignatureItem extends StatelessWidget {
   const SignatureItem({Key? key, required this.title, required this.onSelected})
@@ -25,8 +24,6 @@ class SignatureItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Logger().e(SharedPref.instance.getCurrentTaskResponse()?.signatureType);
-    Logger().e(title);
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(

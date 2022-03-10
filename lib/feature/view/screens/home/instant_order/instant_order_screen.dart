@@ -37,6 +37,8 @@ class InstantOrderScreen extends StatelessWidget {
         ),
         child: GetBuilder<HomeViewModel>(
           builder: (_) {
+            
+            
             return Row(
               children: [
                 CustomTextView(
@@ -44,7 +46,7 @@ class InstantOrderScreen extends StatelessWidget {
                   textStyle: textStyleNormal()?.copyWith(color: colorBlack),
                 ),
                 const Spacer(),
-                SharedPref.instance.getCurrentTaskResponse()?.isNew ?? false
+             (SharedPref.instance.getCurrentTaskResponse()?.isNew.toString() == "true") || (SharedPref.instance.getCurrentTaskResponse()?.isNew ?? false)
                     ? GestureDetector(
                         onTap: () async {
                           await homeViewModel.getImage(ImageSource.camera,
@@ -59,6 +61,8 @@ class InstantOrderScreen extends StatelessWidget {
                     : SvgPicture.asset("assets/svgs/check.svg"),
               ],
             );
+        
+        
           },
         ),
       );

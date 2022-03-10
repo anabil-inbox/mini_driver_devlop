@@ -23,6 +23,7 @@ abstract class Constance {
   static String taskStatus = "task_status";
   static String taskId = "task_id";
   static String serial = "serial";
+  static String newSeal = "new_seal";
   static String taskName = "task_name";
   static String salesOrder = "Sales Orders";
   static String salesOrderUnderScoure = "sales_order";

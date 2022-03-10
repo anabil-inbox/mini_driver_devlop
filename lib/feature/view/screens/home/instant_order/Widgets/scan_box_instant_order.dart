@@ -19,6 +19,7 @@ class ScanBoxInstantOrder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List boxes = SharedPref.instance.getBoxesList();
     screenUtil(context);
     return Container(
       padding: EdgeInsets.symmetric(horizontal: sizeW15!, vertical: sizeH13!),
@@ -83,11 +84,32 @@ class ScanBoxInstantOrder extends StatelessWidget {
                   if (SharedPref.instance.getBoxesList().isEmpty) {
                     return const SizedBox();
                   } else {
+                    // return ListView.builder(
+                    //   shrinkWrap: true,
+                    //   primary: false,
+                    //   itemCount: SharedPref.instance.getBoxesList().length,
+                    //   itemBuilder: (context, index) {
+                    //     return BoxOnOrderItem(
+                    //       onChangeNewSeal: (newSeal) {
+                    //         SharedPref.instance.getBoxesList()[index].newSeal =
+                    //             newSeal;
+                    //       },
+                    //       onChangeBoxOperations: (value) {
+                    //         SharedPref.instance
+                    //             .getBoxesList()[index]
+                    //             .newBoxOperations
+                    //             ?.operation = value;
+                    //       },
+                    //       boxModel: SharedPref.instance.getBoxesList()[index],
+                    //     );
+                    //   },
+                    // );
+                    
+
                     return ListView(
                         shrinkWrap: true,
                         primary: false,
-                        children: SharedPref.instance
-                            .getBoxesList()
+                        children: boxes
                             .map((e) => BoxOnOrderItem(
                                   boxModel: e,
                                 ))

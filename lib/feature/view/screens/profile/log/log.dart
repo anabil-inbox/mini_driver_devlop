@@ -8,7 +8,6 @@ import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/feature/view/widgets/bottom_sheet_widget/emergency_bottom_sheet.dart';
-import 'package:inbox_driver/feature/view/widgets/bottom_sheet_widget/instant_order_bottom_sheet.dart';
 import 'package:inbox_driver/feature/view/widgets/bottom_sheet_widget/no_show_report_bottom_sheet.dart';
 import 'package:inbox_driver/util/string.dart';
 
@@ -67,16 +66,16 @@ class Log extends StatelessWidget {
             Center(
               child: RaisedButton(
                 onPressed: () {
-                  showModalBottomSheet(
-                    context: context,
-                    builder: (BuildContext context) =>
-                        const InstantOrderBottomSheet(),
-                    isScrollControlled: true,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(20),
-                    )),
-                  );
+                  // showModalBottomSheet(
+                  //   context: context,
+                  //   builder: (BuildContext context) =>
+                  //       const InstantOrderBottomSheet(),
+                  //   isScrollControlled: true,
+                  //   shape: const RoundedRectangleBorder(
+                  //       borderRadius: BorderRadius.vertical(
+                  //     top: Radius.circular(20),
+                  //   )),
+                  // );
                 },
                 color: colorPrimary,
                 child: CustomTextView(

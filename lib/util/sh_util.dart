@@ -44,8 +44,7 @@ class SharedPref {
   setCurrentTaskResponse({required String taskResponse}) {
     try {
       _prefs?.remove(taskKey);
-      Logger().e(taskResponse);
-      _prefs?.setString(taskKey, taskResponse);
+      _prefs?.setString(taskKey, jsonEncode(jsonDecode(taskResponse)));
     } catch (e) {
       Logger().e(e);
     }
@@ -71,13 +70,14 @@ class SharedPref {
   }
 
   TaskResponse? getCurrentTaskResponse() {
-    // try {
+    try {
       String? objectStr = _prefs?.getString(taskKey);
-      return TaskResponse.fromJson(jsonDecode(objectStr!));
-    // } catch (e) {
-    //   Logger().e(e);
-    //   return null;
-    // }
+      Map<String,dynamic> map  = jsonDecode(objectStr!);
+      return TaskResponse.fromJson(map);
+    } catch (e) {
+      Logger().e(e);
+      return null;
+    }
   }
 
   setLocalization(String lang) {
