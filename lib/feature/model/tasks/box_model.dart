@@ -1,12 +1,10 @@
-
 class BoxModel {
   BoxModel(
       {this.boxId,
       this.boxName,
       this.boxOperations,
       this.serial,
-      this.newBoxOperation
-  });
+      this.newBoxOperation});
 
   String? boxId;
   String? boxName;
@@ -17,6 +15,7 @@ class BoxModel {
         boxId: json["box_id"],
         serial: json["serial"],
         boxName: json["box_name"],
+        newBoxOperation: json["newBoxOperation"],
         boxOperations: json["active_operations"] == null
             ? []
             : List<BoxOperation>.from(
@@ -27,6 +26,7 @@ class BoxModel {
         "box_id": boxId,
         "box_name": boxName,
         "serial": serial,
+        "newBoxOperation": newBoxOperation,
         "active_operations":
             List<dynamic>.from(boxOperations!.map((x) => x.toJson())),
       };

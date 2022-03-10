@@ -10,6 +10,7 @@ import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_style.dart';
+import 'package:inbox_driver/util/sh_util.dart';
 import 'package:logger/logger.dart';
 
 class BoxOnOrderItem extends StatelessWidget {
@@ -33,24 +34,38 @@ class BoxOnOrderItem extends StatelessWidget {
             TextFormField(
               controller: TextEditingController(text: boxModel.newBoxOperation),
               decoration: InputDecoration(
-                  hintText: "Choose Box Operation",
+                  hintText: "Choose Box ${boxModel.newBoxOperation}",
                   prefixIcon: Padding(
                     padding: const EdgeInsets.all(padding10),
                     child: SvgPicture.asset("assets/svgs/dropdown.svg"),
                   )),
               readOnly: true,
               onTap: () async {
+                int index = 0;
+                List<BoxModel> temBoxes = SharedPref.instance.getBoxesList();
                 await Get.bottomSheet(
-                    InstantOrderBottomSheet(
-                      onEnd: (boxModel) {
-                        this.boxModel = BoxModel();
-                        this.boxModel = boxModel;
-                      },
-                      boxModel: boxModel,
-                      boxOperations: boxModel.boxOperations ?? [],
-                    ),
-                    isScrollControlled: true);
-                Logger().e(boxModel);
+                        InstantOrderBottomSheet(
+                          onEnd: (boxModel) async {
+                            this.boxModel = BoxModel();
+                            this.boxModel = boxModel;
+                          },
+                          boxModel: boxModel,
+                          boxOperations: boxModel.boxOperations ?? [],
+                        ),
+                        isScrollControlled: true)
+                    .whenComplete(() async => {
+                          Logger().e(boxModel),
+                          index = temBoxes.indexOf(boxModel),
+                          temBoxes.removeWhere(
+                              (element) => element.boxId == boxModel.boxId),
+                          temBoxes.insert(index, boxModel),
+                          Logger().e(boxModel),
+                          await SharedPref.instance
+                              .setBoxesList(boxes: temBoxes),
+                          for (var item in SharedPref.instance.getBoxesList())
+                            {Logger().e(item)}
+                        });
+
                 homeViewModel.update();
               },
             ),
