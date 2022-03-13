@@ -19,8 +19,7 @@ class ContractSignature extends StatelessWidget {
         init: HomeViewModel(),
         builder: (logic) {
           return Container(
-            padding:
-                EdgeInsets.symmetric(horizontal: sizeW5!, vertical: sizeH13!),
+            padding: EdgeInsets.symmetric(horizontal: sizeW5!, vertical: sizeH13!),
             height: sizeH50,
             decoration: BoxDecoration(
               color: colorTextWhite,

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_if_null_operators
+
 import 'dart:convert';
 
 import 'package:inbox_driver/feature/model/tasks/box_model.dart';
@@ -27,6 +29,8 @@ class TaskResponse {
       this.processType,
       this.driverToken,
       this.taskStatus,
+        this.waitingTime = 0.0,
+        this.lateFees,
       this.notificationId});
 
   String? salesOrder;
@@ -48,6 +52,8 @@ class TaskResponse {
   String? driverToken;
   String? taskStatus;
   String? notificationId;
+  num? waitingTime;
+  List<LateFees>? lateFees;
 
   factory TaskResponse.fromJson(Map<String, dynamic> json) => TaskResponse(
         salesOrder: json["sales_order"],
@@ -59,8 +65,8 @@ class TaskResponse {
         totalDue: json["total_due"],
         paymentMethod: json["payment_method"],
         notificationId: json["id"],
-        boxes:
-            List<BoxModel>.from(json["boxes"].map((x) => BoxModel.fromJson(x))),
+        boxes: List<BoxModel>.from(json["boxes"].map((x) => BoxModel.fromJson(x))),
+        lateFees: List<LateFees>.from(json["late_fees"].map((x) => LateFees.fromJson(x))),
         scannedBoxes: List<BoxModel>.from(
             json["scanned_boxes"].map((x) => BoxModel.fromJson(x))),
         customerScanned: List<BoxModel>.from(
@@ -74,12 +80,14 @@ class TaskResponse {
         processType: json["process_type"],
         driverToken: json["driver_token"],
         taskStatus: json["task_status"],
+        waitingTime: json["waiting_time"]??0.0,
       );
 
   Map<String, dynamic> toJson() => {
         "sales_order": salesOrder,
         "is_new": isNew,
         "customer_id": customerId,
+        "waiting_time": waitingTime ??0.0,
         "child_order": childOrder,
         "total": total,
         "total_paid": totalPaid,
@@ -101,6 +109,7 @@ class TaskResponse {
         "customer_delivered": customerDelivered == null
             ? []
             : List<dynamic>.from(customerDelivered!.map((x) => x)),
+        "late_fees" : lateFees == null ? []:List<dynamic>.from(lateFees!.map((x) => x)),
         "signature_type": signatureType,
         "signature_file": signatureFile,
         "process_type": processType,
@@ -163,4 +172,28 @@ class Item {
         "qty": qty,
         "image": image,
       };
+}
+
+class LateFees {
+  LateFees({
+    this.mFrom,
+    this.mTo,
+    this.fees,
+  });
+
+  int? mFrom;
+  int? mTo;
+  num? fees;
+
+  factory LateFees.fromJson(Map<String, dynamic> json) => LateFees(
+    mFrom:json["m_from"] == null ? null: json["m_from"],
+    mTo:json["m_to"] == null ? null: json["m_to"],
+    fees:json["fees"] == null ? null: json["fees"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "m_from":mFrom == null ? null: mFrom,
+    "m_to":mTo == null ? null: mTo,
+    "fees":fees == null ? null: fees,
+  };
 }
