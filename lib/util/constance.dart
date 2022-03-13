@@ -26,6 +26,7 @@ abstract class Constance {
   static String newSeal = "new_seal";
   static String taskName = "task_name";
   static String salesOrder = "Sales Orders";
+  static String sealed = "Sealed";
   static String salesOrderUnderScoure = "sales_order";
   static String productCode = "product_code";
   static String qty = "qty";

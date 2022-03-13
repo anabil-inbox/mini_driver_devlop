@@ -10,6 +10,7 @@ import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_style.dart';
+import 'package:inbox_driver/util/constance.dart';
 
 class BoxOnOrderItem extends StatelessWidget {
   BoxOnOrderItem(
@@ -21,65 +22,73 @@ class BoxOnOrderItem extends StatelessWidget {
 
   BoxModel boxModel;
   final bool isShowingOperations;
-  Widget get boxOperationSection => Form(
-        key: formFieldKey,
-        child: Column(
-          children: [
-            SizedBox(
-              height: sizeH12,
-            ),
-            TextFormField(
-              controller: TextEditingController(text: boxModel.newBoxOperation),
-              decoration: InputDecoration(
-                  hintText: "Choose Box Operation",
-                  prefixIcon: Padding(
-                    padding: const EdgeInsets.all(padding10),
-                    child: SvgPicture.asset("assets/svgs/dropdown.svg"),
-                  )),
-              readOnly: true,
-              onTap: () async {
-                await Get.bottomSheet(
-                    InstantOrderBottomSheet(
-                      onEnd: (boxModel) async {
-                        this.boxModel = BoxModel();
-                        this.boxModel = boxModel;
-                      },
-                      boxModel: boxModel,
-                      boxOperations: boxModel.boxOperations ?? [],
-                    ),
-                    isScrollControlled: true);
 
-                homeViewModel.update();
-              },
-            ),
-            SizedBox(
-              height: sizeH12,
-            ),
-            TextFormField(
-              textInputAction: TextInputAction.go,
-              // controller: homeViewModel.tdNewSeal,
-              minLines: 2,
-              maxLines: 2,
-              onFieldSubmitted: (e) async {
-                if (formFieldKey.currentState!.validate()) {
-                  await homeViewModel.createNewSeal(
-                      serial: boxModel.boxId ?? "", newSeal: e);
-                  e = "";
-                  homeViewModel.update();
-                }
-              },
-              validator: (e) {
-                if (e.toString().trim().isEmpty) {
-                  return "Please enter the New Seal";
-                }
-                return null;
-              },
-              decoration:
-                  const InputDecoration(hintText: "Enter New Seal Name"),
-            ),
-          ],
-        ),
-      );
+  Widget get boxOperationSection {
+    return Form(
+      key: formFieldKey,
+      child: Column(
+        children: [
+          SizedBox(
+            height: sizeH12,
+          ),
+          TextFormField(
+            controller: TextEditingController(text: boxModel.selectedBoxOperations?.operation ?? ""),
+            decoration: InputDecoration(
+                hintText: "Choose Box Operation",
+                prefixIcon: Padding(
+                  padding: const EdgeInsets.all(padding10),
+                  child: SvgPicture.asset("assets/svgs/dropdown.svg"),
+                )),
+            readOnly: true,
+            onTap: () async {
+              await Get.bottomSheet(
+                  InstantOrderBottomSheet(
+                    onEnd: (boxModel) async {
+                      this.boxModel = BoxModel();
+                      this.boxModel = boxModel;
+                    },
+                    boxModel: boxModel,
+                    boxOperations: boxModel.boxOperations ?? [],
+                  ),
+                  isScrollControlled: true);
+              homeViewModel.update();
+            },
+          ),
+          SizedBox(
+            height: sizeH12,
+          ),
+          GetBuilder<HomeViewModel>(
+            builder: (homeViewModel) {
+              return boxModel.selectedBoxOperations?.operation ==
+                      Constance.sealed
+                  ? TextFormField(
+                      textInputAction: TextInputAction.go,
+                      minLines: 2,
+                      maxLines: 2,
+                      onFieldSubmitted: (e) async {
+                        if (formFieldKey.currentState!.validate()) {
+                          await homeViewModel.createNewSeal(
+                              serial: boxModel.serial ?? "", newSeal: e);
+                          e = "";
+                          homeViewModel.update();
+                        }
+                      },
+                      validator: (e) {
+                        if (e.toString().trim().isEmpty) {
+                          return "Please enter the New Seal";
+                        }
+                        return null;
+                      },
+                      decoration: const InputDecoration(
+                          hintText: "Enter New Seal Name"),
+                    )
+                  : const SizedBox();
+            },
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

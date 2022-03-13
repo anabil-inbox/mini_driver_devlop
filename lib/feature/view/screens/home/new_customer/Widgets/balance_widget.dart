@@ -8,14 +8,11 @@ import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/string.dart';
 import 'package:get/get.dart';
-import 'package:logger/logger.dart';
 
 class Balance extends StatelessWidget {
   const Balance({Key? key}) : super(key: key);
 
   Widget paymentMethod({required HomeViewModel homeViewModel}) {
-    Logger().e(homeViewModel.operationTask.total);
-    Logger().e(homeViewModel.operationTask.totalDue);
     if ((homeViewModel.operationTask.totalDue ?? 0) > 0) {
       return const PaymentWidget();
     } else {

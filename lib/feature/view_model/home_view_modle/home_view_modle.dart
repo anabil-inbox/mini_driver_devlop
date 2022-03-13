@@ -55,6 +55,7 @@ class HomeViewModel extends GetxController {
       int? index,
       TaskModel? taskModel,
       required bool isProductScan,
+      required bool isScanDeliverdBoxes,
       required bool isFromScanSalesBoxs}) {
     try {
       int i = 0;
@@ -65,7 +66,10 @@ class HomeViewModel extends GetxController {
         i = i + 1;
         if (i == 1) {
           if (isFromScanSalesBoxs) {
-            await scanBoxOrder(serial: data.code ?? "");
+            await scanBoxOrder(
+              isFromScanedDeliverd: isScanDeliverdBoxes,
+              serial: data.code ?? "",
+            );
             Get.back();
           } else if (isProductScan) {
             await scanProudct(productCode: data.code ?? "");
@@ -73,8 +77,9 @@ class HomeViewModel extends GetxController {
             Get.close(2);
           } else {
             await scanBox(
-                serial: data.code ?? "",
-                taskName: operationsSalesData?.taskName ?? "");
+              serial: data.code ?? "",
+              taskName: operationsSalesData?.taskName ?? "",
+            );
             Get.back();
             await getSpecificTask(
                 taskId: taskModel?.id ?? "", taskSatus: Constance.inProgress);
@@ -456,8 +461,7 @@ class HomeViewModel extends GetxController {
                   },
                 // else if (newStatus == Constance.taskDone)
                 //   {
-                    
-                    
+
                 //   },
 
                 update(),
@@ -598,7 +602,8 @@ class HomeViewModel extends GetxController {
   // Set<BoxModel> scaanedBoxes = SharedPref.instance.getBoxesList().toSet();
   // List<ProductModel> scaanedProducts = [];
 
-  Future<void> scanBoxOrder({required String serial}) async {
+  Future<void> scanBoxOrder(
+      {required String serial, required bool isFromScanedDeliverd}) async {
     await HomeHelper.getInstance
         .scanSalesBox(body: {
           Constance.serial: serial,
@@ -607,10 +612,16 @@ class HomeViewModel extends GetxController {
         .then((value) async => {
               if (value.status!.success!)
                 {
-                  operationTask.scannedBoxes?.add(BoxModel.fromJson(value.data)),
-                  // scaanedBoxes.add(BoxModel.fromJson(value.data)),
-                  // SharedPref.instance
-                  //     .setBoxesList(boxes: scaanedBoxes.toList()),
+                  if (isFromScanedDeliverd)
+                    {
+                      operationTask.driverDelivered
+                          ?.add(BoxModel.fromJson(value.data))
+                    }
+                  else
+                    {
+                      operationTask.scannedBoxes
+                          ?.add(BoxModel.fromJson(value.data)),
+                    },
                   await refrshHome(),
                   update(),
                   snackSuccess("$txtSuccess", "${value.status!.message}")
@@ -692,8 +703,7 @@ class HomeViewModel extends GetxController {
   Future<void> sendPaymentRequest() async {
     try {
       await HomeHelper.getInstance.paymentRequest(body: {
-        Constance.id:
-            operationTask.childOrder?.id
+        Constance.id: operationTask.childOrder?.id
       }).then((value) => {
             if (value.status!.success!)
               {
@@ -735,8 +745,7 @@ class HomeViewModel extends GetxController {
 
     try {
       await HomeHelper.getInstance.uploadCustomerSignature(body: {
-        Constance.salesOrderUnderScoure:
-            operationTask.salesOrder ?? "",
+        Constance.salesOrderUnderScoure: operationTask.salesOrder ?? "",
         Constance.image: multipart.MultipartFile.fromFileSync(file.path)
       }).then((value) => {
             if (value.status!.success!)
@@ -756,8 +765,7 @@ class HomeViewModel extends GetxController {
   Future<void> notifyForSign({required String type}) async {
     try {
       await HomeHelper.getInstance.notifyForSign(body: {
-        Constance.id:
-            operationTask.salesOrder ?? "",
+        Constance.id: operationTask.salesOrder ?? "",
         Constance.type: type
       }).then((value) => {
             if (value.status!.success!)

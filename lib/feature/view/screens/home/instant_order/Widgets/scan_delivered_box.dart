@@ -58,7 +58,8 @@ class ScanDeliveredBox extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 Get.to(() => const ScanScreen(
-                      isBoxSalesScan: false,
+                   isScanDeliverdBoxes: true,
+                      isBoxSalesScan: true,
                       isProductScan: false,
                     ));
               },

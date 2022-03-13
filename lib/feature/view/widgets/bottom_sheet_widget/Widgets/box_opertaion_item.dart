@@ -24,9 +24,10 @@ class BoxOperationItem extends StatelessWidget {
       builder: (homeViewModel) {
         return GestureDetector(
           onTap: () {
-            homeViewModel.selectedBoxOperation = boxOperation;
+            homeViewModel.selectedBoxOperation = BoxOperation(operation: boxOperation.operation ?? "");
             homeViewModel.tdBoxOperaion.text = boxOperation.operation ?? "";
-            boxModel.newBoxOperation = boxOperation.operation ?? "";
+            boxModel.selectedBoxOperations = BoxOperation(operation: boxOperation.operation ?? "");
+            
             onEnd(boxModel);
             homeViewModel.update();
             Get.back();

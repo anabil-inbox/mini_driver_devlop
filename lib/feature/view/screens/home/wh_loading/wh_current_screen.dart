@@ -71,7 +71,8 @@ class WHCurrentScreen extends StatelessWidget {
                 task: task,
                 index: i,
                 salesData: homeViewModel.operationsSalesData!,
-                salesOrder: homeViewModel.operationsSalesData!.salesOrders![index],
+                salesOrder:
+                    homeViewModel.operationsSalesData!.salesOrders![index],
                 isBlockContainer: index == 0 ? false : true,
               );
             } else {
@@ -163,8 +164,12 @@ class WHCurrentScreen extends StatelessWidget {
                   height: sizeH48,
                   backgroundColor: colorRed,
                   onPressed: () {
-                    Get.to(() => ScanScreen(taskModel: task , isBoxSalesScan: false, isProductScan: false,));
-                    
+                    Get.to(() => ScanScreen(
+                          taskModel: task,
+                          isBoxSalesScan: false,
+                          isProductScan: false,
+                          isScanDeliverdBoxes: false,
+                        ));
                   },
                   borderColor: colorTrans,
                   icon: "assets/svgs/Scan.svg",

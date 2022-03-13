@@ -59,6 +59,7 @@ class ScanBoxInstantOrder extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 Get.to(() => const ScanScreen(
+                      isScanDeliverdBoxes: false,
                       isBoxSalesScan: true,
                       isProductScan: false,
                     ));
@@ -97,7 +98,7 @@ class ScanBoxInstantOrder extends StatelessWidget {
                             itemCount: home.operationTask.scannedBoxes?.length,
                             itemBuilder: (context, index) {
                               return BoxOnOrderItem(
-                                isShowingOperations: true,
+                                isShowingOperations:  true,
                                 boxModel: home.operationTask.scannedBoxes![index],
                               );
                             },

@@ -9,7 +9,12 @@ import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/constance.dart';
 
 class WhSearchBar extends StatelessWidget {
-  const WhSearchBar({Key? key, this.isHaveScan = true , required this.onChange ,  this.textEditingController}) : super(key: key);
+  const WhSearchBar(
+      {Key? key,
+      this.isHaveScan = true,
+      required this.onChange,
+      this.textEditingController})
+      : super(key: key);
 
   final bool isHaveScan;
   final Function onChange;
@@ -34,9 +39,10 @@ class WhSearchBar extends StatelessWidget {
                 backgroundColor: colorRed,
                 onPressed: () {
                   Get.to(() => const ScanScreen(
-                     isBoxSalesScan: false,
-                      isProductScan: false,
-                  ));
+                        isScanDeliverdBoxes: false,
+                        isBoxSalesScan: false,
+                        isProductScan: false,
+                      ));
                 },
                 borderColor: colorTrans,
                 icon: "assets/svgs/Scan.svg",
@@ -49,57 +55,16 @@ class WhSearchBar extends StatelessWidget {
         padding: EdgeInsets.only(top: padding12!),
         child: SizedBox(
           child: searchWidget,
-          // child: CustomAppBarWidget(
-          //   elevation: 0,
-          //   appBarColor: Colors.transparent,
-          //   isCenterTitle: true,
-          //   titleWidget: searchWidget,
-          //   leadingWidget: const SizedBox(),
-          // ),
         ),
       );
     }
   }
 
-  // Widget get searchWidget => Container(
-  //       height: sizeH50,
-  //       clipBehavior: Clip.hardEdge,
-  //      // padding: EdgeInsets.symmetric(horizontal: sizeW13!),
-  //       decoration: BoxDecoration(
-  //         borderRadius: BorderRadius.circular(sizeRadius10!),
-  //         color: colorSearchBox,
-  //         // border: Border.all(color: colorBorderContainer)
-  //       ),
-  //       child: Row(
-  //         children: [
-  //           SvgPicture.asset(
-  //             "assets/svgs/search_icon.svg",
-  //           ),
-  //           Expanded(
-  //             child: CustomTextFormFiled(
-  //               label: txtSearchHere,
-  //               maxLine: Constance.maxLineOne,
-  //               textInputAction: TextInputAction.search,
-  //               keyboardType: TextInputType.text,
-  //               onSubmitted: (_) {},
-  //               onChange: (_) {},
-  //               isReadOnly: true,
-  //               isSmallPadding: true,
-  //               isSmallPaddingWidth: true,
-  //               fillColor: colorBackground,
-  //               isFill: true,
-  //               isBorder: true,
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     );
-
   // to do this for search Widget ::
- 
+
   Widget get searchWidget => CustomTextFormFiled(
         iconSize: sizeRadius20,
-        controller: textEditingController??TextEditingController(),
+        controller: textEditingController ?? TextEditingController(),
         maxLine: Constance.maxLineOne,
         icon: Icons.search,
         iconColor: colorHint2,
