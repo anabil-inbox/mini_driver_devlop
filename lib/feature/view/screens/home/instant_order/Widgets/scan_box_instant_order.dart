@@ -16,12 +16,10 @@ import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/string.dart';
 
 class ScanBoxInstantOrder extends StatelessWidget {
-   const ScanBoxInstantOrder({Key? key}) : super(key: key);
-
+  const ScanBoxInstantOrder({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    
     screenUtil(context);
     return Container(
       padding: EdgeInsets.symmetric(horizontal: sizeW15!, vertical: sizeH13!),
@@ -71,51 +69,50 @@ class ScanBoxInstantOrder extends StatelessWidget {
           ],
         ),
         collapsed: const SizedBox.shrink(),
-        expanded: Column(
-          children: [
-            SizedBox(height: sizeH14),
-            Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal: sizeW20!, vertical: sizeH17!),
-              decoration: BoxDecoration(
-                color: colorSearchBox,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: GetBuilder<HomeViewModel>(
-                builder: (home) {
-                  
-                  if (home.operationTask.scannedBoxes == null || home.operationTask.scannedBoxes!.isEmpty) {
-                    return const SizedBox();
-                  } else {
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      primary: false,
-                      itemCount: home.operationTask.scannedBoxes?.length,
-                      itemBuilder: (context, index) {
-                        return BoxOnOrderItem(
-                          boxModel: home.operationTask.scannedBoxes![index],
-                        );
+        expanded: GetBuilder<HomeViewModel>(
+          builder: (homeViewModel) {
+            if (homeViewModel.operationTask.scannedBoxes == null ||
+                homeViewModel.operationTask.scannedBoxes!.isEmpty) {
+              return const SizedBox();
+            } else {
+              return Column(
+                children: [
+                  SizedBox(height: sizeH14),
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: sizeW20!, vertical: sizeH17!),
+                    decoration: BoxDecoration(
+                      color: colorSearchBox,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: GetBuilder<HomeViewModel>(
+                      builder: (home) {
+                        if (home.operationTask.scannedBoxes == null ||
+                            home.operationTask.scannedBoxes!.isEmpty) {
+                          return const SizedBox();
+                        } else {
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            primary: false,
+                            itemCount: home.operationTask.scannedBoxes?.length,
+                            itemBuilder: (context, index) {
+                              return BoxOnOrderItem(
+                                isShowingOperations: true,
+                                boxModel: home.operationTask.scannedBoxes![index],
+                              );
+                            },
+                          );
+                        }
                       },
-                    );
-                    
-
-                    // return ListView(
-                    //     shrinkWrap: true,
-                    //     primary: false,
-                    //     children: boxes
-                    //         .map((e) => BoxOnOrderItem(
-                    //               boxModel: e,
-                    //             ))
-                    //         .toList());
-                  }
-                },
-              ),
-            ),
-            SizedBox(height: sizeH10),
-          ],
+                    ),
+                  ),
+                  SizedBox(height: sizeH10),
+                ],
+              );
+            }
+          },
         ),
       ),
-    
     );
   }
 }

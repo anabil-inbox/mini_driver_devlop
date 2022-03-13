@@ -5,11 +5,14 @@ import 'dart:math' as math;
 import 'package:get/get.dart';
 import 'package:inbox_driver/feature/view/screens/home/qr_scan/scan_screen.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
+import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/string.dart';
+
+import 'box_on_order_item.dart';
 
 class ScanDeliveredBox extends StatelessWidget {
   const ScanDeliveredBox({Key? key}) : super(key: key);
@@ -55,9 +58,9 @@ class ScanDeliveredBox extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 Get.to(() => const ScanScreen(
-                   isBoxSalesScan: false,
-                    isProductScan: false,
-                ));
+                      isBoxSalesScan: false,
+                      isProductScan: false,
+                    ));
               },
               child: SvgPicture.asset("assets/svgs/Scan.svg",
                   color: colorRed, width: sizeW20, height: sizeH17),
@@ -65,49 +68,25 @@ class ScanDeliveredBox extends StatelessWidget {
           ],
         ),
         collapsed: const SizedBox.shrink(),
-        expanded: Column(
-          children: [
-            SizedBox(height: sizeH14),
-            Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal: sizeW20!, vertical: sizeH17!),
-              height: sizeH60,
-              decoration: BoxDecoration(
-                color: colorSearchBox,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Row(
-                children: <Widget>[
-                  SvgPicture.asset('assets/svgs/Folder_Shared.svg'),
-                  SizedBox(width: sizeW5),
-                  CustomTextView(
-                    txt: txtBoxes.tr,
-                    textStyle: textStyleNormal()?.copyWith(color: colorBlack),
-                  )
-                ],
-              ),
-            ),
-            SizedBox(height: sizeH14),
-            Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal: sizeW20!, vertical: sizeH17!),
-              height: sizeH60,
-              decoration: BoxDecoration(
-                color: colorSearchBox,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Row(
-                children: <Widget>[
-                  SvgPicture.asset('assets/svgs/Folder_Shared.svg'),
-                  SizedBox(width: sizeW5),
-                  CustomTextView(
-                    txt: txtBoxes.tr,
-                    textStyle: textStyleNormal()?.copyWith(color: colorBlack),
-                  )
-                ],
-              ),
-            )
-          ],
+        expanded: GetBuilder<HomeViewModel>(
+          builder: (home) {
+            if (home.operationTask.driverDelivered == null ||
+                home.operationTask.driverDelivered!.isEmpty) {
+              return const SizedBox();
+            } else {
+              return ListView.builder(
+                shrinkWrap: true,
+                primary: false,
+                itemCount: home.operationTask.driverDelivered?.length,
+                itemBuilder: (context, index) {
+                  return BoxOnOrderItem(
+                    isShowingOperations: false,
+                    boxModel: home.operationTask.driverDelivered![index],
+                  );
+                },
+              );
+            }
+          },
         ),
       ),
     );

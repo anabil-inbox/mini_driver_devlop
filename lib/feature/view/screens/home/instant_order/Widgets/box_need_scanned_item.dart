@@ -1,9 +1,7 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:math' as math;
 import 'package:get/get.dart';
-import 'package:inbox_driver/feature/view/screens/home/qr_scan/scan_screen.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
 import 'package:inbox_driver/util/app_color.dart';
@@ -53,17 +51,6 @@ class BoxNeedScannedItem extends StatelessWidget {
               txt: "Boxes Need Scan",
               textStyle: textStyleNormal()?.copyWith(color: colorBlack),
             ),
-            const Spacer(),
-            GestureDetector(
-              onTap: () {
-                Get.to(() => const ScanScreen(
-                      isBoxSalesScan: true,
-                      isProductScan: false,
-                    ));
-              },
-              child: SvgPicture.asset("assets/svgs/Scan.svg",
-                  color: colorRed, width: sizeW20, height: sizeH17),
-            ),
           ],
         ),
         collapsed: const SizedBox.shrink(),
@@ -79,17 +66,18 @@ class BoxNeedScannedItem extends StatelessWidget {
               ),
               child: GetBuilder<HomeViewModel>(
                 builder: (home) {
-                  if (home.operationTask.scannedBoxes == null ||
-                      home.operationTask.scannedBoxes!.isEmpty) {
+                  if (home.operationTask.boxes == null ||
+                      home.operationTask.boxes!.isEmpty) {
                     return const SizedBox();
                   } else {
                     return ListView.builder(
                       shrinkWrap: true,
                       primary: false,
-                      itemCount: home.operationTask.scannedBoxes?.length,
+                      itemCount: home.operationTask.boxes?.length,
                       itemBuilder: (context, index) {
                         return BoxOnOrderItem(
-                          boxModel: home.operationTask.scannedBoxes![index],
+                          isShowingOperations: false,
+                          boxModel: home.operationTask.boxes![index],
                         );
                       },
                     );
