@@ -187,9 +187,7 @@ class OrderDetailsStarted extends StatelessWidget {
                   await homeViewModel.checkTaskStatus(
                       taskId: salesOrder.taskId ?? "");
                   home.selectedSignatureItemModel = SignatureItemModel(
-                      title: SharedPref.instance
-                          .getCurrentTaskResponse()
-                          ?.signatureType);
+                      title: home.operationTask.signatureType);
                   Get.to(() => InstantOrderScreen(
                         taskStatusId: task.id ?? "",
                         isNewCustomer: true,

@@ -11,7 +11,6 @@ import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/font_dimne.dart';
-import 'package:inbox_driver/util/sh_util.dart';
 
 class SignatureItem extends StatelessWidget {
   const SignatureItem({Key? key, required this.title, required this.onSelected})
@@ -63,15 +62,12 @@ class SignatureItem extends StatelessWidget {
                 ),
                 const Spacer(),
                 if (title == Constance.onDriverSide &&
-                    SharedPref.instance
-                            .getCurrentTaskResponse()
-                            ?.signatureFile !=
+                    homeViewModel.operationTask.signatureFile !=
                         null)
                   imageNetwork(
                     url: ConstanceNetwork.imageUrl +
-                        (SharedPref.instance
-                                .getCurrentTaskResponse()
-                                ?.signatureFile ??
+                        (homeViewModel.operationTask
+                                .signatureFile ??
                             ""),
                     width: sizeW30,
                     height: sizeH30,

@@ -35,7 +35,7 @@ class HomeViewModel extends GetxController {
   int selectedTab = 0;
 
   BoxOperation? selectedBoxOperation;
-  
+
   void changeTab(int x) {
     selectedTab = x;
     update();
@@ -363,8 +363,7 @@ class HomeViewModel extends GetxController {
       }).then((value) => {
             if (value.status!.success!)
               {
-                SharedPref.instance.setCurrentTaskResponse(
-                    taskResponse: jsonEncode(value.data)),
+                operationTask = TaskResponse.fromJson(value.data),
                 snackSuccess(txtSuccess!.tr, value.status!.message!)
               }
             else
@@ -447,18 +446,19 @@ class HomeViewModel extends GetxController {
                 }),
                 if (newStatus == Constance.taskdelivered)
                   {
-                    SharedPref.instance.setCurrentTaskResponse(
-                        taskResponse: jsonEncode(value.data)),
+                    // SharedPref.instance.setCurrentTaskResponse(
+                    //     taskResponse: jsonEncode(value.data)),
+                    // operationTask =
                     Get.to(() => InstantOrderScreen(
                         taskStatusId: taskStatusId,
                         isNewCustomer: true,
                         taskId: taskId))
-                  }
-                else if (newStatus == Constance.taskDone)
-                  {
-                    SharedPref.instance.removeBoxess(),
-                    scaanedBoxes.clear(),
                   },
+                // else if (newStatus == Constance.taskDone)
+                //   {
+                    
+                    
+                //   },
 
                 update(),
                 endLoading(),
@@ -593,22 +593,24 @@ class HomeViewModel extends GetxController {
     super.dispose();
   }
 
-  Set<BoxModel> scaanedBoxes = SharedPref.instance.getBoxesList().toSet();
+  TaskResponse operationTask = TaskResponse();
+
+  // Set<BoxModel> scaanedBoxes = SharedPref.instance.getBoxesList().toSet();
   // List<ProductModel> scaanedProducts = [];
 
   Future<void> scanBoxOrder({required String serial}) async {
     await HomeHelper.getInstance
         .scanSalesBox(body: {
           Constance.serial: serial,
-          "sales_order":
-              SharedPref.instance.getCurrentTaskResponse()?.salesOrder ?? ""
+          "sales_order": operationTask.salesOrder ?? ""
         })
         .then((value) async => {
               if (value.status!.success!)
                 {
-                  Logger().e(value.data),
-                  scaanedBoxes.add(BoxModel.fromJson(value.data)),
-                  SharedPref.instance.setBoxesList(boxes: scaanedBoxes.toList()),
+                  operationTask.scannedBoxes?.add(BoxModel.fromJson(value.data)),
+                  // scaanedBoxes.add(BoxModel.fromJson(value.data)),
+                  // SharedPref.instance
+                  //     .setBoxesList(boxes: scaanedBoxes.toList()),
                   await refrshHome(),
                   update(),
                   snackSuccess("$txtSuccess", "${value.status!.message}")
@@ -628,35 +630,19 @@ class HomeViewModel extends GetxController {
   final tdQty = TextEditingController();
 
   Future<void> scanProudct({required String productCode}) async {
-    Logger().i("${SharedPref.instance.getCurrentTaskResponse()?.toJson()}");
     await HomeHelper.getInstance.scanProduct(body: {
       Constance.productCode: productCode,
       Constance.qty: tdQty.text,
-      Constance.size: SharedPref.instance
-              .getCurrentTaskResponse()!
-              .childOrder!
-              .items!
-              .isEmpty
+      Constance.size: operationTask.childOrder!.items!.isEmpty
           ? 1
-          : SharedPref.instance
-                  .getCurrentTaskResponse()!
-                  .childOrder!
-                  .items!
-                  .length +
-              1,
-      "sales_order": SharedPref.instance
-              .getCurrentTaskResponse()!
-              .childOrder!
-              .items!
-              .isNotEmpty
-          ? SharedPref.instance.getCurrentTaskResponse()!.childOrder!.id
-          : SharedPref.instance.getCurrentTaskResponse()?.salesOrder ?? ""
+          : operationTask.childOrder!.items!.length + 1,
+      "sales_order": operationTask.childOrder!.items!.isNotEmpty
+          ? operationTask.childOrder!.id
+          : operationTask.salesOrder ?? ""
     }).then((value) async => {
           if (value.status!.success!)
             {
-              // scaanedProducts.add(ProductModel.fromJson(value.data)),
-              SharedPref.instance
-                  .setCurrentTaskResponse(taskResponse: jsonEncode(value.data)),
+              operationTask = TaskResponse.fromJson(value.data),
               Logger().e(value.data),
               await refrshHome(),
               update(),
@@ -680,8 +666,7 @@ class HomeViewModel extends GetxController {
       {required Item productModel, required int index}) async {
     try {
       await HomeHelper.getInstance.deleteProduct(body: {
-        "sales_order":
-            SharedPref.instance.getCurrentTaskResponse()?.childOrder?.id,
+        "sales_order": operationTask.childOrder?.id,
         "product_code": productModel.product,
       }).then((value) async {
         if (value.status!.success!) {
@@ -691,8 +676,7 @@ class HomeViewModel extends GetxController {
           //     SharedPref.instance.getCurrentTaskResponse() ??
           //         TaskResponse(childOrder: ChildOrder(items: []));
           // taskResponse.childOrder!.items?.remove(productModel);
-          await SharedPref.instance
-              .setCurrentTaskResponse(taskResponse: jsonEncode(value.data));
+          operationTask = TaskResponse.fromJson(value.data);
           update();
           snackSuccess("$txtSuccess", "${value.status!.message}");
         } else {
@@ -709,7 +693,7 @@ class HomeViewModel extends GetxController {
     try {
       await HomeHelper.getInstance.paymentRequest(body: {
         Constance.id:
-            SharedPref.instance.getCurrentTaskResponse()?.childOrder?.id
+            operationTask.childOrder?.id
       }).then((value) => {
             if (value.status!.success!)
               {
@@ -730,8 +714,7 @@ class HomeViewModel extends GetxController {
       startLoading();
       await HomeHelper.getInstance
           .checkTaskStatus(body: {Constance.taskId: taskId}).then((value) => {
-                SharedPref.instance.setCurrentTaskResponse(
-                    taskResponse: jsonEncode(value.data)),
+                operationTask = TaskResponse.fromJson(value.data),
               });
     } catch (e) {
       endLoading();
@@ -753,7 +736,7 @@ class HomeViewModel extends GetxController {
     try {
       await HomeHelper.getInstance.uploadCustomerSignature(body: {
         Constance.salesOrderUnderScoure:
-            SharedPref.instance.getCurrentTaskResponse()?.salesOrder ?? "",
+            operationTask.salesOrder ?? "",
         Constance.image: multipart.MultipartFile.fromFileSync(file.path)
       }).then((value) => {
             if (value.status!.success!)
@@ -774,13 +757,12 @@ class HomeViewModel extends GetxController {
     try {
       await HomeHelper.getInstance.notifyForSign(body: {
         Constance.id:
-            SharedPref.instance.getCurrentTaskResponse()?.salesOrder ?? "",
+            operationTask.salesOrder ?? "",
         Constance.type: type
       }).then((value) => {
             if (value.status!.success!)
               {
-                SharedPref.instance.setCurrentTaskResponse(
-                    taskResponse: jsonEncode(value.data)),
+                operationTask = TaskResponse.fromJson(value.data),
                 snackSuccess("$txtSuccess", "${value.status!.message}"),
               }
             else
@@ -795,10 +777,11 @@ class HomeViewModel extends GetxController {
 
   final tdBoxOperaion = TextEditingController();
   final tdNewSeal = TextEditingController();
-  
-  Future<void> createNewSeal({required String serial, required String newSeal}) async {
+
+  Future<void> createNewSeal(
+      {required String serial, required String newSeal}) async {
     try {
-     await HomeHelper.getInstance.createNewSeal(body: {
+      await HomeHelper.getInstance.createNewSeal(body: {
         Constance.serial: serial,
         Constance.newSeal: newSeal
       }).then((value) => {

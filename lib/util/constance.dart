@@ -79,4 +79,7 @@ abstract class Constance {
   // Notifications Ids:
 
   static String userSignature = "20";
+  static String addedNewTask = "21";
+  static String addedNewSpecificTask = "21";
+
 }

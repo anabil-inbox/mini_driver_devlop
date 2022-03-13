@@ -6,8 +6,6 @@ import 'package:get/utils.dart';
 import 'package:inbox_driver/feature/model/app_setting_modle.dart';
 import 'package:inbox_driver/feature/model/driver_modle.dart';
 import 'package:inbox_driver/feature/model/language.dart';
-import 'package:inbox_driver/feature/model/tasks/box_model.dart';
-import 'package:inbox_driver/feature/model/tasks/task_response.dart';
 import 'package:inbox_driver/util/constance.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
@@ -28,7 +26,6 @@ class SharedPref {
   final String taskKey = "taskKey";
   final String isStartedTimerKey = "isStartedTimerKey";
   final String timerValueKey = "timerValueKey";
-  final String boxessKey = "boxessKey";
 
   var log = Logger();
 
@@ -41,14 +38,14 @@ class SharedPref {
     _prefs?.setString(appSettingKey, prfApiSettings);
   }
 
-  setCurrentTaskResponse({required String taskResponse}) {
-    try {
-      _prefs?.remove(taskKey);
-      _prefs?.setString(taskKey, jsonEncode(jsonDecode(taskResponse)));
-    } catch (e) {
-      Logger().e(e);
-    }
-  }
+  // setCurrentTaskResponse({required String taskResponse}) {
+  //   try {
+  //     _prefs?.remove(taskKey);
+  //     _prefs?.setString(taskKey, jsonEncode(jsonDecode(taskResponse)));
+  //   } catch (e) {
+  //     Logger().e(e);
+  //   }
+  // }
 
   setIsStartedTimerKey({required bool isStarted}) {
     _prefs?.setBool(isStartedTimerKey, isStarted);
@@ -69,16 +66,16 @@ class SharedPref {
         5 * 60;
   }
 
-  TaskResponse? getCurrentTaskResponse() {
-    try {
-      String? objectStr = _prefs?.getString(taskKey);
-      Map<String,dynamic> map  = jsonDecode(objectStr!);
-      return TaskResponse.fromJson(map);
-    } catch (e) {
-      Logger().e(e);
-      return null;
-    }
-  }
+  // TaskResponse? getCurrentTaskResponse() {
+  //   try {
+  //     String? objectStr = _prefs?.getString(taskKey);
+  //     Map<String, dynamic> map = jsonDecode(objectStr!);
+  //     return TaskResponse.fromJson(map);
+  //   } catch (e) {
+  //     Logger().e(e);
+  //     return null;
+  //   }
+  // }
 
   setLocalization(String lang) {
     _prefs?.setString(_localizationKey, lang);
@@ -201,28 +198,28 @@ class SharedPref {
     }
   }
 
-  setBoxesList({required List<BoxModel> boxes}) {
-    removeBoxess();
-    _prefs?.setString(boxessKey, jsonEncode(boxes));
-  }
+  // setBoxesList({required List<BoxModel> boxes}) {
+  //   removeBoxess();
+  //   _prefs?.setString(boxessKey, jsonEncode(boxes));
+  // }
 
-  List<BoxModel> getBoxesList() {
-    try {
-      String? objectStr = _prefs?.getString(boxessKey);
-      return List<BoxModel>.from(
-          json.decode(objectStr!).map((x) => BoxModel.fromJson(x)));
-    } catch (e) {
-      return [];
-    }
-  }
+  // List<BoxModel> getBoxesList() {
+  //   try {
+  //     String? objectStr = _prefs?.getString(boxessKey);
+  //     return List<BoxModel>.from(
+  //         json.decode(objectStr!).map((x) => BoxModel.fromJson(x)));
+  //   } catch (e) {
+  //     return [];
+  //   }
+  // }
 
-  removeBoxess() async {
-    try {
-      await _prefs?.remove(boxessKey);
-    } catch (e) {
-      Logger().e(e);
-    }
-  }
+  // removeBoxess() async {
+  //   try {
+  //     await _prefs?.remove(boxessKey);
+  //   } catch (e) {
+  //     Logger().e(e);
+  //   }
+  // }
 
   init() async {
     _prefs = await SharedPreferences?.getInstance();
@@ -230,7 +227,7 @@ class SharedPref {
 
   setFCMToken(String fcmToken) async {
     try {
-      _prefs?.setString(fcmKey, fcmToken);
+      await _prefs?.setString(fcmKey, fcmToken);
     } catch (e) {
       printError();
     }
@@ -266,7 +263,7 @@ class SharedPref {
     return numberFormatter.format(initNumber + price) + " ${Constance.qrCoin}";
   }
 
-  clear() {
-    removeBoxess();
-  }
+  // clear() {
+  //   removeBoxess();
+  // }
 }

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:inbox_driver/feature/model/payment/payment.dart';
@@ -11,7 +9,6 @@ import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/font_dimne.dart';
-import 'package:inbox_driver/util/sh_util.dart';
 
 class PaymentItem extends StatelessWidget {
   const PaymentItem({Key? key, required this.paymentMethod}) : super(key: key);
@@ -23,11 +20,9 @@ class PaymentItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        TaskResponse taskResponse =
-            SharedPref.instance.getCurrentTaskResponse() ?? TaskResponse();
+        TaskResponse taskResponse = homeViewModel.operationTask;
         taskResponse.paymentMethod = paymentMethod.name;
-        SharedPref.instance
-            .setCurrentTaskResponse(taskResponse: jsonEncode(taskResponse));
+        homeViewModel.operationTask = taskResponse;
         homeViewModel.update();
 
         if (paymentMethod.id == Constance.application) {
@@ -40,14 +35,12 @@ class PaymentItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(padding6!),
             border: Border.all(
                 width: 0.5,
-                color: SharedPref.instance
-                            .getCurrentTaskResponse()
-                            ?.paymentMethod !=
+                color: homeViewModel.operationTask.paymentMethod !=
                         paymentMethod.id
                     ? colorBorderContainer
                     : colorTrans),
             color:
-                SharedPref.instance.getCurrentTaskResponse()?.paymentMethod !=
+                homeViewModel.operationTask.paymentMethod !=
                         paymentMethod.id
                     ? colorTextWhite
                     : colorPrimary),
@@ -56,7 +49,7 @@ class PaymentItem extends StatelessWidget {
         child: CustomTextView(
           txt: "${paymentMethod.name}",
           textStyle:
-              SharedPref.instance.getCurrentTaskResponse()?.paymentMethod ==
+              homeViewModel.operationTask.paymentMethod ==
                       paymentMethod.id
                   ? textStylebodyWhite()
                   : textStyleHints()!

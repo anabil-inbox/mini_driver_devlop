@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -6,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:inbox_driver/feature/model/tasks/task_response.dart';
+import 'package:inbox_driver/feature/view/screens/home/home_screen.dart';
 import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
 import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/sh_util.dart';
@@ -15,9 +16,8 @@ class AppFcm {
   AppFcm._();
   static AppFcm fcmInstance = AppFcm._();
 
-  static HomeViewModel homeViewModel = Get.put(
-    HomeViewModel(),
-  );
+  static HomeViewModel homeViewModel =
+      Get.put(HomeViewModel(), permanent: true);
 
   init() {
     configuration();
@@ -27,29 +27,28 @@ class AppFcm {
 
   ValueNotifier<int> notificationCounterValueNotifer = ValueNotifier(0);
   MethodChannel platform =
-     const MethodChannel('dexterx.dev/flutter_local_notifications_example');
-   final FirebaseMessaging _firebaseMessaging =  FirebaseMessaging.instance;
+      const MethodChannel('dexterx.dev/flutter_local_notifications_example');
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
   RemoteMessage messages = const RemoteMessage();
   AndroidNotificationChannel channel = const AndroidNotificationChannel(
-    'com.inbox.clients', // id
-    'com.inbox.clients', // title
+    'com.inbox.driver', // id
+    'com.inbox.driver', // title
     //  'IMPORTANCE_HIGH', // description
     importance: Importance.max,
     //showBadge: true,
   );
 
   void updatePages(RemoteMessage message) async {
-    await SharedPref.instance.setCurrentTaskResponse(taskResponse: jsonEncode(message.data));
-    
+        homeViewModel.operationTask = TaskResponse.fromJson(message.data);
   }
 
   configuration() async {
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('drawable/app_icon');
     const IOSInitializationSettings initializationSettingsIOS =
-      IOSInitializationSettings(
+        IOSInitializationSettings(
       requestAlertPermission: false,
       requestBadgePermission: false,
       requestSoundPermission: false,
@@ -156,8 +155,10 @@ class AppFcm {
       {required bool isFromTerminate}) {
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) async {
       if (map[Constance.id].toString() == Constance.userSignature) {
-        
-      }
+      } else if (map[Constance.id].toString() == Constance.addedNewTask) {
+        Get.to(() => HomeScreen());
+      } else if (map[Constance.id].toString() ==
+          Constance.addedNewSpecificTask) {}
     });
   }
 }

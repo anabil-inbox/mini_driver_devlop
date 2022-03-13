@@ -10,7 +10,6 @@ import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
-import 'package:inbox_driver/util/sh_util.dart';
 import 'package:inbox_driver/util/string.dart';
 
 class ScanProducts extends StatelessWidget {
@@ -67,13 +66,8 @@ class ScanProducts extends StatelessWidget {
             ],
           ),
           collapsed: const SizedBox.shrink(),
-          expanded: (SharedPref.instance.getCurrentTaskResponse()?.childOrder ==
-                      null) ||
-                  (SharedPref.instance
-                      .getCurrentTaskResponse()!
-                      .childOrder!
-                      .items!
-                      .isEmpty)
+          expanded: (home.operationTask.childOrder == null) ||
+                  (home.operationTask.childOrder!.items!.isEmpty)
               ? const SizedBox()
               : ListView.builder(
                   shrinkWrap: true,
@@ -81,17 +75,11 @@ class ScanProducts extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return ProductOnOrderItem(
                       index: index,
-                      productModel: SharedPref.instance
-                          .getCurrentTaskResponse()!
-                          .childOrder!
-                          .items![index],
+                      productModel:
+                          home.operationTask.childOrder!.items![index],
                     );
                   },
-                  itemCount: SharedPref.instance
-                      .getCurrentTaskResponse()!
-                      .childOrder!
-                      .items!
-                      .length,
+                  itemCount: home.operationTask.childOrder!.items!.length,
                 ),
         );
       }),

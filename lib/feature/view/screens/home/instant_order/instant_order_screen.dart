@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:inbox_driver/feature/view/screens/home/instant_order/Widgets/box_need_scanned_item.dart';
 import 'package:inbox_driver/feature/view/screens/home/new_customer/Widgets/balance_widget.dart';
 import 'package:inbox_driver/feature/view/screens/home/new_customer/Widgets/contract_signature_widget.dart';
 import 'package:inbox_driver/feature/view/screens/home/new_customer/Widgets/scan_products_widget.dart';
@@ -12,7 +13,6 @@ import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
-import 'package:inbox_driver/util/sh_util.dart';
 import 'package:inbox_driver/util/string.dart';
 import 'package:get/get.dart';
 import 'Widgets/customer_signature_instant_order.dart';
@@ -36,9 +36,7 @@ class InstantOrderScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: GetBuilder<HomeViewModel>(
-          builder: (_) {
-            
-            
+          builder: (home) {
             return Row(
               children: [
                 CustomTextView(
@@ -46,13 +44,11 @@ class InstantOrderScreen extends StatelessWidget {
                   textStyle: textStyleNormal()?.copyWith(color: colorBlack),
                 ),
                 const Spacer(),
-             (SharedPref.instance.getCurrentTaskResponse()?.isNew.toString() == "true") || (SharedPref.instance.getCurrentTaskResponse()?.isNew ?? false)
+                   ( home.operationTask.isNew ?? false)
                     ? GestureDetector(
                         onTap: () async {
                           await homeViewModel.getImage(ImageSource.camera,
-                              customerId: SharedPref.instance
-                                  .getCurrentTaskResponse()
-                                  ?.customerId,
+                              customerId: home.operationTask.customerId,
                               taskId: taskId);
                         },
                         child: SvgPicture.asset("assets/svgs/Scan.svg",
@@ -61,8 +57,6 @@ class InstantOrderScreen extends StatelessWidget {
                     : SvgPicture.asset("assets/svgs/check.svg"),
               ],
             );
-        
-        
           },
         ),
       );
@@ -108,7 +102,7 @@ class InstantOrderScreen extends StatelessWidget {
       ),
       body: GetBuilder<HomeViewModel>(
         builder: (home) {
-          if (SharedPref.instance.getCurrentTaskResponse()?.processType ==
+          if (home.operationTask.processType ==
               Constance.newStorageSv) {
             return Padding(
               padding: EdgeInsets.symmetric(horizontal: padding20!),
@@ -119,8 +113,8 @@ class InstantOrderScreen extends StatelessWidget {
                   const ContractSignature(),
                   SizedBox(height: sizeH10),
                   idVerification,
-                  // SizedBox(height: sizeH10),
-                  // const ScanDeliveredBox(),
+                  SizedBox(height: sizeH10),
+                  const BoxNeedScannedItem(),
                   SizedBox(height: sizeH10),
                   const ScanBoxInstantOrder(),
                   SizedBox(height: sizeH10),

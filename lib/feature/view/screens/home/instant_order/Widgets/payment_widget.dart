@@ -5,7 +5,6 @@ import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
-import 'package:inbox_driver/util/sh_util.dart';
 
 class PaymentWidget extends StatelessWidget {
   const PaymentWidget({Key? key}) : super(key: key);
@@ -22,8 +21,8 @@ class PaymentWidget extends StatelessWidget {
           SizedBox(
             height: sizeH38,
             child: GetBuilder<HomeViewModel>(
-              builder: (_) {
-                if (SharedPref.instance.getCurrentTaskResponse()!.totalDue! <=
+              builder: (home) {
+                if (home.operationTask.totalDue! <=
                     0) {
                   return const SizedBox();
                 }

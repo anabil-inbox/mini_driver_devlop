@@ -10,8 +10,6 @@ import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_style.dart';
-import 'package:inbox_driver/util/sh_util.dart';
-import 'package:logger/logger.dart';
 
 class BoxOnOrderItem extends StatelessWidget {
   BoxOnOrderItem({
@@ -41,8 +39,6 @@ class BoxOnOrderItem extends StatelessWidget {
                   )),
               readOnly: true,
               onTap: () async {
-                int index = 0;
-                List<BoxModel> temBoxes = SharedPref.instance.getBoxesList();
                 await Get.bottomSheet(
                         InstantOrderBottomSheet(
                           onEnd: (boxModel) async {
@@ -52,19 +48,8 @@ class BoxOnOrderItem extends StatelessWidget {
                           boxModel: boxModel,
                           boxOperations: boxModel.boxOperations ?? [],
                         ),
-                        isScrollControlled: true)
-                    .whenComplete(() async => {
-                          Logger().e(boxModel),
-                          index = temBoxes.indexOf(boxModel),
-                          temBoxes.removeWhere(
-                              (element) => element.boxId == boxModel.boxId),
-                          temBoxes.insert(index, boxModel),
-                          Logger().e(boxModel),
-                          await SharedPref.instance
-                              .setBoxesList(boxes: temBoxes),
-                          for (var item in SharedPref.instance.getBoxesList())
-                            {Logger().e(item)}
-                        });
+                        isScrollControlled: true);
+                    
 
                 homeViewModel.update();
               },
@@ -118,7 +103,14 @@ class BoxOnOrderItem extends StatelessWidget {
             SizedBox(
               height: sizeH12,
             ),
-            boxOperationSection,
+            GetBuilder<HomeViewModel>(builder: (home) {
+              if (boxModel.boxOperations == null ||
+                  boxModel.boxOperations!.isEmpty) {
+                return const SizedBox();
+              } else {
+                return boxOperationSection;
+              }
+            }),
           ],
         ),
       ),

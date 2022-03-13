@@ -63,9 +63,7 @@ class ProfileViewModle extends BaseController {
                 isLoading = false,
                 Get.put(AuthViewModle()),
                 update(),
-                SharedPref.instance
-                    .setUserLoginState(ConstanceNetwork.userEnterd),
-                SharedPref.instance.clear(),    
+                SharedPref.instance .setUserLoginState(ConstanceNetwork.userEnterd),
                 Get.offAll(() => const LoginScreen()),
                 Get.put(AuthViewModle())
               }

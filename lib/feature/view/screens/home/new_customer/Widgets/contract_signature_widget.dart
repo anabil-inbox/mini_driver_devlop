@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:inbox_driver/feature/view/widgets/bottom_sheet_widget/signature_bottom_sheet.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
-import 'package:inbox_driver/feature/view_model/auht_view_modle/auth_view_modle.dart';
+import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
-import 'package:inbox_driver/util/sh_util.dart';
 import 'package:inbox_driver/util/string.dart';
 import 'package:get/get.dart';
 
@@ -16,8 +15,8 @@ class ContractSignature extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     screenUtil(context);
-    return GetBuilder<AuthViewModle>(
-        init: AuthViewModle(),
+    return GetBuilder<HomeViewModel>(
+        init: HomeViewModel(),
         builder: (logic) {
           return Container(
             padding:
@@ -41,9 +40,7 @@ class ContractSignature extends StatelessWidget {
                     height: sizeH30,
                     decoration: BoxDecoration(
                       border: Border.all(
-                          color: SharedPref.instance
-                                      .getCurrentTaskResponse()
-                                      ?.isNew ??
+                          color: logic.operationTask.isNew ??
                                   false
                               ? colorRed
                               : colorBtnGray),
@@ -57,9 +54,7 @@ class ContractSignature extends StatelessWidget {
                         child: Container(
                             decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: SharedPref.instance
-                                      .getCurrentTaskResponse()
-                                      ?.isNew ??
+                          color: logic.operationTask.isNew ??
                                   false
                               ? Colors.transparent
                               : colorRed,

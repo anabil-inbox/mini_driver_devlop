@@ -6,7 +6,6 @@ import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
-import 'package:inbox_driver/util/sh_util.dart';
 import 'package:inbox_driver/util/string.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
@@ -15,9 +14,9 @@ class Balance extends StatelessWidget {
   const Balance({Key? key}) : super(key: key);
 
   Widget paymentMethod({required HomeViewModel homeViewModel}) {
-    Logger().e(SharedPref.instance.getCurrentTaskResponse()?.total);
-    Logger().e(SharedPref.instance.getCurrentTaskResponse()?.totalDue);
-    if ((SharedPref.instance.getCurrentTaskResponse()?.totalDue ?? 0) > 0) {
+    Logger().e(homeViewModel.operationTask.total);
+    Logger().e(homeViewModel.operationTask.totalDue);
+    if ((homeViewModel.operationTask.totalDue ?? 0) > 0) {
       return const PaymentWidget();
     } else {
       return const SizedBox();
@@ -48,12 +47,10 @@ class Balance extends StatelessWidget {
               ),
               const Spacer(),
               GetBuilder<HomeViewModel>(
-                builder: (_) {
+                builder: (home) {
                   return CustomTextView(
                     txt: getPriceWithFormate(
-                        price: SharedPref.instance
-                                .getCurrentTaskResponse()
-                                ?.total ??
+                        price: home.operationTask.total ??
                             0),
                     textStyle: textStyleMeduimPrimaryBold(),
                   );
@@ -72,12 +69,10 @@ class Balance extends StatelessWidget {
               ),
               const Spacer(),
               GetBuilder<HomeViewModel>(
-                builder: (_) {
+                builder: (home) {
                   return CustomTextView(
                     txt: getPriceWithFormate(
-                        price: SharedPref.instance
-                                .getCurrentTaskResponse()
-                                ?.totalPaid ??
+                        price: home.operationTask.totalPaid ??
                             0),
                     textStyle: textStyleMeduimPrimaryBold(),
                   );
@@ -96,12 +91,10 @@ class Balance extends StatelessWidget {
               ),
               const Spacer(),
               GetBuilder<HomeViewModel>(
-                builder: (_) {
+                builder: (home) {
                   return CustomTextView(
                     txt: getPriceWithFormate(
-                        price: SharedPref.instance
-                                .getCurrentTaskResponse()
-                                ?.totalDue ??
+                        price: home.operationTask.totalDue ??
                             0),
                     textStyle: textStyleMeduimPrimaryBold(),
                   );
