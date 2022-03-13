@@ -66,15 +66,15 @@ abstract class Constance {
 
   static String id = "id";
 
-  static String application = "Application";
-
   static String image = "image";
-
   static String onClientSide = "Client Side";
   static String onDriverSide = "Driver Side";
 
   static String type = "type";
 
+  static String application = "Application";
+  static String walletKey = "Wallet";
+  static String bankKey = "Bank";
 
   // Notifications Ids:
 

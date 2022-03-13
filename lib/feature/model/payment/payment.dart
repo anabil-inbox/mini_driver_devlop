@@ -18,18 +18,30 @@ class PaymentMethod {
     PaymentMethod({
         this.id,
         this.name,
+        this.target,
+        this.type,
+        this.image,
     });
 
     String? id;
     String? name;
+    String? target;
+    String? type;
+    String? image;
 
     factory PaymentMethod.fromJson(Map<String, dynamic> json) => PaymentMethod(
-        id: json["id"],
-        name: json["name"],
+        id:json["id"] == null ? null: json["id"],
+        name:json["name"] == null ? null: json["name"],
+        target:json["target"] == null ? null: json["target"],
+        type: json["type"] == null ? null: json["type"],
+        image:json["image"] == null ? null: json["image"],
     );
 
     Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
+        "id":id == null ? null: id,
+        "name":name == null ? null: name,
+        "target":target == null ? null: target,
+        "type":type == null ? null: type,
+        "image": image == null ? null:image,
     };
 }

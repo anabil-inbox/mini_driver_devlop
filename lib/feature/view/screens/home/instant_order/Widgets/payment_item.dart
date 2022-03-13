@@ -24,8 +24,7 @@ class PaymentItem extends StatelessWidget {
         taskResponse.paymentMethod = paymentMethod.name;
         homeViewModel.operationTask = taskResponse;
         homeViewModel.update();
-
-        if (paymentMethod.id == Constance.application) {
+        if (paymentMethod.id == Constance.walletKey || paymentMethod.id == Constance.bankKey ) {//applications
           homeViewModel.sendPaymentRequest();
         }
       },

@@ -5,6 +5,7 @@ import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
+import 'package:logger/logger.dart';
 
 class PaymentWidget extends StatelessWidget {
   const PaymentWidget({Key? key}) : super(key: key);
@@ -30,9 +31,12 @@ class PaymentWidget extends StatelessWidget {
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   children: getPaymentMethod()
-                      .map((e) => PaymentItem(
+                      .map((e) {
+                        Logger().d(e.toJson());
+                        return PaymentItem(
                             paymentMethod: e,
-                          ))
+                          );
+                      })
                       .toList(),
                 );
               },

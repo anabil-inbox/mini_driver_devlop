@@ -72,7 +72,7 @@ class Balance extends StatelessWidget {
                 builder: (home) {
                   return CustomTextView(
                     txt: getPriceWithFormate(
-                        price: home.operationTask.totalPaid ??
+                        price: home.operationTask.totalPaid!+waitingTimeReques(home)! ??
                             0),
                     textStyle: textStyleMeduimPrimaryBold(),
                   );
@@ -94,7 +94,7 @@ class Balance extends StatelessWidget {
                 builder: (home) {
                   return CustomTextView(
                     txt: getPriceWithFormate(
-                        price: home.operationTask.totalDue ??
+                        price: home.operationTask.totalDue!+waitingTimeReques(home)! ??
                             0),
                     textStyle: textStyleMeduimPrimaryBold(),
                   );
@@ -112,4 +112,16 @@ class Balance extends StatelessWidget {
       ),
     );
   }
+
+  //this for calc if [waitingTime] > mFrom && [waitingTime] < mTo
+  num? waitingTimeReques(HomeViewModel home){
+    if(home.operationTask.waitingTime != 0
+        && home.operationTask.lateFees != null
+        && home.operationTask.lateFees!.isNotEmpty){
+      return home.operationTask.lateFees?.where((element) => element.mFrom! < home.operationTask.waitingTime! && element.mTo! > home.operationTask.waitingTime!).first.fees;
+    }else{
+      return 0;
+    }
+  }
+
 }
