@@ -812,4 +812,10 @@ class HomeViewModel extends GetxController {
       printError();
     }
   }
+
+  @override
+  void onClose() {
+    super.onClose();
+    
+  }
 }
