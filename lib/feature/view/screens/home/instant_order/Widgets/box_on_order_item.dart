@@ -102,7 +102,7 @@ class BoxOnOrderItem extends StatelessWidget {
                 SvgPicture.asset('assets/svgs/Folder_Shared.svg'),
                 SizedBox(width: sizeW5),
                 CustomTextView(
-                  txt: boxModel.serial,
+                  txt: boxModel.boxId,
                   textStyle: textStyleNormal()?.copyWith(color: colorBlack),
                 ),
               ],
