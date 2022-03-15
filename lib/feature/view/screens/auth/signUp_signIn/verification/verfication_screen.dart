@@ -46,7 +46,7 @@ class _ChangeMobilScreenState extends State<VerficationScreen> {
     });
   }
 
-  String _commingSms = 'Unknown';
+  // String _commingSms = 'Unknown';
 
   Future<void> initSmsListener() async {
     String? commingSms;
@@ -70,7 +70,6 @@ class _ChangeMobilScreenState extends State<VerficationScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     AltSmsAutofill().unregisterListener();
   }
