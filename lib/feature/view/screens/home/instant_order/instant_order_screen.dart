@@ -41,8 +41,7 @@ class InstantOrderScreen extends StatelessWidget {
         child: GetBuilder<HomeViewModel>(
           builder: (home) {
             return (home.operationTask.isNew ?? false)
-                ? const SizedBox()
-                : Row(
+                ? Row(
                     children: [
                       CustomTextView(
                         txt: txtIDVerification.tr,
@@ -60,7 +59,8 @@ class InstantOrderScreen extends StatelessWidget {
                             color: colorRed, width: sizeW20, height: sizeH17),
                       )
                     ],
-                  );
+                  )
+                : const SizedBox();
           },
         ),
       );
@@ -68,7 +68,6 @@ class InstantOrderScreen extends StatelessWidget {
   final bool isNewCustomer;
 
   Widget get waitingTime => Container(
-        height: sizeH140,
         decoration: BoxDecoration(
           color: colorTextWhite,
           borderRadius: BorderRadius.circular(10),
@@ -77,6 +76,9 @@ class InstantOrderScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            SizedBox(
+              height: sizeH14,
+            ),
             CustomTextView(
               txt: txtWaitingTime.tr,
               textStyle: textStyleNormal(),
@@ -84,35 +86,39 @@ class InstantOrderScreen extends StatelessWidget {
             SizedBox(
               height: sizeH7,
             ),
-            CustomTextView(
-              txt: txtTimer.tr,
-              textStyle: textStylePrimaryBold()?.copyWith(color: colorBlack),
-            ),
-            SizedBox(
-              height: sizeH7,
-            ),
             TweenAnimationBuilder<Duration>(
-                duration:homeViewModel.operationTask.waitingTime == null ?Duration.zero : homeViewModel.waiteTimeOperation,
-                tween: Tween(begin:homeViewModel.operationTask.waitingTime == null ?Duration.zero : homeViewModel.waiteTimeOperation , end: Duration.zero),
+                duration: homeViewModel.operationTask.waitingTime == null
+                    ? Duration.zero
+                    : homeViewModel.waiteTimeOperation,
+                tween: Tween(
+                    begin: homeViewModel.operationTask.waitingTime == null
+                        ? Duration.zero
+                        : homeViewModel.waiteTimeOperation,
+                    end: Duration.zero),
                 onEnd: () {
                   Logger().e('Timer ended');
                 },
                 builder: (BuildContext context, Duration value, Widget? child) {
                   final minutes = value.inMinutes;
                   final seconds = value.inSeconds % 60;
-                  homeViewModel.waiteTimeOperation = Duration(minutes: minutes , seconds: seconds);
+                  homeViewModel.waiteTimeOperation =
+                      Duration(minutes: minutes, seconds: seconds);
 
                   return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 5),
                       child: Text(
                         '$minutes:$seconds',
-                        style: Theme.of(context).textTheme.headline5,
+                        style:
+                            textStylePrimaryBold()?.copyWith(color: colorBlack),
                       ));
-                })
+                }),
+            SizedBox(
+              height: sizeH14,
+            ),
           ],
         ),
       );
- 
+
   final String taskId;
   final String taskStatusId;
 
@@ -136,95 +142,100 @@ class InstantOrderScreen extends StatelessWidget {
         ),
         isCenterTitle: true,
       ),
-      body: GetBuilder<HomeViewModel>(
-        builder: (home) {
-            return Padding(
-              padding: EdgeInsets.symmetric(horizontal: padding20!),
-              child: ListView(
-                shrinkWrap: true,
-                children: [
-                   home.operationTask.isNew == true
-                      ? SizedBox(height: sizeH27)
-                      : const SizedBox(),
-                  home.operationTask.isNew == true
-                      ? const ContractSignature()
-                      : const SizedBox(),
-                  SizedBox(height: sizeH10),
-                  home.operationTask.isNew == true
-                      ? idVerification
-                      : const SizedBox(),
-                  SizedBox(height: sizeH10),
-                  const BoxNeedScannedItem(),
-                  SizedBox(height: sizeH10),
-                  const ScanBoxInstantOrder(),
-                  SizedBox(height: sizeH10),
-                  GetBuilder<HomeViewModel>(builder: (homeViewModel) {
-                    return scanDelivedBoxes(homeViewModel: homeViewModel);
-                  }),
-                  SizedBox(height: sizeH10),
-                  const ScanProducts(),
-                  SizedBox(height: sizeH10),
-                  const Balance(),
-                  SizedBox(height: sizeH10),
-                  const CustomerSignatureInstantOrder(),
-                  SizedBox(height: sizeH20),
-                  if(homeViewModel.operationTask.waitingTime != 0)...[
-                  waitingTime,
-                  SizedBox(height: sizeH20),
-                  ],
-                  GetBuilder<HomeViewModel>(
-                    builder: (home) {
-                      return Row(
-                        children: [
-                          Expanded(
-                            child: PrimaryButton(
-                                textButton: "Requesting Time",
-                                isLoading: homeViewModel.isLoading,
-                                onClicked: () async {
-                                  // await home.updateTaskStatus(
-                                  //     newStatus: Constance.done,
-                                  //     taskId: taskId,
-                                  //     taskStatusId: taskStatusId);
-                                  // await home.getSpecificTask(
-                                  //     taskId: taskStatusId,
-                                  //     taskSatus: Constance.inProgress);
-                                  // await home.getSpecificTask(
-                                  //     taskId: taskStatusId,
-                                  //     taskSatus: Constance.done);
-                                  // await home.getHomeTasks(taskType: Constance.done);
-                                  // await home.getHomeTasks(
-                                  //     taskType: Constance.inProgress);
-                                },
-                                isExpanded: false),
-                          ),
-                          SizedBox(width: sizeH20),
-                          Expanded(
-                            child: SeconderyFormButton(buttonText: "Done",onClicked: () async {
-                              await home.updateTaskStatus(
-                                  newStatus: Constance.done,
-                                  taskId: taskId,
-                                  taskStatusId: taskStatusId);
-                              await home.getSpecificTask(
-                                  taskId: taskStatusId,
-                                  taskSatus: Constance.inProgress);
-                              await home.getSpecificTask(
-                                  taskId: taskStatusId,
-                                  taskSatus: Constance.done);
-                              await home.getHomeTasks(taskType: Constance.done);
-                              await home.getHomeTasks(
-                                  taskType: Constance.inProgress);
-                            },),
-                          )
-                        ],
-                      );
-                    },
-                  ),
-                  SizedBox(height: sizeH20),
-                ],
+      body: GetBuilder<HomeViewModel>(builder: (home) {
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: padding20!),
+          child: ListView(
+            shrinkWrap: true,
+            children: [
+              home.operationTask.isNew == true
+                  ? SizedBox(height: sizeH27)
+                  : const SizedBox(),
+              home.operationTask.isNew == true
+                  ? const ContractSignature()
+                  : const SizedBox(),
+              SizedBox(height: sizeH10),
+              home.operationTask.isNew == true
+                  ? idVerification
+                  : const SizedBox(),
+              SizedBox(height: sizeH10),
+              const BoxNeedScannedItem(),
+              SizedBox(height: sizeH10),
+              home.operationTask.processType == Constance.pickupId
+                  ? const SizedBox()
+                  : const ScanBoxInstantOrder(),
+              SizedBox(height: sizeH10),
+              home.operationTask.processType == Constance.newStorageSv
+                  ? const SizedBox()
+                  : GetBuilder<HomeViewModel>(builder: (homeViewModel) {
+                      return scanDelivedBoxes(homeViewModel: homeViewModel);
+                    }),
+              SizedBox(height: sizeH10),
+              const ScanProducts(),
+              SizedBox(height: sizeH10),
+              const Balance(),
+              SizedBox(height: sizeH10),
+              const CustomerSignatureInstantOrder(),
+              SizedBox(height: sizeH20),
+              if (homeViewModel.operationTask.waitingTime != 0) ...[
+                waitingTime,
+                SizedBox(height: sizeH20),
+              ],
+              GetBuilder<HomeViewModel>(
+                builder: (home) {
+                  return Row(
+                    children: [
+                      Expanded(
+                        child: PrimaryButton(
+                            textButton: "Requesting Time",
+                            isLoading: false,
+                            onClicked: () async {
+                              // await home.updateTaskStatus(
+                              //     newStatus: Constance.done,
+                              //     taskId: taskId,
+                              //     taskStatusId: taskStatusId);
+                              // await home.getSpecificTask(
+                              //     taskId: taskStatusId,
+                              //     taskSatus: Constance.inProgress);
+                              // await home.getSpecificTask(
+                              //     taskId: taskStatusId,
+                              //     taskSatus: Constance.done);
+                              // await home.getHomeTasks(taskType: Constance.done);
+                              // await home.getHomeTasks(
+                              //     taskType: Constance.inProgress);
+                            },
+                            isExpanded: false),
+                      ),
+                      SizedBox(width: sizeH20),
+                      Expanded(
+                        child: SeconderyFormButton(
+                          buttonText: "Done",
+                          onClicked: () async {
+                            await home.updateTaskStatus(
+                                newStatus: Constance.done,
+                                taskId: taskId,
+                                taskStatusId: taskStatusId);
+                            await home.getSpecificTask(
+                                taskId: taskStatusId,
+                                taskSatus: Constance.inProgress);
+                            await home.getSpecificTask(
+                                taskId: taskStatusId,
+                                taskSatus: Constance.done);
+                            await home.getHomeTasks(taskType: Constance.done);
+                            await home.getHomeTasks(
+                                taskType: Constance.inProgress);
+                          },
+                        ),
+                      )
+                    ],
+                  );
+                },
               ),
-            );
-          }        
-      ),
+              SizedBox(height: sizeH20),
+            ],
+          ),
+        );
+      }),
     );
   }
 }

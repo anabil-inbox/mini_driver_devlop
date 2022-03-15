@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/route_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:inbox_driver/fcm/app_fcm.dart';
 import 'package:inbox_driver/feature/view/screens/auth/splash/splash.dart';
@@ -52,7 +51,7 @@ class _AppWidgetState extends State<AppWidget> {
     FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
   }
   void _handleMessage(RemoteMessage message) {
-    print("MSG_BUG _handleMessage");
+    debugPrint("MSG_BUG _handleMessage");
     AppFcm.goToOrderPage(message.data , isFromTerminate : true);
   }
   @override

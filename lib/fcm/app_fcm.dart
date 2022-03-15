@@ -155,7 +155,7 @@ class AppFcm {
       if (map[Constance.id].toString() == Constance.userSignature) {
       } else if (map[Constance.id].toString() == Constance.addedNewTask) {
         await homeViewModel.refrshHome();
-        Get.to(() => HomeScreen());
+        Get.off(() => HomeScreen());
       } else if (map[Constance.id].toString() == Constance.addedNewSpecificTask) {
 
         //details

@@ -20,8 +20,8 @@ class BoxModel {
             ? null
             : List<BoxOperation>.from(json["active_operations"]
                     .map((x) => BoxOperation.fromJson(x)))
-                .where((element) => element.isDefault == 1)
-                .first,
+                .firstWhere((element) => element.isDefault == 1,
+                    orElse: () => BoxOperation()),
         boxOperations: json["active_operations"] == null
             ? []
             : List<BoxOperation>.from(
