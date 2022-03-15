@@ -59,7 +59,7 @@ class TaskResponse {
         salesOrder: json["sales_order"],
         isNew: json["is_new"],
         customerId: json["customer_id"],
-        childOrder: json["child_order"],
+        childOrder: json["child_order"] == null ? null:ChildOrder.fromJson(json["child_order"]),
         total: json["total"],
         totalPaid: json["total_paid"],
         totalDue: json["total_due"],

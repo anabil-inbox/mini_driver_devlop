@@ -651,10 +651,10 @@ class HomeViewModel extends GetxController {
     await HomeHelper.getInstance.scanProduct(body: {
       Constance.productCode: productCode,
       Constance.qty: tdQty.text,
-      Constance.size: operationTask.childOrder!.items!.isEmpty
+      Constance.size: operationTask.childOrder == null || operationTask.childOrder!.items!.isEmpty
           ? 1
           : operationTask.childOrder!.items!.length + 1,
-      "sales_order": operationTask.childOrder!.items!.isNotEmpty
+      "sales_order":operationTask.childOrder != null  && operationTask.childOrder!.items!.isNotEmpty
           ? operationTask.childOrder!.id
           : operationTask.salesOrder ?? ""
     }).then((value) async => {
