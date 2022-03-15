@@ -92,8 +92,8 @@ class InstantOrderScreen extends StatelessWidget {
               height: sizeH7,
             ),
             TweenAnimationBuilder<Duration>(
-                duration: homeViewModel.waiteTimeOperation,
-                tween: Tween(begin: homeViewModel.waiteTimeOperation , end: Duration.zero),
+                duration:homeViewModel.operationTask.waitingTime == null ?Duration.zero : homeViewModel.waiteTimeOperation,
+                tween: Tween(begin:homeViewModel.operationTask.waitingTime == null ?Duration.zero : homeViewModel.waiteTimeOperation , end: Duration.zero),
                 onEnd: () {
                   Logger().e('Timer ended');
                 },

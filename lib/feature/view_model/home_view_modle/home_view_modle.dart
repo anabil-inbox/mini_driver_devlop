@@ -424,6 +424,8 @@ class HomeViewModel extends GetxController {
   // to do for Refrsh Home Task:
   Future<void> refrshHome() async {
     try {
+      tasksInProgress.clear();
+      tasksDone.clear();
       await getHomeTasks(taskType: Constance.inProgress);
       await getHomeTasks(taskType: Constance.done);
     } catch (e) {
