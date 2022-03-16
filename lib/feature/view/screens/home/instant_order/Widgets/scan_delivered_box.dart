@@ -17,6 +17,8 @@ import 'box_on_order_item.dart';
 class ScanDeliveredBox extends StatelessWidget {
   const ScanDeliveredBox({Key? key}) : super(key: key);
 
+static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
+
   @override
   Widget build(BuildContext context) {
     screenUtil(context);
@@ -58,7 +60,7 @@ class ScanDeliveredBox extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 Get.to(() => const ScanScreen(
-                   isScanDeliverdBoxes: true,
+                      isScanDeliverdBoxes: true,
                       isBoxSalesScan: true,
                       isProductScan: false,
                     ));
@@ -69,25 +71,40 @@ class ScanDeliveredBox extends StatelessWidget {
           ],
         ),
         collapsed: const SizedBox.shrink(),
-        expanded: GetBuilder<HomeViewModel>(
-          builder: (home) {
-            if (home.operationTask.driverDelivered == null ||
-                home.operationTask.driverDelivered!.isEmpty) {
-              return const SizedBox();
-            } else {
-              return ListView.builder(
-                shrinkWrap: true,
-                primary: false,
-                itemCount: home.operationTask.driverDelivered?.length,
-                itemBuilder: (context, index) {
-                  return BoxOnOrderItem(
-                    isShowingOperations: false,
-                    boxModel: home.operationTask.driverDelivered![index],
-                  );
+        expanded: (homeViewModel.operationTask.driverDelivered == null ||
+                homeViewModel.operationTask.driverDelivered!.isEmpty)
+            ? const SizedBox()
+            : Column(
+          children: [
+            SizedBox(height: sizeH14),
+            Container(
+              padding: EdgeInsets.symmetric(
+                  horizontal: sizeW20!, vertical: sizeH17!),
+              decoration: BoxDecoration(
+                  color: colorSearchBox,
+                  borderRadius: BorderRadius.circular(10)),
+              child: GetBuilder<HomeViewModel>(
+                builder: (home) {
+                  if (home.operationTask.driverDelivered == null ||
+                      home.operationTask.driverDelivered!.isEmpty) {
+                    return const SizedBox();
+                  } else {
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      primary: false,
+                      itemCount: home.operationTask.driverDelivered?.length,
+                      itemBuilder: (context, index) {
+                        return BoxOnOrderItem(
+                          isShowingOperations: false,
+                          boxModel: home.operationTask.driverDelivered![index],
+                        );
+                      },
+                    );
+                  }
                 },
-              );
-            }
-          },
+              ),
+            )
+          ],
         ),
       ),
     );
