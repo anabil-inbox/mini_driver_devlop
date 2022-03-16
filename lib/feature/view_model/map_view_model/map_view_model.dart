@@ -15,6 +15,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:inbox_driver/feature/model/app_setting_modle.dart';
 import 'package:inbox_driver/feature/model/home/sales_order.dart';
+import 'package:inbox_driver/network/firebase/firbase_clinte.dart';
 import 'package:inbox_driver/network/utils/constance_netwoek.dart';
 import 'dart:ui' as ui;
 
@@ -76,7 +77,7 @@ class MapViewModel extends GetxController {
     //todo here we use two method first for me and another for the user
     //todo me = driver
     await getMyCurrentPosition();
-    getStreamLocation();
+    getStreamLocation(salesOrder:salesOrder);
     getUserMarkers(salesOrder: salesOrder);
     Future.delayed(const Duration(seconds: 0)).then((value) async {
       await foucCameraOnUsers(
@@ -276,20 +277,21 @@ class MapViewModel extends GetxController {
 
   // to do for stream Location
 
-  getStreamLocation() async {
-    // try {
-    //   Geolocator.getPositionStream().listen((event) {
-    //     myLatLng = LatLng(event.latitude, event.longitude);
-    //     isAllowToDeliver(
-    //         lat1: myLatLng.latitude,
-    //         lon1: myLatLng.longitude,
-    //         lat2: customerLatLng.latitude,
-    //         lon2: customerLatLng.longitude);
-    //     update();
-    //   });
-    // } catch (e) {
-    //   printError();
-    // }
+  getStreamLocation({required SalesOrder salesOrder}) async {
+    try {
+      Geolocator.getPositionStream().listen((event) {
+        myLatLng = LatLng(event.latitude, event.longitude);
+        var allowToDeliver = isAllowToDeliver(
+            lat1: myLatLng.latitude,
+            lon1: myLatLng.longitude,
+            lat2: customerLatLng.latitude,
+            lon2: customerLatLng.longitude);
+        update();
+        addDriverTackLocation(allowToDeliver ,salesOrder:salesOrder ,driverLocation:myLatLng);
+      });
+    } catch (e) {
+      printError();
+    }
   }
 
   PolylinePoints polylinePoints = PolylinePoints();
@@ -401,5 +403,19 @@ class MapViewModel extends GetxController {
     if (currentLocation != null) {
       myLatLng = LatLng(currentPosition.latitude, currentPosition.longitude);
     }
+  }
+
+  // this for add driver location to firebase
+  void addDriverTackLocation(bool allowToDeliver, {required SalesOrder salesOrder,required LatLng driverLocation}) {
+    if(!allowToDeliver) return;
+    Map<String ,dynamic> bodyData = {
+      "${FirebaseClint.serialOrderData}" : jsonEncode(salesOrder.toJson()),
+      "${FirebaseClint.serialOrderDriverData}" : jsonEncode(SharedPref.instance.getCurrentUserData()!.toJson()),
+      "${FirebaseClint.serialOrderDriverLocations}" : driverLocation.toJson(),
+    };
+    /// store [salesOrder]
+    /// store [CurrentUserData]
+    /// store [driverLocation]
+    FirebaseClint.instance.addDriverLocation(salesOrder.customerId, salesOrder.orderId, bodyData);
   }
 }
