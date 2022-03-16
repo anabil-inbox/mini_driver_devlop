@@ -737,9 +737,9 @@ class HomeViewModel extends GetxController {
           .checkTaskStatus(body: {Constance.taskId: taskId}).then((value) => {
                 operationTask = TaskResponse.fromJson(value.data),
                 Logger().e(operationTask),
-                waiteTimeOperation = Duration(minutes: operationTask.waitingTime?.toInt() ?? 0),
+                waiteTimeOperation =
+                    Duration(minutes: operationTask.waitingTime?.toInt() ?? 0),
               });
-    
     } catch (e) {
       endLoading();
       Logger().e(e);
@@ -820,6 +820,48 @@ class HomeViewModel extends GetxController {
           });
     } catch (e) {
       printError();
+    }
+  }
+
+  Future<void> terminateBox(
+      {required String serial, required String salesOrder}) async {
+    try {
+      await HomeHelper.getInstance.terminateBox(body: {
+        Constance.salesOrderUnderScoure: salesOrder,
+        Constance.serial: serial
+      }).then((value) => {
+            if (value.status!.success!)
+              {
+                snackSuccess("$txtSuccess", "${value.status!.message}"),
+              }
+            else
+              {
+                snackError("$txtError", "${value.status!.message}"),
+              }
+          });
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  Future<void> scheduleBox(
+      {required String serial, required String salesOrder}) async {
+    try {
+      await HomeHelper.getInstance.scheduleBox(body: {
+        Constance.salesOrderUnderScoure: salesOrder,
+        Constance.serial: serial
+      }).then((value) => {
+            if (value.status!.success!)
+              {
+                snackSuccess("$txtSuccess", "${value.status!.message}"),
+              }
+            else
+              {
+                snackError("$txtError", "${value.status!.message}"),
+              }
+          });
+    } catch (e) {
+      debugPrint(e.toString());
     }
   }
 }

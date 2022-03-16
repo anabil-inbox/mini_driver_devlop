@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:inbox_driver/feature/model/home/emergencey/emergency_case.dart';
 import 'package:inbox_driver/feature/model/home/sales_data.dart';
 import 'package:inbox_driver/feature/model/home/task_model.dart';
@@ -307,4 +309,40 @@ class HomeHelper {
       return AppResponse.fromJson({});
     }
   }
+
+  Future<AppResponse> terminateBox({var body}) async{
+    try {
+      var response = await HomeApi.getInstance.terminateBox(
+          body: body,
+          url: ConstanceNetwork.terminateEndPoint,
+          header: ConstanceNetwork.header(4));
+      if (response.status?.success == true) {
+        return response;
+      } else {
+        return response;
+      }
+    } catch (e) {
+      log.d(e.toString());
+      return AppResponse.fromJson({});
+    }
+  }
+
+  Future<AppResponse> scheduleBox({var body}) async{
+    try {
+      var response = await HomeApi.getInstance.scheduleBox(
+          body: body,
+          url: ConstanceNetwork.scheduleEndPoint,
+          header: ConstanceNetwork.header(4));
+      if (response.status?.success == true) {
+        return response;
+      } else {
+        return response;
+      }
+    } catch (e) {
+      log.d(e.toString());
+      return AppResponse.fromJson({});
+    }
+  }
+
+
 }
