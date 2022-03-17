@@ -5,6 +5,7 @@ INJECTED from /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/andr
 INJECTED from /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/android/app/src/main/AndroidManifest.xml:1:1-75:12
 INJECTED from /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/android/app/src/main/AndroidManifest.xml:1:1-75:12
 MERGED from [:alt_sms_autofill] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/alt_sms_autofill/intermediates/library_manifest/release/AndroidManifest.xml:2:1-11:12
+MERGED from [:cloud_firestore] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/cloud_firestore/intermediates/library_manifest/release/AndroidManifest.xml:2:1-15:12
 MERGED from [:firebase_messaging] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/firebase_messaging/intermediates/library_manifest/release/AndroidManifest.xml:2:1-46:12
 MERGED from [:firebase_core] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/firebase_core/intermediates/library_manifest/release/AndroidManifest.xml:2:1-15:12
 MERGED from [:geolocator_android] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/geolocator_android/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
@@ -23,14 +24,17 @@ MERGED from [:connectivity] /Users/monther/AndroidStudioProjects/inboxDriver/inb
 MERGED from [:geocoding] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/geocoding/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
 MERGED from [:location] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/location/intermediates/library_manifest/release/AndroidManifest.xml:2:1-18:12
 MERGED from [:flutter_phone_direct_caller] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/flutter_phone_direct_caller/intermediates/library_manifest/release/AndroidManifest.xml:2:1-15:12
-MERGED from [com.google.firebase:firebase-analytics-ktx:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6e8927c0e84144219dfd8798be5e6c79/jetified-firebase-analytics-ktx-20.0.0/AndroidManifest.xml:2:1-17:12
+MERGED from [com.google.firebase:firebase-analytics-ktx:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/e6fd44d7b153b2ae52bd5047ed1f9f4f/jetified-firebase-analytics-ktx-20.0.2/AndroidManifest.xml:2:1-17:12
 MERGED from [com.google.firebase:firebase-common-ktx:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/9539556afe0c6d25dabfd2645111e4bd/jetified-firebase-common-ktx-20.0.0/AndroidManifest.xml:2:1-21:12
 MERGED from [com.google.firebase:firebase-messaging:23.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/904e16a3eeae955e9f8387a8d31a4740/jetified-firebase-messaging-23.0.0/AndroidManifest.xml:17:1-58:12
 MERGED from [com.google.firebase:firebase-datatransport:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/db41e2dafcaa3db17fc96619f6508044/jetified-firebase-datatransport-18.0.0/AndroidManifest.xml:15:1-34:12
 MERGED from [com.google.android.datatransport:transport-backend-cct:3.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/bdd5ae16350d8894d28d4932cd45c052/jetified-transport-backend-cct-3.0.0/AndroidManifest.xml:15:1-38:12
 MERGED from [com.google.firebase:firebase-encoders-json:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/ea1064931d69869523572d63ac78593d/jetified-firebase-encoders-json-18.0.0/AndroidManifest.xml:15:1-23:12
-MERGED from [com.google.firebase:firebase-analytics:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/b5607d753df41493da37eb0d9a381c0c/jetified-firebase-analytics-20.0.0/AndroidManifest.xml:2:1-9:12
-MERGED from [com.google.android.gms:play-services-measurement-api:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7fde67ef4cafb9579b5fcd131d2e6d7a/jetified-play-services-measurement-api-20.0.0/AndroidManifest.xml:17:1-36:12
+MERGED from [com.google.firebase:firebase-analytics:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/8857119fda8a9c275ca09676538f61fb/jetified-firebase-analytics-20.0.2/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.firebase:firebase-firestore:24.0.1] /Users/monther/.gradle/caches/transforms-2/files-2.1/3dc7ec22b9a78d90b98ee9b82e99b63d/jetified-firebase-firestore-24.0.1/AndroidManifest.xml:2:1-26:12
+MERGED from [com.google.firebase:firebase-appcheck-interop:16.0.0-beta02] /Users/monther/.gradle/caches/transforms-2/files-2.1/a6b9eca413184bc439ddc028ac7bb066/jetified-firebase-appcheck-interop-16.0.0-beta02/AndroidManifest.xml:15:1-26:12
+MERGED from [com.google.firebase:firebase-auth-interop:19.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/8dc402d5fea14b27a6111fba04cfcd23/jetified-firebase-auth-interop-19.0.2/AndroidManifest.xml:2:1-10:12
+MERGED from [com.google.android.gms:play-services-measurement-api:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/a580873f73f4ac970c0bb75bf1e5301a/jetified-play-services-measurement-api-20.0.2/AndroidManifest.xml:17:1-36:12
 MERGED from [com.google.firebase:firebase-installations:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7f725872bdf62851eb9ad4db776dca2f/jetified-firebase-installations-17.0.0/AndroidManifest.xml:2:1-24:12
 MERGED from [com.google.firebase:firebase-common:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/d5eb73e07577dc9aed23faaa7798a90b/jetified-firebase-common-20.0.0/AndroidManifest.xml:15:1-40:12
 MERGED from [com.google.android.gms:play-services-auth:18.1.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/769236b65624cae9ab8e3c7f1d18d628/jetified-play-services-auth-18.1.0/AndroidManifest.xml:17:1-40:12
@@ -38,10 +42,10 @@ MERGED from [androidx.exifinterface:exifinterface:1.3.0] /Users/monther/.gradle/
 MERGED from [androidx.biometric:biometric:1.1.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/a7f94c3f4ca03369ed14ad6c10fc1cc1/biometric-1.1.0/AndroidManifest.xml:17:1-29:12
 MERGED from [androidx.appcompat:appcompat:1.3.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6ced094c760dfe4958eb948cca9b17f5/appcompat-1.3.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.core:core-ktx:1.3.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/19dbe637c5eaedcf6182892a87583737/jetified-core-ktx-1.3.2/AndroidManifest.xml:2:1-9:12
-MERGED from [com.google.android.gms:play-services-measurement:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2ce243634ec88f204e74dbd7b972bfa4/jetified-play-services-measurement-20.0.0/AndroidManifest.xml:17:1-46:12
-MERGED from [com.google.android.gms:play-services-measurement-sdk:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/c2d967bf4bb5895269c06b671d597f3d/jetified-play-services-measurement-sdk-20.0.0/AndroidManifest.xml:17:1-25:12
-MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6682e3ccc1ab3274c0aa46dc553b6c2f/jetified-play-services-measurement-impl-20.0.0/AndroidManifest.xml:17:1-31:12
-MERGED from [com.google.android.gms:play-services-stats:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/b8c7edd3017acd3f57c5ee0cc5b51f01/jetified-play-services-stats-17.0.0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-measurement:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/14e2bbdd1e179c4c48eed97a1412e15a/jetified-play-services-measurement-20.0.2/AndroidManifest.xml:17:1-46:12
+MERGED from [com.google.android.gms:play-services-measurement-sdk:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/6bee0c17dae6a9934084d282394329f2/jetified-play-services-measurement-sdk-20.0.2/AndroidManifest.xml:17:1-25:12
+MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/3446c916baaf026893fbcd8a8508cbac/jetified-play-services-measurement-impl-20.0.2/AndroidManifest.xml:17:1-31:12
+MERGED from [com.google.android.gms:play-services-stats:17.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/00abad09f62c92bd3825c7702f5981cf/jetified-play-services-stats-17.0.2/AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/a87153039073d5f1c678d321fc8d2f26/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/037ee24b5b3f538a95ddcfdfa92577c1/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.firebase:firebase-components:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/d91cfa0932403332b5f5a09c6ab43870/jetified-firebase-components-17.0.0/AndroidManifest.xml:15:1-23:12
@@ -49,17 +53,18 @@ MERGED from [com.google.android.gms:play-services-maps:17.0.0] /Users/monther/.g
 MERGED from [com.google.android.gms:play-services-location:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/06c9bb6f6e84aecc8df5eccc4ba5047d/jetified-play-services-location-17.0.0/AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-auth-api-phone:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/f266d7f33eeae4a7ee08686e7df78395/jetified-play-services-auth-api-phone-17.0.0/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.gms:play-services-auth-base:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/aee2297b2e0ec9b179ec836e5a0f0be1/jetified-play-services-auth-base-17.0.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.firebase:firebase-database-collection:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7d53a3304511bc262a0baa4d0f9ace20/jetified-firebase-database-collection-18.0.0/AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-base:17.1.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/e91c76fa5178367a03077f75662eefda/jetified-play-services-base-17.1.0/AndroidManifest.xml:17:1-29:12
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/98a9c7a3e21e4c2101c551f611812314/jetified-play-services-places-placereport-17.0.0/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-cloud-messaging:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/04b37903eaada20bde762ae5386559cf/jetified-play-services-cloud-messaging-17.0.0/AndroidManifest.xml:2:1-13:12
 MERGED from [com.google.firebase:firebase-iid-interop:17.1.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/dffea6bee4a2497940b3c6baee9e2ce8/jetified-firebase-iid-interop-17.1.0/AndroidManifest.xml:2:1-10:12
-MERGED from [com.google.firebase:firebase-installations-interop:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/5c8817b4845103ff32fcabf16e2676a3/jetified-firebase-installations-interop-17.0.0/AndroidManifest.xml:15:1-23:12
-MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6e0270c271b4d0626fc1d5af7c053a48/jetified-play-services-tasks-17.0.0/AndroidManifest.xml:2:1-9:12
-MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/98a9c7a3e21e4c2101c551f611812314/jetified-play-services-places-placereport-17.0.0/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.firebase:firebase-measurement-connector:19.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2d8417b99060e65db8e502b94245e565/jetified-firebase-measurement-connector-19.0.0/AndroidManifest.xml:17:1-25:12
-MERGED from [com.google.android.gms:play-services-ads-identifier:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/cebcd502a22e241abb0fae97feff90cc/jetified-play-services-ads-identifier-17.0.0/AndroidManifest.xml:17:1-24:12
-MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7d6aad5bf003a24fdfaae50c66dce8b9/jetified-play-services-measurement-sdk-api-20.0.0/AndroidManifest.xml:17:1-27:12
-MERGED from [com.google.android.gms:play-services-measurement-base:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7f4540e7267f746b7214b647be781b34/jetified-play-services-measurement-base-20.0.0/AndroidManifest.xml:2:1-9:12
-MERGED from [com.google.android.gms:play-services-basement:17.1.1] /Users/monther/.gradle/caches/transforms-2/files-2.1/00222db731cd07d08b4d12ac91140fc5/jetified-play-services-basement-17.1.1/AndroidManifest.xml:17:1-28:12
+MERGED from [com.google.android.gms:play-services-ads-identifier:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/f04affec3ab57d6ca02fc3d6aa026ee7/jetified-play-services-ads-identifier-18.0.0/AndroidManifest.xml:17:1-27:12
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/0eee7768fc215541fe7a8d38389967bd/jetified-play-services-measurement-sdk-api-20.0.2/AndroidManifest.xml:17:1-27:12
+MERGED from [com.google.android.gms:play-services-measurement-base:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/7a0d5376436132de7f8cc63a24fedc68/jetified-play-services-measurement-base-20.0.2/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.firebase:firebase-installations-interop:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/5c8817b4845103ff32fcabf16e2676a3/jetified-firebase-installations-interop-17.0.0/AndroidManifest.xml:15:1-23:12
+MERGED from [com.google.android.gms:play-services-tasks:18.0.1] /Users/monther/.gradle/caches/transforms-2/files-2.1/5513c2ae528601a56e5ae4569741fd44/jetified-play-services-tasks-18.0.1/AndroidManifest.xml:2:1-6:12
+MERGED from [com.google.android.gms:play-services-basement:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/da6e58967780a53f83f11ab769f7c2d2/jetified-play-services-basement-18.0.0/AndroidManifest.xml:16:1-26:12
 MERGED from [androidx.fragment:fragment:1.3.4] /Users/monther/.gradle/caches/transforms-2/files-2.1/4ef0d845e105fc59acc9e04f3f9737f6/fragment-1.3.4/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.loader:loader:1.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/0f8c5c5a3838117b93ac8e4b4262126d/loader-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.media:media:1.1.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/b28daf565b222a20a229120778e5238e/media-1.1.0/AndroidManifest.xml:17:1-24:12
@@ -86,8 +91,10 @@ MERGED from [androidx.arch.core:core-runtime:2.1.0] /Users/monther/.gradle/cache
 MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/fd13a86db37d35aeac1515c8c8123ad9/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/4f61f21a55fda513d5ca90fce5a3cf68/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/1df5b336215a60349673ca13fd66a64b/print-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [io.grpc:grpc-android:1.41.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/9677a0cc0e8847fae54c245994ab2761/jetified-grpc-android-1.41.0/AndroidManifest.xml:2:1-13:12
 MERGED from [com.jakewharton.threetenabp:threetenabp:1.2.3] /Users/monther/.gradle/caches/transforms-2/files-2.1/02eade54bcb866518e2183db4c582713/jetified-threetenabp-1.2.3/AndroidManifest.xml:2:1-9:12
 MERGED from [com.journeyapps:zxing-android-embedded:4.2.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/4b724442e1c79e6d3df420378e43cf36/jetified-zxing-android-embedded-4.2.0/AndroidManifest.xml:17:1-56:12
+MERGED from [com.google.firebase:protolite-well-known-types:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2acfd1913c576371e40b17dde6b70445/jetified-protolite-well-known-types-18.0.0/AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/d399316d96a9364b1593cafb882c2969/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:17:1-24:12
 INJECTED from /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/android/app/src/main/AndroidManifest.xml:1:1-75:12
 INJECTED from /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/android/app/src/main/AndroidManifest.xml:1:1-75:12
@@ -120,20 +127,22 @@ MERGED from [:firebase_messaging] /Users/monther/AndroidStudioProjects/inboxDriv
 MERGED from [:firebase_messaging] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/firebase_messaging/intermediates/library_manifest/release/AndroidManifest.xml:7:5-67
 MERGED from [com.google.android.datatransport:transport-backend-cct:3.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/bdd5ae16350d8894d28d4932cd45c052/jetified-transport-backend-cct-3.0.0/AndroidManifest.xml:26:5-67
 MERGED from [com.google.android.datatransport:transport-backend-cct:3.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/bdd5ae16350d8894d28d4932cd45c052/jetified-transport-backend-cct-3.0.0/AndroidManifest.xml:26:5-67
-MERGED from [com.google.android.gms:play-services-measurement-api:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7fde67ef4cafb9579b5fcd131d2e6d7a/jetified-play-services-measurement-api-20.0.0/AndroidManifest.xml:22:5-67
-MERGED from [com.google.android.gms:play-services-measurement-api:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7fde67ef4cafb9579b5fcd131d2e6d7a/jetified-play-services-measurement-api-20.0.0/AndroidManifest.xml:22:5-67
+MERGED from [com.google.firebase:firebase-firestore:24.0.1] /Users/monther/.gradle/caches/transforms-2/files-2.1/3dc7ec22b9a78d90b98ee9b82e99b63d/jetified-firebase-firestore-24.0.1/AndroidManifest.xml:14:5-67
+MERGED from [com.google.firebase:firebase-firestore:24.0.1] /Users/monther/.gradle/caches/transforms-2/files-2.1/3dc7ec22b9a78d90b98ee9b82e99b63d/jetified-firebase-firestore-24.0.1/AndroidManifest.xml:14:5-67
+MERGED from [com.google.android.gms:play-services-measurement-api:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/a580873f73f4ac970c0bb75bf1e5301a/jetified-play-services-measurement-api-20.0.2/AndroidManifest.xml:22:5-67
+MERGED from [com.google.android.gms:play-services-measurement-api:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/a580873f73f4ac970c0bb75bf1e5301a/jetified-play-services-measurement-api-20.0.2/AndroidManifest.xml:22:5-67
 MERGED from [com.google.firebase:firebase-installations:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7f725872bdf62851eb9ad4db776dca2f/jetified-firebase-installations-17.0.0/AndroidManifest.xml:11:5-67
 MERGED from [com.google.firebase:firebase-installations:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7f725872bdf62851eb9ad4db776dca2f/jetified-firebase-installations-17.0.0/AndroidManifest.xml:11:5-67
-MERGED from [com.google.android.gms:play-services-measurement:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2ce243634ec88f204e74dbd7b972bfa4/jetified-play-services-measurement-20.0.0/AndroidManifest.xml:23:5-67
-MERGED from [com.google.android.gms:play-services-measurement:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2ce243634ec88f204e74dbd7b972bfa4/jetified-play-services-measurement-20.0.0/AndroidManifest.xml:23:5-67
-MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6682e3ccc1ab3274c0aa46dc553b6c2f/jetified-play-services-measurement-impl-20.0.0/AndroidManifest.xml:23:5-67
-MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6682e3ccc1ab3274c0aa46dc553b6c2f/jetified-play-services-measurement-impl-20.0.0/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/14e2bbdd1e179c4c48eed97a1412e15a/jetified-play-services-measurement-20.0.2/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/14e2bbdd1e179c4c48eed97a1412e15a/jetified-play-services-measurement-20.0.2/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/3446c916baaf026893fbcd8a8508cbac/jetified-play-services-measurement-impl-20.0.2/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/3446c916baaf026893fbcd8a8508cbac/jetified-play-services-measurement-impl-20.0.2/AndroidManifest.xml:23:5-67
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6139a9e8bc102c4da1c2b82736a9b214/jetified-play-services-maps-17.0.0/AndroidManifest.xml:24:5-67
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6139a9e8bc102c4da1c2b82736a9b214/jetified-play-services-maps-17.0.0/AndroidManifest.xml:24:5-67
 MERGED from [com.google.android.gms:play-services-cloud-messaging:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/04b37903eaada20bde762ae5386559cf/jetified-play-services-cloud-messaging-17.0.0/AndroidManifest.xml:8:5-67
 MERGED from [com.google.android.gms:play-services-cloud-messaging:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/04b37903eaada20bde762ae5386559cf/jetified-play-services-cloud-messaging-17.0.0/AndroidManifest.xml:8:5-67
-MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7d6aad5bf003a24fdfaae50c66dce8b9/jetified-play-services-measurement-sdk-api-20.0.0/AndroidManifest.xml:23:5-67
-MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7d6aad5bf003a24fdfaae50c66dce8b9/jetified-play-services-measurement-sdk-api-20.0.0/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/0eee7768fc215541fe7a8d38389967bd/jetified-play-services-measurement-sdk-api-20.0.2/AndroidManifest.xml:23:5-67
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/0eee7768fc215541fe7a8d38389967bd/jetified-play-services-measurement-sdk-api-20.0.2/AndroidManifest.xml:23:5-67
 	android:name
 		ADDED from /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/android/app/src/main/AndroidManifest.xml:5:22-64
 uses-permission#android.permission.ACCESS_NETWORK_STATE
@@ -146,22 +155,26 @@ MERGED from [com.google.firebase:firebase-messaging:23.0.0] /Users/monther/.grad
 MERGED from [com.google.firebase:firebase-messaging:23.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/904e16a3eeae955e9f8387a8d31a4740/jetified-firebase-messaging-23.0.0/AndroidManifest.xml:22:5-79
 MERGED from [com.google.android.datatransport:transport-backend-cct:3.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/bdd5ae16350d8894d28d4932cd45c052/jetified-transport-backend-cct-3.0.0/AndroidManifest.xml:25:5-79
 MERGED from [com.google.android.datatransport:transport-backend-cct:3.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/bdd5ae16350d8894d28d4932cd45c052/jetified-transport-backend-cct-3.0.0/AndroidManifest.xml:25:5-79
-MERGED from [com.google.android.gms:play-services-measurement-api:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7fde67ef4cafb9579b5fcd131d2e6d7a/jetified-play-services-measurement-api-20.0.0/AndroidManifest.xml:23:5-79
-MERGED from [com.google.android.gms:play-services-measurement-api:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7fde67ef4cafb9579b5fcd131d2e6d7a/jetified-play-services-measurement-api-20.0.0/AndroidManifest.xml:23:5-79
+MERGED from [com.google.firebase:firebase-firestore:24.0.1] /Users/monther/.gradle/caches/transforms-2/files-2.1/3dc7ec22b9a78d90b98ee9b82e99b63d/jetified-firebase-firestore-24.0.1/AndroidManifest.xml:13:5-79
+MERGED from [com.google.firebase:firebase-firestore:24.0.1] /Users/monther/.gradle/caches/transforms-2/files-2.1/3dc7ec22b9a78d90b98ee9b82e99b63d/jetified-firebase-firestore-24.0.1/AndroidManifest.xml:13:5-79
+MERGED from [com.google.android.gms:play-services-measurement-api:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/a580873f73f4ac970c0bb75bf1e5301a/jetified-play-services-measurement-api-20.0.2/AndroidManifest.xml:23:5-79
+MERGED from [com.google.android.gms:play-services-measurement-api:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/a580873f73f4ac970c0bb75bf1e5301a/jetified-play-services-measurement-api-20.0.2/AndroidManifest.xml:23:5-79
 MERGED from [com.google.firebase:firebase-installations:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7f725872bdf62851eb9ad4db776dca2f/jetified-firebase-installations-17.0.0/AndroidManifest.xml:10:5-79
 MERGED from [com.google.firebase:firebase-installations:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7f725872bdf62851eb9ad4db776dca2f/jetified-firebase-installations-17.0.0/AndroidManifest.xml:10:5-79
-MERGED from [com.google.android.gms:play-services-measurement:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2ce243634ec88f204e74dbd7b972bfa4/jetified-play-services-measurement-20.0.0/AndroidManifest.xml:24:5-79
-MERGED from [com.google.android.gms:play-services-measurement:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2ce243634ec88f204e74dbd7b972bfa4/jetified-play-services-measurement-20.0.0/AndroidManifest.xml:24:5-79
-MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6682e3ccc1ab3274c0aa46dc553b6c2f/jetified-play-services-measurement-impl-20.0.0/AndroidManifest.xml:24:5-79
-MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6682e3ccc1ab3274c0aa46dc553b6c2f/jetified-play-services-measurement-impl-20.0.0/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/14e2bbdd1e179c4c48eed97a1412e15a/jetified-play-services-measurement-20.0.2/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/14e2bbdd1e179c4c48eed97a1412e15a/jetified-play-services-measurement-20.0.2/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/3446c916baaf026893fbcd8a8508cbac/jetified-play-services-measurement-impl-20.0.2/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/3446c916baaf026893fbcd8a8508cbac/jetified-play-services-measurement-impl-20.0.2/AndroidManifest.xml:24:5-79
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6139a9e8bc102c4da1c2b82736a9b214/jetified-play-services-maps-17.0.0/AndroidManifest.xml:23:5-79
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6139a9e8bc102c4da1c2b82736a9b214/jetified-play-services-maps-17.0.0/AndroidManifest.xml:23:5-79
 MERGED from [com.google.android.gms:play-services-cloud-messaging:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/04b37903eaada20bde762ae5386559cf/jetified-play-services-cloud-messaging-17.0.0/AndroidManifest.xml:7:5-79
 MERGED from [com.google.android.gms:play-services-cloud-messaging:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/04b37903eaada20bde762ae5386559cf/jetified-play-services-cloud-messaging-17.0.0/AndroidManifest.xml:7:5-79
-MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7d6aad5bf003a24fdfaae50c66dce8b9/jetified-play-services-measurement-sdk-api-20.0.0/AndroidManifest.xml:24:5-79
-MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7d6aad5bf003a24fdfaae50c66dce8b9/jetified-play-services-measurement-sdk-api-20.0.0/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/0eee7768fc215541fe7a8d38389967bd/jetified-play-services-measurement-sdk-api-20.0.2/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/0eee7768fc215541fe7a8d38389967bd/jetified-play-services-measurement-sdk-api-20.0.2/AndroidManifest.xml:24:5-79
 MERGED from [com.google.android.datatransport:transport-runtime:3.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/17b68fe33a6ac5026fdb973194697b83/jetified-transport-runtime-3.0.0/AndroidManifest.xml:22:5-79
 MERGED from [com.google.android.datatransport:transport-runtime:3.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/17b68fe33a6ac5026fdb973194697b83/jetified-transport-runtime-3.0.0/AndroidManifest.xml:22:5-79
+MERGED from [io.grpc:grpc-android:1.41.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/9677a0cc0e8847fae54c245994ab2761/jetified-grpc-android-1.41.0/AndroidManifest.xml:11:5-79
+MERGED from [io.grpc:grpc-android:1.41.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/9677a0cc0e8847fae54c245994ab2761/jetified-grpc-android-1.41.0/AndroidManifest.xml:11:5-79
 	android:name
 		ADDED from /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/android/app/src/main/AndroidManifest.xml:6:22-76
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
@@ -218,6 +231,8 @@ ADDED from /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/android
 		ADDED from /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/android/app/src/main/AndroidManifest.xml:25:13-54
 application
 ADDED from /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/android/app/src/main/AndroidManifest.xml:30:4-74:19
+MERGED from [:cloud_firestore] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/cloud_firestore/intermediates/library_manifest/release/AndroidManifest.xml:7:5-13:19
+MERGED from [:cloud_firestore] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/cloud_firestore/intermediates/library_manifest/release/AndroidManifest.xml:7:5-13:19
 MERGED from [:firebase_messaging] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/firebase_messaging/intermediates/library_manifest/release/AndroidManifest.xml:11:5-44:19
 MERGED from [:firebase_messaging] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/firebase_messaging/intermediates/library_manifest/release/AndroidManifest.xml:11:5-44:19
 MERGED from [:firebase_core] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/firebase_core/intermediates/library_manifest/release/AndroidManifest.xml:7:5-13:19
@@ -230,8 +245,8 @@ MERGED from [:url_launcher_android] /Users/monther/AndroidStudioProjects/inboxDr
 MERGED from [:url_launcher_android] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/url_launcher_android/intermediates/library_manifest/release/AndroidManifest.xml:7:5-12:19
 MERGED from [:location] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/location/intermediates/library_manifest/release/AndroidManifest.xml:10:5-16:19
 MERGED from [:location] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/location/intermediates/library_manifest/release/AndroidManifest.xml:10:5-16:19
-MERGED from [com.google.firebase:firebase-analytics-ktx:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6e8927c0e84144219dfd8798be5e6c79/jetified-firebase-analytics-ktx-20.0.0/AndroidManifest.xml:7:5-15:19
-MERGED from [com.google.firebase:firebase-analytics-ktx:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6e8927c0e84144219dfd8798be5e6c79/jetified-firebase-analytics-ktx-20.0.0/AndroidManifest.xml:7:5-15:19
+MERGED from [com.google.firebase:firebase-analytics-ktx:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/e6fd44d7b153b2ae52bd5047ed1f9f4f/jetified-firebase-analytics-ktx-20.0.2/AndroidManifest.xml:7:5-15:19
+MERGED from [com.google.firebase:firebase-analytics-ktx:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/e6fd44d7b153b2ae52bd5047ed1f9f4f/jetified-firebase-analytics-ktx-20.0.2/AndroidManifest.xml:7:5-15:19
 MERGED from [com.google.firebase:firebase-common-ktx:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/9539556afe0c6d25dabfd2645111e4bd/jetified-firebase-common-ktx-20.0.0/AndroidManifest.xml:11:5-19:19
 MERGED from [com.google.firebase:firebase-common-ktx:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/9539556afe0c6d25dabfd2645111e4bd/jetified-firebase-common-ktx-20.0.0/AndroidManifest.xml:11:5-19:19
 MERGED from [com.google.firebase:firebase-messaging:23.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/904e16a3eeae955e9f8387a8d31a4740/jetified-firebase-messaging-23.0.0/AndroidManifest.xml:27:5-56:19
@@ -240,44 +255,50 @@ MERGED from [com.google.firebase:firebase-datatransport:18.0.0] /Users/monther/.
 MERGED from [com.google.firebase:firebase-datatransport:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/db41e2dafcaa3db17fc96619f6508044/jetified-firebase-datatransport-18.0.0/AndroidManifest.xml:24:5-32:19
 MERGED from [com.google.android.datatransport:transport-backend-cct:3.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/bdd5ae16350d8894d28d4932cd45c052/jetified-transport-backend-cct-3.0.0/AndroidManifest.xml:28:5-36:19
 MERGED from [com.google.android.datatransport:transport-backend-cct:3.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/bdd5ae16350d8894d28d4932cd45c052/jetified-transport-backend-cct-3.0.0/AndroidManifest.xml:28:5-36:19
-MERGED from [com.google.firebase:firebase-analytics:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/b5607d753df41493da37eb0d9a381c0c/jetified-firebase-analytics-20.0.0/AndroidManifest.xml:7:5-20
-MERGED from [com.google.firebase:firebase-analytics:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/b5607d753df41493da37eb0d9a381c0c/jetified-firebase-analytics-20.0.0/AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-measurement-api:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7fde67ef4cafb9579b5fcd131d2e6d7a/jetified-play-services-measurement-api-20.0.0/AndroidManifest.xml:26:5-34:19
-MERGED from [com.google.android.gms:play-services-measurement-api:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7fde67ef4cafb9579b5fcd131d2e6d7a/jetified-play-services-measurement-api-20.0.0/AndroidManifest.xml:26:5-34:19
+MERGED from [com.google.firebase:firebase-analytics:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/8857119fda8a9c275ca09676538f61fb/jetified-firebase-analytics-20.0.2/AndroidManifest.xml:7:5-20
+MERGED from [com.google.firebase:firebase-analytics:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/8857119fda8a9c275ca09676538f61fb/jetified-firebase-analytics-20.0.2/AndroidManifest.xml:7:5-20
+MERGED from [com.google.firebase:firebase-firestore:24.0.1] /Users/monther/.gradle/caches/transforms-2/files-2.1/3dc7ec22b9a78d90b98ee9b82e99b63d/jetified-firebase-firestore-24.0.1/AndroidManifest.xml:16:5-24:19
+MERGED from [com.google.firebase:firebase-firestore:24.0.1] /Users/monther/.gradle/caches/transforms-2/files-2.1/3dc7ec22b9a78d90b98ee9b82e99b63d/jetified-firebase-firestore-24.0.1/AndroidManifest.xml:16:5-24:19
+MERGED from [com.google.firebase:firebase-appcheck-interop:16.0.0-beta02] /Users/monther/.gradle/caches/transforms-2/files-2.1/a6b9eca413184bc439ddc028ac7bb066/jetified-firebase-appcheck-interop-16.0.0-beta02/AndroidManifest.xml:24:5-20
+MERGED from [com.google.firebase:firebase-appcheck-interop:16.0.0-beta02] /Users/monther/.gradle/caches/transforms-2/files-2.1/a6b9eca413184bc439ddc028ac7bb066/jetified-firebase-appcheck-interop-16.0.0-beta02/AndroidManifest.xml:24:5-20
+MERGED from [com.google.firebase:firebase-auth-interop:19.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/8dc402d5fea14b27a6111fba04cfcd23/jetified-firebase-auth-interop-19.0.2/AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.firebase:firebase-auth-interop:19.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/8dc402d5fea14b27a6111fba04cfcd23/jetified-firebase-auth-interop-19.0.2/AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.android.gms:play-services-measurement-api:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/a580873f73f4ac970c0bb75bf1e5301a/jetified-play-services-measurement-api-20.0.2/AndroidManifest.xml:26:5-34:19
+MERGED from [com.google.android.gms:play-services-measurement-api:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/a580873f73f4ac970c0bb75bf1e5301a/jetified-play-services-measurement-api-20.0.2/AndroidManifest.xml:26:5-34:19
 MERGED from [com.google.firebase:firebase-installations:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7f725872bdf62851eb9ad4db776dca2f/jetified-firebase-installations-17.0.0/AndroidManifest.xml:14:5-22:19
 MERGED from [com.google.firebase:firebase-installations:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7f725872bdf62851eb9ad4db776dca2f/jetified-firebase-installations-17.0.0/AndroidManifest.xml:14:5-22:19
 MERGED from [com.google.firebase:firebase-common:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/d5eb73e07577dc9aed23faaa7798a90b/jetified-firebase-common-20.0.0/AndroidManifest.xml:25:5-38:19
 MERGED from [com.google.firebase:firebase-common:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/d5eb73e07577dc9aed23faaa7798a90b/jetified-firebase-common-20.0.0/AndroidManifest.xml:25:5-38:19
 MERGED from [com.google.android.gms:play-services-auth:18.1.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/769236b65624cae9ab8e3c7f1d18d628/jetified-play-services-auth-18.1.0/AndroidManifest.xml:22:5-38:19
 MERGED from [com.google.android.gms:play-services-auth:18.1.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/769236b65624cae9ab8e3c7f1d18d628/jetified-play-services-auth-18.1.0/AndroidManifest.xml:22:5-38:19
-MERGED from [com.google.android.gms:play-services-measurement:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2ce243634ec88f204e74dbd7b972bfa4/jetified-play-services-measurement-20.0.0/AndroidManifest.xml:28:5-44:19
-MERGED from [com.google.android.gms:play-services-measurement:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2ce243634ec88f204e74dbd7b972bfa4/jetified-play-services-measurement-20.0.0/AndroidManifest.xml:28:5-44:19
-MERGED from [com.google.android.gms:play-services-measurement-sdk:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/c2d967bf4bb5895269c06b671d597f3d/jetified-play-services-measurement-sdk-20.0.0/AndroidManifest.xml:22:5-23:19
-MERGED from [com.google.android.gms:play-services-measurement-sdk:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/c2d967bf4bb5895269c06b671d597f3d/jetified-play-services-measurement-sdk-20.0.0/AndroidManifest.xml:22:5-23:19
-MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6682e3ccc1ab3274c0aa46dc553b6c2f/jetified-play-services-measurement-impl-20.0.0/AndroidManifest.xml:28:5-29:19
-MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6682e3ccc1ab3274c0aa46dc553b6c2f/jetified-play-services-measurement-impl-20.0.0/AndroidManifest.xml:28:5-29:19
-MERGED from [com.google.android.gms:play-services-stats:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/b8c7edd3017acd3f57c5ee0cc5b51f01/jetified-play-services-stats-17.0.0/AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-stats:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/b8c7edd3017acd3f57c5ee0cc5b51f01/jetified-play-services-stats-17.0.0/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-measurement:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/14e2bbdd1e179c4c48eed97a1412e15a/jetified-play-services-measurement-20.0.2/AndroidManifest.xml:28:5-44:19
+MERGED from [com.google.android.gms:play-services-measurement:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/14e2bbdd1e179c4c48eed97a1412e15a/jetified-play-services-measurement-20.0.2/AndroidManifest.xml:28:5-44:19
+MERGED from [com.google.android.gms:play-services-measurement-sdk:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/6bee0c17dae6a9934084d282394329f2/jetified-play-services-measurement-sdk-20.0.2/AndroidManifest.xml:22:5-23:19
+MERGED from [com.google.android.gms:play-services-measurement-sdk:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/6bee0c17dae6a9934084d282394329f2/jetified-play-services-measurement-sdk-20.0.2/AndroidManifest.xml:22:5-23:19
+MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/3446c916baaf026893fbcd8a8508cbac/jetified-play-services-measurement-impl-20.0.2/AndroidManifest.xml:28:5-29:19
+MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/3446c916baaf026893fbcd8a8508cbac/jetified-play-services-measurement-impl-20.0.2/AndroidManifest.xml:28:5-29:19
+MERGED from [com.google.android.gms:play-services-stats:17.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/00abad09f62c92bd3825c7702f5981cf/jetified-play-services-stats-17.0.2/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-stats:17.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/00abad09f62c92bd3825c7702f5981cf/jetified-play-services-stats-17.0.2/AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6139a9e8bc102c4da1c2b82736a9b214/jetified-play-services-maps-17.0.0/AndroidManifest.xml:30:5-36:19
 MERGED from [com.google.android.gms:play-services-maps:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6139a9e8bc102c4da1c2b82736a9b214/jetified-play-services-maps-17.0.0/AndroidManifest.xml:30:5-36:19
 MERGED from [com.google.android.gms:play-services-location:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/06c9bb6f6e84aecc8df5eccc4ba5047d/jetified-play-services-location-17.0.0/AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-location:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/06c9bb6f6e84aecc8df5eccc4ba5047d/jetified-play-services-location-17.0.0/AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-base:17.1.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/e91c76fa5178367a03077f75662eefda/jetified-play-services-base-17.1.0/AndroidManifest.xml:22:5-27:19
 MERGED from [com.google.android.gms:play-services-base:17.1.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/e91c76fa5178367a03077f75662eefda/jetified-play-services-base-17.1.0/AndroidManifest.xml:22:5-27:19
-MERGED from [com.google.firebase:firebase-iid-interop:17.1.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/dffea6bee4a2497940b3c6baee9e2ce8/jetified-firebase-iid-interop-17.1.0/AndroidManifest.xml:7:5-8:19
-MERGED from [com.google.firebase:firebase-iid-interop:17.1.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/dffea6bee4a2497940b3c6baee9e2ce8/jetified-firebase-iid-interop-17.1.0/AndroidManifest.xml:7:5-8:19
-MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6e0270c271b4d0626fc1d5af7c053a48/jetified-play-services-tasks-17.0.0/AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6e0270c271b4d0626fc1d5af7c053a48/jetified-play-services-tasks-17.0.0/AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/98a9c7a3e21e4c2101c551f611812314/jetified-play-services-places-placereport-17.0.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/98a9c7a3e21e4c2101c551f611812314/jetified-play-services-places-placereport-17.0.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.firebase:firebase-iid-interop:17.1.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/dffea6bee4a2497940b3c6baee9e2ce8/jetified-firebase-iid-interop-17.1.0/AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.firebase:firebase-iid-interop:17.1.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/dffea6bee4a2497940b3c6baee9e2ce8/jetified-firebase-iid-interop-17.1.0/AndroidManifest.xml:7:5-8:19
 MERGED from [com.google.firebase:firebase-measurement-connector:19.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2d8417b99060e65db8e502b94245e565/jetified-firebase-measurement-connector-19.0.0/AndroidManifest.xml:22:5-23:19
 MERGED from [com.google.firebase:firebase-measurement-connector:19.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2d8417b99060e65db8e502b94245e565/jetified-firebase-measurement-connector-19.0.0/AndroidManifest.xml:22:5-23:19
-MERGED from [com.google.android.gms:play-services-ads-identifier:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/cebcd502a22e241abb0fae97feff90cc/jetified-play-services-ads-identifier-17.0.0/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-ads-identifier:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/cebcd502a22e241abb0fae97feff90cc/jetified-play-services-ads-identifier-17.0.0/AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-measurement-base:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7f4540e7267f746b7214b647be781b34/jetified-play-services-measurement-base-20.0.0/AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-measurement-base:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7f4540e7267f746b7214b647be781b34/jetified-play-services-measurement-base-20.0.0/AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-basement:17.1.1] /Users/monther/.gradle/caches/transforms-2/files-2.1/00222db731cd07d08b4d12ac91140fc5/jetified-play-services-basement-17.1.1/AndroidManifest.xml:22:5-26:19
-MERGED from [com.google.android.gms:play-services-basement:17.1.1] /Users/monther/.gradle/caches/transforms-2/files-2.1/00222db731cd07d08b4d12ac91140fc5/jetified-play-services-basement-17.1.1/AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-ads-identifier:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/f04affec3ab57d6ca02fc3d6aa026ee7/jetified-play-services-ads-identifier-18.0.0/AndroidManifest.xml:25:5-20
+MERGED from [com.google.android.gms:play-services-ads-identifier:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/f04affec3ab57d6ca02fc3d6aa026ee7/jetified-play-services-ads-identifier-18.0.0/AndroidManifest.xml:25:5-20
+MERGED from [com.google.android.gms:play-services-measurement-base:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/7a0d5376436132de7f8cc63a24fedc68/jetified-play-services-measurement-base-20.0.2/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-measurement-base:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/7a0d5376436132de7f8cc63a24fedc68/jetified-play-services-measurement-base-20.0.2/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-tasks:18.0.1] /Users/monther/.gradle/caches/transforms-2/files-2.1/5513c2ae528601a56e5ae4569741fd44/jetified-play-services-tasks-18.0.1/AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-tasks:18.0.1] /Users/monther/.gradle/caches/transforms-2/files-2.1/5513c2ae528601a56e5ae4569741fd44/jetified-play-services-tasks-18.0.1/AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-basement:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/da6e58967780a53f83f11ab769f7c2d2/jetified-play-services-basement-18.0.0/AndroidManifest.xml:20:5-24:19
+MERGED from [com.google.android.gms:play-services-basement:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/da6e58967780a53f83f11ab769f7c2d2/jetified-play-services-basement-18.0.0/AndroidManifest.xml:20:5-24:19
 MERGED from [androidx.core:core:1.6.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/8a7f6825b2c857263502d908e7ce1fa5/core-1.6.0/AndroidManifest.xml:24:5-89
 MERGED from [androidx.core:core:1.6.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/8a7f6825b2c857263502d908e7ce1fa5/core-1.6.0/AndroidManifest.xml:24:5-89
 MERGED from [com.google.android.datatransport:transport-runtime:3.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/17b68fe33a6ac5026fdb973194697b83/jetified-transport-runtime-3.0.0/AndroidManifest.xml:25:5-39:19
@@ -350,6 +371,8 @@ INJECTED from /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/andr
 INJECTED from /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/android/app/src/main/AndroidManifest.xml
 MERGED from [:alt_sms_autofill] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/alt_sms_autofill/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
 MERGED from [:alt_sms_autofill] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/alt_sms_autofill/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:cloud_firestore] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/cloud_firestore/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:cloud_firestore] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/cloud_firestore/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
 MERGED from [:firebase_messaging] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/firebase_messaging/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
 MERGED from [:firebase_messaging] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/firebase_messaging/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
 MERGED from [:firebase_core] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/firebase_core/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
@@ -386,8 +409,8 @@ MERGED from [:location] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_d
 MERGED from [:location] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/location/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
 MERGED from [:flutter_phone_direct_caller] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/flutter_phone_direct_caller/intermediates/library_manifest/release/AndroidManifest.xml:5:5-7:41
 MERGED from [:flutter_phone_direct_caller] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/flutter_phone_direct_caller/intermediates/library_manifest/release/AndroidManifest.xml:5:5-7:41
-MERGED from [com.google.firebase:firebase-analytics-ktx:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6e8927c0e84144219dfd8798be5e6c79/jetified-firebase-analytics-ktx-20.0.0/AndroidManifest.xml:5:5-44
-MERGED from [com.google.firebase:firebase-analytics-ktx:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6e8927c0e84144219dfd8798be5e6c79/jetified-firebase-analytics-ktx-20.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-analytics-ktx:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/e6fd44d7b153b2ae52bd5047ed1f9f4f/jetified-firebase-analytics-ktx-20.0.2/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-analytics-ktx:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/e6fd44d7b153b2ae52bd5047ed1f9f4f/jetified-firebase-analytics-ktx-20.0.2/AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-common-ktx:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/9539556afe0c6d25dabfd2645111e4bd/jetified-firebase-common-ktx-20.0.0/AndroidManifest.xml:6:5-8:41
 MERGED from [com.google.firebase:firebase-common-ktx:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/9539556afe0c6d25dabfd2645111e4bd/jetified-firebase-common-ktx-20.0.0/AndroidManifest.xml:6:5-8:41
 MERGED from [com.google.firebase:firebase-messaging:23.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/904e16a3eeae955e9f8387a8d31a4740/jetified-firebase-messaging-23.0.0/AndroidManifest.xml:20:5-44
@@ -398,10 +421,16 @@ MERGED from [com.google.android.datatransport:transport-backend-cct:3.0.0] /User
 MERGED from [com.google.android.datatransport:transport-backend-cct:3.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/bdd5ae16350d8894d28d4932cd45c052/jetified-transport-backend-cct-3.0.0/AndroidManifest.xml:19:5-21:41
 MERGED from [com.google.firebase:firebase-encoders-json:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/ea1064931d69869523572d63ac78593d/jetified-firebase-encoders-json-18.0.0/AndroidManifest.xml:19:5-21:41
 MERGED from [com.google.firebase:firebase-encoders-json:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/ea1064931d69869523572d63ac78593d/jetified-firebase-encoders-json-18.0.0/AndroidManifest.xml:19:5-21:41
-MERGED from [com.google.firebase:firebase-analytics:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/b5607d753df41493da37eb0d9a381c0c/jetified-firebase-analytics-20.0.0/AndroidManifest.xml:5:5-44
-MERGED from [com.google.firebase:firebase-analytics:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/b5607d753df41493da37eb0d9a381c0c/jetified-firebase-analytics-20.0.0/AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-measurement-api:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7fde67ef4cafb9579b5fcd131d2e6d7a/jetified-play-services-measurement-api-20.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-measurement-api:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7fde67ef4cafb9579b5fcd131d2e6d7a/jetified-play-services-measurement-api-20.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-analytics:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/8857119fda8a9c275ca09676538f61fb/jetified-firebase-analytics-20.0.2/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-analytics:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/8857119fda8a9c275ca09676538f61fb/jetified-firebase-analytics-20.0.2/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-firestore:24.0.1] /Users/monther/.gradle/caches/transforms-2/files-2.1/3dc7ec22b9a78d90b98ee9b82e99b63d/jetified-firebase-firestore-24.0.1/AndroidManifest.xml:7:5-9:41
+MERGED from [com.google.firebase:firebase-firestore:24.0.1] /Users/monther/.gradle/caches/transforms-2/files-2.1/3dc7ec22b9a78d90b98ee9b82e99b63d/jetified-firebase-firestore-24.0.1/AndroidManifest.xml:7:5-9:41
+MERGED from [com.google.firebase:firebase-appcheck-interop:16.0.0-beta02] /Users/monther/.gradle/caches/transforms-2/files-2.1/a6b9eca413184bc439ddc028ac7bb066/jetified-firebase-appcheck-interop-16.0.0-beta02/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.firebase:firebase-appcheck-interop:16.0.0-beta02] /Users/monther/.gradle/caches/transforms-2/files-2.1/a6b9eca413184bc439ddc028ac7bb066/jetified-firebase-appcheck-interop-16.0.0-beta02/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.firebase:firebase-auth-interop:19.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/8dc402d5fea14b27a6111fba04cfcd23/jetified-firebase-auth-interop-19.0.2/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-auth-interop:19.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/8dc402d5fea14b27a6111fba04cfcd23/jetified-firebase-auth-interop-19.0.2/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-measurement-api:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/a580873f73f4ac970c0bb75bf1e5301a/jetified-play-services-measurement-api-20.0.2/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-api:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/a580873f73f4ac970c0bb75bf1e5301a/jetified-play-services-measurement-api-20.0.2/AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-installations:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7f725872bdf62851eb9ad4db776dca2f/jetified-firebase-installations-17.0.0/AndroidManifest.xml:6:5-8:41
 MERGED from [com.google.firebase:firebase-installations:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7f725872bdf62851eb9ad4db776dca2f/jetified-firebase-installations-17.0.0/AndroidManifest.xml:6:5-8:41
 MERGED from [com.google.firebase:firebase-common:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/d5eb73e07577dc9aed23faaa7798a90b/jetified-firebase-common-20.0.0/AndroidManifest.xml:20:5-22:41
@@ -416,14 +445,14 @@ MERGED from [androidx.appcompat:appcompat:1.3.0] /Users/monther/.gradle/caches/t
 MERGED from [androidx.appcompat:appcompat:1.3.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6ced094c760dfe4958eb948cca9b17f5/appcompat-1.3.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.core:core-ktx:1.3.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/19dbe637c5eaedcf6182892a87583737/jetified-core-ktx-1.3.2/AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.core:core-ktx:1.3.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/19dbe637c5eaedcf6182892a87583737/jetified-core-ktx-1.3.2/AndroidManifest.xml:5:5-7:41
-MERGED from [com.google.android.gms:play-services-measurement:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2ce243634ec88f204e74dbd7b972bfa4/jetified-play-services-measurement-20.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-measurement:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2ce243634ec88f204e74dbd7b972bfa4/jetified-play-services-measurement-20.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-measurement-sdk:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/c2d967bf4bb5895269c06b671d597f3d/jetified-play-services-measurement-sdk-20.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-measurement-sdk:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/c2d967bf4bb5895269c06b671d597f3d/jetified-play-services-measurement-sdk-20.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6682e3ccc1ab3274c0aa46dc553b6c2f/jetified-play-services-measurement-impl-20.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6682e3ccc1ab3274c0aa46dc553b6c2f/jetified-play-services-measurement-impl-20.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-stats:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/b8c7edd3017acd3f57c5ee0cc5b51f01/jetified-play-services-stats-17.0.0/AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-stats:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/b8c7edd3017acd3f57c5ee0cc5b51f01/jetified-play-services-stats-17.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-measurement:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/14e2bbdd1e179c4c48eed97a1412e15a/jetified-play-services-measurement-20.0.2/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/14e2bbdd1e179c4c48eed97a1412e15a/jetified-play-services-measurement-20.0.2/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-sdk:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/6bee0c17dae6a9934084d282394329f2/jetified-play-services-measurement-sdk-20.0.2/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-sdk:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/6bee0c17dae6a9934084d282394329f2/jetified-play-services-measurement-sdk-20.0.2/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/3446c916baaf026893fbcd8a8508cbac/jetified-play-services-measurement-impl-20.0.2/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/3446c916baaf026893fbcd8a8508cbac/jetified-play-services-measurement-impl-20.0.2/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-stats:17.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/00abad09f62c92bd3825c7702f5981cf/jetified-play-services-stats-17.0.2/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-stats:17.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/00abad09f62c92bd3825c7702f5981cf/jetified-play-services-stats-17.0.2/AndroidManifest.xml:5:5-44
 MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/a87153039073d5f1c678d321fc8d2f26/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/a87153039073d5f1c678d321fc8d2f26/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/037ee24b5b3f538a95ddcfdfa92577c1/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
@@ -438,28 +467,30 @@ MERGED from [com.google.android.gms:play-services-auth-api-phone:17.0.0] /Users/
 MERGED from [com.google.android.gms:play-services-auth-api-phone:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/f266d7f33eeae4a7ee08686e7df78395/jetified-play-services-auth-api-phone-17.0.0/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-auth-base:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/aee2297b2e0ec9b179ec836e5a0f0be1/jetified-play-services-auth-base-17.0.0/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-auth-base:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/aee2297b2e0ec9b179ec836e5a0f0be1/jetified-play-services-auth-base-17.0.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-database-collection:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7d53a3304511bc262a0baa4d0f9ace20/jetified-firebase-database-collection-18.0.0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.firebase:firebase-database-collection:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7d53a3304511bc262a0baa4d0f9ace20/jetified-firebase-database-collection-18.0.0/AndroidManifest.xml:5:5-7:41
 MERGED from [com.google.android.gms:play-services-base:17.1.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/e91c76fa5178367a03077f75662eefda/jetified-play-services-base-17.1.0/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-base:17.1.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/e91c76fa5178367a03077f75662eefda/jetified-play-services-base-17.1.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/98a9c7a3e21e4c2101c551f611812314/jetified-play-services-places-placereport-17.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/98a9c7a3e21e4c2101c551f611812314/jetified-play-services-places-placereport-17.0.0/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-cloud-messaging:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/04b37903eaada20bde762ae5386559cf/jetified-play-services-cloud-messaging-17.0.0/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-cloud-messaging:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/04b37903eaada20bde762ae5386559cf/jetified-play-services-cloud-messaging-17.0.0/AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-iid-interop:17.1.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/dffea6bee4a2497940b3c6baee9e2ce8/jetified-firebase-iid-interop-17.1.0/AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-iid-interop:17.1.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/dffea6bee4a2497940b3c6baee9e2ce8/jetified-firebase-iid-interop-17.1.0/AndroidManifest.xml:5:5-44
-MERGED from [com.google.firebase:firebase-installations-interop:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/5c8817b4845103ff32fcabf16e2676a3/jetified-firebase-installations-interop-17.0.0/AndroidManifest.xml:19:5-21:41
-MERGED from [com.google.firebase:firebase-installations-interop:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/5c8817b4845103ff32fcabf16e2676a3/jetified-firebase-installations-interop-17.0.0/AndroidManifest.xml:19:5-21:41
-MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6e0270c271b4d0626fc1d5af7c053a48/jetified-play-services-tasks-17.0.0/AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-tasks:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6e0270c271b4d0626fc1d5af7c053a48/jetified-play-services-tasks-17.0.0/AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/98a9c7a3e21e4c2101c551f611812314/jetified-play-services-places-placereport-17.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/98a9c7a3e21e4c2101c551f611812314/jetified-play-services-places-placereport-17.0.0/AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-measurement-connector:19.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2d8417b99060e65db8e502b94245e565/jetified-firebase-measurement-connector-19.0.0/AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-measurement-connector:19.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2d8417b99060e65db8e502b94245e565/jetified-firebase-measurement-connector-19.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-ads-identifier:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/cebcd502a22e241abb0fae97feff90cc/jetified-play-services-ads-identifier-17.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-ads-identifier:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/cebcd502a22e241abb0fae97feff90cc/jetified-play-services-ads-identifier-17.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7d6aad5bf003a24fdfaae50c66dce8b9/jetified-play-services-measurement-sdk-api-20.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7d6aad5bf003a24fdfaae50c66dce8b9/jetified-play-services-measurement-sdk-api-20.0.0/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-measurement-base:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7f4540e7267f746b7214b647be781b34/jetified-play-services-measurement-base-20.0.0/AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-measurement-base:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7f4540e7267f746b7214b647be781b34/jetified-play-services-measurement-base-20.0.0/AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-basement:17.1.1] /Users/monther/.gradle/caches/transforms-2/files-2.1/00222db731cd07d08b4d12ac91140fc5/jetified-play-services-basement-17.1.1/AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-basement:17.1.1] /Users/monther/.gradle/caches/transforms-2/files-2.1/00222db731cd07d08b4d12ac91140fc5/jetified-play-services-basement-17.1.1/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-ads-identifier:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/f04affec3ab57d6ca02fc3d6aa026ee7/jetified-play-services-ads-identifier-18.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-ads-identifier:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/f04affec3ab57d6ca02fc3d6aa026ee7/jetified-play-services-ads-identifier-18.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/0eee7768fc215541fe7a8d38389967bd/jetified-play-services-measurement-sdk-api-20.0.2/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/0eee7768fc215541fe7a8d38389967bd/jetified-play-services-measurement-sdk-api-20.0.2/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-measurement-base:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/7a0d5376436132de7f8cc63a24fedc68/jetified-play-services-measurement-base-20.0.2/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-measurement-base:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/7a0d5376436132de7f8cc63a24fedc68/jetified-play-services-measurement-base-20.0.2/AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-installations-interop:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/5c8817b4845103ff32fcabf16e2676a3/jetified-firebase-installations-interop-17.0.0/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.firebase:firebase-installations-interop:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/5c8817b4845103ff32fcabf16e2676a3/jetified-firebase-installations-interop-17.0.0/AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.android.gms:play-services-tasks:18.0.1] /Users/monther/.gradle/caches/transforms-2/files-2.1/5513c2ae528601a56e5ae4569741fd44/jetified-play-services-tasks-18.0.1/AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-tasks:18.0.1] /Users/monther/.gradle/caches/transforms-2/files-2.1/5513c2ae528601a56e5ae4569741fd44/jetified-play-services-tasks-18.0.1/AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-basement:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/da6e58967780a53f83f11ab769f7c2d2/jetified-play-services-basement-18.0.0/AndroidManifest.xml:18:5-43
+MERGED from [com.google.android.gms:play-services-basement:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/da6e58967780a53f83f11ab769f7c2d2/jetified-play-services-basement-18.0.0/AndroidManifest.xml:18:5-43
 MERGED from [androidx.fragment:fragment:1.3.4] /Users/monther/.gradle/caches/transforms-2/files-2.1/4ef0d845e105fc59acc9e04f3f9737f6/fragment-1.3.4/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.fragment:fragment:1.3.4] /Users/monther/.gradle/caches/transforms-2/files-2.1/4ef0d845e105fc59acc9e04f3f9737f6/fragment-1.3.4/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.loader:loader:1.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/0f8c5c5a3838117b93ac8e4b4262126d/loader-1.0.0/AndroidManifest.xml:20:5-44
@@ -512,10 +543,14 @@ MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/monther/.gradle/ca
 MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/4f61f21a55fda513d5ca90fce5a3cf68/documentfile-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.print:print:1.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/1df5b336215a60349673ca13fd66a64b/print-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.print:print:1.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/1df5b336215a60349673ca13fd66a64b/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [io.grpc:grpc-android:1.41.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/9677a0cc0e8847fae54c245994ab2761/jetified-grpc-android-1.41.0/AndroidManifest.xml:7:5-9:41
+MERGED from [io.grpc:grpc-android:1.41.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/9677a0cc0e8847fae54c245994ab2761/jetified-grpc-android-1.41.0/AndroidManifest.xml:7:5-9:41
 MERGED from [com.jakewharton.threetenabp:threetenabp:1.2.3] /Users/monther/.gradle/caches/transforms-2/files-2.1/02eade54bcb866518e2183db4c582713/jetified-threetenabp-1.2.3/AndroidManifest.xml:5:5-44
 MERGED from [com.jakewharton.threetenabp:threetenabp:1.2.3] /Users/monther/.gradle/caches/transforms-2/files-2.1/02eade54bcb866518e2183db4c582713/jetified-threetenabp-1.2.3/AndroidManifest.xml:5:5-44
 MERGED from [com.journeyapps:zxing-android-embedded:4.2.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/4b724442e1c79e6d3df420378e43cf36/jetified-zxing-android-embedded-4.2.0/AndroidManifest.xml:20:5-44
 MERGED from [com.journeyapps:zxing-android-embedded:4.2.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/4b724442e1c79e6d3df420378e43cf36/jetified-zxing-android-embedded-4.2.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:protolite-well-known-types:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2acfd1913c576371e40b17dde6b70445/jetified-protolite-well-known-types-18.0.0/AndroidManifest.xml:7:5-9:41
+MERGED from [com.google.firebase:protolite-well-known-types:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2acfd1913c576371e40b17dde6b70445/jetified-protolite-well-known-types-18.0.0/AndroidManifest.xml:7:5-9:41
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/d399316d96a9364b1593cafb882c2969/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/d399316d96a9364b1593cafb882c2969/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:20:5-22:41
 INJECTED from /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/android/app/src/main/AndroidManifest.xml
@@ -542,20 +577,56 @@ uses-permission#android.permission.RECEIVE_SMS
 ADDED from [:alt_sms_autofill] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/alt_sms_autofill/intermediates/library_manifest/release/AndroidManifest.xml:9:5-70
 	android:name
 		ADDED from [:alt_sms_autofill] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/alt_sms_autofill/intermediates/library_manifest/release/AndroidManifest.xml:9:22-67
+service#com.google.firebase.components.ComponentDiscoveryService
+ADDED from [:cloud_firestore] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/cloud_firestore/intermediates/library_manifest/release/AndroidManifest.xml:8:9-12:19
+MERGED from [:firebase_messaging] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/firebase_messaging/intermediates/library_manifest/release/AndroidManifest.xml:33:9-37:19
+MERGED from [:firebase_messaging] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/firebase_messaging/intermediates/library_manifest/release/AndroidManifest.xml:33:9-37:19
+MERGED from [:firebase_core] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/firebase_core/intermediates/library_manifest/release/AndroidManifest.xml:8:9-12:19
+MERGED from [:firebase_core] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/firebase_core/intermediates/library_manifest/release/AndroidManifest.xml:8:9-12:19
+MERGED from [com.google.firebase:firebase-analytics-ktx:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/e6fd44d7b153b2ae52bd5047ed1f9f4f/jetified-firebase-analytics-ktx-20.0.2/AndroidManifest.xml:8:9-14:19
+MERGED from [com.google.firebase:firebase-analytics-ktx:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/e6fd44d7b153b2ae52bd5047ed1f9f4f/jetified-firebase-analytics-ktx-20.0.2/AndroidManifest.xml:8:9-14:19
+MERGED from [com.google.firebase:firebase-common-ktx:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/9539556afe0c6d25dabfd2645111e4bd/jetified-firebase-common-ktx-20.0.0/AndroidManifest.xml:12:9-18:19
+MERGED from [com.google.firebase:firebase-common-ktx:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/9539556afe0c6d25dabfd2645111e4bd/jetified-firebase-common-ktx-20.0.0/AndroidManifest.xml:12:9-18:19
+MERGED from [com.google.firebase:firebase-messaging:23.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/904e16a3eeae955e9f8387a8d31a4740/jetified-firebase-messaging-23.0.0/AndroidManifest.xml:49:9-55:19
+MERGED from [com.google.firebase:firebase-messaging:23.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/904e16a3eeae955e9f8387a8d31a4740/jetified-firebase-messaging-23.0.0/AndroidManifest.xml:49:9-55:19
+MERGED from [com.google.firebase:firebase-datatransport:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/db41e2dafcaa3db17fc96619f6508044/jetified-firebase-datatransport-18.0.0/AndroidManifest.xml:25:9-31:19
+MERGED from [com.google.firebase:firebase-datatransport:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/db41e2dafcaa3db17fc96619f6508044/jetified-firebase-datatransport-18.0.0/AndroidManifest.xml:25:9-31:19
+MERGED from [com.google.firebase:firebase-firestore:24.0.1] /Users/monther/.gradle/caches/transforms-2/files-2.1/3dc7ec22b9a78d90b98ee9b82e99b63d/jetified-firebase-firestore-24.0.1/AndroidManifest.xml:17:9-23:19
+MERGED from [com.google.firebase:firebase-firestore:24.0.1] /Users/monther/.gradle/caches/transforms-2/files-2.1/3dc7ec22b9a78d90b98ee9b82e99b63d/jetified-firebase-firestore-24.0.1/AndroidManifest.xml:17:9-23:19
+MERGED from [com.google.android.gms:play-services-measurement-api:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/a580873f73f4ac970c0bb75bf1e5301a/jetified-play-services-measurement-api-20.0.2/AndroidManifest.xml:27:9-33:19
+MERGED from [com.google.android.gms:play-services-measurement-api:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/a580873f73f4ac970c0bb75bf1e5301a/jetified-play-services-measurement-api-20.0.2/AndroidManifest.xml:27:9-33:19
+MERGED from [com.google.firebase:firebase-installations:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7f725872bdf62851eb9ad4db776dca2f/jetified-firebase-installations-17.0.0/AndroidManifest.xml:15:9-21:19
+MERGED from [com.google.firebase:firebase-installations:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7f725872bdf62851eb9ad4db776dca2f/jetified-firebase-installations-17.0.0/AndroidManifest.xml:15:9-21:19
+MERGED from [com.google.firebase:firebase-common:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/d5eb73e07577dc9aed23faaa7798a90b/jetified-firebase-common-20.0.0/AndroidManifest.xml:33:9-37:35
+MERGED from [com.google.firebase:firebase-common:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/d5eb73e07577dc9aed23faaa7798a90b/jetified-firebase-common-20.0.0/AndroidManifest.xml:33:9-37:35
+	android:exported
+		ADDED from [com.google.firebase:firebase-analytics-ktx:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/e6fd44d7b153b2ae52bd5047ed1f9f4f/jetified-firebase-analytics-ktx-20.0.2/AndroidManifest.xml:10:13-37
+	tools:targetApi
+		ADDED from [com.google.firebase:firebase-common:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/d5eb73e07577dc9aed23faaa7798a90b/jetified-firebase-common-20.0.0/AndroidManifest.xml:37:13-32
+	android:directBootAware
+		ADDED from [com.google.firebase:firebase-common:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/d5eb73e07577dc9aed23faaa7798a90b/jetified-firebase-common-20.0.0/AndroidManifest.xml:35:13-43
+	android:name
+		ADDED from [:cloud_firestore] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/cloud_firestore/intermediates/library_manifest/release/AndroidManifest.xml:8:18-89
+meta-data#com.google.firebase.components:io.flutter.plugins.firebase.firestore.FlutterFirebaseFirestoreRegistrar
+ADDED from [:cloud_firestore] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/cloud_firestore/intermediates/library_manifest/release/AndroidManifest.xml:9:13-11:85
+	android:value
+		ADDED from [:cloud_firestore] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/cloud_firestore/intermediates/library_manifest/release/AndroidManifest.xml:11:17-82
+	android:name
+		ADDED from [:cloud_firestore] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/cloud_firestore/intermediates/library_manifest/release/AndroidManifest.xml:10:17-134
 uses-permission#android.permission.WAKE_LOCK
 ADDED from [:firebase_messaging] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/firebase_messaging/intermediates/library_manifest/release/AndroidManifest.xml:8:5-68
 MERGED from [com.google.firebase:firebase-messaging:23.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/904e16a3eeae955e9f8387a8d31a4740/jetified-firebase-messaging-23.0.0/AndroidManifest.xml:23:5-68
 MERGED from [com.google.firebase:firebase-messaging:23.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/904e16a3eeae955e9f8387a8d31a4740/jetified-firebase-messaging-23.0.0/AndroidManifest.xml:23:5-68
-MERGED from [com.google.android.gms:play-services-measurement-api:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7fde67ef4cafb9579b5fcd131d2e6d7a/jetified-play-services-measurement-api-20.0.0/AndroidManifest.xml:24:5-68
-MERGED from [com.google.android.gms:play-services-measurement-api:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7fde67ef4cafb9579b5fcd131d2e6d7a/jetified-play-services-measurement-api-20.0.0/AndroidManifest.xml:24:5-68
-MERGED from [com.google.android.gms:play-services-measurement:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2ce243634ec88f204e74dbd7b972bfa4/jetified-play-services-measurement-20.0.0/AndroidManifest.xml:25:5-68
-MERGED from [com.google.android.gms:play-services-measurement:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2ce243634ec88f204e74dbd7b972bfa4/jetified-play-services-measurement-20.0.0/AndroidManifest.xml:25:5-68
-MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6682e3ccc1ab3274c0aa46dc553b6c2f/jetified-play-services-measurement-impl-20.0.0/AndroidManifest.xml:25:5-68
-MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6682e3ccc1ab3274c0aa46dc553b6c2f/jetified-play-services-measurement-impl-20.0.0/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement-api:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/a580873f73f4ac970c0bb75bf1e5301a/jetified-play-services-measurement-api-20.0.2/AndroidManifest.xml:24:5-68
+MERGED from [com.google.android.gms:play-services-measurement-api:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/a580873f73f4ac970c0bb75bf1e5301a/jetified-play-services-measurement-api-20.0.2/AndroidManifest.xml:24:5-68
+MERGED from [com.google.android.gms:play-services-measurement:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/14e2bbdd1e179c4c48eed97a1412e15a/jetified-play-services-measurement-20.0.2/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/14e2bbdd1e179c4c48eed97a1412e15a/jetified-play-services-measurement-20.0.2/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/3446c916baaf026893fbcd8a8508cbac/jetified-play-services-measurement-impl-20.0.2/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/3446c916baaf026893fbcd8a8508cbac/jetified-play-services-measurement-impl-20.0.2/AndroidManifest.xml:25:5-68
 MERGED from [com.google.android.gms:play-services-cloud-messaging:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/04b37903eaada20bde762ae5386559cf/jetified-play-services-cloud-messaging-17.0.0/AndroidManifest.xml:9:5-68
 MERGED from [com.google.android.gms:play-services-cloud-messaging:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/04b37903eaada20bde762ae5386559cf/jetified-play-services-cloud-messaging-17.0.0/AndroidManifest.xml:9:5-68
-MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7d6aad5bf003a24fdfaae50c66dce8b9/jetified-play-services-measurement-sdk-api-20.0.0/AndroidManifest.xml:25:5-68
-MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7d6aad5bf003a24fdfaae50c66dce8b9/jetified-play-services-measurement-sdk-api-20.0.0/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/0eee7768fc215541fe7a8d38389967bd/jetified-play-services-measurement-sdk-api-20.0.2/AndroidManifest.xml:25:5-68
+MERGED from [com.google.android.gms:play-services-measurement-sdk-api:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/0eee7768fc215541fe7a8d38389967bd/jetified-play-services-measurement-sdk-api-20.0.2/AndroidManifest.xml:25:5-68
 	android:name
 		ADDED from [:firebase_messaging] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/firebase_messaging/intermediates/library_manifest/release/AndroidManifest.xml:8:22-65
 service#io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingBackgroundService
@@ -592,32 +663,6 @@ action#com.google.android.c2dm.intent.RECEIVE
 ADDED from [:firebase_messaging] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/firebase_messaging/intermediates/library_manifest/release/AndroidManifest.xml:29:17-81
 	android:name
 		ADDED from [:firebase_messaging] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/firebase_messaging/intermediates/library_manifest/release/AndroidManifest.xml:29:25-78
-service#com.google.firebase.components.ComponentDiscoveryService
-ADDED from [:firebase_messaging] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/firebase_messaging/intermediates/library_manifest/release/AndroidManifest.xml:33:9-37:19
-MERGED from [:firebase_core] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/firebase_core/intermediates/library_manifest/release/AndroidManifest.xml:8:9-12:19
-MERGED from [:firebase_core] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/firebase_core/intermediates/library_manifest/release/AndroidManifest.xml:8:9-12:19
-MERGED from [com.google.firebase:firebase-analytics-ktx:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6e8927c0e84144219dfd8798be5e6c79/jetified-firebase-analytics-ktx-20.0.0/AndroidManifest.xml:8:9-14:19
-MERGED from [com.google.firebase:firebase-analytics-ktx:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6e8927c0e84144219dfd8798be5e6c79/jetified-firebase-analytics-ktx-20.0.0/AndroidManifest.xml:8:9-14:19
-MERGED from [com.google.firebase:firebase-common-ktx:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/9539556afe0c6d25dabfd2645111e4bd/jetified-firebase-common-ktx-20.0.0/AndroidManifest.xml:12:9-18:19
-MERGED from [com.google.firebase:firebase-common-ktx:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/9539556afe0c6d25dabfd2645111e4bd/jetified-firebase-common-ktx-20.0.0/AndroidManifest.xml:12:9-18:19
-MERGED from [com.google.firebase:firebase-messaging:23.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/904e16a3eeae955e9f8387a8d31a4740/jetified-firebase-messaging-23.0.0/AndroidManifest.xml:49:9-55:19
-MERGED from [com.google.firebase:firebase-messaging:23.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/904e16a3eeae955e9f8387a8d31a4740/jetified-firebase-messaging-23.0.0/AndroidManifest.xml:49:9-55:19
-MERGED from [com.google.firebase:firebase-datatransport:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/db41e2dafcaa3db17fc96619f6508044/jetified-firebase-datatransport-18.0.0/AndroidManifest.xml:25:9-31:19
-MERGED from [com.google.firebase:firebase-datatransport:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/db41e2dafcaa3db17fc96619f6508044/jetified-firebase-datatransport-18.0.0/AndroidManifest.xml:25:9-31:19
-MERGED from [com.google.android.gms:play-services-measurement-api:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7fde67ef4cafb9579b5fcd131d2e6d7a/jetified-play-services-measurement-api-20.0.0/AndroidManifest.xml:27:9-33:19
-MERGED from [com.google.android.gms:play-services-measurement-api:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7fde67ef4cafb9579b5fcd131d2e6d7a/jetified-play-services-measurement-api-20.0.0/AndroidManifest.xml:27:9-33:19
-MERGED from [com.google.firebase:firebase-installations:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7f725872bdf62851eb9ad4db776dca2f/jetified-firebase-installations-17.0.0/AndroidManifest.xml:15:9-21:19
-MERGED from [com.google.firebase:firebase-installations:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7f725872bdf62851eb9ad4db776dca2f/jetified-firebase-installations-17.0.0/AndroidManifest.xml:15:9-21:19
-MERGED from [com.google.firebase:firebase-common:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/d5eb73e07577dc9aed23faaa7798a90b/jetified-firebase-common-20.0.0/AndroidManifest.xml:33:9-37:35
-MERGED from [com.google.firebase:firebase-common:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/d5eb73e07577dc9aed23faaa7798a90b/jetified-firebase-common-20.0.0/AndroidManifest.xml:33:9-37:35
-	android:exported
-		ADDED from [com.google.firebase:firebase-analytics-ktx:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6e8927c0e84144219dfd8798be5e6c79/jetified-firebase-analytics-ktx-20.0.0/AndroidManifest.xml:10:13-37
-	tools:targetApi
-		ADDED from [com.google.firebase:firebase-common:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/d5eb73e07577dc9aed23faaa7798a90b/jetified-firebase-common-20.0.0/AndroidManifest.xml:37:13-32
-	android:directBootAware
-		ADDED from [com.google.firebase:firebase-common:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/d5eb73e07577dc9aed23faaa7798a90b/jetified-firebase-common-20.0.0/AndroidManifest.xml:35:13-43
-	android:name
-		ADDED from [:firebase_messaging] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/firebase_messaging/intermediates/library_manifest/release/AndroidManifest.xml:33:18-89
 meta-data#com.google.firebase.components:io.flutter.plugins.firebase.messaging.FlutterFirebaseAppRegistrar
 ADDED from [:firebase_messaging] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/firebase_messaging/intermediates/library_manifest/release/AndroidManifest.xml:34:13-36:85
 	android:value
@@ -731,11 +776,11 @@ ADDED from [:flutter_phone_direct_caller] /Users/monther/AndroidStudioProjects/i
 	android:name
 		ADDED from [:flutter_phone_direct_caller] /Users/monther/AndroidStudioProjects/inboxDriver/inbox_driver/build/flutter_phone_direct_caller/intermediates/library_manifest/release/AndroidManifest.xml:12:9-50
 meta-data#com.google.firebase.components:com.google.firebase.analytics.ktx.FirebaseAnalyticsKtxRegistrar
-ADDED from [com.google.firebase:firebase-analytics-ktx:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6e8927c0e84144219dfd8798be5e6c79/jetified-firebase-analytics-ktx-20.0.0/AndroidManifest.xml:11:13-13:85
+ADDED from [com.google.firebase:firebase-analytics-ktx:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/e6fd44d7b153b2ae52bd5047ed1f9f4f/jetified-firebase-analytics-ktx-20.0.2/AndroidManifest.xml:11:13-13:85
 	android:value
-		ADDED from [com.google.firebase:firebase-analytics-ktx:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6e8927c0e84144219dfd8798be5e6c79/jetified-firebase-analytics-ktx-20.0.0/AndroidManifest.xml:13:17-82
+		ADDED from [com.google.firebase:firebase-analytics-ktx:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/e6fd44d7b153b2ae52bd5047ed1f9f4f/jetified-firebase-analytics-ktx-20.0.2/AndroidManifest.xml:13:17-82
 	android:name
-		ADDED from [com.google.firebase:firebase-analytics-ktx:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6e8927c0e84144219dfd8798be5e6c79/jetified-firebase-analytics-ktx-20.0.0/AndroidManifest.xml:12:17-126
+		ADDED from [com.google.firebase:firebase-analytics-ktx:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/e6fd44d7b153b2ae52bd5047ed1f9f4f/jetified-firebase-analytics-ktx-20.0.2/AndroidManifest.xml:12:17-126
 meta-data#com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonKtxRegistrar
 ADDED from [com.google.firebase:firebase-common-ktx:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/9539556afe0c6d25dabfd2645111e4bd/jetified-firebase-common-ktx-20.0.0/AndroidManifest.xml:15:13-17:85
 	android:value
@@ -790,12 +835,18 @@ ADDED from [com.google.android.datatransport:transport-backend-cct:3.0.0] /Users
 		ADDED from [com.google.android.datatransport:transport-backend-cct:3.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/bdd5ae16350d8894d28d4932cd45c052/jetified-transport-backend-cct-3.0.0/AndroidManifest.xml:34:17-36
 	android:name
 		ADDED from [com.google.android.datatransport:transport-backend-cct:3.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/bdd5ae16350d8894d28d4932cd45c052/jetified-transport-backend-cct-3.0.0/AndroidManifest.xml:33:17-94
-meta-data#com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar
-ADDED from [com.google.android.gms:play-services-measurement-api:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7fde67ef4cafb9579b5fcd131d2e6d7a/jetified-play-services-measurement-api-20.0.0/AndroidManifest.xml:30:13-32:85
+meta-data#com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar
+ADDED from [com.google.firebase:firebase-firestore:24.0.1] /Users/monther/.gradle/caches/transforms-2/files-2.1/3dc7ec22b9a78d90b98ee9b82e99b63d/jetified-firebase-firestore-24.0.1/AndroidManifest.xml:20:13-22:85
 	android:value
-		ADDED from [com.google.android.gms:play-services-measurement-api:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7fde67ef4cafb9579b5fcd131d2e6d7a/jetified-play-services-measurement-api-20.0.0/AndroidManifest.xml:32:17-82
+		ADDED from [com.google.firebase:firebase-firestore:24.0.1] /Users/monther/.gradle/caches/transforms-2/files-2.1/3dc7ec22b9a78d90b98ee9b82e99b63d/jetified-firebase-firestore-24.0.1/AndroidManifest.xml:22:17-82
 	android:name
-		ADDED from [com.google.android.gms:play-services-measurement-api:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7fde67ef4cafb9579b5fcd131d2e6d7a/jetified-play-services-measurement-api-20.0.0/AndroidManifest.xml:31:17-139
+		ADDED from [com.google.firebase:firebase-firestore:24.0.1] /Users/monther/.gradle/caches/transforms-2/files-2.1/3dc7ec22b9a78d90b98ee9b82e99b63d/jetified-firebase-firestore-24.0.1/AndroidManifest.xml:21:17-111
+meta-data#com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar
+ADDED from [com.google.android.gms:play-services-measurement-api:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/a580873f73f4ac970c0bb75bf1e5301a/jetified-play-services-measurement-api-20.0.2/AndroidManifest.xml:30:13-32:85
+	android:value
+		ADDED from [com.google.android.gms:play-services-measurement-api:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/a580873f73f4ac970c0bb75bf1e5301a/jetified-play-services-measurement-api-20.0.2/AndroidManifest.xml:32:17-82
+	android:name
+		ADDED from [com.google.android.gms:play-services-measurement-api:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/a580873f73f4ac970c0bb75bf1e5301a/jetified-play-services-measurement-api-20.0.2/AndroidManifest.xml:31:17-139
 meta-data#com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar
 ADDED from [com.google.firebase:firebase-installations:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/7f725872bdf62851eb9ad4db776dca2f/jetified-firebase-installations-17.0.0/AndroidManifest.xml:18:13-20:85
 	android:value
@@ -839,37 +890,37 @@ ADDED from [androidx.biometric:biometric:1.1.0] /Users/monther/.gradle/caches/tr
 	android:name
 		ADDED from [androidx.biometric:biometric:1.1.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/a7f94c3f4ca03369ed14ad6c10fc1cc1/biometric-1.1.0/AndroidManifest.xml:24:22-69
 uses-permission#com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE
-ADDED from [com.google.android.gms:play-services-measurement:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2ce243634ec88f204e74dbd7b972bfa4/jetified-play-services-measurement-20.0.0/AndroidManifest.xml:26:5-110
-MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6682e3ccc1ab3274c0aa46dc553b6c2f/jetified-play-services-measurement-impl-20.0.0/AndroidManifest.xml:26:5-110
-MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6682e3ccc1ab3274c0aa46dc553b6c2f/jetified-play-services-measurement-impl-20.0.0/AndroidManifest.xml:26:5-110
+ADDED from [com.google.android.gms:play-services-measurement:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/14e2bbdd1e179c4c48eed97a1412e15a/jetified-play-services-measurement-20.0.2/AndroidManifest.xml:26:5-110
+MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/3446c916baaf026893fbcd8a8508cbac/jetified-play-services-measurement-impl-20.0.2/AndroidManifest.xml:26:5-110
+MERGED from [com.google.android.gms:play-services-measurement-impl:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/3446c916baaf026893fbcd8a8508cbac/jetified-play-services-measurement-impl-20.0.2/AndroidManifest.xml:26:5-110
 	android:name
-		ADDED from [com.google.android.gms:play-services-measurement:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2ce243634ec88f204e74dbd7b972bfa4/jetified-play-services-measurement-20.0.0/AndroidManifest.xml:26:22-107
+		ADDED from [com.google.android.gms:play-services-measurement:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/14e2bbdd1e179c4c48eed97a1412e15a/jetified-play-services-measurement-20.0.2/AndroidManifest.xml:26:22-107
 receiver#com.google.android.gms.measurement.AppMeasurementReceiver
-ADDED from [com.google.android.gms:play-services-measurement:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2ce243634ec88f204e74dbd7b972bfa4/jetified-play-services-measurement-20.0.0/AndroidManifest.xml:29:9-33:20
+ADDED from [com.google.android.gms:play-services-measurement:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/14e2bbdd1e179c4c48eed97a1412e15a/jetified-play-services-measurement-20.0.2/AndroidManifest.xml:29:9-33:20
 	android:enabled
-		ADDED from [com.google.android.gms:play-services-measurement:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2ce243634ec88f204e74dbd7b972bfa4/jetified-play-services-measurement-20.0.0/AndroidManifest.xml:31:13-35
+		ADDED from [com.google.android.gms:play-services-measurement:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/14e2bbdd1e179c4c48eed97a1412e15a/jetified-play-services-measurement-20.0.2/AndroidManifest.xml:31:13-35
 	android:exported
-		ADDED from [com.google.android.gms:play-services-measurement:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2ce243634ec88f204e74dbd7b972bfa4/jetified-play-services-measurement-20.0.0/AndroidManifest.xml:32:13-37
+		ADDED from [com.google.android.gms:play-services-measurement:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/14e2bbdd1e179c4c48eed97a1412e15a/jetified-play-services-measurement-20.0.2/AndroidManifest.xml:32:13-37
 	android:name
-		ADDED from [com.google.android.gms:play-services-measurement:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2ce243634ec88f204e74dbd7b972bfa4/jetified-play-services-measurement-20.0.0/AndroidManifest.xml:30:13-85
+		ADDED from [com.google.android.gms:play-services-measurement:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/14e2bbdd1e179c4c48eed97a1412e15a/jetified-play-services-measurement-20.0.2/AndroidManifest.xml:30:13-85
 service#com.google.android.gms.measurement.AppMeasurementService
-ADDED from [com.google.android.gms:play-services-measurement:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2ce243634ec88f204e74dbd7b972bfa4/jetified-play-services-measurement-20.0.0/AndroidManifest.xml:35:9-38:40
+ADDED from [com.google.android.gms:play-services-measurement:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/14e2bbdd1e179c4c48eed97a1412e15a/jetified-play-services-measurement-20.0.2/AndroidManifest.xml:35:9-38:40
 	android:enabled
-		ADDED from [com.google.android.gms:play-services-measurement:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2ce243634ec88f204e74dbd7b972bfa4/jetified-play-services-measurement-20.0.0/AndroidManifest.xml:37:13-35
+		ADDED from [com.google.android.gms:play-services-measurement:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/14e2bbdd1e179c4c48eed97a1412e15a/jetified-play-services-measurement-20.0.2/AndroidManifest.xml:37:13-35
 	android:exported
-		ADDED from [com.google.android.gms:play-services-measurement:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2ce243634ec88f204e74dbd7b972bfa4/jetified-play-services-measurement-20.0.0/AndroidManifest.xml:38:13-37
+		ADDED from [com.google.android.gms:play-services-measurement:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/14e2bbdd1e179c4c48eed97a1412e15a/jetified-play-services-measurement-20.0.2/AndroidManifest.xml:38:13-37
 	android:name
-		ADDED from [com.google.android.gms:play-services-measurement:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2ce243634ec88f204e74dbd7b972bfa4/jetified-play-services-measurement-20.0.0/AndroidManifest.xml:36:13-84
+		ADDED from [com.google.android.gms:play-services-measurement:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/14e2bbdd1e179c4c48eed97a1412e15a/jetified-play-services-measurement-20.0.2/AndroidManifest.xml:36:13-84
 service#com.google.android.gms.measurement.AppMeasurementJobService
-ADDED from [com.google.android.gms:play-services-measurement:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2ce243634ec88f204e74dbd7b972bfa4/jetified-play-services-measurement-20.0.0/AndroidManifest.xml:39:9-43:72
+ADDED from [com.google.android.gms:play-services-measurement:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/14e2bbdd1e179c4c48eed97a1412e15a/jetified-play-services-measurement-20.0.2/AndroidManifest.xml:39:9-43:72
 	android:enabled
-		ADDED from [com.google.android.gms:play-services-measurement:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2ce243634ec88f204e74dbd7b972bfa4/jetified-play-services-measurement-20.0.0/AndroidManifest.xml:41:13-35
+		ADDED from [com.google.android.gms:play-services-measurement:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/14e2bbdd1e179c4c48eed97a1412e15a/jetified-play-services-measurement-20.0.2/AndroidManifest.xml:41:13-35
 	android:exported
-		ADDED from [com.google.android.gms:play-services-measurement:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2ce243634ec88f204e74dbd7b972bfa4/jetified-play-services-measurement-20.0.0/AndroidManifest.xml:42:13-37
+		ADDED from [com.google.android.gms:play-services-measurement:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/14e2bbdd1e179c4c48eed97a1412e15a/jetified-play-services-measurement-20.0.2/AndroidManifest.xml:42:13-37
 	android:permission
-		ADDED from [com.google.android.gms:play-services-measurement:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2ce243634ec88f204e74dbd7b972bfa4/jetified-play-services-measurement-20.0.0/AndroidManifest.xml:43:13-69
+		ADDED from [com.google.android.gms:play-services-measurement:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/14e2bbdd1e179c4c48eed97a1412e15a/jetified-play-services-measurement-20.0.2/AndroidManifest.xml:43:13-69
 	android:name
-		ADDED from [com.google.android.gms:play-services-measurement:20.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/2ce243634ec88f204e74dbd7b972bfa4/jetified-play-services-measurement-20.0.0/AndroidManifest.xml:40:13-87
+		ADDED from [com.google.android.gms:play-services-measurement:20.0.2] /Users/monther/.gradle/caches/transforms-2/files-2.1/14e2bbdd1e179c4c48eed97a1412e15a/jetified-play-services-measurement-20.0.2/AndroidManifest.xml:40:13-87
 uses-feature#0x00020000
 ADDED from [com.google.android.gms:play-services-maps:17.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/6139a9e8bc102c4da1c2b82736a9b214/jetified-play-services-maps-17.0.0/AndroidManifest.xml:26:5-28:35
 	android:glEsVersion
@@ -890,12 +941,16 @@ ADDED from [com.google.android.gms:play-services-base:17.1.0] /Users/monther/.gr
 		ADDED from [com.google.android.gms:play-services-base:17.1.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/e91c76fa5178367a03077f75662eefda/jetified-play-services-base-17.1.0/AndroidManifest.xml:26:13-72
 	android:name
 		ADDED from [com.google.android.gms:play-services-base:17.1.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/e91c76fa5178367a03077f75662eefda/jetified-play-services-base-17.1.0/AndroidManifest.xml:24:13-79
-meta-data#com.google.android.gms.version
-ADDED from [com.google.android.gms:play-services-basement:17.1.1] /Users/monther/.gradle/caches/transforms-2/files-2.1/00222db731cd07d08b4d12ac91140fc5/jetified-play-services-basement-17.1.1/AndroidManifest.xml:23:9-25:69
-	android:value
-		ADDED from [com.google.android.gms:play-services-basement:17.1.1] /Users/monther/.gradle/caches/transforms-2/files-2.1/00222db731cd07d08b4d12ac91140fc5/jetified-play-services-basement-17.1.1/AndroidManifest.xml:25:13-66
+uses-permission#com.google.android.gms.permission.AD_ID
+ADDED from [com.google.android.gms:play-services-ads-identifier:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/f04affec3ab57d6ca02fc3d6aa026ee7/jetified-play-services-ads-identifier-18.0.0/AndroidManifest.xml:23:5-79
 	android:name
-		ADDED from [com.google.android.gms:play-services-basement:17.1.1] /Users/monther/.gradle/caches/transforms-2/files-2.1/00222db731cd07d08b4d12ac91140fc5/jetified-play-services-basement-17.1.1/AndroidManifest.xml:24:13-58
+		ADDED from [com.google.android.gms:play-services-ads-identifier:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/f04affec3ab57d6ca02fc3d6aa026ee7/jetified-play-services-ads-identifier-18.0.0/AndroidManifest.xml:23:22-76
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/da6e58967780a53f83f11ab769f7c2d2/jetified-play-services-basement-18.0.0/AndroidManifest.xml:21:9-23:69
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/da6e58967780a53f83f11ab769f7c2d2/jetified-play-services-basement-18.0.0/AndroidManifest.xml:23:13-66
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:18.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/da6e58967780a53f83f11ab769f7c2d2/jetified-play-services-basement-18.0.0/AndroidManifest.xml:22:13-58
 service#com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService
 ADDED from [com.google.android.datatransport:transport-runtime:3.0.0] /Users/monther/.gradle/caches/transforms-2/files-2.1/17b68fe33a6ac5026fdb973194697b83/jetified-transport-runtime-3.0.0/AndroidManifest.xml:26:9-30:19
 	android:exported

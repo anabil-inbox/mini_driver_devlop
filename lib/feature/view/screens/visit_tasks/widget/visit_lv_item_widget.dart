@@ -101,7 +101,7 @@ class VisitLvItemWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  children: <Widget>[
+                  children: [
                     Stack(
                       children: [
                         SvgPicture.asset('assets/svgs/Folder_Shared.svg'),
@@ -149,8 +149,6 @@ class VisitLvItemWidget extends StatelessWidget {
             ),
           ),
         ),
-        // ignore: todo
-        //TODO: this for Make CAll
         PositionedDirectional(
             bottom: sizeH20,
             end: sizeW30,
@@ -167,8 +165,7 @@ class VisitLvItemWidget extends StatelessWidget {
                 "assets/svgs/call_red_fig.svg",
               ),
             )),
-        // ignore: todo
-        //TODO: this for block container
+
         if (isBlockContainer!)
           Container(
             margin:

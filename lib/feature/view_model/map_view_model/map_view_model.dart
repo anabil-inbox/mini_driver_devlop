@@ -287,7 +287,7 @@ class MapViewModel extends GetxController {
             lat2: customerLatLng.latitude,
             lon2: customerLatLng.longitude);
         update();
-        addDriverTackLocation(allowToDeliver ,salesOrder:salesOrder ,driverLocation:myLatLng);
+        //addDriverTackLocation(allowToDeliver ,salesOrder:salesOrder ,driverLocation:myLatLng);
       });
     } catch (e) {
       printError();
@@ -406,16 +406,16 @@ class MapViewModel extends GetxController {
   }
 
   // this for add driver location to firebase
-  void addDriverTackLocation(bool allowToDeliver, {required SalesOrder salesOrder,required LatLng driverLocation}) {
-    if(!allowToDeliver) return;
-    Map<String ,dynamic> bodyData = {
-      "${FirebaseClint.serialOrderData}" : jsonEncode(salesOrder.toJson()),
-      "${FirebaseClint.serialOrderDriverData}" : jsonEncode(SharedPref.instance.getCurrentUserData()!.toJson()),
-      "${FirebaseClint.serialOrderDriverLocations}" : driverLocation.toJson(),
-    };
-    /// store [salesOrder]
-    /// store [CurrentUserData]
-    /// store [driverLocation]
-    FirebaseClint.instance.addDriverLocation(salesOrder.customerId, salesOrder.orderId, bodyData);
-  }
+  // void addDriverTackLocation(bool allowToDeliver, {required SalesOrder salesOrder,required LatLng driverLocation}) {
+  //   if(!allowToDeliver) return;
+  //   Map<String ,dynamic> bodyData = {
+  //     "${FirebaseClint.serialOrderData}" : jsonEncode(salesOrder.toJson()),
+  //     "${FirebaseClint.serialOrderDriverData}" : jsonEncode(SharedPref.instance.getCurrentUserData()!.toJson()),
+  //     "${FirebaseClint.serialOrderDriverLocations}" : driverLocation.toJson(),
+  //   };
+  //   /// store [salesOrder]
+  //   /// store [CurrentUserData]
+  //   /// store [driverLocation]
+  //   FirebaseClint.instance.addDriverLocation(salesOrder.customerId, salesOrder.orderId, bodyData);
+  // }
 }
