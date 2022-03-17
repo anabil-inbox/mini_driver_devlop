@@ -84,5 +84,6 @@ abstract class Constance {
   static String addedNewSpecificTask = "22";
 
   static String fingerprint = "Fingerprint";
-
+  static String schedule = "Schedule";
+  static String terminate = "Terminate";
 }
