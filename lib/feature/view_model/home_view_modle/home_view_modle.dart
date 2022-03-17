@@ -619,18 +619,22 @@ class HomeViewModel extends GetxController {
         .then((value) async => {
               if (value.status!.success!)
                 {
+                  Logger().d("ScanedDeliverd_success"),
                   if (isFromScanedDeliverd)
                     {
+                      Logger().d("ScanedDeliverd_true"),
                       operationTask.driverDelivered
-                          ?.add(BoxModel.fromJson(value.data))
+                          ?.add(BoxModel.fromJson(value.data)),
+                      update(),
                     }
                   else
                     {
+                      Logger().d("ScanedDeliverd_false"),
                       operationTask.scannedBoxes
                           ?.add(BoxModel.fromJson(value.data)),
+                      update(),
                     },
                   await refrshHome(),
-                  update(),
                   snackSuccess("$txtSuccess", "${value.status!.message}")
                 }
               else

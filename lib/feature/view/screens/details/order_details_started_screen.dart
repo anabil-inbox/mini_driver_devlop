@@ -331,7 +331,7 @@ class OrderDetailsStarted extends StatelessWidget {
                         ),
                         SizedBox(height: sizeH10),
                         lvOrderItems(),
-                        SizedBox(height: sizeH40),
+                        SizedBox(height: sizeH80),
                       ],
                     ),
                   ),

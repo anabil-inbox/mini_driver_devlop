@@ -58,7 +58,7 @@ class QtyBottomSheet extends StatelessWidget {
                   if (_formKey.currentState!.validate()) {
                     Get.to(() => const ScanScreen(
                        isScanDeliverdBoxes: false,
-                          isBoxSalesScan: false,
+                          isFromScanSalesBoxs: false,
                           isProductScan: true,
                         ));
                   }

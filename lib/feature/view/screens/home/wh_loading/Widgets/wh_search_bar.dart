@@ -40,7 +40,7 @@ class WhSearchBar extends StatelessWidget {
                 onPressed: () {
                   Get.to(() => const ScanScreen(
                         isScanDeliverdBoxes: false,
-                        isBoxSalesScan: false,
+                        isFromScanSalesBoxs: false,
                         isProductScan: false,
                       ));
                 },

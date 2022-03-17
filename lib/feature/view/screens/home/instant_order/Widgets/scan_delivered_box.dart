@@ -17,96 +17,94 @@ import 'box_on_order_item.dart';
 class ScanDeliveredBox extends StatelessWidget {
   const ScanDeliveredBox({Key? key}) : super(key: key);
 
-static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
+  static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
 
   @override
   Widget build(BuildContext context) {
     screenUtil(context);
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: sizeW15!, vertical: sizeH13!),
-      decoration: BoxDecoration(
-        color: colorTextWhite,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: ExpandablePanel(
-        theme: const ExpandableThemeData(
-          hasIcon: false,
-          alignment: Alignment.topLeft,
-          tapHeaderToExpand: true,
+    return GetBuilder<HomeViewModel>(builder: (logic) {
+      return Container(
+        padding: EdgeInsets.symmetric(horizontal: sizeW15!, vertical: sizeH13!),
+        decoration: BoxDecoration(
+          color: colorTextWhite,
+          borderRadius: BorderRadius.circular(10),
         ),
-        header: Row(
-          children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                color: colorBtnGray.withOpacity(0.4),
-                shape: BoxShape.circle,
-              ),
-              padding: EdgeInsets.all(padding4!),
-              child: Transform.rotate(
-                angle: 180 * math.pi / 180,
-                child: Icon(
-                  Icons.keyboard_arrow_up,
-                  color: colorBlack,
-                  size: 20,
+        child: ExpandablePanel(
+          theme: const ExpandableThemeData(
+            hasIcon: false,
+            alignment: Alignment.topLeft,
+            tapHeaderToExpand: true,
+          ),
+          header: Row(
+            children: <Widget>[
+              Container(
+                decoration: BoxDecoration(
+                  color: colorBtnGray.withOpacity(0.4),
+                  shape: BoxShape.circle,
+                ),
+                padding: EdgeInsets.all(padding4!),
+                child: Transform.rotate(
+                  angle: 180 * math.pi / 180,
+                  child: Icon(
+                    Icons.keyboard_arrow_up,
+                    color: colorBlack,
+                    size: 20,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(width: sizeW10),
-            CustomTextView(
-              txt: txtScanDeliveredBox.tr,
-              textStyle: textStyleNormal()?.copyWith(color: colorBlack),
-            ),
-            const Spacer(),
-            GestureDetector(
-              onTap: () {
-                Get.to(() => const ScanScreen(
-                      isScanDeliverdBoxes: true,
-                      isBoxSalesScan: true,
-                      isProductScan: false,
-                    ));
-              },
-              child: SvgPicture.asset("assets/svgs/Scan.svg",
-                  color: colorRed, width: sizeW20, height: sizeH17),
-            ),
-          ],
-        ),
-        collapsed: const SizedBox.shrink(),
-        expanded: (homeViewModel.operationTask.driverDelivered == null ||
-                homeViewModel.operationTask.driverDelivered!.isEmpty)
-            ? const SizedBox()
-            : Column(
-          children: [
-            SizedBox(height: sizeH14),
-            Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal: sizeW20!, vertical: sizeH17!),
-              decoration: BoxDecoration(
-                  color: colorSearchBox,
-                  borderRadius: BorderRadius.circular(10)),
-              child: GetBuilder<HomeViewModel>(
-                builder: (home) {
-                  if (home.operationTask.driverDelivered == null ||
-                      home.operationTask.driverDelivered!.isEmpty) {
-                    return const SizedBox();
-                  } else {
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      primary: false,
-                      itemCount: home.operationTask.driverDelivered?.length,
-                      itemBuilder: (context, index) {
-                        return BoxOnOrderItem(
-                          isShowingOperations: false,
-                          boxModel: home.operationTask.driverDelivered![index],
-                        );
-                      },
-                    );
-                  }
-                },
+              SizedBox(width: sizeW10),
+              CustomTextView(
+                txt: txtScanDeliveredBox.tr,
+                textStyle: textStyleNormal()?.copyWith(color: colorBlack),
               ),
-            )
-          ],
+              const Spacer(),
+              GestureDetector(
+                onTap: () {
+                  Get.to(() => const ScanScreen(
+                        isScanDeliverdBoxes: true,
+                        isFromScanSalesBoxs: true,
+                        isProductScan: false,
+                      ));
+                },
+                child: SvgPicture.asset("assets/svgs/Scan.svg",
+                    color: colorRed, width: sizeW20, height: sizeH17),
+              ),
+            ],
+          ),
+          collapsed: const SizedBox.shrink(),
+          expanded: (homeViewModel.operationTask.driverDelivered == null ||
+                  homeViewModel.operationTask.driverDelivered!.isEmpty)
+              ? const SizedBox()
+              : Column(
+                  children: [
+                    SizedBox(height: sizeH14),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: sizeW20!, vertical: sizeH17!),
+                      decoration: BoxDecoration(
+                          color: colorSearchBox,
+                          borderRadius: BorderRadius.circular(10)),
+                      child: (logic.operationTask.driverDelivered == null ||
+                              logic.operationTask.driverDelivered!.isEmpty)
+                          ? const SizedBox()
+                          : ListView.builder(
+                              shrinkWrap: true,
+                              primary: false,
+                              itemCount:
+                                  logic.operationTask.driverDelivered?.length,
+                              itemBuilder: (context, index) {
+                                return BoxOnOrderItem(
+                                  isShowingOperations: false,
+                                  boxModel: logic
+                                      .operationTask.driverDelivered![index],
+                                );
+                              },
+                            ),
+                    )
+                  ],
+                ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

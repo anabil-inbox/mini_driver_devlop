@@ -166,7 +166,7 @@ class WHCurrentScreen extends StatelessWidget {
                   onPressed: () {
                     Get.to(() => ScanScreen(
                           taskModel: task,
-                          isBoxSalesScan: false,
+                          isFromScanSalesBoxs: false,
                           isProductScan: false,
                           isScanDeliverdBoxes: false,
                         ));
