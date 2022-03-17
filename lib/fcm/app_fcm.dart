@@ -163,7 +163,7 @@ class AppFcm {
     });
   }
   void updatePages(RemoteMessage message) async {
-    homeViewModel.operationTask = TaskResponse.fromJson(message.data);
+    homeViewModel.operationTask = TaskResponse.fromJson(message.data,isFromNotification: true);
     await homeViewModel.refrshHome();
   }
 }

@@ -83,4 +83,6 @@ abstract class Constance {
   static String addedNewTask = "21";
   static String addedNewSpecificTask = "22";
 
+  static String fingerprint = "Fingerprint";
+
 }
