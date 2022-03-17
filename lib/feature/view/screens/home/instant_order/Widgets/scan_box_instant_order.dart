@@ -60,7 +60,7 @@ class ScanBoxInstantOrder extends StatelessWidget {
               onTap: () {
                 Get.to(() => const ScanScreen(
                       isScanDeliverdBoxes: false,
-                      isBoxSalesScan: true,
+                  isFromScanSalesBoxs: true,
                       isProductScan: false,
                     ));
               },

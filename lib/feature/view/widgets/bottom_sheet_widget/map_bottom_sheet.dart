@@ -66,6 +66,7 @@ class MapBottomSheet extends StatelessWidget {
                                 zoomGesturesEnabled: true,
                                 scrollGesturesEnabled: true,
                                 rotateGesturesEnabled: false,
+                                compassEnabled: false,
                                 onTap: (argument) => logic.onMapTaped(argument),
                                 markers: logic.markers,
                                 polylines: logic.polyLines,

@@ -7,13 +7,13 @@ import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class ScanScreen extends StatelessWidget {
-  const ScanScreen({Key? key, this.taskModel, required this.isBoxSalesScan , required this.isProductScan , required this.isScanDeliverdBoxes})
+  const ScanScreen({Key? key, this.taskModel, required this.isFromScanSalesBoxs , required this.isProductScan , required this.isScanDeliverdBoxes})
       : super(key: key);
 
   static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
   static GlobalKey<FormState> qrKey = GlobalKey<FormState>();
   final TaskModel? taskModel;
-  final bool isBoxSalesScan;
+  final bool isFromScanSalesBoxs;
   final bool isProductScan;
   final bool isScanDeliverdBoxes;
 
@@ -30,7 +30,7 @@ class ScanScreen extends StatelessWidget {
                 taskModel: taskModel,
                 isScanDeliverdBoxes: isScanDeliverdBoxes,
                 isProductScan: isProductScan,
-                isFromScanSalesBoxs: isBoxSalesScan),
+                isFromScanSalesBoxs: isFromScanSalesBoxs),
             overlay: QrScannerOverlayShape(
                 borderColor: colorRed,
                 borderRadius: padding12!,

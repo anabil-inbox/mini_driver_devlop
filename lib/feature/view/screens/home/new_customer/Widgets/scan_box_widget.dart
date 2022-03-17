@@ -56,7 +56,7 @@ class ScanBox extends StatelessWidget {
               onTap: () {
                 Get.to(() => const ScanScreen(
                    isScanDeliverdBoxes: false,
-                   isBoxSalesScan: false,
+                   isFromScanSalesBoxs: false,
                     isProductScan: false,
                 ));
               },

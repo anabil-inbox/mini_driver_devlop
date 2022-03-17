@@ -59,7 +59,7 @@ class CustomerSignatureInstantOrder extends StatelessWidget {
             // GestureDetector(
             //   onTap: () {
             //     Get.to(() => const ScanScreen(
-            //           isBoxSalesScan: false,
+            //           isFromScanSalesBoxs: false,
             //           isProductScan: false,
             //         ));
             //   },

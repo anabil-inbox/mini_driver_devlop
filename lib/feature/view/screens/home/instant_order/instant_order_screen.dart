@@ -177,7 +177,7 @@ class InstantOrderScreen extends StatelessWidget {
               SizedBox(height: sizeH10),
               const CustomerSignatureInstantOrder(),
               SizedBox(height: sizeH20),
-              if (homeViewModel.operationTask.waitingTime != 0) ...[
+              if (homeViewModel.operationTask.waitingTime! > 0.1 ) ...[
                 waitingTime,
                 SizedBox(height: sizeH20),
               ],
@@ -210,6 +210,7 @@ class InstantOrderScreen extends StatelessWidget {
                       Expanded(
                         child: SeconderyFormButton(
                           buttonText: "Done",
+                          isLoading: homeViewModel.isLoading,
                           onClicked: () async {
                             await home.updateTaskStatus(
                                 newStatus: Constance.done,
