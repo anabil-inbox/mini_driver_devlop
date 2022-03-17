@@ -15,7 +15,6 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:inbox_driver/feature/model/app_setting_modle.dart';
 import 'package:inbox_driver/feature/model/home/sales_order.dart';
-import 'package:inbox_driver/network/firebase/firbase_clinte.dart';
 import 'package:inbox_driver/network/utils/constance_netwoek.dart';
 import 'dart:ui' as ui;
 
