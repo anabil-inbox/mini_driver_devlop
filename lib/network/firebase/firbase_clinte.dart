@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:inbox_driver/network/firebase/track_model.dart';
 import 'package:logger/logger.dart';
 
@@ -27,13 +27,13 @@ class FirebaseClint {
       ///  in customerId we will store [_serialOrder]
       ///  in _serialOrder we will store [serial]
       ///  in serial we will store [bodyData]
-      FirebaseFirestore.instance.collection("$_diverTrack")
-              .doc(customerId).collection(_serialOrder.toString())
-              .doc(serial).set(bodyData).then((value) {
-                Logger().i("Done Store locations [Driver]");
-      }).catchError((onError){
-        Logger().e("$onError");
-      });
+      // FirebaseFirestore.instance.collection("$_diverTrack")
+      //         .doc(customerId).collection(_serialOrder.toString())
+      //         .doc(serial).set(bodyData).then((value) {
+      //           Logger().i("Done Store locations [Driver]");
+      // }).catchError((onError){
+      //   Logger().e("$onError");
+      // });
     } catch (e) {
       Logger().d(e);
       throw "e";
@@ -41,21 +41,21 @@ class FirebaseClint {
   }
 
   //this for get driver tracking
-  Stream<TrackModel> getTrackLocation(var customerId  , var serial) async* {
-    try {
-      ///  in _diverTrack we will get [customerId]
-      ///  in customerId we will get [_serialOrder]
-      ///  in _serialOrder we will get [serial]
-      ///  in serial we will get [bodyData]
-      var documentReference =  FirebaseFirestore.instance.collection("$_diverTrack").doc(customerId)
-          .collection(_serialOrder.toString()).doc(serial);
-      var querySnapshot = await documentReference.get();
-      yield TrackModel.fromJson(querySnapshot.data()??{}) ;
-    } catch (e) {
-      Logger().d(e);
-      throw "e";
-    }
-  }
+  // Stream<TrackModel> getTrackLocation(var customerId  , var serial) async* {
+  //   try {
+  //     ///  in _diverTrack we will get [customerId]
+  //     ///  in customerId we will get [_serialOrder]
+  //     ///  in _serialOrder we will get [serial]
+  //     ///  in serial we will get [bodyData]
+  //     var documentReference =  FirebaseFirestore.instance.collection("$_diverTrack").doc(customerId)
+  //         .collection(_serialOrder.toString()).doc(serial);
+  //     var querySnapshot = await documentReference.get();
+  //     yield TrackModel.fromJson(querySnapshot.data()??{}) ;
+  //   } catch (e) {
+  //     Logger().d(e);
+  //     throw "e";
+  //   }
+  // }
 
 
   //this for add driver tracking
@@ -65,9 +65,9 @@ class FirebaseClint {
       ///  in customerId we will go to [_serialOrder]
       ///  in _serialOrder we will go to delete [serial]
       //  in serial we will store [bodyData]
-      FirebaseFirestore.instance.collection("$_diverTrack")
-          .doc(customerId).collection(_serialOrder.toString())
-          .doc(serial).delete();
+      // FirebaseFirestore.instance.collection("$_diverTrack")
+      //     .doc(customerId).collection(_serialOrder.toString())
+      //     .doc(serial).delete();
     } catch (e) {
       Logger().d(e);
       throw "e";
