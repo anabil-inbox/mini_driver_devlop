@@ -167,7 +167,7 @@ class InstantOrderScreen extends StatelessWidget {
                   : const ScanBoxInstantOrder(),
               SizedBox(height: sizeH10),
               (home.operationTask.processType == Constance.newStorageSv ||
-                      home.operationTask.processType == Constance.fetchId)
+                      home.operationTask.processType == Constance.fetchId ||  home.operationTask.processType == LocalConstance.destroyId)
                   ? const SizedBox()
                   : GetBuilder<HomeViewModel>(builder: (homeViewModel) {
                       return scanDelivedBoxes(homeViewModel: homeViewModel);
