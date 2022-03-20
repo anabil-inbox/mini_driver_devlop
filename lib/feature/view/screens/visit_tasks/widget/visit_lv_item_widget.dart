@@ -157,7 +157,7 @@ class VisitLvItemWidget extends StatelessWidget {
               onPressed: () {
                 Get.bottomSheet(
                     CallBottomSheet(
-                      phoneNumber: salesOrder.customerMobile,
+                      phoneNumber: salesOrder.customerMobile ?? "",
                     ),
                     isScrollControlled: true);
               },

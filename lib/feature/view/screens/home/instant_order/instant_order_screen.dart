@@ -161,11 +161,13 @@ class InstantOrderScreen extends StatelessWidget {
               SizedBox(height: sizeH10),
               const BoxNeedScannedItem(),
               SizedBox(height: sizeH10),
-              home.operationTask.processType == Constance.pickupId
+              (home.operationTask.processType == Constance.pickupId ||
+                      home.operationTask.processType == Constance.fetchId)
                   ? const SizedBox()
                   : const ScanBoxInstantOrder(),
               SizedBox(height: sizeH10),
-              home.operationTask.processType == Constance.newStorageSv
+              (home.operationTask.processType == Constance.newStorageSv ||
+                      home.operationTask.processType == Constance.fetchId)
                   ? const SizedBox()
                   : GetBuilder<HomeViewModel>(builder: (homeViewModel) {
                       return scanDelivedBoxes(homeViewModel: homeViewModel);
@@ -177,59 +179,66 @@ class InstantOrderScreen extends StatelessWidget {
               SizedBox(height: sizeH10),
               const CustomerSignatureInstantOrder(),
               SizedBox(height: sizeH20),
-              if (homeViewModel.operationTask.waitingTime! > 0.1 ) ...[
+              if (homeViewModel.operationTask.waitingTime! > 0.1) ...[
                 waitingTime,
                 SizedBox(height: sizeH20),
               ],
               GetBuilder<HomeViewModel>(
                 builder: (home) {
-                  return Row(
-                    children: [
-                      Expanded(
-                        child: PrimaryButton(
-                            textButton: "Requesting Time",
-                            isLoading: false,
-                            onClicked: () async {
-                              // await home.updateTaskStatus(
-                              //     newStatus: Constance.done,
-                              //     taskId: taskId,
-                              //     taskStatusId: taskStatusId);
-                              // await home.getSpecificTask(
-                              //     taskId: taskStatusId,
-                              //     taskSatus: Constance.inProgress);
-                              // await home.getSpecificTask(
-                              //     taskId: taskStatusId,
-                              //     taskSatus: Constance.done);
-                              // await home.getHomeTasks(taskType: Constance.done);
-                              // await home.getHomeTasks(
-                              //     taskType: Constance.inProgress);
-                            },
-                            isExpanded: false),
-                      ),
-                      SizedBox(width: sizeH20),
-                      Expanded(
-                        child: SeconderyFormButton(
-                          buttonText: "Done",
-                          isLoading: homeViewModel.isLoading,
-                          onClicked: () async {
-                            await home.updateTaskStatus(
-                                newStatus: Constance.done,
-                                taskId: taskId,
-                                taskStatusId: taskStatusId);
-                            await home.getSpecificTask(
-                                taskId: taskStatusId,
-                                taskSatus: Constance.inProgress);
-                            await home.getSpecificTask(
-                                taskId: taskStatusId,
-                                taskSatus: Constance.done);
-                            await home.getHomeTasks(taskType: Constance.done);
-                            await home.getHomeTasks(
-                                taskType: Constance.inProgress);
-                          },
+                  if (homeViewModel.operationTask.waitingTime! > 0.1) {
+                    return Row(
+                      children: [
+                        Expanded(
+                          child: PrimaryButton(
+                              textButton: "Requesting Time",
+                              isLoading: false,
+                              onClicked: () async {},
+                              isExpanded: false),
                         ),
-                      )
-                    ],
-                  );
+                        SizedBox(width: sizeH20),
+                        Expanded(
+                          child: SeconderyFormButton(
+                            buttonText: "Done",
+                            isLoading: homeViewModel.isLoading,
+                            onClicked: () async {
+                              await home.updateTaskStatus(
+                                  newStatus: Constance.done,
+                                  taskId: taskId,
+                                  taskStatusId: taskStatusId);
+                              await home.getSpecificTask(
+                                  taskId: taskStatusId,
+                                  taskSatus: Constance.inProgress);
+                              await home.getSpecificTask(
+                                  taskId: taskStatusId,
+                                  taskSatus: Constance.done);
+                              await home.getHomeTasks(taskType: Constance.done);
+                              await home.getHomeTasks(
+                                  taskType: Constance.inProgress);
+                            },
+                          ),
+                        )
+                      ],
+                    );
+                  } else {
+                    return PrimaryButton(
+                        textButton: "Done",
+                        isLoading: homeViewModel.isLoading,
+                        onClicked: () async {
+                          await home.updateTaskStatus(
+                              newStatus: Constance.done,
+                              taskId: taskId,
+                              taskStatusId: taskStatusId);
+                          await home.getSpecificTask(
+                              taskId: taskStatusId,
+                              taskSatus: Constance.inProgress);
+                          await home.getSpecificTask(
+                              taskId: taskStatusId, taskSatus: Constance.done);
+                          await home.getHomeTasks(taskType: Constance.done);
+                          await home.getHomeTasks(
+                              taskType: Constance.inProgress);
+                        },
+                        isExpanded: true);
+                  }
                 },
               ),
               SizedBox(height: sizeH20),

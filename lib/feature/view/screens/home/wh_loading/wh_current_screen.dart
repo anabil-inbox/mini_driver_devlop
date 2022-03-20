@@ -71,8 +71,7 @@ class WHCurrentScreen extends StatelessWidget {
                 task: task,
                 index: i,
                 salesData: homeViewModel.operationsSalesData!,
-                salesOrder:
-                    homeViewModel.operationsSalesData!.salesOrders![index],
+                salesOrder: homeViewModel.operationsSalesData!.salesOrders![index],
                 isBlockContainer: index == 0 ? false : true,
               );
             } else {
