@@ -26,6 +26,8 @@ import 'package:inbox_driver/util/sh_util.dart';
 import 'package:location/location.dart';
 import 'package:logger/logger.dart';
 
+import '../../../network/firebase/firbase_clinte.dart';
+
 class MapViewModel extends GetxController {
   Completer<GoogleMapController>? controller = Completer();
   GoogleMapController? mapController;
@@ -91,6 +93,9 @@ class MapViewModel extends GetxController {
 
   Future<BitmapDescriptor> _getMarkerImageFromUrl(String url,
       {int? targetWidth, Color? color}) async {
+    if(GetUtils.isNull(url)  || url .isEmpty){
+      url = "https://c8.alamy.com/comp/2A8GA22/location-pin-icon-on-transparent-map-marker-sign-flat-style-map-point-symbol-map-pointer-symbol-map-pin-sign-2A8GA22.jpg";
+    }
     final File markerImageFile = await DefaultCacheManager().getSingleFile(url);
     if (targetWidth != null) {
       return _convertImageFileToBitmapDescriptor(markerImageFile,
@@ -175,6 +180,7 @@ class MapViewModel extends GetxController {
 
   getUserMarkers({required SalesOrder salesOrder}) async {
     // markers.clear();
+    Logger().d("salesOrder_${salesOrder.customerImage}\n${salesOrder.toJson()}");
     final Marker marker = Marker(
       markerId: MarkerId("${salesOrder.customerId}"),
       icon: await _getMarkerImageFromUrl(
@@ -286,7 +292,7 @@ class MapViewModel extends GetxController {
             lat2: customerLatLng.latitude,
             lon2: customerLatLng.longitude);
         update();
-        //addDriverTackLocation(allowToDeliver ,salesOrder:salesOrder ,driverLocation:myLatLng);
+        addDriverTackLocation(allowToDeliver ,salesOrder:salesOrder ,driverLocation:myLatLng);
       });
     } catch (e) {
       printError();
@@ -405,16 +411,16 @@ class MapViewModel extends GetxController {
   }
 
   // this for add driver location to firebase
-  // void addDriverTackLocation(bool allowToDeliver, {required SalesOrder salesOrder,required LatLng driverLocation}) {
-  //   if(!allowToDeliver) return;
-  //   Map<String ,dynamic> bodyData = {
-  //     "${FirebaseClint.serialOrderData}" : jsonEncode(salesOrder.toJson()),
-  //     "${FirebaseClint.serialOrderDriverData}" : jsonEncode(SharedPref.instance.getCurrentUserData()!.toJson()),
-  //     "${FirebaseClint.serialOrderDriverLocations}" : driverLocation.toJson(),
-  //   };
-  //   /// store [salesOrder]
-  //   /// store [CurrentUserData]
-  //   /// store [driverLocation]
-  //   FirebaseClint.instance.addDriverLocation(salesOrder.customerId, salesOrder.orderId, bodyData);
-  // }
+  void addDriverTackLocation(bool allowToDeliver, {required SalesOrder salesOrder,required LatLng driverLocation}) {
+    if(!allowToDeliver) return;
+    Map<String ,dynamic> bodyData = {
+      "${FirebaseClint.serialOrderData}" : jsonEncode(salesOrder.toJson()),
+      "${FirebaseClint.serialOrderDriverData}" : jsonEncode(SharedPref.instance.getCurrentUserData()!.toJson()),
+      "${FirebaseClint.serialOrderDriverLocations}" : driverLocation.toJson(),
+    };
+    /// store [salesOrder]
+    /// store [CurrentUserData]
+    /// store [driverLocation]
+    FirebaseClint.instance.addDriverLocation(salesOrder.customerId, salesOrder.orderId, bodyData);
+  }
 }

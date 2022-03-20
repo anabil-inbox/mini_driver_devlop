@@ -6,9 +6,14 @@ import 'package:inbox_driver/util/app_shaerd_data.dart';
 
 import 'Widgets/home_card.dart';
 
-class CurrentScreen extends StatelessWidget {
+class CurrentScreen extends StatefulWidget {
   const CurrentScreen({Key? key}) : super(key: key);
 
+  @override
+  State<CurrentScreen> createState() => _CurrentScreenState();
+}
+
+class _CurrentScreenState extends State<CurrentScreen> {
   @override
   Widget build(BuildContext context) {
     screenUtil(context);
