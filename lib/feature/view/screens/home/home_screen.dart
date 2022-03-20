@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:inbox_driver/feature/core/loading_circle.dart';
-import 'package:inbox_driver/feature/model/home/sales_data.dart';
 import 'package:inbox_driver/feature/model/home/task_model.dart';
 import 'package:inbox_driver/feature/view/screens/home/Widgets/home_appbar.dart';
 import 'package:inbox_driver/feature/view/screens/home/Widgets/home_tabbar.dart';
@@ -17,7 +16,6 @@ import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/sh_util.dart';
 import 'package:logger/logger.dart';
 
-import '../../../model/home/sales_order.dart';
 import 'completed_screen/completed_screen.dart';
 
 class HomeScreen extends StatelessWidget {

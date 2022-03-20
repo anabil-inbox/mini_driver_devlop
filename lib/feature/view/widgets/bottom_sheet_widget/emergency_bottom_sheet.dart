@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:inbox_driver/feature/model/home/sales_data.dart';
 import 'package:inbox_driver/feature/model/home/task_model.dart';
 import 'package:inbox_driver/feature/view/widgets/custom_text_filed.dart';
 import 'package:inbox_driver/feature/view/widgets/primary_button.dart';
@@ -142,6 +141,14 @@ class EmergencyBottomSheet extends StatelessWidget {
                           if (isFromHome) {
                             String ids = "";
                             // to do put ids of all Tasks
+
+                            for (TaskModel item
+                                in homeViewModel.tasksInProgress) {
+                              ids += item.taskName.toString() + ",";
+                            }
+
+                            ids = ids.substring(0, ids.length - 1);
+
                             await logic.createEmergancyReport(
                               taskId: ids,
                               latitude: lat,
