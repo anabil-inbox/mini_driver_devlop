@@ -36,6 +36,8 @@ class HomeViewModel extends GetxController {
 
   BoxOperation? selectedBoxOperation;
 
+  bool isNeedTrancfre = false;
+
   void changeTab(int x) {
     selectedTab = x;
     update();
@@ -247,7 +249,11 @@ class HomeViewModel extends GetxController {
     update();
   }
 
-  Future<void> createEmergancyReport() async {
+  Future<void> createEmergancyReport({
+    required String taskId,
+    required num latitude,
+    required num longitude,
+  }) async {
     try {
       startLoading();
       if (img != null) {
@@ -257,7 +263,11 @@ class HomeViewModel extends GetxController {
         "emergency_case": selectedEmergencyCase?.name ?? "",
         "emergency_notes": tdEmergencyNote.text,
         "attatchment":
-            img != null ? multipart.MultipartFile.fromFileSync(img!.path) : ""
+            img != null ? multipart.MultipartFile.fromFileSync(img!.path) : "",
+        "content_transfer": isNeedTrancfre ? 1 : 0,
+        "task_id": taskId,
+        "longitude": longitude,
+        "latitude": latitude,
       }).then((value) => {
             if (value.status!.success!)
               {snackSuccess(txtSuccess!.tr, value.status!.message!), Get.back()}
@@ -369,7 +379,8 @@ class HomeViewModel extends GetxController {
       }).then((value) => {
             if (value.status!.success!)
               {
-                operationTask = TaskResponse.fromJson(value.data ,isFromNotification: false),
+                operationTask = TaskResponse.fromJson(value.data,
+                    isFromNotification: false),
                 waiteTimeOperation =
                     Duration(minutes: operationTask.waitingTime?.toInt() ?? 0),
                 snackSuccess(txtSuccess!.tr, value.status!.message!)
@@ -447,6 +458,8 @@ class HomeViewModel extends GetxController {
       }).then((value) => {
             if (value.status!.success!)
               {
+                operationTask = TaskResponse.fromJson(value.data,
+                    isFromNotification: false),
                 snackSuccess(txtSuccess!.tr, value.status!.message!),
 
                 operationsSalesData?.salesOrders?.forEach((element) {
@@ -459,7 +472,7 @@ class HomeViewModel extends GetxController {
                     // SharedPref.instance.setCurrentTaskResponse(
                     //     taskResponse: jsonEncode(value.data)),
                     // operationTask =
-                    operationTask = TaskResponse.fromJson(value.data,isFromNotification: false),
+
                     Get.to(() => InstantOrderScreen(
                         taskStatusId: taskStatusId,
                         isNewCustomer: true,
@@ -623,17 +636,19 @@ class HomeViewModel extends GetxController {
                   if (isFromScanedDeliverd)
                     {
                       Logger().d("ScanedDeliverd_true"),
-                      if(!operationTask.driverDelivered!.contains(BoxModel.fromJson(value.data)))
-                      operationTask.driverDelivered
-                          ?.add(BoxModel.fromJson(value.data)),
+                      if (!operationTask.driverDelivered!
+                          .contains(BoxModel.fromJson(value.data)))
+                        operationTask.driverDelivered
+                            ?.add(BoxModel.fromJson(value.data)),
                       update(),
                     }
                   else
                     {
                       Logger().d("ScanedDeliverd_false"),
-                      if(!operationTask.scannedBoxes!.contains(BoxModel.fromJson(value.data)))
-                      operationTask.scannedBoxes
-                          ?.add(BoxModel.fromJson(value.data)),
+                      if (!operationTask.scannedBoxes!
+                          .contains(BoxModel.fromJson(value.data)))
+                        operationTask.scannedBoxes
+                            ?.add(BoxModel.fromJson(value.data)),
                       update(),
                     },
                   await refrshHome(),
@@ -657,16 +672,19 @@ class HomeViewModel extends GetxController {
     await HomeHelper.getInstance.scanProduct(body: {
       Constance.productCode: productCode,
       Constance.qty: tdQty.text,
-      Constance.size: operationTask.childOrder == null || operationTask.childOrder!.items!.isEmpty
+      Constance.size: operationTask.childOrder == null ||
+              operationTask.childOrder!.items!.isEmpty
           ? 1
           : operationTask.childOrder!.items!.length + 1,
-      "sales_order":operationTask.childOrder != null  && operationTask.childOrder!.items!.isNotEmpty
+      "sales_order": operationTask.childOrder != null &&
+              operationTask.childOrder!.items!.isNotEmpty
           ? operationTask.childOrder!.id
           : operationTask.salesOrder ?? ""
     }).then((value) async => {
           if (value.status!.success!)
             {
-              operationTask = TaskResponse.fromJson(value.data,isFromNotification: false),
+              operationTask =
+                  TaskResponse.fromJson(value.data, isFromNotification: false),
               waiteTimeOperation =
                   Duration(minutes: operationTask.waitingTime?.toInt() ?? 0),
               Logger().e(value.data),
@@ -702,7 +720,8 @@ class HomeViewModel extends GetxController {
           //     SharedPref.instance.getCurrentTaskResponse() ??
           //         TaskResponse(childOrder: ChildOrder(items: []));
           // taskResponse.childOrder!.items?.remove(productModel);
-          operationTask = TaskResponse.fromJson(value.data,isFromNotification: false);
+          operationTask =
+              TaskResponse.fromJson(value.data, isFromNotification: false);
           waiteTimeOperation =
               Duration(minutes: operationTask.waitingTime?.toInt() ?? 0);
           update();
@@ -739,13 +758,15 @@ class HomeViewModel extends GetxController {
   Future<void> checkTaskStatus({required String taskId}) async {
     try {
       startLoading();
-      await HomeHelper.getInstance
-          .checkTaskStatus(body: {Constance.taskId: taskId}).then((value) => {
-                operationTask = TaskResponse.fromJson(value.data,isFromNotification: false),
-                // Logger().e(operationTask),
-                waiteTimeOperation =
-                    Duration(minutes: operationTask.waitingTime?.toInt() ?? 0),
-              });
+      await HomeHelper.getInstance.checkTaskStatus(body: {
+        Constance.taskId: taskId
+      }).then((value) => {
+            operationTask =
+                TaskResponse.fromJson(value.data, isFromNotification: false),
+            // Logger().e(operationTask),
+            waiteTimeOperation =
+                Duration(minutes: operationTask.waitingTime?.toInt() ?? 0),
+          });
     } catch (e) {
       endLoading();
       Logger().e(e);
@@ -790,7 +811,8 @@ class HomeViewModel extends GetxController {
       }).then((value) => {
             if (value.status!.success!)
               {
-                operationTask = TaskResponse.fromJson(value.data,isFromNotification: false),
+                operationTask = TaskResponse.fromJson(value.data,
+                    isFromNotification: false),
                 waiteTimeOperation =
                     Duration(minutes: operationTask.waitingTime?.toInt() ?? 0),
                 snackSuccess("$txtSuccess", "${value.status!.message}"),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inbox_driver/feature/model/home/sales_data.dart';
 import 'package:inbox_driver/feature/model/home/task_model.dart';
 import 'package:inbox_driver/feature/view/screens/home/wh_loading/Widgets/wh_loading_tabbar.dart';
 import 'package:inbox_driver/feature/view/screens/home/wh_loading/wh_completed_screen.dart';
@@ -18,17 +19,16 @@ class WhLoading extends StatelessWidget {
       {Key? key,
       required this.task,
       required this.index,
+      this.salesData,
       required this.isFromCurrent})
       : super(key: key);
 
-  Widget get appBar => WhLoadingAppBar(
-        title: task.taskName ?? "",
-      );
   Widget get tabBar => const WHLoadingTabBar();
   static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
   final TaskModel task;
   final int index;
   final bool isFromCurrent;
+  final SalesData? salesData;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +40,8 @@ class WhLoading extends StatelessWidget {
             children: [
               WhLoadingAppBar(
                 title: task.taskName ?? "",
+                taskModel: task,
+                salesData: salesData,
               ),
               const Divider(
                 height: 3,

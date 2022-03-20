@@ -64,8 +64,7 @@ class LocationHelper {
 
     Logger().i("Test_getCurrentPositionPlatform 6");
     return Platform.isIOS
-        ? await _geolocatorPlatform.getLastKnownPosition(
-        forceAndroidLocationManager: false) ??
+        ? await _geolocatorPlatform.getLastKnownPosition() ??
         await Geolocator.getCurrentPosition(timeLimit: null)
         : await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high,

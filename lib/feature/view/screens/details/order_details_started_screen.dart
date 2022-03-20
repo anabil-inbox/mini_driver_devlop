@@ -164,8 +164,10 @@ class OrderDetailsStarted extends StatelessWidget {
                   SharedPref.instance.setIsStartedTimerKey(isStarted: true);
                   showModalBottomSheet(
                     context: Get.context!,
-                    builder: (BuildContext context) =>
-                        const NoShowReportBottomSheet(),
+                    builder: (BuildContext context) => NoShowReportBottomSheet(
+                      salesOrder: salesOrder,
+                      task: task,
+                    ),
                     isScrollControlled: true,
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.vertical(
