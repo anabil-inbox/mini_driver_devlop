@@ -36,6 +36,7 @@ class HomeCard extends StatelessWidget {
               ));
         } else {
           Get.to(() => WhLoading(
+                salesData: null,
                 isFromCurrent: !isFromCompleted,
                 index: index,
                 task: task,

@@ -46,7 +46,8 @@ abstract class Constance {
   static String taskNoShow = "no show";
   static String taskDone = "done";
   static String inProgress = "in processing";
-
+  static String cancelled = "cancelled";
+  
   // tasks typs const
   // to do here constance for task Ids:
   static String pickupId = "Pickup_sv";

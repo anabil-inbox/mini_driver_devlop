@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:inbox_driver/feature/model/home/sales_data.dart';
+import 'package:inbox_driver/feature/model/home/task_model.dart';
 import 'package:inbox_driver/feature/view/widgets/custom_text_filed.dart';
 import 'package:inbox_driver/feature/view/widgets/primary_button.dart';
 import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
@@ -13,7 +15,19 @@ import '../../../../util/app_style.dart';
 import 'Widgets/bottom_sheet_card.dart';
 
 class EmergencyBottomSheet extends StatelessWidget {
-  const EmergencyBottomSheet({Key? key}) : super(key: key);
+  const EmergencyBottomSheet(
+      {Key? key,
+      this.taskModel,
+      required this.lat,
+      this.isFromHome = false,
+      required this.long})
+      : super(key: key);
+
+  final TaskModel? taskModel;
+  final double lat;
+  final double long;
+  final bool isFromHome;
+  static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +98,26 @@ class EmergencyBottomSheet extends StatelessWidget {
               SizedBox(height: sizeH20),
               GetBuilder<HomeViewModel>(
                 builder: (home) {
+                  return Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          home.isNeedTrancfre = !home.isNeedTrancfre;
+                          home.update();
+                        },
+                        icon: home.isNeedTrancfre
+                            ? SvgPicture.asset("assets/svgs/check.svg")
+                            : SvgPicture.asset("assets/svgs/uncheck.svg"),
+                      ),
+                      // SizedBox(width: sizeH10),
+                      const Text("Order Tracnfer"),
+                    ],
+                  );
+                },
+              ),
+              SizedBox(height: sizeH20),
+              GetBuilder<HomeViewModel>(
+                builder: (home) {
                   return BottomSheetCard(
                     text: txtTakePicture.tr,
                     containerColor: colorTextWhite,
@@ -105,7 +139,23 @@ class EmergencyBottomSheet extends StatelessWidget {
                       textButton: txtSubmitReport.tr,
                       onClicked: () async {
                         if (logic.validationEmergency()) {
-                          await logic.createEmergancyReport();
+                          if (isFromHome) {
+                            String ids = "";
+                            // to do put ids of all Tasks
+                            await logic.createEmergancyReport(
+                              taskId: ids,
+                              latitude: lat,
+                              longitude: long,
+                            );
+                          } else {
+                            {
+                              await logic.createEmergancyReport(
+                                taskId: taskModel?.id ?? "",
+                                latitude: lat,
+                                longitude: long,
+                              );
+                            }
+                          }
                         }
                       },
                       isExpanded: true);
