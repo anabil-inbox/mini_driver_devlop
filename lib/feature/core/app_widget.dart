@@ -70,7 +70,9 @@ class _AppWidgetState extends State<AppWidget> {
     ));
     return ScreenUtilInit(
       designSize: const Size(392.72727272727275, 803.6363636363636),
-      builder: () => GetMaterialApp(
+      builder: () {
+        ScreenUtil.setContext(context);
+        return GetMaterialApp(
         title: 'Inbox Driver',
         locale: SharedPref.instance.getLocalization() == Constance.arabicKey
               ? LocalizationService.localeAr
@@ -124,7 +126,8 @@ class _AppWidgetState extends State<AppWidget> {
 
        home: const SplashScreen()
         // home: const ProfileScreen(),
-      ),
+      );
+      },
     );
   }
 }
