@@ -74,59 +74,60 @@ class _AppWidgetState extends State<AppWidget> {
       builder: () {
         ScreenUtil.setContext(context);
         return GetMaterialApp(
-            title: 'Inbox Driver',
-            locale: SharedPref.instance.getLocalization() == Constance.arabicKey
-                ? LocalizationService.localeAr
-                : LocalizationService.localeEn,
-            initialBinding: BindingsController(),
-            fallbackLocale: LocalizationService.fallbackLocale,
-            translations: LocalizationService(),
-            debugShowCheckedModeBanner: false,
-            enableLog: true,
-            themeMode: ThemeMode.system,
-            theme: ThemeData(
-              fontFamily: Constance.Font_regular,
-              cupertinoOverrideTheme: CupertinoThemeData(
-                primaryColor: colorPrimary,
-              ),
-              backgroundColor: scaffoldColor,
-              textSelectionTheme: TextSelectionThemeData(
-                cursorColor: colorPrimary,
-                selectionColor: colorPrimary,
-                selectionHandleColor: colorPrimary,
-              ),
-              inputDecorationTheme: InputDecorationTheme(
-                hintStyle: textStyleHints(),
-                filled: true,
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: colorTrans),
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: colorPrimary),
-                ),
-                fillColor: colorTextWhite,
-                contentPadding: EdgeInsets.symmetric(
-                    horizontal: padding18!, vertical: padding16!),
-                border: UnderlineInputBorder(
-                    borderRadius: BorderRadius.circular(padding4!)),
-              ),
-              primaryColor: colorPrimary,
-              secondaryHeaderColor: seconderyColor,
-              scaffoldBackgroundColor: scaffoldColor,
-              appBarTheme: AppBarTheme(
-                  systemOverlayStyle: SystemUiOverlayStyle(
-                statusBarColor: transparent,
-                statusBarIconBrightness: Brightness.dark,
-                statusBarBrightness: Brightness.light,
-              )),
-              pageTransitionsTheme: const PageTransitionsTheme(builders: {
-                TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-                TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-              }),
+        title: 'Inbox Driver',
+        locale: SharedPref.instance.getLocalization() == Constance.arabicKey
+              ? LocalizationService.localeAr
+              : LocalizationService.localeEn,
+        initialBinding: BindingsController(),
+        fallbackLocale: LocalizationService.fallbackLocale,
+        translations: LocalizationService(),
+        debugShowCheckedModeBanner: false,
+        enableLog: true,
+        themeMode: ThemeMode.system,
+        theme: ThemeData(
+          fontFamily: Constance.Font_regular,
+          cupertinoOverrideTheme: CupertinoThemeData(
+            primaryColor: colorPrimary,
+          ),
+          backgroundColor: scaffoldColor,
+          textSelectionTheme: TextSelectionThemeData(
+            cursorColor: colorPrimary,
+            selectionColor: colorPrimary,
+            selectionHandleColor: colorPrimary,
+          ),
+          inputDecorationTheme: InputDecorationTheme(
+            hintStyle: textStyleHints(),
+            filled: true,
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: colorTrans),
             ),
-            home: const SplashScreen()
-            // home: const ProfileScreen(),
-            );
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: colorPrimary),
+            ),
+            fillColor: colorTextWhite,
+            contentPadding: EdgeInsets.symmetric(
+                horizontal: padding18!, vertical: padding16!),
+            border: UnderlineInputBorder(
+                borderRadius: BorderRadius.circular(padding4!)),
+          ),
+          primaryColor: colorPrimary,
+          secondaryHeaderColor: seconderyColor,
+          scaffoldBackgroundColor: scaffoldColor,
+          appBarTheme: AppBarTheme(
+              systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: transparent,
+            statusBarIconBrightness: Brightness.dark,
+            statusBarBrightness: Brightness.light,
+          )),
+          pageTransitionsTheme: const PageTransitionsTheme(builders: {
+            TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+            TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+          }),
+        ),
+
+       home: const SplashScreen()
+        // home: const ProfileScreen(),
+      );
       },
     );
   }
