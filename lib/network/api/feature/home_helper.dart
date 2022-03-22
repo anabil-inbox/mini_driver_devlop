@@ -341,6 +341,21 @@ class HomeHelper {
       return AppResponse.fromJson({});
     }
   }
-
+  Future<AppResponse> createWaitingRequest({var body}) async{
+    try {
+      var response = await HomeApi.getInstance.createWaitingRequest(
+          body: body,
+          url: ConstanceNetwork.createWaitingRequestEndPoint,
+          header: ConstanceNetwork.header(4));
+      if (response.status?.success == true) {
+        return response;
+      } else {
+        return response;
+      }
+    } catch (e) {
+      log.d(e.toString());
+      return AppResponse.fromJson({});
+    }
+  }
 
 }

@@ -77,7 +77,7 @@ abstract class ConstanceNetwork {
   static String createNewSealEndPoint = "inbox_app.driver.task_management.create_new_seal";
   static String terminateEndPoint = "inbox_app.driver.task_management.terminate_box";
   static String scheduleEndPoint = "inbox_app.driver.task_management.schedule_box";
-  
+  static String createWaitingRequestEndPoint = "inbox_app.driver.task_management.create_waiting_request";
 
 
 

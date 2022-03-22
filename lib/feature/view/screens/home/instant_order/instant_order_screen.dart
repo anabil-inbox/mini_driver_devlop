@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:inbox_driver/feature/view/screens/home/instant_order/Widgets/box_need_scanned_item.dart';
+import 'package:inbox_driver/feature/view/screens/home/instant_order/Widgets/fetched_items.dart';
 import 'package:inbox_driver/feature/view/screens/home/instant_order/Widgets/scan_delivered_box.dart';
 import 'package:inbox_driver/feature/view/screens/home/new_customer/Widgets/balance_widget.dart';
 import 'package:inbox_driver/feature/view/screens/home/new_customer/Widgets/contract_signature_widget.dart';
@@ -13,6 +14,7 @@ import 'package:inbox_driver/feature/view/widgets/secondery_form_button.dart';
 import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
+import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/string.dart';
@@ -133,6 +135,7 @@ class InstantOrderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return Scaffold(
       appBar: CustomAppBarWidget(
         titleWidget: CustomTextView(
@@ -158,8 +161,12 @@ class InstantOrderScreen extends StatelessWidget {
               home.operationTask.isNew == true
                   ? idVerification
                   : const SizedBox(),
-              SizedBox(height: sizeH10),
-              const BoxNeedScannedItem(),
+              // SizedBox(height: sizeH10),
+              if (home.operationTask.processType != Constance.fetchId) ...[
+                const BoxNeedScannedItem(),
+              ] else ...[
+                const FetchedItems(),
+              ],
               SizedBox(height: sizeH10),
               (home.operationTask.processType == Constance.pickupId ||
                       home.operationTask.processType == Constance.fetchId)
@@ -167,7 +174,8 @@ class InstantOrderScreen extends StatelessWidget {
                   : const ScanBoxInstantOrder(),
               SizedBox(height: sizeH10),
               (home.operationTask.processType == Constance.newStorageSv ||
-                      home.operationTask.processType == Constance.fetchId ||  home.operationTask.processType == LocalConstance.destroyId)
+                      home.operationTask.processType == Constance.fetchId ||
+                      home.operationTask.processType == Constance.destroyId)
                   ? const SizedBox()
                   : GetBuilder<HomeViewModel>(builder: (homeViewModel) {
                       return scanDelivedBoxes(homeViewModel: homeViewModel);
@@ -191,8 +199,13 @@ class InstantOrderScreen extends StatelessWidget {
                         Expanded(
                           child: PrimaryButton(
                               textButton: "Requesting Time",
-                              isLoading: false,
-                              onClicked: () async {},
+                              isLoading: home.isLoadingRequestTime,
+                              onClicked: () async {
+                                home.requestWaittingTime(
+                                    taskId: taskId,
+                                    salesOrder:
+                                        home.operationTask.salesOrder ?? "");
+                              },
                               isExpanded: false),
                         ),
                         SizedBox(width: sizeH20),

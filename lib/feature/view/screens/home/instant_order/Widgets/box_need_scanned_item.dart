@@ -90,5 +90,7 @@ class BoxNeedScannedItem extends StatelessWidget {
         ),
       ),
     );
+  
+  
   }
 }

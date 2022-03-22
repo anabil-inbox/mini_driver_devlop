@@ -122,6 +122,18 @@ class HomeViewModel extends GetxController {
     update();
   }
 
+  bool isLoadingRequestTime = false;
+
+  startLoadingRequestTime() {
+    isLoadingRequestTime = true;
+    update();
+  }
+
+  endLoadingRequestTime() {
+    isLoadingRequestTime = false;
+    update();
+  }
+
   List<TaskModel> tasksInProgress = [];
   List<TaskModel> tasksDone = [];
 
@@ -891,5 +903,27 @@ class HomeViewModel extends GetxController {
     } catch (e) {
       debugPrint(e.toString());
     }
+  }
+
+  Future<void> requestWaittingTime({required String salesOrder , required String taskId}) async {
+    startLoadingRequestTime();
+    try {
+    await HomeHelper.getInstance.createWaitingRequest(body: {
+        Constance.salesOrderUnderScoure: salesOrder,
+      }).then((value) async => {
+            if (value.status!.success!)
+              {
+                // await checkTaskStatus(taskId: taskId),
+                snackSuccess("$txtSuccess", "${value.status!.message}"),
+              }
+            else
+              {
+                snackError("$txtError", "${value.status!.message}"),
+              }
+          });
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+    endLoadingRequestTime();
   }
 }

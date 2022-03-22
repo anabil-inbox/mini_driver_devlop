@@ -69,7 +69,7 @@ class Balance extends StatelessWidget {
                   return CustomTextView(
                     txt: getPriceWithFormate(
                         price: home.operationTask
-                                .totalPaid /*!+waitingTimeReques(home)! */
+                                .totalPaid
                             ??
                             0),
                     textStyle: textStyleMeduimPrimaryBold(),
@@ -93,7 +93,7 @@ class Balance extends StatelessWidget {
                   return CustomTextView(
                     txt: getPriceWithFormate(
                         price: home.operationTask
-                                .totalDue /*!+waitingTimeReques(home)! */
+                                .totalDue
                             ??
                             0),
                     textStyle: textStyleMeduimPrimaryBold(),

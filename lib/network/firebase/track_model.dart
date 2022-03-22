@@ -18,7 +18,7 @@ class TrackModel {
         serialOrderDriverLocation:json["serialOrderDriverLocation"] == null ? null:LatLng.fromJson(json["serialOrderDriverLocation"]),);
 
   Map<String, dynamic> toJson() =>{
-    "serialOrderData":serialOrderData == null ?null :serialOrderData?.toJson(),
+    "serialOrderData": serialOrderData == null ?null :serialOrderData?.toJson(),
         "serialOrderDriverData":serialOrderDriverData == null ?null :serialOrderDriverData?.toJson(),
         "serialOrderDriverLocation":serialOrderDriverLocation == null ?null :serialOrderDriverLocation?.toJson(),
   };
