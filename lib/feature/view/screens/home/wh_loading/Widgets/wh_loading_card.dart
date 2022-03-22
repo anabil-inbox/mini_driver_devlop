@@ -14,6 +14,8 @@ import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/font_dimne.dart';
 import 'package:inbox_driver/util/string.dart';
 
+import '../../../../../../util/app_shaerd_data.dart';
+
 class WhLoadingCard extends StatelessWidget {
   const WhLoadingCard(
       {Key? key,
@@ -35,6 +37,7 @@ class WhLoadingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return Column(
       children: [
         InkWell(

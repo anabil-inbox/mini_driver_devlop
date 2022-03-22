@@ -4,6 +4,8 @@ import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_style.dart';
 
+import '../../../util/app_shaerd_data.dart';
+
 
 class SeconderyFormButton extends StatelessWidget {
   final Function onClicked;
@@ -15,6 +17,7 @@ class SeconderyFormButton extends StatelessWidget {
   final  bool? isLoading;
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return Container(
       width: double.infinity,
       height: sizeH50,

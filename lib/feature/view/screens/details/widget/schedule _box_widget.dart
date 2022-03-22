@@ -9,6 +9,8 @@ import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/string.dart';
 
+import '../../../../../util/app_shaerd_data.dart';
+
 class ScheduleBox extends StatelessWidget {
   const ScheduleBox({Key? key ,required this.dateTime }) : super(key: key);
 
@@ -16,6 +18,7 @@ class ScheduleBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return Container(
       padding: EdgeInsets.symmetric(horizontal: padding20!),
       decoration: BoxDecoration(

@@ -10,6 +10,7 @@ class HeaderCodeVerfication extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return SizedBox(
       height: sizeH200,
       child: Stack(

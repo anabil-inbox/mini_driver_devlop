@@ -12,6 +12,8 @@ import 'package:inbox_driver/util/string.dart';
 import 'package:logger/logger.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
+import '../../../../../../util/app_shaerd_data.dart';
+
 class VerficationScreen extends StatefulWidget {
   final String mobileNumber;
   final String countryCode;
@@ -76,6 +78,7 @@ class _ChangeMobilScreenState extends State<VerficationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return Scaffold(
         backgroundColor: colorScaffoldRegistrationBody,
         body: GetBuilder<AuthViewModle>(builder: (logic) {

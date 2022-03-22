@@ -9,12 +9,15 @@ import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/font_dimne.dart';
 import 'package:inbox_driver/util/string.dart';
 
+import '../../../../../util/app_shaerd_data.dart';
+
 class OrderListItem extends StatelessWidget {
   const OrderListItem({Key? key, required this.orderItem}) : super(key: key);
 
   final OrderItem orderItem;
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return Container(
       padding: EdgeInsets.symmetric(horizontal: sizeW20!, vertical: sizeH17!),
       decoration: BoxDecoration(

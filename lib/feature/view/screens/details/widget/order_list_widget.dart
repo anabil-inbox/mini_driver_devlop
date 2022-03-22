@@ -12,6 +12,8 @@ import 'package:inbox_driver/util/font_dimne.dart';
 import 'package:inbox_driver/util/string.dart';
 import 'package:get/get.dart';
 
+import '../../../../../util/app_shaerd_data.dart';
+
 class OrderList extends StatelessWidget {
   const OrderList({Key? key, required this.orderItems}) : super(key: key);
   Widget get bulkItem => Container(
@@ -145,6 +147,7 @@ class OrderList extends StatelessWidget {
   final List<OrderItem> orderItems;
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return Container(
       padding: EdgeInsets.symmetric(horizontal: padding20!),
       decoration: BoxDecoration(

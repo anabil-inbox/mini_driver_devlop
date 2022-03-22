@@ -68,6 +68,7 @@ class CompletedLevelOneScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return Scaffold(
       appBar: CustomAppBarWidget(
         titleWidget: CustomTextView(

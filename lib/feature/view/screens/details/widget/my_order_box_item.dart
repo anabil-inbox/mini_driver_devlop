@@ -17,6 +17,7 @@ class MyOrderBoxItem extends StatelessWidget {
   final List<BoxModel> boxes;
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return Container(
       margin: const EdgeInsets.only(bottom: padding10),
       padding: const EdgeInsets.symmetric(vertical: padding10),

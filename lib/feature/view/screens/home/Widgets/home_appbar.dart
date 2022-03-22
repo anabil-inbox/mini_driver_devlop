@@ -37,6 +37,7 @@ class HomeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     screenUtil(context);
+    screenUtil(context);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: sizeW20!, vertical: sizeH20!),
       child: SizedBox(

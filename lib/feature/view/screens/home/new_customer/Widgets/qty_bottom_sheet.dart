@@ -8,6 +8,8 @@ import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 
+import '../../../../../../util/app_shaerd_data.dart';
+
 class QtyBottomSheet extends StatelessWidget {
   QtyBottomSheet({Key? key}) : super(key: key);
 
@@ -16,6 +18,7 @@ class QtyBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return Container(
       decoration: const BoxDecoration(
         color: Colors.white,

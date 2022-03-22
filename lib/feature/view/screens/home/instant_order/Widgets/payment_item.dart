@@ -10,6 +10,8 @@ import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/font_dimne.dart';
 
+import '../../../../../../util/app_shaerd_data.dart';
+
 class PaymentItem extends StatelessWidget {
   const PaymentItem({Key? key, required this.paymentMethod}) : super(key: key);
 
@@ -18,6 +20,7 @@ class PaymentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return InkWell(
       onTap: () {
         TaskResponse taskResponse = homeViewModel.operationTask;

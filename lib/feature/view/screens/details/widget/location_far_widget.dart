@@ -8,6 +8,8 @@ import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/font_dimne.dart';
 import 'package:inbox_driver/util/sh_util.dart';
 
+import '../../../../../util/app_shaerd_data.dart';
+
 class LocationFarWdiget extends StatelessWidget {
   const LocationFarWdiget({Key? key}) : super(key: key);
 
@@ -16,6 +18,7 @@ class LocationFarWdiget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return Container(
       decoration: BoxDecoration(
           color: colorDark, borderRadius: BorderRadius.circular(padding6!)),

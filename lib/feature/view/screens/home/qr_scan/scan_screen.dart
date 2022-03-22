@@ -6,6 +6,8 @@ import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
+import '../../../../../util/app_shaerd_data.dart';
+
 class ScanScreen extends StatelessWidget {
   const ScanScreen({Key? key, this.taskModel, required this.isFromScanSalesBoxs , required this.isProductScan , required this.isScanDeliverdBoxes})
       : super(key: key);
@@ -19,6 +21,7 @@ class ScanScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return Scaffold(
       body: Stack(
         children: [

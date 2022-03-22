@@ -12,6 +12,8 @@ import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
 
+import '../../../../../../util/app_shaerd_data.dart';
+
 class BoxOnOrderItem extends StatelessWidget {
   BoxOnOrderItem(
       {Key? key, required this.boxModel, required this.isShowingOperations})
@@ -92,6 +94,7 @@ class BoxOnOrderItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return Container(
       margin: const EdgeInsets.only(bottom: padding10),
       child: InkWell(

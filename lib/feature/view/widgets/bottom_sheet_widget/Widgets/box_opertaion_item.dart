@@ -8,6 +8,7 @@ import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
 
+import '../../../../../util/app_shaerd_data.dart';
 import '../../custome_text_view.dart';
 
 class BoxOperationItem extends StatelessWidget {
@@ -21,6 +22,7 @@ class BoxOperationItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return GetBuilder<HomeViewModel>(
       builder: (homeViewModel) {
         return GestureDetector(

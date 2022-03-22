@@ -3,6 +3,8 @@ import 'package:inbox_driver/feature/model/home/sales_order.dart';
 import 'package:inbox_driver/feature/view/screens/details/widget/show_option_item.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 
+import '../../../../../util/app_shaerd_data.dart';
+
 class OptionDeatailes extends StatelessWidget {
   const OptionDeatailes({Key? key, required this.orderItem}) : super(key: key);
 
@@ -10,6 +12,7 @@ class OptionDeatailes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return Container(
       padding: EdgeInsets.symmetric(horizontal: padding20!),
       child: Column(

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 
+import '../../../../../../util/app_shaerd_data.dart';
+
 class WhLoadingChart extends StatelessWidget {
   const WhLoadingChart({Key? key, required this.pieCharts , required this.title}) : super(key: key);
 
@@ -11,6 +13,7 @@ class WhLoadingChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return SizedBox(
       height: sizeH80,
       child: Stack(

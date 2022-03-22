@@ -290,6 +290,7 @@ class OrderDetailsStarted extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     Logger().e(task.id ?? "");
     Logger().e(salesOrder.taskId ?? "");
     return Scaffold(

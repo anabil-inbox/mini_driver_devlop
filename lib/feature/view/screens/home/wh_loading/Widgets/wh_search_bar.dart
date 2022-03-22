@@ -8,6 +8,8 @@ import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/constance.dart';
 
+import '../../../../../../util/app_shaerd_data.dart';
+
 class WhSearchBar extends StatelessWidget {
   const WhSearchBar(
       {Key? key,
@@ -21,6 +23,7 @@ class WhSearchBar extends StatelessWidget {
   final TextEditingController? textEditingController;
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     if (isHaveScan) {
       return SizedBox(
         child: CustomAppBarWidget(

@@ -22,6 +22,7 @@ class CountryItem extends StatelessWidget {
   final int selectedIndex;
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return GetBuilder<AuthViewModle>(builder: (_) {
       return Container(
         clipBehavior: Clip.hardEdge,
