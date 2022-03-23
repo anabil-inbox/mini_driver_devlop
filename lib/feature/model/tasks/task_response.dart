@@ -140,6 +140,8 @@ class TaskResponse {
       this.waitingTime = 0.0,
       this.lateFees,
       this.items,
+      this.cancellationFees,
+      this.hasTimeRequest,
       this.notificationId});
 
   String? salesOrder;
@@ -164,15 +166,17 @@ class TaskResponse {
   num? waitingTime;
   List<LateFees>? lateFees;
   List<FetchedItem>? items;
-
+  num? cancellationFees;
+  bool? hasTimeRequest;
   factory TaskResponse.fromJson(Map<String, dynamic> json,
       {required bool isFromNotification}) {
     if (isFromNotification) {
       return TaskResponse(
         salesOrder: json["sales_order"],
-        isNew: json["is_new"] == "false"
+        isNew: json["is_new"] == "false" ? false : json["is_new"] == "true",
+        hasTimeRequest: json["has_time_request"] == "false"
             ? false
-            : json["is_new"] == "true"
+            : json["has_time_request"] == "true"
                 ? true
                 : false,
         customerId: json["customer_id"],
@@ -220,11 +224,15 @@ class TaskResponse {
         driverToken: json["driver_token"],
         taskStatus: json["task_status"],
         waitingTime: num.tryParse(json["waiting_time"].toString()) ?? 0.0,
+        cancellationFees:
+            num.tryParse(json["cancellation_fees"].toString()) ?? 0.0,
       );
     } else {
       return TaskResponse(
         salesOrder: json["sales_order"],
         isNew: json["is_new"] == null ? null : json["is_new"],
+        hasTimeRequest:
+            json["has_time_request"] == null ? null : json["has_time_request"],
         customerId: json["customer_id"],
         childOrder: json["child_order"] == null
             ? null
@@ -268,6 +276,8 @@ class TaskResponse {
         driverToken: json["driver_token"],
         taskStatus: json["task_status"],
         waitingTime: num.tryParse(json["waiting_time"].toString()) ?? 0.0,
+        cancellationFees:
+            num.tryParse(json["cancellation_fees"].toString()) ?? 0.0,
       );
     }
   }

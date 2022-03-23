@@ -151,16 +151,24 @@ class InstantOrderScreen extends StatelessWidget {
           child: ListView(
             shrinkWrap: true,
             children: [
-              home.operationTask.isNew == true
-                  ? SizedBox(height: sizeH27)
-                  : const SizedBox(),
-              home.operationTask.isNew == true
-                  ? const ContractSignature()
-                  : const SizedBox(),
-              SizedBox(height: sizeH10),
-              home.operationTask.isNew == true
-                  ? idVerification
-                  : const SizedBox(),
+              // home.operationTask.isNew == true
+              //     ? SizedBox(height: sizeH27)
+              //     : const SizedBox(),
+              // home.operationTask.isNew == true
+              //     ? const ContractSignature()
+              //     : const SizedBox(),
+              // SizedBox(height: sizeH10),
+              // home.operationTask.isNew == true
+              //     ? idVerification
+              //     : const SizedBox(),
+
+              if (home.operationTask.isNew ?? false) ...[
+                SizedBox(height: sizeH27),
+                const ContractSignature(),
+                SizedBox(height: sizeH10),
+                idVerification
+              ],
+
               // SizedBox(height: sizeH10),
               if (home.operationTask.processType != Constance.fetchId) ...[
                 const BoxNeedScannedItem(),
@@ -168,18 +176,33 @@ class InstantOrderScreen extends StatelessWidget {
                 const FetchedItems(),
               ],
               SizedBox(height: sizeH10),
-              (home.operationTask.processType == Constance.pickupId ||
-                      home.operationTask.processType == Constance.fetchId)
-                  ? const SizedBox()
-                  : const ScanBoxInstantOrder(),
+              if (!(home.operationTask.processType == Constance.pickupId ||
+                  home.operationTask.processType == Constance.fetchId)) ...[
+                const ScanBoxInstantOrder(),
+              ],
+              // (home.operationTask.processType == Constance.pickupId ||
+              //         home.operationTask.processType == Constance.fetchId)
+              //     ? const SizedBox()
+              //     : const ScanBoxInstantOrder(),
+
               SizedBox(height: sizeH10),
-              (home.operationTask.processType == Constance.newStorageSv ||
-                      home.operationTask.processType == Constance.fetchId ||
-                      home.operationTask.processType == Constance.destroyId)
-                  ? const SizedBox()
-                  : GetBuilder<HomeViewModel>(builder: (homeViewModel) {
-                      return scanDelivedBoxes(homeViewModel: homeViewModel);
-                    }),
+
+              // (home.operationTask.processType == Constance.newStorageSv ||
+              //         home.operationTask.processType == Constance.fetchId ||
+              //         home.operationTask.processType == Constance.destroyId)
+              //     ? const SizedBox()
+              //     : GetBuilder<HomeViewModel>(builder: (homeViewModel) {
+              //         return scanDelivedBoxes(homeViewModel: homeViewModel);
+              //       }),
+
+              if (!(home.operationTask.processType == Constance.newStorageSv ||
+                  home.operationTask.processType == Constance.fetchId ||
+                  home.operationTask.processType == Constance.destroyId)) ...[
+                GetBuilder<HomeViewModel>(builder: (homeViewModel) {
+                  return scanDelivedBoxes(homeViewModel: homeViewModel);
+                })
+              ],
+
               SizedBox(height: sizeH10),
               const ScanProducts(),
               SizedBox(height: sizeH10),
@@ -187,7 +210,8 @@ class InstantOrderScreen extends StatelessWidget {
               SizedBox(height: sizeH10),
               const CustomerSignatureInstantOrder(),
               SizedBox(height: sizeH20),
-              if (homeViewModel.operationTask.waitingTime! > 0.1) ...[
+              if (homeViewModel.operationTask.waitingTime! > 0.1 &&
+                  (homeViewModel.operationTask.hasTimeRequest ?? false)) ...[
                 waitingTime,
                 SizedBox(height: sizeH20),
               ],

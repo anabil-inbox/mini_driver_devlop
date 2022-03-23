@@ -40,8 +40,6 @@ class AppFcm {
     //showBadge: true,
   );
 
-
-
   configuration() async {
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('drawable/app_icon');
@@ -149,21 +147,27 @@ class AppFcm {
     });
   }
 
-  static void goToOrderPage(Map<String, dynamic> map, {required bool isFromTerminate}) async{
+  static void goToOrderPage(Map<String, dynamic> map,
+      {required bool isFromTerminate}) async {
     Logger().i(map[Constance.id].toString());
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) async {
       if (map[Constance.id].toString() == Constance.userSignature) {
       } else if (map[Constance.id].toString() == Constance.addedNewTask) {
         await homeViewModel.refrshHome();
         Get.off(() => HomeScreen());
-      } else if (map[Constance.id].toString() == Constance.addedNewSpecificTask) {
-
+      } else if (map[Constance.id].toString() ==
+          Constance.addedNewSpecificTask) {
         //details
-      }
+      } else if (map[Constance.id].toString() ==
+          Constance.accetedRequestTime) {
+            
+          }
     });
   }
+
   void updatePages(RemoteMessage message) async {
-    homeViewModel.operationTask = TaskResponse.fromJson(message.data,isFromNotification: true);
+    homeViewModel.operationTask =
+        TaskResponse.fromJson(message.data, isFromNotification: true);
     await homeViewModel.refrshHome();
   }
 }

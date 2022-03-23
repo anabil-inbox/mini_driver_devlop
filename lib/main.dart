@@ -27,12 +27,11 @@ void main() async {
 
 ///To use Hybrid Composition to render the GoogleMap widget on Android,
 /// set AndroidGoogleMapsFlutter.useAndroidViewSurface to true.
-void enableHybridComposition(){
+void enableHybridComposition() {
   if (defaultTargetPlatform == TargetPlatform.android) {
     AndroidGoogleMapsFlutter.useAndroidViewSurface = true;
   }
 }
-
 
 class BindingsController extends Bindings {
   @override
@@ -42,6 +41,9 @@ class BindingsController extends Bindings {
     Get.lazyPut(() => ProfileViewModle());
     Get.lazyPut(() => HomeViewModel());
   }
-
-
 }
+
+
+// write play doc to abedallah 
+// mohanned crash 
+// request waitting time notification

@@ -914,6 +914,8 @@ class HomeViewModel extends GetxController {
             if (value.status!.success!)
               {
                 // await checkTaskStatus(taskId: taskId),
+                operationTask = TaskResponse.fromJson(value.data,
+                    isFromNotification: false),
                 snackSuccess("$txtSuccess", "${value.status!.message}"),
               }
             else

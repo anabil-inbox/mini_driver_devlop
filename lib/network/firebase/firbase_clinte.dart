@@ -1,5 +1,5 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
- import 'package:inbox_driver/network/firebase/track_model.dart';
+//  import 'package:inbox_driver/network/firebase/track_model.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:logger/logger.dart';
 
@@ -12,11 +12,11 @@ class FirebaseClint {
 
 
   //constance collections
-  static const String? _stagingKey = "test/";//live/ /// todo:// this for testing or live key
-  static const String? _diverTrack = "diverTrackList";
+  // static const String? _stagingKey = "test/";//live/ /// todo:// this for testing or live key
+  // static const String? _diverTrack = "diverTrackList";
 
   //constance docs
-  static const String? _serialOrder = "serialOrder";
+  // static const String? _serialOrder = "serialOrder";
   static  String? serialOrderData = "serialOrderData";
   static  String? serialOrderDriverData = "serialOrderDriverData";
   static  String? serialOrderDriverLocations = "serialOrderDriverLocation";

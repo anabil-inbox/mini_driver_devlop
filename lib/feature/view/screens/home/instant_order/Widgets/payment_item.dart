@@ -27,9 +27,10 @@ class PaymentItem extends StatelessWidget {
         taskResponse.paymentMethod = paymentMethod.name;
         homeViewModel.operationTask = taskResponse;
         homeViewModel.update();
-        if (paymentMethod.id == Constance.walletKey || paymentMethod.id == Constance.bankKey ) {//applications
-          homeViewModel.sendPaymentRequest();
-        }
+        homeViewModel.sendPaymentRequest();
+        // if (paymentMethod.id == Constance.walletKey || paymentMethod.id == Constance.bankKey ) {//applications
+        //   homeViewModel.sendPaymentRequest();
+        // }
       },
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: padding4!),
@@ -41,18 +42,15 @@ class PaymentItem extends StatelessWidget {
                         paymentMethod.id
                     ? colorBorderContainer
                     : colorTrans),
-            color:
-                homeViewModel.operationTask.paymentMethod !=
-                        paymentMethod.id
-                    ? colorTextWhite
-                    : colorPrimary),
+            color: homeViewModel.operationTask.paymentMethod != paymentMethod.id
+                ? colorTextWhite
+                : colorPrimary),
         padding:
             EdgeInsets.symmetric(vertical: padding9!, horizontal: padding14!),
         child: CustomTextView(
           txt: "${paymentMethod.name}",
           textStyle:
-              homeViewModel.operationTask.paymentMethod ==
-                      paymentMethod.id
+              homeViewModel.operationTask.paymentMethod == paymentMethod.id
                   ? textStylebodyWhite()
                   : textStyleHints()!
                       .copyWith(fontSize: fontSize14, color: colorHint2),
