@@ -32,7 +32,7 @@ class _ChooseCountryScreenState extends State<ChooseCountryScreen> {
 
   Country selctedCountry = Country();
   AuthViewModle authViewModle = Get.put(AuthViewModle());
-  Set<Country> listCountry = Set<Country>();
+  Set<Country> listCountry = <Country>{};
   @override
   void initState() {
     super.initState();
