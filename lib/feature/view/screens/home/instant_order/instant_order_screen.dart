@@ -169,7 +169,7 @@ class InstantOrderScreen extends StatelessWidget {
                 idVerification
               ],
 
-              // SizedBox(height: sizeH10),
+              SizedBox(height: sizeH10),
               if (home.operationTask.processType != Constance.fetchId) ...[
                 const BoxNeedScannedItem(),
               ] else ...[

@@ -28,7 +28,6 @@ class ScanScreen extends StatelessWidget {
           QRView(
             key: qrKey,
             onQRViewCreated: (controller) => homeViewModel.onQRViewCreated(
-                
                 controller,
                 taskModel: taskModel,
                 isScanDeliverdBoxes: isScanDeliverdBoxes,

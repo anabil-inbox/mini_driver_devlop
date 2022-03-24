@@ -61,7 +61,10 @@ class HomeViewModel extends GetxController {
       required bool isFromScanSalesBoxs}) {
     try {
       int i = 0;
-      this.controller = controller;
+      if (this.controller == null) {
+        this.controller = controller;
+      }
+
       controller.scannedDataStream.listen((scanData) {
         result = scanData;
       }).onData((data) async {
@@ -393,8 +396,8 @@ class HomeViewModel extends GetxController {
               {
                 operationTask = TaskResponse.fromJson(value.data,
                     isFromNotification: false),
-                waiteTimeOperation =
-                    Duration(minutes: operationTask.waitingTime?.toInt() ?? 0),
+                    
+                waiteTimeOperation = Duration(minutes: operationTask.waitingTime?.toInt() ?? 0),
                 snackSuccess(txtSuccess!.tr, value.status!.message!)
               }
             else
@@ -713,6 +716,7 @@ class HomeViewModel extends GetxController {
   }
 
   Future showQtyBottomSheet() async {
+    
     Get.bottomSheet(QtyBottomSheet(), isScrollControlled: true);
   }
 
@@ -905,10 +909,11 @@ class HomeViewModel extends GetxController {
     }
   }
 
-  Future<void> requestWaittingTime({required String salesOrder , required String taskId}) async {
+  Future<void> requestWaittingTime(
+      {required String salesOrder, required String taskId}) async {
     startLoadingRequestTime();
     try {
-    await HomeHelper.getInstance.createWaitingRequest(body: {
+      await HomeHelper.getInstance.createWaitingRequest(body: {
         Constance.salesOrderUnderScoure: salesOrder,
       }).then((value) async => {
             if (value.status!.success!)

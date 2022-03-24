@@ -58,6 +58,7 @@ class ScanProducts extends StatelessWidget {
               const Spacer(),
               GestureDetector(
                 onTap: () {
+                  
                   ScanProducts.homeViewModel.showQtyBottomSheet();
                 },
                 child: SvgPicture.asset("assets/svgs/Scan.svg",

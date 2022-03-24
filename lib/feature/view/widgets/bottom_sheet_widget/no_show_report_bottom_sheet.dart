@@ -17,8 +17,7 @@ import '../../../../util/app_color.dart';
 import 'Widgets/bottom_sheet_card.dart';
 
 class NoShowReportBottomSheet extends StatelessWidget {
-  const NoShowReportBottomSheet(
-      {Key? key, required this.salesOrder, required this.task})
+  const NoShowReportBottomSheet({Key? key, required this.salesOrder, required this.task})
       : super(key: key);
 
   static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
@@ -83,11 +82,13 @@ class NoShowReportBottomSheet extends StatelessWidget {
                 text: txtReSchedule!.tr,
                 textStyleColor: colorRed,
                 onClicked: () async {
-                  await homeViewModel.updateTaskStatus(
-                      newStatus: Constance.schedule,
-                      taskId: salesOrder.taskId ?? "",
-                      taskStatusId: task.id ?? "");
-                  Get.back();
+                  if (homeViewModel.wateTime.inMilliseconds == 0) {
+                    await homeViewModel.updateTaskStatus(
+                        newStatus: Constance.schedule,
+                        taskId: salesOrder.taskId ?? "",
+                        taskStatusId: task.id ?? "");
+                    Get.back();
+                  }
                 },
               ),
               SizedBox(height: sizeH10),
@@ -95,11 +96,13 @@ class NoShowReportBottomSheet extends StatelessWidget {
                 text: txtNoShow!.tr,
                 textStyleColor: colorRed,
                 onClicked: () async {
-                  await homeViewModel.updateTaskStatus(
-                      newStatus: Constance.taskNoShow,
-                      taskId: salesOrder.taskId ?? "",
-                      taskStatusId: task.id ?? "");
-                  Get.back();
+                  if (homeViewModel.wateTime.inMilliseconds == 0) {
+                    await homeViewModel.updateTaskStatus(
+                        newStatus: Constance.taskNoShow,
+                        taskId: salesOrder.taskId ?? "",
+                        taskStatusId: task.id ?? "");
+                    Get.back();
+                  }
                 },
               ),
               SizedBox(height: sizeH10),
@@ -110,11 +113,13 @@ class NoShowReportBottomSheet extends StatelessWidget {
                   isLoading: false,
                   textButton: txtCancelOrder!.tr,
                   onClicked: () async {
-                    await homeViewModel.updateTaskStatus(
-                        newStatus: Constance.cancelled,
-                        taskId: salesOrder.taskId ?? "",
-                        taskStatusId: task.id ?? "");
-                    Get.back();
+                    if (homeViewModel.wateTime.inMilliseconds == 0) {
+                      await homeViewModel.updateTaskStatus(
+                          newStatus: Constance.cancelled,
+                          taskId: salesOrder.taskId ?? "",
+                          taskStatusId: task.id ?? "");
+                      Get.back();
+                    }
                   },
                   isExpanded: true),
               SizedBox(

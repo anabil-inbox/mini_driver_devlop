@@ -58,13 +58,18 @@ class QtyBottomSheet extends StatelessWidget {
                 textButton: "Add",
                 isLoading: false,
                 onClicked: () {
-                  if (_formKey.currentState!.validate()) {
+
+                  hideFocus(context);
+                  Future.delayed(const Duration(milliseconds: 500),(){
+if (_formKey.currentState!.validate()) {
                     Get.to(() => const ScanScreen(
                        isScanDeliverdBoxes: false,
                           isFromScanSalesBoxs: false,
                           isProductScan: true,
                         ));
                   }
+                  });
+                  
                 },
                 isExpanded: true),
             SizedBox(height: sizeH16),
