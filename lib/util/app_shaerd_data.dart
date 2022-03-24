@@ -33,6 +33,11 @@ import 'constance.dart';
 import 'localization/localization_service.dart';
 import 'string.dart';
 
+String? urlPlacholder =
+    "https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png";
+String? urlUserPlacholder =
+    "https://jenalk.ahdtech.com/dev/assets/img/no-user.png";
+
 String? urlPlaceholder =
     "https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png";
 String? urlUserPlaceholder =
@@ -61,6 +66,7 @@ List<PaymentMethod> getPaymentMethod() {
       ApiSettings.fromJson(json.decode(SharedPref.instance.getAppSetting()))
               .paymentMethod ??
           [];
+
   /// todo:// [wallet and back] => Application
   /// List<PaymentMethod> list = [
   ///   PaymentMethod(id: "Cash", name: "Cash"),
@@ -308,25 +314,32 @@ showAnimatedDialog(dialog) {
   );
 }
 
+var paymentError = "https://cdn-icons-png.flaticon.com/512/189/189715.png";
 var urlProduct =
     "https://images.unsplash.com/photo-1613177794106-be20802b11d3?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2xvY2slMjBoYW5kc3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80";
-Widget imageNetwork({double? width, double? height, String? url}) {
+Widget imageNetwork(
+    {double? width,
+    double? height,
+    String? url,
+    BoxFit? fit,
+    bool isPayment = false}) {
   return CachedNetworkImage(
     imageBuilder: (context, imageProvider) {
       return Container(
         decoration: BoxDecoration(
-          // border: Border.all(color: colorBorderLight),
           image: DecorationImage(
-            image: CachedNetworkImageProvider(url ?? urlUserPlaceholder!),
-            fit: BoxFit.contain,
+            image: CachedNetworkImageProvider(
+                url ?? (isPayment ? paymentError : urlUserPlacholder!)),
+            fit: fit ?? BoxFit.contain,
           ),
         ),
       );
     },
-    imageUrl: urlUserPlaceholder!,
+    imageUrl: isPayment ? paymentError : urlUserPlacholder!,
     errorWidget: (context, url, error) {
       return CachedNetworkImage(
-          imageUrl: urlUserPlaceholder!, fit: BoxFit.contain);
+          imageUrl: isPayment ? paymentError : urlUserPlacholder!,
+          fit: BoxFit.contain);
     },
     width: width ?? 74,
     height: height ?? 74,
@@ -352,7 +365,6 @@ Widget imageNetwork({double? width, double? height, String? url}) {
     },
   );
 }
-
 // Future<void> askOnWhatsApp(String? phoneNumber) async {
 //   final u =
 //       "https://api.whatsapp.com/send?phone=+972${phoneNumber.toString().replaceFirst(RegExp(r'^0+'), "")}&text=";

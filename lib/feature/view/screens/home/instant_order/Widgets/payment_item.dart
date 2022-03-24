@@ -46,13 +46,30 @@ class PaymentItem extends StatelessWidget {
                 : colorPrimary),
         padding:
             EdgeInsets.symmetric(vertical: padding9!, horizontal: padding14!),
-        child: CustomTextView(
-          txt: "${paymentMethod.name}",
-          textStyle:
-              homeViewModel.operationTask.paymentMethod == paymentMethod.id
-                  ? textStylebodyWhite()
-                  : textStyleHints()!
-                      .copyWith(fontSize: fontSize14, color: colorHint2),
+        child: Row(
+          children: [
+            if (paymentMethod.image != null &&
+                    paymentMethod.image != "") ...[
+                  imageNetwork(
+                      isPayment: true,
+                      url: paymentMethod.image,
+                      width: sizeW20,
+                      height: sizeH20),
+                ] else ...[
+                  imageNetwork(isPayment: true, width: sizeW20, height: sizeH20)
+                ],
+                 SizedBox(
+                  width: sizeW5,
+                ),
+            CustomTextView(
+              txt: "${paymentMethod.name}",
+              textStyle:
+                  homeViewModel.operationTask.paymentMethod == paymentMethod.id
+                      ? textStylebodyWhite()
+                      : textStyleHints()!
+                          .copyWith(fontSize: fontSize14, color: colorHint2),
+            ),
+          ],
         ),
       ),
     );
