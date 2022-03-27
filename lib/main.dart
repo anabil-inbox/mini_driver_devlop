@@ -42,8 +42,3 @@ class BindingsController extends Bindings {
     Get.lazyPut(() => HomeViewModel());
   }
 }
-
-
-// write play doc to abedallah 
-// mohanned crash 
-// request waitting time notification

@@ -141,11 +141,13 @@ class TaskResponse {
       this.lateFees,
       this.items,
       this.cancellationFees,
+      this.taskId,
       this.hasTimeRequest,
       this.notificationId});
 
   String? salesOrder;
   bool? isNew;
+  String? taskId;
   String? customerId;
   ChildOrder? childOrder;
   num? total;
@@ -190,6 +192,7 @@ class TaskResponse {
         total: num.tryParse(json["total"].toString()),
         totalPaid: num.tryParse(json["total_paid"].toString()),
         totalDue: num.tryParse(json["total_due"].toString()),
+        taskId: json["task_id"],
         paymentMethod: json["payment_method"],
         notificationId: json["id"],
         boxes: json["boxes"] == null
@@ -234,6 +237,7 @@ class TaskResponse {
         hasTimeRequest:
             json["has_time_request"] == null ? null : json["has_time_request"],
         customerId: json["customer_id"],
+        taskId: json["task_id"],
         childOrder: json["child_order"] == null
             ? null
             : ChildOrder.fromJson(json["child_order"]),

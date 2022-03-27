@@ -12,6 +12,8 @@ import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/sh_util.dart';
 import 'package:logger/logger.dart';
 
+import '../feature/view/screens/home/instant_order/instant_order_screen.dart';
+
 class AppFcm {
   AppFcm._();
   static AppFcm fcmInstance = AppFcm._();
@@ -161,17 +163,18 @@ class AppFcm {
       } else if (map[Constance.id].toString() == Constance.accetedRequestTime) {
         homeViewModel.operationTask =
             TaskResponse.fromJson(map, isFromNotification: true);
-          // Get.offAll(() => InstantOrderScreen(
-          //   taskId: homeViewModel.operationTask.tas,
-          //   taskStatusId: "",
-          // ));  
+        Get.offAll(() => InstantOrderScreen(
+              taskId: homeViewModel.operationTask.taskId ?? "",
+              taskStatusId: "",
+            ));
         homeViewModel.update();
       }
     });
   }
 
   void updatePages(RemoteMessage message) async {
-    homeViewModel.operationTask = TaskResponse.fromJson(message.data, isFromNotification: true);
+    homeViewModel.operationTask =
+        TaskResponse.fromJson(message.data, isFromNotification: true);
     await homeViewModel.refrshHome();
   }
 }

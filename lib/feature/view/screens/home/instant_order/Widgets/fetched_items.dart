@@ -1,6 +1,7 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:inbox_driver/network/utils/constance_netwoek.dart';
 import 'dart:math' as math;
 
 import '../../../../../../util/app_color.dart';
@@ -91,8 +92,10 @@ class FetchedItems extends StatelessWidget {
                               imageNetwork()
                             ] else ...[
                               imageNetwork(
-                                  url: home.operationTask.items![index]
-                                      .itemGallery![0])
+                                  fit: BoxFit.cover,
+                                  url: ConstanceNetwork.imageUrl +
+                                      (home.operationTask.items![index]
+                                          .itemGallery![0]["attachment"]))
                             ]
                           ]);
                         },

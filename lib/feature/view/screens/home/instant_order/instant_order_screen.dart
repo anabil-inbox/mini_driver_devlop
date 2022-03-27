@@ -176,8 +176,7 @@ class InstantOrderScreen extends StatelessWidget {
                 const FetchedItems(),
               ],
               SizedBox(height: sizeH10),
-              if (!(home.operationTask.processType == Constance.pickupId ||
-                  home.operationTask.processType == Constance.fetchId)) ...[
+              if (!(home.operationTask.processType == Constance.fetchId)) ...[
                 const ScanBoxInstantOrder(),
               ],
               // (home.operationTask.processType == Constance.pickupId ||
@@ -197,6 +196,7 @@ class InstantOrderScreen extends StatelessWidget {
 
               if (!(home.operationTask.processType == Constance.newStorageSv ||
                   home.operationTask.processType == Constance.fetchId ||
+                  home.operationTask.processType == Constance.pickupId ||
                   home.operationTask.processType == Constance.destroyId)) ...[
                 GetBuilder<HomeViewModel>(builder: (homeViewModel) {
                   return scanDelivedBoxes(homeViewModel: homeViewModel);

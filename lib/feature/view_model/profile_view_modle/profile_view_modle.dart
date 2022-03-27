@@ -59,7 +59,7 @@ class ProfileViewModle extends BaseController {
             Logger().i("${value.status!.message}"),
             if (value.status!.success!)
               {
-                snackSuccess(txtSuccess!.tr, "${value.status!.message}"),
+                // snackSuccess(txtSuccess!.tr, "${value.status!.message}"),
                 isLoading = false,
                 Get.put(AuthViewModle()),
                 update(),
