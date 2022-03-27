@@ -143,6 +143,7 @@ class TaskResponse {
       this.cancellationFees,
       this.taskId,
       this.hasTimeRequest,
+      this.timer,
       this.notificationId});
 
   String? salesOrder;
@@ -170,6 +171,7 @@ class TaskResponse {
   List<FetchedItem>? items;
   num? cancellationFees;
   bool? hasTimeRequest;
+  num? timer;
   factory TaskResponse.fromJson(Map<String, dynamic> json,
       {required bool isFromNotification}) {
     if (isFromNotification) {
@@ -192,6 +194,7 @@ class TaskResponse {
         total: num.tryParse(json["total"].toString()),
         totalPaid: num.tryParse(json["total_paid"].toString()),
         totalDue: num.tryParse(json["total_due"].toString()),
+        timer: num.tryParse(json["timer"].toString()),
         taskId: json["task_id"],
         paymentMethod: json["payment_method"],
         notificationId: json["id"],
@@ -242,6 +245,7 @@ class TaskResponse {
             ? null
             : ChildOrder.fromJson(json["child_order"]),
         total: num.tryParse(json["total"].toString()),
+        timer: num.tryParse(json["timer"].toString()),
         totalPaid: num.tryParse(json["total_paid"].toString()),
         totalDue: num.tryParse(json["total_due"].toString()),
         paymentMethod: json["payment_method"],
@@ -293,6 +297,7 @@ class TaskResponse {
         "waiting_time": waitingTime ?? 0.0,
         "child_order": childOrder,
         "total": total,
+        "timer" : timer,
         "total_paid": totalPaid,
         "total_due": totalDue,
         "payment_method": paymentMethod,

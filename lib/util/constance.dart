@@ -87,9 +87,11 @@ abstract class Constance {
   static String addedNewTask = "21";
   static String addedNewSpecificTask = "22";
   // static String accetedRequestTime = "23";
-  static String accetedRequestTime = "25";
+  static String accetedRequestTime = "24";
 
   static String fingerprint = "Fingerprint";
   static String schedule = "Schedule";
   static String terminate = "Terminate";
+
+  static String paymentMethod = "payment_method";
 }

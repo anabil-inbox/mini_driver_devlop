@@ -21,12 +21,12 @@ class AddressBox extends StatelessWidget {
   final SalesOrder salesOrder;
 
   Widget textAddressWidget() {
-    String fullAddress =
-        (salesOrder.orderShippingAddress) ?? (salesOrder.orderWarehouseAddress);
+    String fullAddress = (salesOrder.orderShippingAddress) ?? (salesOrder.orderWarehouseAddress);
     fullAddress +=
         " , ${salesOrder.street} , ${salesOrder.unitNo} , ${salesOrder.buildingNo}";
     
     fullAddress += "\n ${salesOrder.fromTime?.split(":")[0] }:${salesOrder.fromTime?.split(":")[1]} - ${salesOrder.toTime?.split(":")[0] }:${salesOrder.toTime?.split(":")[1]}";
+    fullAddress = fullAddress.replaceAll(",  ," ,  "");
     return InkWell(
       onTap: () => _goToMap(salesOrder: salesOrder),
       child: CustomTextView(

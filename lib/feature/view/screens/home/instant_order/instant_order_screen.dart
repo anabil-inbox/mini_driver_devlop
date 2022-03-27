@@ -89,29 +89,29 @@ class InstantOrderScreen extends StatelessWidget {
               height: sizeH7,
             ),
             TweenAnimationBuilder<Duration>(
-                duration: homeViewModel.operationTask.waitingTime == null
-                    ? Duration.zero
-                    : homeViewModel.waiteTimeOperation,
+                // duration: homeViewModel.operationTask.timer == null
+                //     ? Duration.zero
+                //     : homeViewModel.waiteTimeOperation,
+                // duration: const Duration(seconds: 1),
+                duration: const Duration(minutes: 1000),
                 tween: Tween(
-                    begin: homeViewModel.operationTask.waitingTime == null
+                    begin: homeViewModel.operationTask.timer == null
                         ? Duration.zero
                         : homeViewModel.waiteTimeOperation,
-                    end: Duration.zero),
+                    end: const Duration(minutes: 1000)),
                 onEnd: () {
                   Logger().e('Timer ended');
                 },
                 builder: (BuildContext context, Duration value, Widget? child) {
                   final minutes = value.inMinutes;
                   final seconds = value.inSeconds % 60;
-                  homeViewModel.waiteTimeOperation =
-                      Duration(minutes: minutes, seconds: seconds);
+                  homeViewModel.waiteTimeOperation = Duration(minutes: minutes, seconds: seconds);
 
                   return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 5),
                       child: Text(
                         '$minutes:$seconds',
-                        style:
-                            textStylePrimaryBold()?.copyWith(color: colorBlack),
+                        style: textStylePrimaryBold()?.copyWith(color: colorBlack),
                       ));
                 }),
             SizedBox(
@@ -212,7 +212,9 @@ class InstantOrderScreen extends StatelessWidget {
               SizedBox(height: sizeH20),
               if (homeViewModel.operationTask.waitingTime! > 0.1 &&
                   (homeViewModel.operationTask.hasTimeRequest ?? false)) ...[
-                waitingTime,
+                GetBuilder<HomeViewModel>(
+                  builder: (controller) => waitingTime,
+                ),
                 SizedBox(height: sizeH20),
               ],
               GetBuilder<HomeViewModel>(

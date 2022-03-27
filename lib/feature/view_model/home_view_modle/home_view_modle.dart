@@ -396,8 +396,10 @@ class HomeViewModel extends GetxController {
               {
                 operationTask = TaskResponse.fromJson(value.data,
                     isFromNotification: false),
-                    
-                waiteTimeOperation = Duration(minutes: operationTask.waitingTime?.toInt() ?? 0),
+                // waiteTimeOperation =
+                //     Duration(minutes: operationTask.waitingTime?.toInt() ?? 0),
+                waiteTimeOperation =
+                  Duration(minutes: operationTask.timer?.toInt() ?? 0),
                 snackSuccess(txtSuccess!.tr, value.status!.message!)
               }
             else
@@ -466,49 +468,67 @@ class HomeViewModel extends GetxController {
       required String taskId,
       required String taskStatusId}) async {
     try {
+      Map<String, dynamic> body = {};
+      
+      if (newStatus == Constance.done) {
+        body = {
+          Constance.status: newStatus,
+          Constance.taskId: taskId,
+          Constance.paymentMethod: operationTask.paymentMethod
+        };
+      } else {
+        body = {
+          Constance.status: newStatus,
+          Constance.taskId: taskId,
+          Constance.paymentMethod: taskStatusId
+        };
+      }
+
       startLoading();
-      await HomeHelper.getInstance.updateTaskStatus(body: {
-        Constance.taskId: taskId,
-        Constance.status: newStatus
-      }).then((value) => {
-            if (value.status!.success!)
-              {
-                operationTask = TaskResponse.fromJson(value.data,
-                    isFromNotification: false),
-                snackSuccess(txtSuccess!.tr, value.status!.message!),
+      await HomeHelper.getInstance
+          .updateTaskStatus(body: body)
+          .then((value) => {
+                if (value.status!.success!)
+                  {
+                    operationTask = TaskResponse.fromJson(value.data,
+                        isFromNotification: false),
+                    snackSuccess(txtSuccess!.tr, value.status!.message!),
 
-                operationsSalesData?.salesOrders?.forEach((element) {
-                  if (element.taskId == taskId) {
-                    element.taskStatus = newStatus;
+                    operationsSalesData?.salesOrders?.forEach((element) {
+                      if (element.taskId == taskId) {
+                        element.taskStatus = newStatus;
+                      }
+                    }),
+                    if (newStatus == Constance.taskdelivered)
+                      {
+                        // SharedPref.instance.setCurrentTaskResponse(
+                        //     taskResponse: jsonEncode(value.data)),
+                        // operationTask =
+
+                        Get.to(() => InstantOrderScreen(
+                            taskStatusId: taskStatusId,
+                            isNewCustomer: true,
+                            taskId: taskId))
+                      },
+                    // else if (newStatus == Constance.taskDone)
+                    //   {
+
+                    //   },
+
+                    update(),
+                    endLoading(),
+                    if (newStatus == Constance.done)
+                      {
+                        Get.close(2),
+                      },
+                    // operationsSalesData.
                   }
-                }),
-                if (newStatus == Constance.taskdelivered)
+                else
                   {
-                    // SharedPref.instance.setCurrentTaskResponse(
-                    //     taskResponse: jsonEncode(value.data)),
-                    // operationTask =
-
-                    Get.to(() => InstantOrderScreen(
-                        taskStatusId: taskStatusId,
-                        isNewCustomer: true,
-                        taskId: taskId))
-                  },
-                // else if (newStatus == Constance.taskDone)
-                //   {
-
-                //   },
-
-                update(),
-                endLoading(),
-                if (newStatus == Constance.done)
-                  {
-                    Get.close(2),
-                  },
-                // operationsSalesData.
-              }
-            else
-              {snackError(txtSuccess!.tr, value.status!.message!), endLoading()}
-          });
+                    snackError(txtSuccess!.tr, value.status!.message!),
+                    endLoading()
+                  }
+              });
     } catch (e) {
       endLoading();
       printError();
@@ -700,8 +720,12 @@ class HomeViewModel extends GetxController {
             {
               operationTask =
                   TaskResponse.fromJson(value.data, isFromNotification: false),
-              waiteTimeOperation =
-                  Duration(minutes: operationTask.waitingTime?.toInt() ?? 0),
+              // waiteTimeOperation =
+              //     Duration(minutes: operationTask.waitingTime?.toInt() ?? 0),
+            //  waiteTimeOperation =
+            //       Duration(minutes: operationTask.timer?.toInt() ?? 0),     
+             waiteTimeOperation =
+                  Duration(minutes: operationTask.timer?.toInt() ?? 0),
               Logger().e(value.data),
               await refrshHome(),
               update(),
@@ -716,7 +740,6 @@ class HomeViewModel extends GetxController {
   }
 
   Future showQtyBottomSheet() async {
-    
     Get.bottomSheet(QtyBottomSheet(), isScrollControlled: true);
   }
 
@@ -738,8 +761,10 @@ class HomeViewModel extends GetxController {
           // taskResponse.childOrder!.items?.remove(productModel);
           operationTask =
               TaskResponse.fromJson(value.data, isFromNotification: false);
-          waiteTimeOperation =
-              Duration(minutes: operationTask.waitingTime?.toInt() ?? 0);
+          // waiteTimeOperation =
+          //     Duration(minutes: operationTask.waitingTime?.toInt() ?? 0);
+           waiteTimeOperation =
+                  Duration(minutes: operationTask.timer?.toInt() ?? 0);
           update();
           snackSuccess("$txtSuccess", "${value.status!.message}");
         } else {
@@ -781,7 +806,7 @@ class HomeViewModel extends GetxController {
                 TaskResponse.fromJson(value.data, isFromNotification: false),
             // Logger().e(operationTask),
             waiteTimeOperation =
-                Duration(minutes: operationTask.waitingTime?.toInt() ?? 0),
+                Duration(minutes: operationTask.timer?.toInt() ?? 0),
           });
     } catch (e) {
       endLoading();

@@ -119,6 +119,7 @@ class OrderDetailsStarted extends StatelessWidget {
                   newStatus: Constance.taskStart,
                   taskId: salesOrder.taskId ?? "",
                 );
+                
                 await home.getSpecificTask(
                     taskId: task.id ?? "", taskSatus: Constance.inProgress);
                 await home.getSpecificTask(

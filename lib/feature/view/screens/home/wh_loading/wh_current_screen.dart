@@ -71,11 +71,41 @@ class WHCurrentScreen extends StatelessWidget {
                 task: task,
                 index: i,
                 salesData: homeViewModel.operationsSalesData!,
-                salesOrder: homeViewModel.operationsSalesData!.salesOrders![index],
+                salesOrder:
+                    homeViewModel.operationsSalesData!.salesOrders![index],
                 isBlockContainer: index == 0 ? false : true,
               );
             } else {
-              return const Text("Else Case");
+              return WhLoadingCard(
+                isFromCompelted: true,
+                task: task,
+                index: i,
+                salesData: home.operationsSalesData!,
+                salesOrder: home.operationsSalesData!.salesOrders![index],
+                onRecivedClick: i == 0
+                    ? () async {
+                        if (homeViewModel.isTaskWareHouseLoading(task: task)) {
+                          await homeViewModel.recivedBoxes(
+                              serial: homeViewModel.operationsSalesData!
+                                      .salesOrders![index].orderId ??
+                                  "",
+                              taskName: Constance.taskWarehouseLoading);
+                        } else if (homeViewModel.isTaskWorahouseClousre(
+                            task: task)) {
+                          await homeViewModel.recivedBoxes(
+                              serial: homeViewModel.operationsSalesData!
+                                      .salesOrders![index].orderId ??
+                                  "",
+                              taskName: Constance.taskWarehouseClosure);
+                        } else {}
+                        await homeViewModel.getSpecificTask(
+                            taskId: task.id ?? "",
+                            taskSatus: Constance.inProgress);
+                      }
+                    : () {
+                        snackError(txtError!.tr, txtPreviousTask.tr);
+                      },
+              );
             }
           });
     }
