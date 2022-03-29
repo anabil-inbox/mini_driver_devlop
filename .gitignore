@@ -12,8 +12,8 @@
 *.metadata
 *.packages
 *.dart_tool
-*android/app/build/
 
+**/android/app/build/
 # Node artifact files
 node_modules/
 dist/
