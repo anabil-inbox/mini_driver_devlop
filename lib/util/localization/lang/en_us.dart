@@ -60,5 +60,10 @@ Map<String, String> enUS = {
   txtButtonStart: "Start",
   txtVisitTasks : "Visit Tasks",
   txtOngoing : "Ongoing",
-  txtYouHaveToSelectEmergencyCase : "You Have To Select Emergency Case"
+  txtYouHaveToSelectEmergencyCase : "You Have To Select Emergency Case",
+  txtCashClosure : "Cash Closure",
+  txtTotalAmount : "Total Amount",
+  txtPaidAmount : "Paid Amount",
+  txtRemainingAmount : "Remaining Amount",
+
 };
