@@ -12,6 +12,7 @@
 *.metadata
 *.packages
 *.dart_tool
+*.pubspec
 
 **/android/app/build/
 # Node artifact files
