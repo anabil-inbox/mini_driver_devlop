@@ -85,9 +85,9 @@ String? txtSMSOnMyWay = "SMS: I’m on my way";
 String? txtSMSArrivedOutside = "SMS: I arrived here outside";
 String? txtSMSReportNoShow = "SMS: I’ll report “no show” within 5 mins";
 String? txtNextScan = "Next Scan";
-String? txtEmergency = "Emergency";
+const String txtEmergency = "Emergency";
 String? txtCase1 = "Case 1";
-String? txtWriteDownCaseRemarks = "Write down case remarks";
+const String txtWriteDownCaseRemarks = "Write down case remarks";
 String? txtNoShowReport = "No Show Report";
 const String txtTimer = "00:00:00";
 String? txtReSchedule = "Re-Schedule";
@@ -175,3 +175,13 @@ const String txtCashClosure = "cashClosure";
 const String txtTotalAmount = "totalamount";
 const String txtPaidAmount = "paidamount";
 const String txtRemainingAmount = "remainingamount";
+
+
+//todo strings of instance
+const String txtRequestTime = "Request Time"; 
+const String  txtBoxesNeedScan = "Boxes Need Scan";
+const String txtChooseBoxOperation = "Choose Box Operation";
+const String txtItemFetched = "Items Fetched";
+const String txtChooseQuantity = "Choose Quantity";
+const String txtPleaseEnterQuantity = "Please enter quantity";
+const String txtOrderTracnfer = "Order Tracnfer";

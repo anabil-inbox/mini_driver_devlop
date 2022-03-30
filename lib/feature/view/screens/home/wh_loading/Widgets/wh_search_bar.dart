@@ -7,6 +7,7 @@ import 'package:inbox_driver/feature/view/widgets/icon_btn.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/constance.dart';
+import 'package:inbox_driver/util/string.dart';
 
 import '../../../../../../util/app_shaerd_data.dart';
 
@@ -82,6 +83,6 @@ class WhSearchBar extends StatelessWidget {
         fillColor: colorBackground,
         isFill: true,
         isBorder: true,
-        label: "Search here ...",
+        label: txtSearchHere.tr,
       );
 }

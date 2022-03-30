@@ -11,6 +11,7 @@ import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
+import 'package:inbox_driver/util/string.dart';
 
 import '../../../../../../util/app_shaerd_data.dart';
 
@@ -36,7 +37,7 @@ class BoxOnOrderItem extends StatelessWidget {
           TextFormField(
             controller: TextEditingController(text: boxModel.selectedBoxOperations?.operation ?? ""),
             decoration: InputDecoration(
-                hintText: "Choose Box Operation",
+                hintText: txtChooseBoxOperation.tr,
                 prefixIcon: Padding(
                   padding: const EdgeInsets.all(padding10),
                   child: SvgPicture.asset("assets/svgs/dropdown.svg"),

@@ -161,8 +161,10 @@ class AuthViewModle extends GetxController {
               Get.put(AuthViewModle()),
               Get.put(ProfileViewModle()),
             }
-          else
+          else if (value.status?.success == false)
             {snackError(txtError!.tr, "${value.status!.message}")}
+          else
+            {snackError(txtError!.tr, "Something Git Wrong")}
         });
   }
 
@@ -189,7 +191,6 @@ class AuthViewModle extends GetxController {
               startTimerCounter = 60,
               startTimer(),
               update(),
-              
               isFromChange
                   ? Get.to(() => VerficationScreen(
                         id: id ?? "",
@@ -333,7 +334,9 @@ class AuthViewModle extends GetxController {
       await _checkBiometrics();
       await _getAvailableBiometrics();
       await _authenticate();
-      if (isAuth! && "${SharedPref.instance.getCurrentUserData()?.id.toString()}".isNotEmpty) {
+      if (isAuth! &&
+          "${SharedPref.instance.getCurrentUserData()?.id.toString()}"
+              .isNotEmpty) {
         await signInUser(
             user: Driver(
                 countryCode:
@@ -374,7 +377,7 @@ class AuthViewModle extends GetxController {
     try {
       availableBiometrics = await auth.getAvailableBiometrics();
     } on PlatformException catch (_) {
-     printError();
+      printError();
     }
 
     _availableBiometrics = availableBiometrics;

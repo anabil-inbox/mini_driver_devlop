@@ -65,5 +65,15 @@ Map<String, String> enUS = {
   txtTotalAmount : "Total Amount",
   txtPaidAmount : "Paid Amount",
   txtRemainingAmount : "Remaining Amount",
-
+  txtRequestTime : "Request Time",
+   txtBoxesNeedScan : "Boxes Need Scan",
+   txtChooseBoxOperation : "Choose Box Operation",
+   txtItemFetched : "Item Fetched",
+   txtChooseQuantity : "Choose Quantity",
+   txtPleaseEnterQuantity : "Please enter quantity",
+   txtEmergency : "Emergency",
+   txtWriteDownCaseRemarks : "Write down case remarks",
+   txtOrderTracnfer : "Order Tracnfer",
+   txtSubmitReport : "Submit Report",
+   txtTakePicture : "Take Picture",
 };

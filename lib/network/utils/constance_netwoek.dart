@@ -83,11 +83,15 @@ abstract class ConstanceNetwork {
 
   static Map<String, String> header(int typeToken) {
     Map<String, String> headers = {};
+    
     if (typeToken == 0) {
       headers = {
-        'Accept': 'application/json',
+         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Language': Get.locale.toString().split("_")[0],
+        // 'Cookie': 'full_name=Guest; sid=Guest; system_user=no; user_id=Guest; user_image='
+      
+      
       };
     } else if (typeToken == 1) {
       headers = {

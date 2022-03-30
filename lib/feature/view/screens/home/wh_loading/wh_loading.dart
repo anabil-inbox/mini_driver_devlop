@@ -49,7 +49,7 @@ class WhLoading extends StatelessWidget {
               Container(
                 color: colorBackground,
                 child: TabBar(
-                  labelColor: Colors.black,
+                  labelColor: colorBlack,
                   indicatorColor: colorPrimary,
                   labelPadding: const EdgeInsets.all(0),
                   onTap: (index) async {

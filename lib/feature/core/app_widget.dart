@@ -33,7 +33,7 @@ class _AppWidgetState extends State<AppWidget> {
             {
               // apiSettings = value,
               // Logger().i(value.workingHours,),
-              SharedPref.instance.setUserType(value.customerType!),
+              // SharedPref.instance.setUserType(value.customerType!),
               // update()
             }
         });

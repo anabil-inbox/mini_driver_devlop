@@ -34,8 +34,10 @@
    <application
        android:allowBackup="false"
         android:label="inbox_driver"
-        android:icon="@mipmap/ic_launcher">
-
+        android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true"
+        >
+        
        <!--todo this for google maps-->
        <meta-data android:name="com.google.android.geo.API_KEY"
            android:value="AIzaSyAzBtxE3NluLYNrUajTg9OnG7X_luzESvU"/>

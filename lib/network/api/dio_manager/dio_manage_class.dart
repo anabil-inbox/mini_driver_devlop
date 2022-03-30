@@ -36,7 +36,7 @@ class DioManagerClass {
       {var url,
       Map<String, dynamic>? header,
       Map<String, dynamic>? body}) async {
-           print("msg_request_url : $url");
+    print("msg_request_url : $url");
     print("msg_request_header : $header");
     print("msg_request_body : $body");
     return await _dio!.post(

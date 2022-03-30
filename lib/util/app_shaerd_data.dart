@@ -521,14 +521,14 @@ updateLanguage(Locale locale) {
 }
 
 void changeLanguageBottomSheet() {
+  screenUtil(Get.context!);
   Get.bottomSheet(Container(
-    height: sizeH350,
+    // height: sizeH350,
     decoration: BoxDecoration(
         color: colorTextWhite,
         borderRadius: const BorderRadius.vertical(top: Radius.circular(20))),
     padding: EdgeInsets.symmetric(horizontal: sizeH20!),
     child: GetBuilder<AuthViewModle>(
-      init: AuthViewModle(),
       builder: (controller) {
         return Column(
           mainAxisSize: MainAxisSize.min,

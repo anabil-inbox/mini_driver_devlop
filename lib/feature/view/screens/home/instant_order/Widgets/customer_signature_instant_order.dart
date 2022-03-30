@@ -151,7 +151,7 @@ class CustomerSignatureInstantOrder extends StatelessWidget {
 
           SizedBox(height: sizeH10),
           SignatureItem(
-            title: "Fingerprint",
+            title: txtFingerprint.tr,
             onSelected: () {
               homeViewModel.notifyForSign(type: "Fingerprint");
             },

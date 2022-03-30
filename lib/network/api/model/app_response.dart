@@ -1,4 +1,3 @@
-
 // ignore_for_file: prefer_if_null_operators
 
 import 'package:get/utils.dart';
@@ -12,8 +11,12 @@ class AppResponse {
 
   factory AppResponse.fromJson(var map) {
     try {
-      
-      if (GetUtils.isNull(map["data"])) {
+      if (map["exception"] != null) {
+        return AppResponse(
+          data: "",
+          status: Status(code: 401, message: "Error accoured", success: false),
+        );
+      } else if (GetUtils.isNull(map["data"])) {
         return AppResponse(
           status: Status.fromJson(map["status"]),
         );
@@ -24,7 +27,8 @@ class AppResponse {
         );
       }
     } catch (e) {
-      return AppResponse(status: Status(
+      return AppResponse(
+          status: Status(
         message: "$e",
         code: 403,
         success: false,
@@ -55,13 +59,13 @@ class Status {
 
   factory Status.fromJson(Map<String, dynamic> json) => Status(
         message: json["message"].toString(),
-        code: json["code"] ?? "",
-        success: json["success"] ?? "",
+        code: json["code"] ?? 0,
+        success: json["success"] ?? false,
       );
 
   Map<String, dynamic> toJson() => {
         "message": message ?? "",
-        "code": code ?? "",
-        "success": success ?? "",
+        "code": code ?? 0,
+        "success": success ?? false,
       };
 }

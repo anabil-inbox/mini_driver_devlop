@@ -45,7 +45,7 @@ class EmergencyBottomSheet extends StatelessWidget {
               SvgPicture.asset('assets/svgs/Indicator.svg'),
               SizedBox(height: sizeH17),
               Text(
-                txtEmergency!.tr,
+                txtEmergency.tr,
                 style: textStyleTitle(),
               ),
               SizedBox(height: sizeH36),
@@ -83,7 +83,7 @@ class EmergencyBottomSheet extends StatelessWidget {
               GetBuilder<HomeViewModel>(
                 builder: (home) {
                   return CustomTextFormFiled(
-                    label: txtWriteDownCaseRemarks,
+                    label: txtWriteDownCaseRemarks.tr,
                     controller: home.tdEmergencyNote,
                     isSmallPadding: true,
                     isSmallPaddingWidth: false,
@@ -109,7 +109,7 @@ class EmergencyBottomSheet extends StatelessWidget {
                             : SvgPicture.asset("assets/svgs/uncheck.svg"),
                       ),
                       // SizedBox(width: sizeH10),
-                      const Text("Order Tracnfer"),
+                      Text(txtOrderTracnfer.tr),
                     ],
                   );
                 },

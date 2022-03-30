@@ -1,6 +1,7 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:get/get_utils/get_utils.dart';
 import 'package:inbox_driver/network/utils/constance_netwoek.dart';
 import 'dart:math' as math;
 
@@ -8,6 +9,7 @@ import '../../../../../../util/app_color.dart';
 import '../../../../../../util/app_dimen.dart';
 import '../../../../../../util/app_shaerd_data.dart';
 import '../../../../../../util/app_style.dart';
+import '../../../../../../util/string.dart';
 import '../../../../../view_model/home_view_modle/home_view_modle.dart';
 import '../../../../widgets/custome_text_view.dart';
 
@@ -48,7 +50,7 @@ class FetchedItems extends StatelessWidget {
             ),
             SizedBox(width: sizeW10),
             CustomTextView(
-              txt: "Items Fetched",
+              txt: txtItemFetched.tr,
               textStyle: textStyleNormal()?.copyWith(color: colorBlack),
             ),
           ],

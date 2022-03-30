@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/src/extension_instance.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/get.dart';
 import 'package:inbox_driver/feature/view/screens/home/qr_scan/scan_screen.dart';
 import 'package:inbox_driver/feature/view/widgets/primary_button.dart';
 import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
+import 'package:inbox_driver/util/string.dart';
 
 import '../../../../../../util/app_shaerd_data.dart';
 
@@ -33,7 +32,7 @@ class QtyBottomSheet extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(height: sizeH16),
-            Text("Choose Quantity",
+            Text(txtChooseQuantity.tr,
                 style: Theme.of(context).textTheme.headline6),
             SizedBox(height: sizeH16),
             Form(
@@ -43,7 +42,7 @@ class QtyBottomSheet extends StatelessWidget {
                 textDirection: TextDirection.ltr,
                 validator: (e) {
                   if (e!.trim().isEmpty) {
-                    return "Please enter quantity";
+                    return txtPleaseEnterQuantity.tr;
                   }
                   return null;
                 },
@@ -55,7 +54,7 @@ class QtyBottomSheet extends StatelessWidget {
             ),
             SizedBox(height: sizeH16),
             PrimaryButton(
-                textButton: "Add",
+                textButton: txtADD.tr,
                 isLoading: false,
                 onClicked: () {
 

@@ -225,11 +225,11 @@ class InstantOrderScreen extends StatelessWidget {
                 SizedBox(height: sizeH10),
                 const CustomerSignatureInstantOrder(),
                 SizedBox(height: sizeH20),
-                if (homeViewModel.operationTask.waitingTime! > 0.1 &&
-                    (homeViewModel.operationTask.hasTimeRequest ?? false)) ...[
+                if (
+                /* homeViewModel.operationTask.waitingTime! > 0.1 && */
+                (homeViewModel.operationTask.hasTimeRequest ?? false)) ...[
                   GetBuilder<HomeViewModel>(
-                    builder: (controller) =>
-                        const WattingTime(isFreeTime: false),
+                    builder: (controller) => const WattingTime(isFreeTime: false),
                   ),
                   SizedBox(height: sizeH20),
                 ] else ...[
@@ -244,7 +244,7 @@ class InstantOrderScreen extends StatelessWidget {
                         children: [
                           Expanded(
                             child: PrimaryButton(
-                                textButton: "Requesting Time",
+                                textButton: txtRequestTime.tr,
                                 isLoading: home.isLoadingRequestTime,
                                 onClicked: () async {
                                   home.requestWaittingTime(
@@ -257,7 +257,7 @@ class InstantOrderScreen extends StatelessWidget {
                           SizedBox(width: sizeH20),
                           Expanded(
                             child: SeconderyFormButton(
-                              buttonText: "Done",
+                              buttonText: txtDone.tr,
                               isLoading: homeViewModel.isLoading,
                               onClicked: () async {
                                 await home.updateTaskStatus(
@@ -281,7 +281,7 @@ class InstantOrderScreen extends StatelessWidget {
                       );
                     } else {
                       return PrimaryButton(
-                          textButton: "Done",
+                          textButton: txtDone.tr,
                           isLoading: homeViewModel.isLoading,
                           onClicked: () async {
                             await home.updateTaskStatus(
