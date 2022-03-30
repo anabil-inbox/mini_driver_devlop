@@ -41,3 +41,4 @@ class BindingsController extends Bindings {
     // Get.lazyPut(() => HomeViewModel());
   }
 }
+// terminate and destroy without items 
