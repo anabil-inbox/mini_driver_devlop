@@ -169,3 +169,9 @@ const String txtOngoing = "Ongoing";
 
 //todo this for Emergency Report :
 const String txtYouHaveToSelectEmergencyCase = "You Have To Select Emergency Case";
+
+//todo this for cash closure page
+const String txtCashClosure = "cashClosure";
+const String txtTotalAmount = "totalamount";
+const String txtPaidAmount = "paidamount";
+const String txtRemainingAmount = "remainingamount";

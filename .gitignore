@@ -12,6 +12,11 @@
 *.metadata
 *.packages
 *.dart_tool
+*.pubspec.lock
+
+**/android/app/build/
+
+
 # Node artifact files
 node_modules/
 dist/
@@ -105,3 +110,4 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 >>>>>>> 83c8dcc616ba2d4264554fc35edf043f0f592bfc
+/android/app/build/
