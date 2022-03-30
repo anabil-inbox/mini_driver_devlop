@@ -149,8 +149,7 @@ class AppFcm {
     });
   }
 
-  static void goToOrderPage(Map<String, dynamic> map,
-      {required bool isFromTerminate}) async {
+  static void goToOrderPage(Map<String, dynamic> map,{required bool isFromTerminate}) async {
     Logger().i(map[Constance.id].toString());
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) async {
       if (map[Constance.id].toString() == Constance.userSignature) {
@@ -164,6 +163,7 @@ class AppFcm {
         homeViewModel.operationTask =
             TaskResponse.fromJson(map, isFromNotification: true);
         Get.offAll(() => InstantOrderScreen(
+              isFromNotification: true,
               taskId: homeViewModel.operationTask.taskId ?? "",
               taskStatusId: "",
             ));

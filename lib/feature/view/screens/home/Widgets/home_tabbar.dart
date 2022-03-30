@@ -17,7 +17,6 @@ class HomeTabBar extends StatelessWidget {
     screenUtil(context);
     screenUtil(context);
     return GetBuilder<HomeViewModel>(
-      init: HomeViewModel(),
       builder: (logic) {
         return Container(
           color: colorTextWhite,

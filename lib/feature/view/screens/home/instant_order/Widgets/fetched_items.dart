@@ -89,10 +89,14 @@ class FetchedItems extends StatelessWidget {
                             ),
                             if (home.operationTask.items![index].itemGallery!
                                 .isEmpty) ...[
-                              imageNetwork()
+                              imageNetwork(
+                                fit: BoxFit.cover,
+                                height: sizeH75,
+                              )
                             ] else ...[
                               imageNetwork(
                                   fit: BoxFit.cover,
+                                  height: sizeH75,
                                   url: ConstanceNetwork.imageUrl +
                                       (home.operationTask.items![index]
                                           .itemGallery![0]["attachment"]))

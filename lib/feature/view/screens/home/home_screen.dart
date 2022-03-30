@@ -54,7 +54,6 @@ class HomeScreen extends StatelessWidget {
           )),
       backgroundColor: colorTextWhite,
       body: GetBuilder<HomeViewModel>(
-          init: HomeViewModel(),
           builder: (logic) {
             if (logic.isLoading) {
               return const LoadingCircle();

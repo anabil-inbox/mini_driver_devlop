@@ -329,16 +329,16 @@ Widget imageNetwork(
         decoration: BoxDecoration(
           image: DecorationImage(
             image: CachedNetworkImageProvider(
-                url ?? (isPayment ? paymentError : urlUserPlacholder!)),
+                url ?? (isPayment ? paymentError : urlPlaceholder!)),
             fit: fit ?? BoxFit.contain,
           ),
         ),
       );
     },
-    imageUrl: isPayment ? paymentError : urlUserPlacholder!,
+    imageUrl: isPayment ? paymentError : urlPlaceholder!,
     errorWidget: (context, url, error) {
       return CachedNetworkImage(
-          imageUrl: isPayment ? paymentError : urlUserPlacholder!,
+          imageUrl: isPayment ? paymentError : urlPlaceholder!,
           fit: BoxFit.contain);
     },
     width: width ?? 74,

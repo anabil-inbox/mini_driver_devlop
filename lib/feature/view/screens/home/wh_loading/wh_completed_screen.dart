@@ -108,7 +108,6 @@ class WHCompletedScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: scaffoldColor,
         body: GetBuilder<HomeViewModel>(
-            init: HomeViewModel(),
             initState: (_) async {
               WidgetsBinding.instance?.addPostFrameCallback((timeStamp) async {
                 await homeViewModel.getSpecificTask(

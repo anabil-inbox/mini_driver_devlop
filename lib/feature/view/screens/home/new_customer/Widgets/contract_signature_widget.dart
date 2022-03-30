@@ -16,7 +16,6 @@ class ContractSignature extends StatelessWidget {
   Widget build(BuildContext context) {
     screenUtil(context);
     return GetBuilder<HomeViewModel>(
-        init: HomeViewModel(),
         builder: (logic) {
           return Container(
             padding: EdgeInsets.symmetric(horizontal: sizeW5!, vertical: sizeH13!),

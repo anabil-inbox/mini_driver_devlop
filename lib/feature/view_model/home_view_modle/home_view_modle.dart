@@ -399,7 +399,7 @@ class HomeViewModel extends GetxController {
                 // waiteTimeOperation =
                 //     Duration(minutes: operationTask.waitingTime?.toInt() ?? 0),
                 waiteTimeOperation =
-                  Duration(minutes: operationTask.timer?.toInt() ?? 0),
+                    Duration(minutes: operationTask.timer?.toInt() ?? 0),
                 snackSuccess(txtSuccess!.tr, value.status!.message!)
               }
             else
@@ -469,7 +469,7 @@ class HomeViewModel extends GetxController {
       required String taskStatusId}) async {
     try {
       Map<String, dynamic> body = {};
-      
+
       if (newStatus == Constance.done) {
         body = {
           Constance.status: newStatus,
@@ -506,6 +506,7 @@ class HomeViewModel extends GetxController {
                         // operationTask =
 
                         Get.to(() => InstantOrderScreen(
+                            isFromNotification: false,
                             taskStatusId: taskStatusId,
                             isNewCustomer: true,
                             taskId: taskId))
@@ -722,9 +723,9 @@ class HomeViewModel extends GetxController {
                   TaskResponse.fromJson(value.data, isFromNotification: false),
               // waiteTimeOperation =
               //     Duration(minutes: operationTask.waitingTime?.toInt() ?? 0),
-            //  waiteTimeOperation =
-            //       Duration(minutes: operationTask.timer?.toInt() ?? 0),     
-             waiteTimeOperation =
+              //  waiteTimeOperation =
+              //       Duration(minutes: operationTask.timer?.toInt() ?? 0),
+              waiteTimeOperation =
                   Duration(minutes: operationTask.timer?.toInt() ?? 0),
               Logger().e(value.data),
               await refrshHome(),
@@ -763,8 +764,8 @@ class HomeViewModel extends GetxController {
               TaskResponse.fromJson(value.data, isFromNotification: false);
           // waiteTimeOperation =
           //     Duration(minutes: operationTask.waitingTime?.toInt() ?? 0);
-           waiteTimeOperation =
-                  Duration(minutes: operationTask.timer?.toInt() ?? 0);
+          waiteTimeOperation =
+              Duration(minutes: operationTask.timer?.toInt() ?? 0);
           update();
           snackSuccess("$txtSuccess", "${value.status!.message}");
         } else {

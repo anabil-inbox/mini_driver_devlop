@@ -25,14 +25,14 @@ class WHCurrentScreen extends StatelessWidget {
   final int i;
 
   Widget lvSalesOrder({required HomeViewModel home}) {
-    if (GetUtils.isNull(home.operationsSalesData) ||
-        GetUtils.isNull(home.operationsSalesData!.salesOrders)) {
+    if (GetUtils.isNull(homeViewModel.operationsSalesData) ||
+        GetUtils.isNull(homeViewModel.operationsSalesData!.salesOrders)) {
       return const SizedBox();
     } else {
       return ListView.builder(
           shrinkWrap: true,
           primary: false,
-          itemCount: home.operationsSalesData!.salesOrders?.length,
+          itemCount: homeViewModel.operationsSalesData!.salesOrders?.length,
           itemBuilder: (context, index) {
             if (home.isTaskWarwhouseLoadingOrClousre(task: task)) {
               return WhLoadingCard(
@@ -63,7 +63,7 @@ class WHCurrentScreen extends StatelessWidget {
                       }
                     : () {
                         snackError(txtError!.tr, txtPreviousTask.tr);
-                      },
+                        },
               );
             } else if (home.isTaskCustomerVist(task: task)) {
               return VisitLvItemWidget(

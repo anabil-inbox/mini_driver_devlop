@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:inbox_driver/fcm/app_fcm.dart';
-import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/sh_util.dart';
 
@@ -39,6 +38,6 @@ class BindingsController extends Bindings {
     Get.lazyPut(() => SplashViewModle());
     Get.lazyPut(() => AuthViewModle());
     Get.lazyPut(() => ProfileViewModle());
-    Get.lazyPut(() => HomeViewModel());
+    // Get.lazyPut(() => HomeViewModel());
   }
 }
