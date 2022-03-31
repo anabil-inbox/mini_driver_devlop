@@ -42,3 +42,4 @@ class BindingsController extends Bindings {
   }
 }
 // terminate and destroy without items 
+// hide recall after check in box :: 

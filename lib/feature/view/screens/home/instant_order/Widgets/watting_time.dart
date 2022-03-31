@@ -103,8 +103,7 @@ class WattingTime extends StatelessWidget {
                 builder: (BuildContext context, Duration value, Widget? child) {
                   final minutes = value.inMinutes;
                   final seconds = value.inSeconds % 60;
-                  homeViewModel.waiteTimeOperation =
-                      Duration(minutes: minutes, seconds: seconds);
+                  homeViewModel.waiteTimeOperation = Duration(minutes: minutes, seconds: seconds);
                   return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 5),
                       child: Text(

@@ -189,8 +189,11 @@ class InstantOrderScreen extends StatelessWidget {
                 ] else ...[
                   const FetchedItems(),
                 ],
-                SizedBox(height: sizeH10),
-                if (!(home.operationTask.processType == Constance.fetchId)) ...[
+                //SizedBox(height: sizeH10),
+                if (!(home.operationTask.processType == Constance.fetchId ||
+                    home.operationTask.processType ==
+                        Constance.terminateId)) ...[
+                  SizedBox(height: sizeH10),
                   const ScanBoxInstantOrder(),
                 ],
                 // (home.operationTask.processType == Constance.pickupId ||
@@ -208,15 +211,20 @@ class InstantOrderScreen extends StatelessWidget {
                 //         return scanDelivedBoxes(homeViewModel: homeViewModel);
                 //       }),
 
-                if (!(home.operationTask.processType ==
-                        Constance.newStorageSv ||
-                    home.operationTask.processType == Constance.fetchId ||
-                    home.operationTask.processType == Constance.pickupId ||
-                    home.operationTask.processType == Constance.destroyId)) ...[
+                // if (!(home.operationTask.processType ==
+                //         Constance.newStorageSv ||
+                //     home.operationTask.processType == Constance.fetchId ||
+                //     home.operationTask.processType == Constance.pickupId ||
+                //     home.operationTask.processType == Constance.destroyId)) ...[
+                if (home.operationTask.processType == Constance.recallId ||
+                    (home.operationTask.processType == Constance.terminateId &&
+                    (homeViewModel.operationTask.hasDeliveredScan ?? false))) ...[
                   GetBuilder<HomeViewModel>(builder: (homeViewModel) {
                     return scanDelivedBoxes(homeViewModel: homeViewModel);
                   })
                 ],
+
+                // ],
 
                 SizedBox(height: sizeH10),
                 const ScanProducts(),
@@ -229,7 +237,8 @@ class InstantOrderScreen extends StatelessWidget {
                 /* homeViewModel.operationTask.waitingTime! > 0.1 && */
                 (homeViewModel.operationTask.hasTimeRequest ?? false)) ...[
                   GetBuilder<HomeViewModel>(
-                    builder: (controller) => const WattingTime(isFreeTime: false),
+                    builder: (controller) =>
+                        const WattingTime(isFreeTime: false),
                   ),
                   SizedBox(height: sizeH20),
                 ] else ...[

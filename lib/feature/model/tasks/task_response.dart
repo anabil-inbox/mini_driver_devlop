@@ -141,6 +141,7 @@ class TaskResponse {
       this.lateFees,
       this.items,
       this.cancellationFees,
+      this.hasDeliveredScan,
       this.taskId,
       this.hasTimeRequest,
       this.timer,
@@ -163,6 +164,7 @@ class TaskResponse {
   String? signatureType;
   dynamic signatureFile;
   String? processType;
+
   String? driverToken;
   String? taskStatus;
   String? notificationId;
@@ -172,12 +174,17 @@ class TaskResponse {
   num? cancellationFees;
   bool? hasTimeRequest;
   num? timer;
+  bool? hasDeliveredScan;
+
   factory TaskResponse.fromJson(Map<String, dynamic> json,
       {required bool isFromNotification}) {
     if (isFromNotification) {
       return TaskResponse(
         salesOrder: json["sales_order"],
         isNew: json["is_new"] == "false" ? false : json["is_new"] == "true",
+        hasDeliveredScan: json["has_delivered_scan"] == "false"
+            ? false
+            : json["has_delivered_scan"] == "true",
         hasTimeRequest: json["has_time_request"] == "false"
             ? false
             : json["has_time_request"] == "true"
@@ -237,6 +244,9 @@ class TaskResponse {
       return TaskResponse(
         salesOrder: json["sales_order"],
         isNew: json["is_new"] == null ? null : json["is_new"],
+        hasDeliveredScan: json["has_delivered_scan"] == null
+            ? null
+            : json["has_delivered_scan"],
         hasTimeRequest:
             json["has_time_request"] == null ? null : json["has_time_request"],
         customerId: json["customer_id"],
@@ -297,7 +307,7 @@ class TaskResponse {
         "waiting_time": waitingTime ?? 0.0,
         "child_order": childOrder,
         "total": total,
-        "timer" : timer,
+        "timer": timer,
         "total_paid": totalPaid,
         "total_due": totalDue,
         "payment_method": paymentMethod,
