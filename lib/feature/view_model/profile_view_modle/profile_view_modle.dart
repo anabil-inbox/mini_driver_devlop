@@ -13,6 +13,7 @@ import 'package:inbox_driver/feature/view/screens/auth/signUp_signIn/log_in/log_
 import 'package:inbox_driver/feature/view/widgets/bottom_sheet_widget/logout_bottom_sheet.dart';
 import 'package:inbox_driver/feature/view/widgets/secondery_button.dart';
 import 'package:inbox_driver/feature/view_model/auht_view_modle/auth_view_modle.dart';
+import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
 import 'package:inbox_driver/network/api/feature/profie_helper.dart';
 import 'package:inbox_driver/network/utils/constance_netwoek.dart';
 import 'package:inbox_driver/util/app_color.dart';
@@ -66,7 +67,9 @@ class ProfileViewModle extends BaseController {
                 update(),
                 SharedPref.instance .setUserLoginState(ConstanceNetwork.userEnterd),
                 Get.offAll(() => const LoginScreen()),
-                Get.put(AuthViewModle())
+                Get.put(AuthViewModle()),
+                Get.find<HomeViewModel>().tasksDone.clear(),
+                Get.find<HomeViewModel>().tasksInProgress.clear(),
               }
             else
               {
@@ -74,7 +77,9 @@ class ProfileViewModle extends BaseController {
                 update(),
                 snackError(txtError!.tr, "${value.status!.message}"),
                 Get.offAll(() => const LoginScreen()),
-                Get.put(AuthViewModle())
+                Get.put(AuthViewModle()),
+                Get.find<HomeViewModel>().tasksDone.clear(),
+                Get.find<HomeViewModel>().tasksInProgress.clear(),
               }
           });
     } catch (e) {

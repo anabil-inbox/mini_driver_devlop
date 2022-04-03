@@ -191,12 +191,13 @@ class OrderDetailsStarted extends StatelessWidget {
                       taskId: salesOrder.taskId ?? "");
                   home.selectedSignatureItemModel = SignatureItemModel(
                       title: home.operationTask.signatureType);
-                  Get.to(() => InstantOrderScreen(
+               await Get.to(() => InstantOrderScreen(
                         isFromNotification: false,
                         taskStatusId: task.id ?? "",
                         isNewCustomer: true,
                         taskId: salesOrder.taskId ?? "",
                       ));
+
                 },
                 isExpanded: true);
           },

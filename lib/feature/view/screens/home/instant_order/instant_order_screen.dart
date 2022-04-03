@@ -25,17 +25,17 @@ import 'Widgets/customer_signature_instant_order.dart';
 import 'Widgets/scan_box_instant_order.dart';
 
 class InstantOrderScreen extends StatelessWidget {
-  const InstantOrderScreen(
-      {Key? key,
-      required this.isFromNotification,
-      this.isNewCustomer = false,
-      required this.taskId,
-      required this.taskStatusId})
+  const InstantOrderScreen({Key? key,
+    required this.isFromNotification,
+    this.isNewCustomer = false,
+    required this.taskId,
+    required this.taskStatusId})
       : super(key: key);
 
   static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
 
-  Widget get idVerification => Container(
+  Widget get idVerification =>
+      Container(
         height: sizeH50,
         padding: EdgeInsets.symmetric(horizontal: sizeW15!, vertical: sizeH13!),
         decoration: BoxDecoration(
@@ -46,24 +46,24 @@ class InstantOrderScreen extends StatelessWidget {
           builder: (home) {
             return (home.operationTask.isNew ?? false)
                 ? Row(
-                    children: [
-                      CustomTextView(
-                        txt: txtIDVerification.tr,
-                        textStyle:
-                            textStyleNormal()?.copyWith(color: colorBlack),
-                      ),
-                      const Spacer(),
-                      GestureDetector(
-                        onTap: () async {
-                          await homeViewModel.getImage(ImageSource.camera,
-                              customerId: home.operationTask.customerId,
-                              taskId: taskId);
-                        },
-                        child: SvgPicture.asset("assets/svgs/Scan.svg",
-                            color: colorRed, width: sizeW20, height: sizeH17),
-                      )
-                    ],
-                  )
+              children: [
+                CustomTextView(
+                  txt: txtIDVerification.tr,
+                  textStyle:
+                  textStyleNormal()?.copyWith(color: colorBlack),
+                ),
+                const Spacer(),
+                GestureDetector(
+                  onTap: () async {
+                    await homeViewModel.getImage(ImageSource.camera,
+                        customerId: home.operationTask.customerId,
+                        taskId: taskId);
+                  },
+                  child: SvgPicture.asset("assets/svgs/Scan.svg",
+                      color: colorRed, width: sizeW20, height: sizeH17),
+                )
+              ],
+            )
                 : const SizedBox();
           },
         ),
@@ -136,7 +136,7 @@ class InstantOrderScreen extends StatelessWidget {
     if (isFromNotification) {
       Get.offAll(() => HomeScreen());
     } else {
-      Get.back();
+      Get.close(2);
     }
 
     return false;
@@ -186,9 +186,10 @@ class InstantOrderScreen extends StatelessWidget {
                 SizedBox(height: sizeH10),
                 if (home.operationTask.processType != Constance.fetchId) ...[
                   const BoxNeedScannedItem(),
-                ] else ...[
-                  const FetchedItems(),
-                ],
+                ] else
+                  ...[
+                    const FetchedItems(),
+                  ],
                 //SizedBox(height: sizeH10),
                 if (!(home.operationTask.processType == Constance.fetchId ||
                     home.operationTask.processType ==
@@ -218,7 +219,8 @@ class InstantOrderScreen extends StatelessWidget {
                 //     home.operationTask.processType == Constance.destroyId)) ...[
                 if (home.operationTask.processType == Constance.recallId ||
                     (home.operationTask.processType == Constance.terminateId &&
-                    (homeViewModel.operationTask.hasDeliveredScan ?? false))) ...[
+                        (homeViewModel.operationTask.hasDeliveredScan ??
+                            false))) ...[
                   GetBuilder<HomeViewModel>(builder: (homeViewModel) {
                     return scanDelivedBoxes(homeViewModel: homeViewModel);
                   })
@@ -231,20 +233,24 @@ class InstantOrderScreen extends StatelessWidget {
                 SizedBox(height: sizeH10),
                 const Balance(),
                 SizedBox(height: sizeH10),
-                const CustomerSignatureInstantOrder(),
+                GetBuilder<HomeViewModel>(builder: (logic) {
+                  return CustomerSignatureInstantOrder(taskId: homeViewModel
+                      .operationTask.taskId.toString());
+                }),
                 SizedBox(height: sizeH20),
                 if (
                 /* homeViewModel.operationTask.waitingTime! > 0.1 && */
                 (homeViewModel.operationTask.hasTimeRequest ?? false)) ...[
                   GetBuilder<HomeViewModel>(
                     builder: (controller) =>
-                        const WattingTime(isFreeTime: false),
+                    const WattingTime(isFreeTime: false),
                   ),
                   SizedBox(height: sizeH20),
-                ] else ...[
-                  const WattingTime(isFreeTime: true),
-                  SizedBox(height: sizeH20),
-                ],
+                ] else
+                  ...[
+                    const WattingTime(isFreeTime: true),
+                    SizedBox(height: sizeH20),
+                  ],
 
                 GetBuilder<HomeViewModel>(
                   builder: (home) {
@@ -259,7 +265,7 @@ class InstantOrderScreen extends StatelessWidget {
                                   home.requestWaittingTime(
                                       taskId: taskId,
                                       salesOrder:
-                                          home.operationTask.salesOrder ?? "");
+                                      home.operationTask.salesOrder ?? "");
                                 },
                                 isExpanded: false),
                           ),

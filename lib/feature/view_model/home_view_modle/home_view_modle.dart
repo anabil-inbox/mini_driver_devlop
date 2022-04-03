@@ -5,6 +5,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart' as multipart;
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:inbox_driver/feature/model/app_setting_modle.dart';
@@ -808,12 +809,13 @@ class HomeViewModel extends GetxController {
             // Logger().e(operationTask),
             waiteTimeOperation =
                 Duration(minutes: operationTask.timer?.toInt() ?? 0),
+        endLoading()
           });
     } catch (e) {
       endLoading();
       Logger().e(e);
     }
-    endLoading();
+    // endLoading();
   }
 
   // to do here for signature code
@@ -834,10 +836,14 @@ class HomeViewModel extends GetxController {
             if (value.status!.success!)
               {
                 snackSuccess("$txtSuccess", "${value.status!.message}"),
+    Logger().d(value.toJson()),
+                operationTask = TaskResponse.fromJson(value.data, isFromNotification: false),
+                update(),
               }
             else
               {
                 snackError("$txtError", "${value.status!.message}"),
+                update(),
               }
           });
     } catch (e) {
@@ -858,6 +864,7 @@ class HomeViewModel extends GetxController {
                 waiteTimeOperation =
                     Duration(minutes: operationTask.waitingTime?.toInt() ?? 0),
                 snackSuccess("$txtSuccess", "${value.status!.message}"),
+                update(),
               }
             else
               {

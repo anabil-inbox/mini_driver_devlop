@@ -13,9 +13,12 @@ import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/string.dart';
 
-class CustomerSignatureInstantOrder extends StatelessWidget {
-  const CustomerSignatureInstantOrder({Key? key}) : super(key: key);
+import '../../../../../model/signature_item_model.dart';
 
+class CustomerSignatureInstantOrder extends StatelessWidget {
+  const CustomerSignatureInstantOrder({Key? key, this.taskId, }) : super(key: key);
+
+  final String? taskId;
   static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
 
   @override

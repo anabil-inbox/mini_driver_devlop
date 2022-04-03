@@ -26,7 +26,11 @@ class SignatureItem extends StatelessWidget {
     if (title == Constance.fingerprint) {
       return const SizedBox();
     }
-    if (title == homeViewModel.selectedSignatureItemModel.title &&
+    /*if (title == homeViewModel.selectedSignatureItemModel.title &&
+        homeViewModel.operationTask.signatureFile != null)*/
+    if ( title == homeViewModel.operationTask.signatureType &&
+        homeViewModel.operationTask.signatureType ==
+            homeViewModel.selectedSignatureItemModel.title &&
         homeViewModel.operationTask.signatureFile != null) {
       return imageNetwork(
         url: ConstanceNetwork.imageUrl +
