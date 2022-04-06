@@ -24,7 +24,7 @@ import 'package:get/get.dart';
 import 'Widgets/customer_signature_instant_order.dart';
 import 'Widgets/scan_box_instant_order.dart';
 
-class InstantOrderScreen extends StatelessWidget {
+class InstantOrderScreen extends StatefulWidget {
   const InstantOrderScreen({Key? key,
     required this.isFromNotification,
     this.isNewCustomer = false,
@@ -32,42 +32,7 @@ class InstantOrderScreen extends StatelessWidget {
     required this.taskStatusId})
       : super(key: key);
 
-  static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
 
-  Widget get idVerification =>
-      Container(
-        height: sizeH50,
-        padding: EdgeInsets.symmetric(horizontal: sizeW15!, vertical: sizeH13!),
-        decoration: BoxDecoration(
-          color: colorTextWhite,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: GetBuilder<HomeViewModel>(
-          builder: (home) {
-            return (home.operationTask.isNew ?? false)
-                ? Row(
-              children: [
-                CustomTextView(
-                  txt: txtIDVerification.tr,
-                  textStyle:
-                  textStyleNormal()?.copyWith(color: colorBlack),
-                ),
-                const Spacer(),
-                GestureDetector(
-                  onTap: () async {
-                    await homeViewModel.getImage(ImageSource.camera,
-                        customerId: home.operationTask.customerId,
-                        taskId: taskId);
-                  },
-                  child: SvgPicture.asset("assets/svgs/Scan.svg",
-                      color: colorRed, width: sizeW20, height: sizeH17),
-                )
-              ],
-            )
-                : const SizedBox();
-          },
-        ),
-      );
 
   final bool isNewCustomer;
 
@@ -123,6 +88,47 @@ class InstantOrderScreen extends StatelessWidget {
   final String taskStatusId;
   final bool isFromNotification;
 
+  @override
+  State<InstantOrderScreen> createState() => _InstantOrderScreenState();
+}
+
+class _InstantOrderScreenState extends State<InstantOrderScreen> {
+  static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
+  Widget get idVerification =>
+      Container(
+        height: sizeH50,
+        padding: EdgeInsets.symmetric(horizontal: sizeW15!, vertical: sizeH13!),
+        decoration: BoxDecoration(
+          color: colorTextWhite,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: GetBuilder<HomeViewModel>(
+          builder: (home) {
+            return (home.operationTask.isNew ?? false)
+                ? Row(
+              children: [
+                CustomTextView(
+                  txt: txtIDVerification.tr,
+                  textStyle:
+                  textStyleNormal()?.copyWith(color: colorBlack),
+                ),
+                const Spacer(),
+                GestureDetector(
+                  onTap: () async {
+                    await homeViewModel.getImage(ImageSource.camera,
+                        customerId: home.operationTask.customerId,
+                        taskId: widget.taskId);
+                  },
+                  child: SvgPicture.asset("assets/svgs/Scan.svg",
+                      color: colorRed, width: sizeW20, height: sizeH17),
+                )
+              ],
+            )
+                : const SizedBox();
+          },
+        ),
+      );
+
   Widget scanDelivedBoxes({required HomeViewModel homeViewModel}) {
     if (homeViewModel.operationTask.processType == Constance.newStorageSv ||
         homeViewModel.operationTask.processType == Constance.fetchId) {
@@ -146,11 +152,11 @@ class InstantOrderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     screenUtil(context);
     return WillPopScope(
-      onWillPop: () => onWillPop(isFromNotification: isFromNotification),
+      onWillPop: () => onWillPop(isFromNotification: widget.isFromNotification),
       child: Scaffold(
         appBar: CustomAppBarWidget(
           onBackBtnClick: () {
-            onWillPop(isFromNotification: isFromNotification);
+            onWillPop(isFromNotification: widget.isFromNotification);
           },
           titleWidget: CustomTextView(
             txt: txtInstantOrder.tr,
@@ -263,7 +269,7 @@ class InstantOrderScreen extends StatelessWidget {
                                 isLoading: home.isLoadingRequestTime,
                                 onClicked: () async {
                                   home.requestWaittingTime(
-                                      taskId: taskId,
+                                      taskId: widget.taskId,
                                       salesOrder:
                                       home.operationTask.salesOrder ?? "");
                                 },
@@ -277,13 +283,13 @@ class InstantOrderScreen extends StatelessWidget {
                               onClicked: () async {
                                 await home.updateTaskStatus(
                                     newStatus: Constance.done,
-                                    taskId: taskId,
-                                    taskStatusId: taskStatusId);
+                                    taskId: widget.taskId,
+                                    taskStatusId: widget.taskStatusId);
                                 await home.getSpecificTask(
-                                    taskId: taskStatusId,
+                                    taskId: widget.taskStatusId,
                                     taskSatus: Constance.inProgress);
                                 await home.getSpecificTask(
-                                    taskId: taskStatusId,
+                                    taskId: widget.taskStatusId,
                                     taskSatus: Constance.done);
                                 await home.getHomeTasks(
                                     taskType: Constance.done);
@@ -301,13 +307,13 @@ class InstantOrderScreen extends StatelessWidget {
                           onClicked: () async {
                             await home.updateTaskStatus(
                                 newStatus: Constance.done,
-                                taskId: taskId,
-                                taskStatusId: taskStatusId);
+                                taskId: widget.taskId,
+                                taskStatusId: widget.taskStatusId);
                             await home.getSpecificTask(
-                                taskId: taskStatusId,
+                                taskId: widget.taskStatusId,
                                 taskSatus: Constance.inProgress);
                             await home.getSpecificTask(
-                                taskId: taskStatusId,
+                                taskId: widget.taskStatusId,
                                 taskSatus: Constance.done);
                             await home.getHomeTasks(taskType: Constance.done);
                             await home.getHomeTasks(
