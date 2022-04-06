@@ -53,13 +53,12 @@ class ProfileViewModle extends BaseController {
   }
 
   List<Log> userLogs = [];
-  List<CashCloserData> listCashCloser =[];
+  List<CashCloserData> listCashCloser = [];
   num totalAmount = 0;
   num padAmount = 0;
   num remainingAmount = 0;
 
 //   //-- for log out
-
 
   logOutBottomSheet() {
     Get.bottomSheet(GlobalBottomSheet(
@@ -230,8 +229,9 @@ class ProfileViewModle extends BaseController {
       Logger().e(e.toString());
     }
     stopLoading();
+  }
 
-  Future<void> getCashCloser() async{
+  Future<void> getCashCloser() async {
     try {
       isLoading = true;
       update();
@@ -240,38 +240,15 @@ class ProfileViewModle extends BaseController {
       remainingAmount = 0;
       await CashCloserFeature.getInstance.getCashCloser().then((value) {
         Logger().d(value.length);
-            if(value.isNotEmpty){
-              listCashCloser.clear();
-              listCashCloser=value;
-              isLoading = false;
-              totalAmountCalc();
-              padAmountCalc();
-              remainingAmountCalc();
-              update();
-            }else {
-              isLoading = false;
-              update();
-            }
-          });
-    } catch (e) {
-      Logger().e(e);
-      isLoading = false;
-      update();
-    }
-
-  }
-
-  Future<void> applyCashCloser(var id ) async{
-    try {
-      isLoading = true;
-      update();
-      await CashCloserFeature.getInstance.applyCashCloser({ConstanceNetwork.idKey:id.toString()}).then((value) {
-        if(value.status!.success!){
-          getCashCloser();
-          Get.back();
+        if (value.isNotEmpty) {
+          listCashCloser.clear();
+          listCashCloser = value;
           isLoading = false;
+          totalAmountCalc();
+          padAmountCalc();
+          remainingAmountCalc();
           update();
-        }else {
+        } else {
           isLoading = false;
           update();
         }
@@ -281,19 +258,41 @@ class ProfileViewModle extends BaseController {
       isLoading = false;
       update();
     }
+  }
 
+  Future<void> applyCashCloser(var id) async {
+    try {
+      isLoading = true;
+      update();
+      await CashCloserFeature.getInstance.applyCashCloser(
+          {ConstanceNetwork.idKey: id.toString()}).then((value) {
+        if (value.status!.success!) {
+          getCashCloser();
+          Get.back();
+          isLoading = false;
+          update();
+        } else {
+          isLoading = false;
+          update();
+        }
+      });
+    } catch (e) {
+      Logger().e(e);
+      isLoading = false;
+      update();
+    }
   }
 
   void totalAmountCalc() {
-    for(var item in listCashCloser){
-        totalAmount = totalAmount + item.amount!;
+    for (var item in listCashCloser) {
+      totalAmount = totalAmount + item.amount!;
     }
     update();
   }
 
   void padAmountCalc() {
-    for(var item in listCashCloser){
-      if(item.status != 0) {
+    for (var item in listCashCloser) {
+      if (item.status != 0) {
         padAmount = padAmount + item.amount!;
       }
     }
@@ -301,8 +300,8 @@ class ProfileViewModle extends BaseController {
   }
 
   void remainingAmountCalc() {
-    for(var item in listCashCloser){
-      if(item.status == 0) {
+    for (var item in listCashCloser) {
+      if (item.status == 0) {
         remainingAmount = remainingAmount + item.amount!;
       }
     }
@@ -329,5 +328,4 @@ class ProfileViewModle extends BaseController {
 //     );
 //   }
 
-}
 }

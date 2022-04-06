@@ -76,15 +76,6 @@ Map<String, String> arSU = {
   txtTotalAmount: "المبلغ الاجمالي",
   txtPaidAmount: "المبلغ المدفوع",
   txtRemainingAmount: "المبلغ المتبقي",
-<<<<<<< HEAD
-  // txtVisitTasks : "زيارة المهام",
-  // txtOngoing : "جاري التنفيذ",
-  // txtYouHaveToSelectEmergencyCase : "اختيار حالة الطوارئ اجبارية",
-  // txtCashClosure : "الكاش المنتهي",
-  // txtTotalAmount : "المبلغ الكلي",
-  // txtPaidAmount : "المبلغ المدفوع",
-  // txtRemainingAmount : "المبلغ المتبقي",
-=======
   txtVisitTasks : "زيارة المهام",
   txtOngoing : "جاري التنفيذ",
   txtYouHaveToSelectEmergencyCase : "اختيار حالة الطوارئ اجبارية",
@@ -95,5 +86,4 @@ Map<String, String> arSU = {
   txtApplyCashCloser : "تطبيق الكاش المنتهي",
   txtNotPaid : "غير مدفوع",
   txtHandover : "سلم",
->>>>>>> 0ff7faf52ca3a3f463a890c1e17456f500a2a930
 };

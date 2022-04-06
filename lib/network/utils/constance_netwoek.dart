@@ -82,7 +82,6 @@ abstract class ConstanceNetwork {
 
   // to do here for User Uploads Certificates :
   static String uploadCustomerId = "inbox_app.driver.task_management.attach_id";
-<<<<<<< HEAD
   static String uploadCustomerSignatureEndPoint =
       "inbox_app.driver.task_management.upload_customer_singnature";
   static String notifyForSignEndpoint =
@@ -101,13 +100,12 @@ abstract class ConstanceNetwork {
       "inbox_app.driver.notification.get_notifications";
 
   static String getLogEndPoint = "inbox_app.driver.notification.get_logs";
-=======
-  static String uploadCustomerSignatureEndPoint = "inbox_app.driver.task_management.upload_customer_singnature";
-  static String notifyForSignEndpoint = "inbox_app.driver.task_management.notify_customer_sign_side"; 
-  static String createNewSealEndPoint = "inbox_app.driver.task_management.create_new_seal";
-  static String terminateEndPoint = "inbox_app.driver.task_management.terminate_box";
-  static String scheduleEndPoint = "inbox_app.driver.task_management.schedule_box";
-  static String createWaitingRequestEndPoint = "inbox_app.driver.task_management.create_waiting_request";
+  // static String uploadCustomerSignatureEndPoint = "inbox_app.driver.task_management.upload_customer_singnature";
+  // static String notifyForSignEndpoint = "inbox_app.driver.task_management.notify_customer_sign_side"; 
+  // static String createNewSealEndPoint = "inbox_app.driver.task_management.create_new_seal";
+  // static String terminateEndPoint = "inbox_app.driver.task_management.terminate_box";
+  // static String scheduleEndPoint = "inbox_app.driver.task_management.schedule_box";
+  // static String createWaitingRequestEndPoint = "inbox_app.driver.task_management.create_waiting_request";
 
 
   //this for cash closer
@@ -116,7 +114,6 @@ abstract class ConstanceNetwork {
 
 
 
->>>>>>> 0ff7faf52ca3a3f463a890c1e17456f500a2a930
 
   static Map<String, String> header(int typeToken) {
     Map<String, String> headers = {};
