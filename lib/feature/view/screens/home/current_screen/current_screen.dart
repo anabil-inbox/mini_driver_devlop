@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:inbox_driver/feature/view/screens/details/order_details_started_screen.dart';
-import 'package:inbox_driver/feature/view/screens/home/current_screen/Widgets/home_card.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 
-class CurrentScreen extends StatelessWidget {
+import 'Widgets/home_card.dart';
+
+class CurrentScreen extends StatefulWidget {
   const CurrentScreen({Key? key}) : super(key: key);
 
+  @override
+  State<CurrentScreen> createState() => _CurrentScreenState();
+}
+
+class _CurrentScreenState extends State<CurrentScreen> {
   @override
   Widget build(BuildContext context) {
     screenUtil(context);
@@ -25,10 +30,17 @@ class CurrentScreen extends StatelessWidget {
                         .asMap()
                         .map((i, element) => MapEntry(
                             i,
-                            HomeCard(
-                              index: i,
-                              task: element,
-                            )))
+                            (home.tdSearchHome.text.isEmpty ||
+                                    element.taskName!
+                                        .toLowerCase()
+                                        .contains(
+                                            home.tdSearchHome.text.toLowerCase()))
+                                ? HomeCard(
+                                    isFromCompleted: false,
+                                    index: i,
+                                    task: element,
+                                  )
+                                : const SizedBox()))
                         .values
                         .toList()));
           })

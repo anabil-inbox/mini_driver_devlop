@@ -27,17 +27,12 @@ class CompletedScreen extends StatelessWidget {
                         .map((i, element) => MapEntry(
                             i,
                             HomeCard(
+                              isFromCompleted: true,
                               index: i,
                               task: element,
                             )))
                         .values
                         .toList()),
-                // child: ListView.builder(
-                //     shrinkWrap: true,
-                //     itemCount: 2,
-                //     itemBuilder: (context, index) {
-                //       return HomeCard();
-                //     }),
               );
             },
           )

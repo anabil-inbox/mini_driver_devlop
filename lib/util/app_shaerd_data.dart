@@ -3,17 +3,18 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'dart:math' as Math;
+import 'dart:math' as math;
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:image/image.dart' as Img;
+import 'package:image/image.dart' as img;
 import 'package:inbox_driver/feature/core/dialog_loading.dart';
+import 'package:inbox_driver/feature/model/app_setting_modle.dart';
+import 'package:inbox_driver/feature/model/payment/payment.dart';
 import 'package:inbox_driver/feature/view/screens/auth/signUp_signIn/widget/language_item_widget.dart';
 import 'package:inbox_driver/feature/view/widgets/primary_button.dart';
 import 'package:inbox_driver/feature/view_model/auht_view_modle/auth_view_modle.dart';
@@ -37,12 +38,18 @@ String? urlPlacholder =
 String? urlUserPlacholder =
     "https://jenalk.ahdtech.com/dev/assets/img/no-user.png";
 
+String? urlPlaceholder =
+    "https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png";
+String? urlUserPlaceholder =
+    "https://jenalk.ahdtech.com/dev/assets/img/no-user.png";
+
 screenUtil(BuildContext context) {
   ScreenUtil.init(
       BoxConstraints(
           maxWidth: MediaQuery.of(context).size.width,
           maxHeight: MediaQuery.of(context).size.height),
       designSize: const Size(392.72727272727275, 803.6363636363636),
+      context: context,
       orientation: Orientation.portrait);
 }
 
@@ -53,6 +60,21 @@ var safeAreaLight =
   statusBarIconBrightness: Brightness.dark,
   systemNavigationBarIconBrightness: Brightness.dark,
 ));
+
+List<PaymentMethod> getPaymentMethod() {
+  List<PaymentMethod> list =
+      ApiSettings.fromJson(json.decode(SharedPref.instance.getAppSetting()))
+              .paymentMethod ??
+          [];
+
+  /// todo:// [wallet and back] => Application
+  /// List<PaymentMethod> list = [
+  ///   PaymentMethod(id: "Cash", name: "Cash"),
+  ///   PaymentMethod(id: "Application", name: "Application"),
+  ///   PaymentMethod(id: "Card", name: "Card"),
+  /// ];
+  return list;
+}
 
 var safeAreaDark =
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
@@ -98,7 +120,7 @@ emailValid(String val) {
 }
 
 phoneVaild(String value) {
-  if (value == null || value.isEmpty) {
+  if (value.isEmpty) {
     return txtErrorMobileNumber.tr;
   } else if (value.length > 10 || value.length < 8) {
     return txtErrorMobileNumber.tr;
@@ -142,18 +164,44 @@ openwhatsapp({required String phoneNumber}) async {
     if (await canLaunch(whatappIos)) {
       await launch(whatappIos, forceSafariVC: false);
     } else {
-      ScaffoldMessenger.of(Get.context!)
-          .showSnackBar(const SnackBar(content: Text("whatsapp no installed")));
+      ScaffoldMessenger.of(Get.context!).showSnackBar(
+          const SnackBar(content: Text("whatsapp is not installed")));
     }
   } else {
     // android , web
     if (await canLaunch(whatsappAndroid)) {
       await launch(whatsappAndroid);
     } else {
-      ScaffoldMessenger.of(Get.context!)
-          .showSnackBar(const SnackBar(content: Text("whatsapp no installed")));
+      ScaffoldMessenger.of(Get.context!).showSnackBar(
+          const SnackBar(content: Text("whatsapp is not installed")));
     }
   }
+}
+
+sendSmsOnMyWay({required String phoneNumber}) async {
+  String number = phoneNumber;
+  String sms = 'sms:$number?body=I\'m%20on%20my%20way';
+  launch(sms);
+}
+
+sendSmsArrivedHereOutside({required String phoneNumber}) async {
+  String number = phoneNumber;
+  String sms = 'sms:$number?body=I%20arrived%20here%20outside';
+  launch(sms);
+}
+
+sendSmsNoShow({required String phoneNumber}) async {
+  String number = phoneNumber;
+  String sms = 'sms:$number?body=I\'ll%20report%20"no show"%20within 5 mins';
+  launch(sms);
+}
+
+sendCustomizeSMS({required String phoneNumber}) async {
+  String number = phoneNumber;
+  String message = '';
+
+  String sms = 'sms:$number?body=$message';
+  launch(sms);
 }
 
 Future<void> startPhoneCall({required String phoneNumber}) async {
@@ -190,34 +238,56 @@ callNumber({required String phoneNumber}) async {
 //   }
 // }
 
-snackSuccess(String title, String body) {
-  Future.delayed(Duration(seconds: 0)).then((value) {
-    Get.snackbar(title, body,
-        colorText: Colors.white,
-        margin: EdgeInsets.all(8),
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Color(0xFF10C995));
-  });
+// snackSuccess(String title, String body) {
+//   Future.delayed(const Duration(seconds: 0)).then((value) {
+//     Get.snackbar(title, body,
+//         colorText: Colors.white,
+//         margin: const EdgeInsets.all(8),
+//         snackPosition: SnackPosition.BOTTOM,
+//         backgroundColor: const Color(0xFF10C995));
+//   });
+// }
+
+// snackError(String title, String body) {
+//   Future.delayed(const Duration(seconds: 0)).then((value) {
+//     Get.snackbar(title, body,
+//         colorText: Colors.white,
+//         margin: const EdgeInsets.all(8),
+//         snackPosition: SnackPosition.BOTTOM,
+//         backgroundColor: const Color(0xFFF2AE56).withAlpha(150));
+//   });
+// }
+
+snackSuccess(String? title, String? body) {
+  mainSnack(body: body ?? "", backgroundColor: successColor);
 }
 
-snackError(String title, String body) {
-  Future.delayed(Duration(seconds: 0)).then((value) {
-    Get.snackbar(title, body,
-        colorText: Colors.white,
-        margin: EdgeInsets.all(8),
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Color(0xFFF2AE56).withAlpha(150));
+snackError(String? title, String? body) {
+  mainSnack(body: body ?? "", backgroundColor: errorColor);
+}
+
+mainSnack({String? title, required String body, Color? backgroundColor}) {
+  Future.delayed(const Duration(seconds: 0)).then((value) {
+    Get.showSnackbar(
+      GetSnackBar(
+        backgroundColor: backgroundColor ?? const Color(0xFF303030),
+        message: body,
+        duration: const Duration(seconds: 2),
+        borderRadius: 10,
+        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      ),
+    );
   });
 }
 
 snackConnection() {
-  Future.delayed(Duration(seconds: 0)).then((value) {
+  Future.delayed(const Duration(seconds: 0)).then((value) {
     Get.snackbar("$txtConnection", "$txtConnectionNote",
         colorText: Colors.white,
-        duration: Duration(seconds: 7),
-        margin: EdgeInsets.all(8),
+        duration: const Duration(seconds: 7),
+        margin: const EdgeInsets.all(8),
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Color(0xFF000000).withAlpha(150));
+        backgroundColor: const Color(0xFF000000).withAlpha(150));
   });
 }
 
@@ -226,7 +296,7 @@ showAnimatedDialog(dialog) {
     barrierLabel: "Label",
     barrierDismissible: true,
     barrierColor: Colors.black.withOpacity(0.5),
-    transitionDuration: Duration(milliseconds: 700),
+    transitionDuration: const Duration(milliseconds: 700),
     context: Get.context!,
     pageBuilder: (context, anim1, anim2) {
       return Align(
@@ -236,47 +306,55 @@ showAnimatedDialog(dialog) {
     },
     transitionBuilder: (context, anim1, anim2, child) {
       return SlideTransition(
-        position: Tween(begin: Offset(0, 1), end: Offset(0, 0)).animate(anim1),
+        position: Tween(begin: const Offset(0, 1), end: const Offset(0, 0))
+            .animate(anim1),
         child: child,
       );
     },
   );
 }
 
+var paymentError = "https://cdn-icons-png.flaticon.com/512/189/189715.png";
 var urlProduct =
     "https://images.unsplash.com/photo-1613177794106-be20802b11d3?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2xvY2slMjBoYW5kc3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80";
-Widget imageNetwork({double? width, double? height, String? url}) {
+Widget imageNetwork(
+    {double? width,
+    double? height,
+    String? url,
+    BoxFit? fit,
+    bool isPayment = false}) {
   return CachedNetworkImage(
     imageBuilder: (context, imageProvider) {
       return Container(
         decoration: BoxDecoration(
-          // border: Border.all(color: colorBorderLight),
           image: DecorationImage(
-            image: CachedNetworkImageProvider(url ?? urlUserPlacholder!),
-            fit: BoxFit.contain,
+            image: CachedNetworkImageProvider(
+                url ?? (isPayment ? paymentError : urlPlaceholder!)),
+            fit: fit ?? BoxFit.contain,
           ),
         ),
       );
     },
-    imageUrl: urlUserPlacholder!,
+    imageUrl: isPayment ? paymentError : urlPlaceholder!,
     errorWidget: (context, url, error) {
       return CachedNetworkImage(
-          imageUrl: urlUserPlacholder!, fit: BoxFit.contain);
+          imageUrl: isPayment ? paymentError : urlPlaceholder!,
+          fit: BoxFit.contain);
     },
     width: width ?? 74,
     height: height ?? 74,
     fit: BoxFit.cover,
     placeholder: (context, String? url) {
       return Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
                 "assets/gif/loading_shimmer.gif") /* CachedNetworkImageProvider(url ?? urlUserPlacholder!)*/,
             fit: BoxFit.cover,
           ),
         ),
-        child: Center(
-          child: Container(
+        child: const Center(
+          child: SizedBox(
               width: 20,
               height: 20,
               child: CircularProgressIndicator(
@@ -287,7 +365,6 @@ Widget imageNetwork({double? width, double? height, String? url}) {
     },
   );
 }
-
 // Future<void> askOnWhatsApp(String? phoneNumber) async {
 //   final u =
 //       "https://api.whatsapp.com/send?phone=+972${phoneNumber.toString().replaceFirst(RegExp(r'^0+'), "")}&text=";
@@ -376,20 +453,10 @@ hideFocus(context) {
   }
 }
 
-showProgress() async {
-  await SharedPref.instance.isShowProgress(true);
-  Future.delayed(Duration(seconds: 0)).then((value) {
-    showDialog(
-      context: Get.context!,
-      builder: (context) => DialogLoading(),
-    );
-  });
-}
-
 mainShowProgress() {
   showDialog(
     context: Get.context!,
-    builder: (context) => DialogLoading(),
+    builder: (context) => const DialogLoading(),
   );
 }
 
@@ -406,7 +473,6 @@ mainHideProgress() {
 //todo this is second
 Future<String>? convertToBase64(File file) async {
   List<int> imageBytes = file.readAsBytesSync();
-  print(imageBytes);
   String base64Image = base64Encode(imageBytes);
   return base64Image;
 }
@@ -415,15 +481,15 @@ Future<String>? convertToBase64(File file) async {
 Future<File>? compressImage(File file) async {
   final tempDir = await getTemporaryDirectory();
   final path = tempDir.path;
-  int rand = new Math.Random().nextInt(10000);
+  int rand = math.Random().nextInt(10000);
 
-  Img.Image? images = Img.decodeImage(file.readAsBytesSync());
-  Img.Image? smallerImage = Img.copyResize(images!,
+  img.Image? images = img.decodeImage(file.readAsBytesSync());
+  img.Image? smallerImage = img.copyResize(images!,
       width: 500,
       height: 500); // choose the size here, it will maintain aspect ratio
 
   var compressedImage = File('$path/img_$rand.jpg')
-    ..writeAsBytesSync(Img.encodeJpg(/*image*/ smallerImage, quality: 85));
+    ..writeAsBytesSync(img.encodeJpg(/*image*/ smallerImage, quality: 85));
   return compressedImage;
 }
 
@@ -455,14 +521,14 @@ updateLanguage(Locale locale) {
 }
 
 void changeLanguageBottomSheet() {
+  screenUtil(Get.context!);
   Get.bottomSheet(Container(
-    height: sizeH350,
+    // height: sizeH350,
     decoration: BoxDecoration(
         color: colorTextWhite,
         borderRadius: const BorderRadius.vertical(top: Radius.circular(20))),
     padding: EdgeInsets.symmetric(horizontal: sizeH20!),
     child: GetBuilder<AuthViewModle>(
-      init: AuthViewModle(),
       builder: (controller) {
         return Column(
           mainAxisSize: MainAxisSize.min,
@@ -536,6 +602,7 @@ void changeLanguageBottomSheet() {
 }
 
 class CustomMaterialPageRoute extends MaterialPageRoute {
+  @override
   @protected
   bool get hasScopedWillPopCallback {
     return false;
@@ -554,7 +621,25 @@ class CustomMaterialPageRoute extends MaterialPageRoute {
         );
 }
 
+String getPriceWithFormate({required num price}) {
+  final numberFormatter = NumberFormat("##0.00#", "en_US");
+  const num initNumber = 0.00;
+  return numberFormatter.format(initNumber + price) + " ${Constance.qrCoin}";
+}
+
+String formatStringWithCurrency(var data, String currency) {
+  try {
+    var number = data.toString().replaceAll("\$", "").replaceAll(",", "");
+    number =
+        "${currency.isEmpty ? "QR" : currency} ${NumberFormat("#0.00", "en_US").format(double.parse(number))}";
+    //var numbers = "${currency}${double.parse(number).toStringAsFixed(2)}";
+    return number.toString();
+  } catch (e) {
+    return "0.00";
+  }
+}
+
 bool isArabicLang() {
-  return (SharedPref.instance.getAppLanguageMain() == "ar" ? true : false);
+  return (SharedPref.instance.getLocalization() == "Arabic" ? true : false);
   // return isRTL;
 }

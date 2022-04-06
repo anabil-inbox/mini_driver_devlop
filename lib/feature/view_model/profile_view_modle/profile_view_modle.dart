@@ -9,10 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:inbox_driver/feature/model/country.dart';
+import 'package:inbox_driver/feature/model/profile/log_model.dart';
 import 'package:inbox_driver/feature/view/screens/auth/signUp_signIn/log_in/log_in_screen.dart';
 import 'package:inbox_driver/feature/view/widgets/bottom_sheet_widget/logout_bottom_sheet.dart';
 import 'package:inbox_driver/feature/view/widgets/secondery_button.dart';
 import 'package:inbox_driver/feature/view_model/auht_view_modle/auth_view_modle.dart';
+import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
+import 'package:inbox_driver/network/api/feature/home_helper.dart';
+import 'package:inbox_driver/network/api/feature/cash_helper.dart';
 import 'package:inbox_driver/network/api/feature/profie_helper.dart';
 import 'package:inbox_driver/network/utils/constance_netwoek.dart';
 import 'package:inbox_driver/util/app_color.dart';
@@ -23,6 +27,8 @@ import 'package:inbox_driver/util/base_controller.dart';
 import 'package:inbox_driver/util/sh_util.dart';
 import 'package:inbox_driver/util/string.dart';
 import 'package:logger/logger.dart';
+
+import '../../model/profile/cash_closer_data.dart';
 
 class ProfileViewModle extends BaseController {
   TextEditingController tdUserFullNameEdit = TextEditingController();
@@ -35,6 +41,22 @@ class ProfileViewModle extends BaseController {
   List<Map<String, dynamic>> contactMap = [];
 
   bool isLoading = false;
+
+  startLoading() {
+    isLoading = true;
+    update();
+  }
+
+  stopLoading() {
+    isLoading = false;
+    update();
+  }
+
+  List<Log> userLogs = [];
+  List<CashCloserData> listCashCloser = [];
+  num totalAmount = 0;
+  num padAmount = 0;
+  num remainingAmount = 0;
 
 //   //-- for log out
 
@@ -59,14 +81,17 @@ class ProfileViewModle extends BaseController {
             Logger().i("${value.status!.message}"),
             if (value.status!.success!)
               {
-                snackSuccess(txtSuccess!.tr, "${value.status!.message}"),
+                // snackSuccess(txtSuccess!.tr, "${value.status!.message}"),
+
                 isLoading = false,
                 Get.put(AuthViewModle()),
                 update(),
                 SharedPref.instance
                     .setUserLoginState(ConstanceNetwork.userEnterd),
                 Get.offAll(() => const LoginScreen()),
-                Get.put(AuthViewModle())
+                Get.put(AuthViewModle()),
+                Get.find<HomeViewModel>().tasksDone.clear(),
+                Get.find<HomeViewModel>().tasksInProgress.clear(),
               }
             else
               {
@@ -74,10 +99,14 @@ class ProfileViewModle extends BaseController {
                 update(),
                 snackError(txtError!.tr, "${value.status!.message}"),
                 Get.offAll(() => const LoginScreen()),
-                Get.put(AuthViewModle())
+                Get.put(AuthViewModle()),
+                Get.find<HomeViewModel>().tasksDone.clear(),
+                Get.find<HomeViewModel>().tasksInProgress.clear(),
               }
           });
-    } catch (e) {}
+    } catch (e) {
+      printError();
+    }
   }
 
 //   //-- for user Edit profile:
@@ -87,17 +116,18 @@ class ProfileViewModle extends BaseController {
     update();
     File? myImg;
     hideFocus(Get.context!);
-    Map<String, dynamic> myMap = Map<String, dynamic>();
+    Map<String, dynamic> myMap = {};
     if (img != null) {
       myImg = await compressImage(img!);
     }
 
     myMap = {
       "full_name": tdUserFullNameEdit.text,
-      "image": myImg != null ? multipart.MultipartFile.fromFileSync(myImg.path) : "",
+      "image":
+          myImg != null ? multipart.MultipartFile.fromFileSync(myImg.path) : "",
       "contact_number": jsonEncode(contactMap),
-      "email" : tdUserEmailEdit.text,
-      "udid" : udid
+      "email": tdUserEmailEdit.text,
+      "udid": udid
     };
 
     try {
@@ -116,12 +146,13 @@ class ProfileViewModle extends BaseController {
                 snackError(txtError!.tr, "${value.status!.message}")
               }
           });
-    } catch (e) {}
+    } catch (e) {
+      printError();
+    }
   }
 
   void getImageBottomSheet() {
-    Get.bottomSheet(
-      Container(
+    Get.bottomSheet(Container(
       height: sizeH240,
       padding: EdgeInsets.symmetric(horizontal: padding20!),
       decoration: BoxDecoration(
@@ -185,6 +216,96 @@ class ProfileViewModle extends BaseController {
       img = File(pickedImage.path);
       update();
     }
+  }
+
+  Future<void> getUserLog() async {
+    startLoading();
+    try {
+      await HomeHelper.getInstance.getLog().then((value) => {
+            userLogs = value,
+            Logger().e(value),
+          });
+    } catch (e) {
+      Logger().e(e.toString());
+    }
+    stopLoading();
+  }
+
+  Future<void> getCashCloser() async {
+    try {
+      isLoading = true;
+      update();
+      totalAmount = 0;
+      padAmount = 0;
+      remainingAmount = 0;
+      await CashCloserFeature.getInstance.getCashCloser().then((value) {
+        Logger().d(value.length);
+        if (value.isNotEmpty) {
+          listCashCloser.clear();
+          listCashCloser = value;
+          isLoading = false;
+          totalAmountCalc();
+          padAmountCalc();
+          remainingAmountCalc();
+          update();
+        } else {
+          isLoading = false;
+          update();
+        }
+      });
+    } catch (e) {
+      Logger().e(e);
+      isLoading = false;
+      update();
+    }
+  }
+
+  Future<void> applyCashCloser(var id) async {
+    try {
+      isLoading = true;
+      update();
+      await CashCloserFeature.getInstance.applyCashCloser(
+          {ConstanceNetwork.idKey: id.toString()}).then((value) {
+        if (value.status!.success!) {
+          getCashCloser();
+          Get.back();
+          isLoading = false;
+          update();
+        } else {
+          isLoading = false;
+          update();
+        }
+      });
+    } catch (e) {
+      Logger().e(e);
+      isLoading = false;
+      update();
+    }
+  }
+
+  void totalAmountCalc() {
+    for (var item in listCashCloser) {
+      totalAmount = totalAmount + item.amount!;
+    }
+    update();
+  }
+
+  void padAmountCalc() {
+    for (var item in listCashCloser) {
+      if (item.status != 0) {
+        padAmount = padAmount + item.amount!;
+      }
+    }
+    update();
+  }
+
+  void remainingAmountCalc() {
+    for (var item in listCashCloser) {
+      if (item.status == 0) {
+        remainingAmount = remainingAmount + item.amount!;
+      }
+    }
+    update();
   }
 
 //   // fot timer on change number :

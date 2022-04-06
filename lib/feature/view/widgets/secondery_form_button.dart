@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:inbox_driver/feature/view/widgets/three_size_dot.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_style.dart';
+
+import '../../../util/app_shaerd_data.dart';
 
 
 class SeconderyFormButton extends StatelessWidget {
@@ -9,10 +12,12 @@ class SeconderyFormButton extends StatelessWidget {
 
   final Color? color;
 
-  const SeconderyFormButton({ Key? key , required this.buttonText, required this.onClicked,this.color}) : super(key: key);
+  const SeconderyFormButton({ Key? key , required this.buttonText, required this.onClicked,this.color,this.isLoading = false}) : super(key: key);
   final String buttonText;
+  final  bool? isLoading;
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return Container(
       width: double.infinity,
       height: sizeH50,
@@ -22,7 +27,7 @@ class SeconderyFormButton extends StatelessWidget {
       ),
       child: MaterialButton(
         color: color??seconderyButton,
-        onPressed:  (){
+        onPressed: isLoading! ? null: (){
           onClicked();
           // if (buttonText.toLowerCase()==("${tr.login_as_company.toString().toLowerCase()}")) {
           //    Get.off(() => CompanyBothLoginScreen());
@@ -34,7 +39,7 @@ class SeconderyFormButton extends StatelessWidget {
           //    Get.off(() => RegisterCompanyScreen());
           //  }
         },
-        child: Text("$buttonText" , style: textStyleHint()!.copyWith(color: colorHint , fontWeight: FontWeight.bold,fontSize: 15),),
+        child:isLoading!?ThreeSizeDot(color_1: colorBlack,color_2: colorBlack,color_3: colorBlack,) : Text(buttonText , style: textStyleHint()!.copyWith(color: colorHint , fontWeight: FontWeight.bold,fontSize: 15),),
       ),
     );
   }

@@ -45,6 +45,7 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return Scaffold(
       backgroundColor: colorScaffoldRegistrationBody,
       appBar: AppBar(
@@ -59,7 +60,10 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
             Navigator.pop(Get.context!);
           },
           icon: isArabicLang()
-              ? SvgPicture.asset("assets/svgs/back_arrow_ar.svg")
+              ? Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SvgPicture.asset("assets/svgs/back_arrow_ar.svg"),
+              )
               : SvgPicture.asset("assets/svgs/back_arrow.svg"),
         ),
         centerTitle: true,

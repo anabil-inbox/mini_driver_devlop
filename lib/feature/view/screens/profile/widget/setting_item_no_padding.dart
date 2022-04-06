@@ -3,6 +3,8 @@ import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_style.dart';
 
+import '../../../../../util/app_shaerd_data.dart';
+
 class SettingItemNoPadding extends StatelessWidget {
   const SettingItemNoPadding({Key? key ,required this.settingTitle, required this.onTap}) : super(key: key);
 
@@ -11,6 +13,7 @@ class SettingItemNoPadding extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return Container(
       margin: EdgeInsets.symmetric(horizontal: sizeH20!),
       clipBehavior: Clip.hardEdge,

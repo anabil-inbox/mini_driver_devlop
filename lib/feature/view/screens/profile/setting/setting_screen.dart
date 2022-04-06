@@ -16,6 +16,7 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return Scaffold(
       backgroundColor: scaffoldColor,
       appBar: AppBar(
@@ -29,7 +30,12 @@ class SettingsScreen extends StatelessWidget {
           onPressed: () {
             Navigator.pop(Get.context!);
           },
-          icon: isArabicLang()?SvgPicture.asset("assets/svgs/back_arrow_ar.svg"):SvgPicture.asset("assets/svgs/back_arrow.svg"),
+          icon: isArabicLang()
+              ? Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SvgPicture.asset("assets/svgs/back_arrow_ar.svg"),
+              )
+              : SvgPicture.asset("assets/svgs/back_arrow.svg"),
         ),
         centerTitle: true,
         backgroundColor: colorBackground,

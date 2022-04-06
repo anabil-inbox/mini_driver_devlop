@@ -7,17 +7,6 @@ import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 
 class DateUtility {
-  // static String getPostTime2(String date) {
-  //   initializeDateFormatting(isArabicLang() ? 'ar' : 'en');
-  //   if (date.isEmpty) {
-  //     return '';
-  //   }
-  //   var dt = DateTime.parse(date).toLocal();
-  //   var dat = DateFormat.jm().format(dt) +
-  //       ' - ' +
-  //       DateFormat("dd MMM yy", (isArabicLang() ? "ar" : "en")).format(dt);
-  //   return dat;
-  // }
 
   static String getdob(String date) {
     if (date.isEmpty) {
@@ -118,7 +107,6 @@ class DateUtility {
       String createdDate = dateFormat.format(DateTime.parse(localDate));
       return createdDate;
     } catch (e) {
-      print(e);
       return "";
     }
   }
@@ -141,26 +129,21 @@ class DateUtility {
       Logger().d("i parssed it $dateTimeSt");
       var dateFormat =
           DateFormat("yyyy-MM-dd hh:mm a"); // you can change the format here
-      if (format)
-        dateFormat =
-            DateFormat("EEE,MMM dd hh:mm aa", (isArabicLang() ? "ar" : "en"));
+      if (format) {
+        dateFormat = DateFormat("EEE,MMM dd hh:mm aa", (isArabicLang() ? "ar" : "en"));
+      }
       DateTime dateTime = dateFormat.parse(dateTimeSt);
-      print(dateTime);
       return dateTime;
     } catch (e) {
-      print(e);
       try {
         var dateFormat = DateFormat("EEE,MMM dd hh:mm aa",
             (isArabicLang() ? "ar" : "en")); // you can change the format here
         DateTime dateTime = dateFormat.parse(dateTimeSt);
-        print(dateTime);
         return dateTime;
       } catch (e) {
-        print(e);
         var dateFormat =
             DateFormat("yyyy-MM-dd hh:mm a"); // you can change the format here
         DateTime dateTime = dateFormat.parse(dateTimeSt);
-        print(dateTime);
         return dateTime;
       }
     }
@@ -188,17 +171,11 @@ class DateUtility {
       DateTime dateUtc =
           DateTime.parse(dateFormat1.format(dateFormat.parse(localTime, true)))
               .toUtc();
-      print('utc to localTime : $localTime');
-      print("dateUtc1: $dateUtc");
-
       var createdDate = dateFormat1.format(dateUtc);
-      print('utc convert : $createdDate');
       var createdDate1 = (DateTime.parse(createdDate));
-      print('utc convert2 : $createdDate1');
 
       return createdDate1;
     } catch (e) {
-      print(e);
       Logger().d(e);
       return DateTime.now();
     }
@@ -215,7 +192,6 @@ class DateUtility {
       String createdDate2 = dateFormat2.format(dateNew);
       return createdDate2;
     } catch (e) {
-      print(e);
       Logger().d(e);
       return "";
     }
@@ -229,7 +205,6 @@ class DateUtility {
       dateNew = dateNew.toLocal();
       return dateNew;
     } catch (e) {
-      print(e);
       Logger().d(e);
       return utcDateTime;
     }
@@ -259,7 +234,6 @@ class DateUtility {
       String createdDate2 = dateFormat2.format(dateNew);
       return createdDate2;
     } catch (e) {
-      print(e);
       Logger().d(e);
       return "";
     }
@@ -277,7 +251,6 @@ class DateUtility {
       String createdDate2 = dateFormat2.format(dateNew);
       return createdDate2;
     } catch (e) {
-      print(e);
       Logger().d(e);
       return "";
     }
@@ -295,7 +268,6 @@ class DateUtility {
       String createdDate2 = dateFormat2.format(dateNew);
       return createdDate2;
     } catch (e) {
-      print(e);
       Logger().d(e);
       return "";
     }
@@ -348,7 +320,6 @@ class DateUtility {
       }
       return time;
     } catch (e) {
-      print(e);
       Logger().d(e);
       return "";
     }
@@ -362,7 +333,6 @@ class DateUtility {
 
       return amPm;
     } catch (e) {
-      print(e);
       Logger().d(e);
       return "";
     }
@@ -377,7 +347,6 @@ class DateUtility {
 
       return amPm;
     } catch (e) {
-      print(e);
       Logger().d(e);
       return "";
     }
@@ -392,10 +361,10 @@ class DateUtility {
   static String currencySymbol() {
     Locale locale = Localizations.localeOf(Get.context!);
     var format = NumberFormat.simpleCurrency(locale: locale.toString());
-    return '${format.currencySymbol}';
+    return format.currencySymbol;
   }
 
-  static RegExp _timePattern =
+  static final RegExp _timePattern =
       RegExp(r'(?<hour>\d+):(?<minute>\d+) (?<amPm>AM|PM)');
 
 // timeString must be of the format "3:52:59 PM"
@@ -412,7 +381,6 @@ class DateUtility {
               now.year, now.month, now.day, isPm ? hour + 12 : hour, minute, 0)
           .toUtc();
     } catch (e) {
-      print(e);
       Logger().d(e);
       return DateTime.now().toUtc();
     }
@@ -429,7 +397,6 @@ class DateUtility {
       // return one.isBefore(two.subtract(Duration(days: 1)));
       return (one.hour < two.hour && one.minute <= two.minute);
     } catch (e) {
-      print(e);
       Logger().d(e);
       return "";
     }
@@ -453,8 +420,17 @@ class DateUtility {
       return DateFormat("yyyy-MM-dd hh:mm a", (isArabicLang() ? "ar" : "en"))
           .format(dateTime);
     } catch (e) {
-      print(e);
       return DateTime.now();
     }
   }
+
+
+  static dateFormatNamed({String? txtDate, DateTime? date}){
+  initializeDateFormatting(isArabicLang() ? 'ar' : 'en');
+  if(!GetUtils.isNull(date)) {
+    return DateFormat('MMMM d, y', (isArabicLang() ? "ar" : "en")).format(date!);
+  } else {
+    return DateFormat('MMMM d, y', (isArabicLang() ? "ar" : "en")).format(DateTime.parse(txtDate!));
+  }
+}
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_if_null_operators
+
 import 'country.dart';
 
 class Driver {
@@ -48,18 +50,18 @@ class Driver {
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "driver_name": driverName,
-        "mobile_number": mobileNumber,
-        "country_code": countryCode,
-        "image": image,
-        "udid": udId,
-        "fcm": fcm,
-        "email": email,
-        "contact_number": contactNumber == null
+        "id":id == null ? null: id,
+        "driver_name":driverName == null ? null: driverName,
+        "mobile_number":mobileNumber == null ? null: mobileNumber,
+        "country_code":countryCode == null ? null: countryCode,
+        "image":image == null ? null: image,
+        "udid":udId == null ? null: udId,
+        "fcm":fcm == null ? null: fcm,
+        "email": email == null ? null:email,
+        "contact_number":contactNumber == null ? null: contactNumber == null
             ? null
             : List<Map<String, dynamic>>.from(contactNumber!.map((x) => x)),
-        "country": country == null
+        "country":contactNumber == null ? null: country == null
             ? null
             : List<dynamic>.from(country!.map((x) => x.toJson())),
       };

@@ -29,7 +29,7 @@ final double? leadingWidth;
       title: titleWidget??const SizedBox.shrink(),
       actions: actionsWidgets??[],
       backgroundColor: appBarColor??colorTextWhite,
-      brightness: brightness??Brightness.light,
+      //brightness: brightness??Brightness.light,
       elevation: elevation??1,
       leading: leadingWidget??BackBtnWidget(onTap: onBackBtnClick??_getBack,),
     );

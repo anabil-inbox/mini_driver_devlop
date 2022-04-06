@@ -13,6 +13,8 @@ import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/sh_util.dart';
 import 'package:inbox_driver/util/string.dart';
 
+import '../../../../../../util/app_shaerd_data.dart';
+
 class ChangeMobileScreen extends StatelessWidget {
   ChangeMobileScreen({Key? key, required this.mobileNumber}) : super(key: key);
 
@@ -21,6 +23,7 @@ class ChangeMobileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return Scaffold(
       backgroundColor: colorScaffoldRegistrationBody,
       body: GetBuilder<AuthViewModle>(

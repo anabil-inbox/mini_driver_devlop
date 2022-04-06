@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
@@ -7,11 +9,16 @@ import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/string.dart';
 
+import '../../../../../util/app_shaerd_data.dart';
+
 class ScheduleBox extends StatelessWidget {
-  const ScheduleBox({Key? key}) : super(key: key);
+  const ScheduleBox({Key? key ,required this.dateTime }) : super(key: key);
+
+  final String dateTime;
 
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return Container(
       padding: EdgeInsets.symmetric(horizontal: padding20!),
       decoration: BoxDecoration(
@@ -29,7 +36,7 @@ class ScheduleBox extends StatelessWidget {
             textStyle:textStyleNormal()?.copyWith(color: colorBlack),
           ),
           CustomTextView(
-            txt: txtTime.tr,
+            txt: /* DateUtility.getChatTime(dateTime) */ dateTime.split(" ")[0],
             maxLine: Constance.maxLineOne,
             textStyle:textStyleNormal(),
           ),

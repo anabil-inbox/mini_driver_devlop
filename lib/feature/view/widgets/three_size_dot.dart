@@ -6,11 +6,13 @@ import 'dart:math' as math show sin, pi;
 
 import 'package:flutter/material.dart';
 
+import '../../../util/app_shaerd_data.dart';
+
 /// following code is a customized widget -- ThreeSizeDot
 /// -- for a demonstration of how it looks in [ProgressButton]
 
 class ThreeSizeDot extends StatefulWidget {
-  ThreeSizeDot(
+  const ThreeSizeDot(
       {Key? key,
         this.shape = BoxShape.circle,
         this.duration = const Duration(milliseconds: 1000),
@@ -62,48 +64,47 @@ class _ThreeSizeDotState extends State<ThreeSizeDot>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          ScaleTransition(
-            scale: animation_1!,
-            child: Padding(
-              padding: widget.padding,
-              child: Dot(
-                shape: widget.shape,
-                size: widget.size,
-                color:
-                widget.color_1 ?? Theme.of(context).colorScheme.onPrimary,
-              ),
+    screenUtil(context);
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        ScaleTransition(
+          scale: animation_1!,
+          child: Padding(
+            padding: widget.padding,
+            child: Dot(
+              shape: widget.shape,
+              size: widget.size,
+              color:
+              widget.color_1 ?? Theme.of(context).colorScheme.onPrimary,
             ),
           ),
-          ScaleTransition(
-            scale: animation_2!,
-            child: Padding(
-              padding: widget.padding,
-              child: Dot(
-                shape: widget.shape,
-                size: widget.size,
-                color:
-                widget.color_2 ?? Theme.of(context).colorScheme.onPrimary,
-              ),
+        ),
+        ScaleTransition(
+          scale: animation_2!,
+          child: Padding(
+            padding: widget.padding,
+            child: Dot(
+              shape: widget.shape,
+              size: widget.size,
+              color:
+              widget.color_2 ?? Theme.of(context).colorScheme.onPrimary,
             ),
           ),
-          ScaleTransition(
-            scale: animation_3!,
-            child: Padding(
-              padding: widget.padding,
-              child: Dot(
-                shape: widget.shape,
-                size: widget.size,
-                color:
-                widget.color_3 ?? Theme.of(context).colorScheme.onPrimary,
-              ),
+        ),
+        ScaleTransition(
+          scale: animation_3!,
+          child: Padding(
+            padding: widget.padding,
+            child: Dot(
+              shape: widget.shape,
+              size: widget.size,
+              color:
+              widget.color_3 ?? Theme.of(context).colorScheme.onPrimary,
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -113,7 +114,7 @@ class Dot extends StatelessWidget {
   final double? size;
   final Color? color;
 
-  Dot({
+  const Dot({
     Key? key,
     this.shape,
     this.size,
@@ -122,6 +123,7 @@ class Dot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return Center(
       child: Container(
         width: size,

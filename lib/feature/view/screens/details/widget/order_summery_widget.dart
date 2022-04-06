@@ -9,11 +9,14 @@ import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/font_dimne.dart';
 import 'package:inbox_driver/util/string.dart';
 
+import '../../../../../util/app_shaerd_data.dart';
+
 class OrderSummeryWidget extends StatelessWidget {
   const OrderSummeryWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return Container(
       padding: EdgeInsets.symmetric(horizontal: padding20!),
       decoration: BoxDecoration(

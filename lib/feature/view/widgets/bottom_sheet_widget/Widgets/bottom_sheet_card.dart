@@ -4,6 +4,8 @@ import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_style.dart';
 
+import '../../../../../util/app_shaerd_data.dart';
+
 class BottomSheetCard extends StatelessWidget {
   final String text;
   final Function onClicked;
@@ -21,6 +23,7 @@ class BottomSheetCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return GestureDetector(
       onTap: () {
         onClicked();

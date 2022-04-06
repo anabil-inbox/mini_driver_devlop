@@ -1,21 +1,68 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:inbox_driver/fcm/app_fcm.dart';
 import 'package:inbox_driver/feature/view/screens/auth/splash/splash.dart';
+import 'package:inbox_driver/network/api/feature/splash_feature_helper.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/localization/localization_service.dart';
 import 'package:inbox_driver/util/sh_util.dart';
-
+import 'package:logger/logger.dart';
 
 import '../../main.dart';
 
-class AppWidget extends StatelessWidget {
+class AppWidget extends StatefulWidget {
   const AppWidget({Key? key}) : super(key: key);
+
+  @override
+  State<AppWidget> createState() => _AppWidgetState();
+}
+
+class _AppWidgetState extends State<AppWidget> {
+  Future<void> setupInteractedMessage() async {
+    // Get any messages which caused the application to open from
+    // a terminated state.
+    await SplashHelper.getInstance.getAppSettings().then((value) => {
+          if (!GetUtils.isNull(value))
+            {
+              // apiSettings = value,
+              // Logger().i(value.workingHours,),
+              // SharedPref.instance.setUserType(value.customerType!),
+              // update()
+            }
+        });
+    RemoteMessage? initialMessage =
+        await FirebaseMessaging.instance.getInitialMessage();
+    // If the message also contains a data property with a "type" of "chat",
+    // navigate to a chat screen
+    if (initialMessage != null) {
+      Logger().d("remote message $initialMessage");
+      _handleMessage(initialMessage);
+    }
+    // Also handle any interaction when the app is in the background via a
+    // Stream listener
+    FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
+  }
+
+  void _handleMessage(RemoteMessage message) {
+    debugPrint("MSG_BUG _handleMessage");
+    AppFcm.goToOrderPage(message.data, isFromTerminate: true);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      setupInteractedMessage();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -24,7 +71,9 @@ class AppWidget extends StatelessWidget {
     ));
     return ScreenUtilInit(
       designSize: const Size(392.72727272727275, 803.6363636363636),
-      builder: () => GetMaterialApp(
+      builder: () {
+        ScreenUtil.setContext(context);
+        return GetMaterialApp(
         title: 'Inbox Driver',
         locale: SharedPref.instance.getLocalization() == Constance.arabicKey
               ? LocalizationService.localeAr
@@ -75,9 +124,11 @@ class AppWidget extends StatelessWidget {
             TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
           }),
         ),
-        home: const SplashScreen()
+
+       home: const SplashScreen()
         // home: const ProfileScreen(),
-      ),
+      );
+      },
     );
   }
 }

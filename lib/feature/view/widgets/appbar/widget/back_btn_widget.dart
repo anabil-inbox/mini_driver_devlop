@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 
 class BackBtnWidget extends StatelessWidget {
@@ -13,12 +12,17 @@ class BackBtnWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     screenUtil(context);
     return InkWell(
-        onTap: onTap ??_getBack,
+        onTap: onTap ?? _getBack,
         child: Padding(
           padding: const EdgeInsets.all(6.0),
-          child: SvgPicture.asset(isArabicLang()?"assets/svgs/back_arrow_ar.svg":"assets/svgs/back_btn_widget.svg" , width: sizeW36,height: sizeH34,),
+          child: isArabicLang()
+              ? Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SvgPicture.asset("assets/svgs/back_arrow_ar.svg"),
+                )
+              : SvgPicture.asset("assets/svgs/back_arrow.svg"),
         ));
   }
 
-  _getBack()=> Get.back();
+  _getBack() => Get.back();
 }

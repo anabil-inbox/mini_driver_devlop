@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:inbox_driver/feature/model/notification/notification_model.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_style.dart';
+import 'package:inbox_driver/util/date/date_time_util.dart';
+
+import '../../../util/app_shaerd_data.dart';
 
 class NotificationItem extends StatelessWidget {
-  const NotificationItem({Key? key}) : super(key: key);
+  const NotificationItem({Key? key, required this.notification})
+      : super(key: key);
+
+  final NotificationModel notification;
+
 
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return Container(
-      height: sizeH75,
       width: double.infinity,
-      margin: EdgeInsets.symmetric(horizontal: sizeH20! , vertical: sizeH5!),
+      margin: EdgeInsets.symmetric(horizontal: sizeH20!, vertical: sizeH5!),
+      padding: EdgeInsets.symmetric(horizontal: sizeH12!, vertical: sizeH12!),
       decoration: BoxDecoration(
           color: colorTextWhite, borderRadius: BorderRadius.circular(sizeH6!)),
       child: Row(
@@ -25,18 +34,30 @@ class NotificationItem extends StatelessWidget {
           SizedBox(
             width: sizeW10,
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const CustomTextView(
-                txt : "Lorem ipsum dolor sit ametconsectetur"
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomTextView(txt: notification.title.toString()),
+                SizedBox(
+                  height: sizeW2,
                 ),
-              SizedBox(
-                width: sizeW2,
-              ),
-              Text("Mar 13, 2018", style: smallHintTextStyle(), )
-            ],
+                CustomTextView(
+                  txt: notification.message.toString(),
+                  maxLine: 1,
+                  textOverflow: TextOverflow.ellipsis,
+                ),
+                SizedBox(
+                  height: sizeW2,
+                ),
+                Text(
+                  DateUtility.dateFormatNamed(
+                      txtDate: notification.date.toString()),
+                  style: smallHintTextStyle(),
+                )
+              ],
+            ),
           )
         ],
       ),

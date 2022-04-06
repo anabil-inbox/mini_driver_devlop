@@ -33,4 +33,14 @@ class Country {
         "prefix": prefix ?? "",
         "code" : code ?? ""
       };
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Country &&
+          runtimeType == other.runtimeType &&
+          name == other.name;
+
+  @override
+  int get hashCode => name.hashCode;
 }

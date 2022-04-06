@@ -127,7 +127,6 @@ class AuthViewModle extends GetxController {
               isLoading = false,
               Get.put(AuthViewModle()),
               update(),
-              snackSuccess(txtSuccess!.tr, "${value.status!.message}"),
               Get.to(() => VerficationScreen(
                     id: value.data["Driver"]["id"],
                     mobileNumber: user.mobileNumber!,
@@ -153,18 +152,19 @@ class AuthViewModle extends GetxController {
       "id": "$id",
       "udid": "$identifier",
       "code": "$code",
-      "mobile_number": "$mobileNumber",
-      "country_code": "$countryCode"
+      // "mobile_number": "$mobileNumber",
+      // "country_code": "$countryCode"
     }).then((value) => {
           if (value.status!.success!)
             {
-              snackSuccess(txtSuccess!.tr, "${value.status!.message}"),
               Get.offAll(() => HomeScreen()),
               Get.put(AuthViewModle()),
               Get.put(ProfileViewModle()),
             }
-          else
+          else if (value.status?.success == false)
             {snackError(txtError!.tr, "${value.status!.message}")}
+          else
+            {snackError(txtError!.tr, "Something Git Wrong")}
         });
   }
 
@@ -191,7 +191,6 @@ class AuthViewModle extends GetxController {
               startTimerCounter = 60,
               startTimer(),
               update(),
-              snackSuccess(txtSuccess!.tr, "${value.status!.message}"),
               isFromChange
                   ? Get.to(() => VerficationScreen(
                         id: id ?? "",
@@ -335,7 +334,9 @@ class AuthViewModle extends GetxController {
       await _checkBiometrics();
       await _getAvailableBiometrics();
       await _authenticate();
-      if (isAuth! && "${SharedPref.instance.getCurrentUserData()?.id.toString()}".isNotEmpty) {
+      if (isAuth! &&
+          "${SharedPref.instance.getCurrentUserData()?.id.toString()}"
+              .isNotEmpty) {
         await signInUser(
             user: Driver(
                 countryCode:
@@ -363,8 +364,8 @@ class AuthViewModle extends GetxController {
     bool canCheckBiometrics = false;
     try {
       canCheckBiometrics = await auth.canCheckBiometrics;
-    } on PlatformException catch (e) {
-      print(e);
+    } on PlatformException catch (_) {
+      printError();
     }
 
     _canCheckBiometrics = canCheckBiometrics;
@@ -375,8 +376,8 @@ class AuthViewModle extends GetxController {
     List<BiometricType> availableBiometrics = <BiometricType>[];
     try {
       availableBiometrics = await auth.getAvailableBiometrics();
-    } on PlatformException catch (e) {
-      print(e);
+    } on PlatformException catch (_) {
+      printError();
     }
 
     _availableBiometrics = availableBiometrics;
@@ -392,8 +393,8 @@ class AuthViewModle extends GetxController {
         biometricOnly: true,
         stickyAuth: false,
       );
-    } on PlatformException catch (e) {
-      print(e);
+    } on PlatformException catch (_) {
+      printError();
     }
     _authorized = authenticated ? 'Authorized' : 'Not Authorized';
     isAuth = authenticated ? true : false;

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:inbox_driver/feature/view/screens/home/new_customer/new_customer_view.dart';
+import 'package:inbox_driver/feature/view/screens/notifications_screen/notifications_screen.dart';
 import 'package:inbox_driver/feature/view/screens/profile/profile_screen.dart';
-import 'package:inbox_driver/feature/view/screens/visit_tasks/visit_tasks_view.dart';
 import 'package:inbox_driver/feature/view/widgets/appbar/custom_app_bar_widget.dart';
 import 'package:inbox_driver/feature/view/widgets/custom_text_filed.dart';
 import 'package:inbox_driver/feature/view/widgets/icon_btn.dart';
+import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
@@ -16,17 +16,23 @@ import 'package:inbox_driver/util/string.dart';
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({Key? key}) : super(key: key);
 
+  static HomeViewModel get homeViewModel => Get.find<HomeViewModel>();
   Widget get _userProfileImage {
     return (SharedPref.instance.getCurrentUserData()?.image != null &&
-            SharedPref.instance.getCurrentUserData()!.image.toString().isNotEmpty)
+            SharedPref.instance
+                .getCurrentUserData()!
+                .image
+                .toString()
+                .isNotEmpty)
         ? Container(
             clipBehavior: Clip.hardEdge,
             decoration: const BoxDecoration(shape: BoxShape.circle),
-            child: imageNetwork(url: "${SharedPref.instance.getCurrentUserData()?.image}"))
-        : Container(
-            clipBehavior: Clip.hardEdge,
-            decoration: const BoxDecoration(shape: BoxShape.circle),
-            child: Image.asset('assets/png/profile.png'));
+            child: imageNetwork(
+                url: "${SharedPref.instance.getCurrentUserData()?.image}"))
+        : CircleAvatar(
+            backgroundColor: colorPrimary,
+            radius: 30,
+          );
   }
 
   @override
@@ -77,8 +83,9 @@ class HomeAppBar extends StatelessWidget {
               height: sizeH48,
               backgroundColor: colorRedTrans,
               onPressed: () {
-              //  Get.to(() => NewCustomer());
-                Get.to(()=> const VisitTasksView());
+                Get.to(() => const NotificationScreen());
+                //  Get.to(() => NewCustomer());
+                // Get.to(() => const VisitTasksView());
               },
               borderColor: colorTrans,
             ),
@@ -125,6 +132,7 @@ class HomeAppBar extends StatelessWidget {
   //     );
 
   Widget get searchWidget => CustomTextFormFiled(
+        controller: homeViewModel.tdSearchHome,
         iconSize: sizeRadius20,
         maxLine: Constance.maxLineOne,
         icon: Icons.search,
@@ -132,7 +140,9 @@ class HomeAppBar extends StatelessWidget {
         textInputAction: TextInputAction.search,
         keyboardType: TextInputType.text,
         onSubmitted: (_) {},
-        onChange: (value) {},
+        onChange: (value) {
+          homeViewModel.update();
+        },
         isSmallPadding: false,
         isSmallPaddingWidth: true,
         fillColor: scaffoldColor,
@@ -141,7 +151,7 @@ class HomeAppBar extends StatelessWidget {
         label: txtSearchHere.tr,
       );
 
-  void _goToFilterNameView() {
-    // Get.to(() => SearchScreen());
-  }
+  // void _goToFilterNameView() {
+  //   // Get.to(() => SearchScreen());
+  // }
 }

@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:inbox_driver/feature/view_model/auht_view_modle/auth_view_modle.dart';
@@ -12,6 +11,7 @@ class HeaderLogin extends GetWidget<AuthViewModle> {
 
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return  SizedBox(
       height: sizeH200,
       child: Stack(

@@ -32,6 +32,7 @@ class _ChooseCountryScreenState extends State<ChooseCountryScreen> {
 
   Country selctedCountry = Country();
   AuthViewModle authViewModle = Get.put(AuthViewModle());
+  Set<Country> listCountry = <Country>{};
   @override
   void initState() {
     super.initState();
@@ -40,9 +41,17 @@ class _ChooseCountryScreenState extends State<ChooseCountryScreen> {
 
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     controller.addPageRequestListener((pageKey) async {
       final data = await repo.getCountries(1 + (pageKey ~/ 10), 250);
+      for(var i in data){
+        var contains = listCountry.contains(i);
+        if(contains) {
+          data.remove(i);
+        }
+      }
       controller.appendPage(data.toList(), pageKey + data.length);
+      listCountry.addAll(data);
     });
 
     return Scaffold(
@@ -52,7 +61,12 @@ class _ChooseCountryScreenState extends State<ChooseCountryScreen> {
           onPressed: () {
             Navigator.pop(Get.context!);
           },
-          icon: SvgPicture.asset(isArabicLang()?"assets/svgs/back_arrow_ar.svg":"assets/svgs/back_arrow.svg"),
+          icon: isArabicLang()
+              ? Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SvgPicture.asset("assets/svgs/back_arrow_ar.svg"),
+              )
+              : SvgPicture.asset("assets/svgs/back_arrow.svg"),
         ),
         title: Text(
          txtChooseCountry.tr,
@@ -101,6 +115,9 @@ class _ChooseCountryScreenState extends State<ChooseCountryScreen> {
                       newPageProgressIndicatorBuilder: (ctx) {
                     return const SizedBox();
                   }, itemBuilder: (context, item, index) {
+                       // if(listCountry.contains(item)){
+                       //   return const SizedBox.shrink();
+                       // }
                     return InkWell(
                       onTap: () {
                         logic.selectedIndex = -1;

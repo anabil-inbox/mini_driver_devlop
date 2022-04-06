@@ -69,13 +69,193 @@ class HomeApi {
       return AppResponse.fromJson(message);
     }
   }
-  
 
-    Future<AppResponse> reciveBoxess(
+  Future<AppResponse> reciveBoxess({var url, var header, var body}) async {
+    try {
+      var response = await DioManagerClass.getInstance
+          .dioPostFormMethod(url: url, header: header, body: body);
+      return AppResponse.fromJson(json.decode(response.toString()));
+    } on DioError catch (ex) {
+      var message = json.decode(ex.response.toString());
+      Logger().e(message);
+      return AppResponse.fromJson(message);
+    }
+  }
+
+  Future<AppResponse> updateTaskStatus({var url, var header, var body}) async {
+    try {
+      var response = await DioManagerClass.getInstance
+          .dioPostFormMethod(url: url, header: header, body: body);
+      return AppResponse.fromJson(json.decode(response.toString()));
+    } on DioError catch (ex) {
+      var message = json.decode(ex.response.toString());
+      Logger().e(message);
+      return AppResponse.fromJson(message);
+    }
+  }
+
+  Future<AppResponse> search({var url, var header, var body}) async {
+    try {
+      var response = await DioManagerClass.getInstance
+          .dioPostFormMethod(url: url, header: header, body: body);
+      return AppResponse.fromJson(json.decode(response.toString()));
+    } on DioError catch (ex) {
+      var message = json.decode(ex.response.toString());
+      Logger().e(message);
+      return AppResponse.fromJson(message);
+    }
+  }
+
+  Future<AppResponse> uploadCustomerId({var url, var header, var body}) async {
+    try {
+      var response = await DioManagerClass.getInstance
+          .dioPostFormMethod(url: url, header: header, body: body);
+      return AppResponse.fromJson(json.decode(response.toString()));
+    } on DioError catch (ex) {
+      var message = json.decode(ex.response.toString());
+      Logger().e(message);
+      return AppResponse.fromJson(message);
+    }
+  }
+
+  Future<AppResponse> scanSalesBox({var url, var header, var body}) async {
+    try {
+      var response = await DioManagerClass.getInstance
+          .dioPostFormMethod(url: url, header: header, body: body);
+      return AppResponse.fromJson(json.decode(response.toString()));
+    } on DioError catch (ex) {
+      var message = json.decode(ex.response.toString());
+      Logger().e(message);
+      return AppResponse.fromJson(message);
+    }
+  }
+
+  Future<AppResponse> scanProduct({var url, var header, var body}) async {
+    try {
+      var response = await DioManagerClass.getInstance
+          .dioPostFormMethod(url: url, header: header, body: body);
+      return AppResponse.fromJson(json.decode(response.toString()));
+    } on DioError catch (ex) {
+      var message = json.decode(ex.response.toString());
+      Logger().e(message);
+      return AppResponse.fromJson(message);
+    }
+  }
+
+  Future<AppResponse> deleteProduct({var url, var header, var body}) async {
+    try {
+      var response = await DioManagerClass.getInstance
+          .dioPostFormMethod(url: url, header: header, body: body);
+      return AppResponse.fromJson(json.decode(response.toString()));
+    } on DioError catch (ex) {
+      var message = json.decode(ex.response.toString());
+      Logger().e(message);
+      return AppResponse.fromJson(message);
+    }
+  }
+
+  Future<AppResponse> paymentRequest({var url, var header, var body}) async {
+    try {
+      var response = await DioManagerClass.getInstance
+          .dioPostFormMethod(url: url, header: header, body: body);
+      return AppResponse.fromJson(json.decode(response.toString()));
+    } on DioError catch (ex) {
+      var message = json.decode(ex.response.toString());
+      Logger().e(message);
+      return AppResponse.fromJson(message);
+    }
+  }
+
+  Future<AppResponse> checkTaskStatus({var url, var header, var body}) async {
+    try {
+      var response = await DioManagerClass.getInstance
+          .dioPostFormMethod(url: url, header: header, body: body);
+      return AppResponse.fromJson(json.decode(response.toString()));
+    } on DioError catch (ex) {
+      var message = json.decode(ex.response.toString());
+      Logger().e(message);
+      return AppResponse.fromJson(message);
+    }
+  }
+
+  Future<AppResponse> uploadCustomerSignature(
       {var url, var header, var body}) async {
     try {
       var response = await DioManagerClass.getInstance
           .dioPostFormMethod(url: url, header: header, body: body);
+      return AppResponse.fromJson(json.decode(response.toString()));
+    } on DioError catch (ex) {
+      var message = json.decode(ex.response.toString());
+      Logger().e(message);
+      return AppResponse.fromJson(message);
+    }
+  }
+
+  Future<AppResponse> createNewSeal({var url, var header, var body}) async {
+    try {
+      var response = await DioManagerClass.getInstance
+          .dioPostFormMethod(url: url, header: header, body: body);
+      return AppResponse.fromJson(json.decode(response.toString()));
+    } on DioError catch (ex) {
+      var message = json.decode(ex.response.toString());
+      Logger().e(message);
+      return AppResponse.fromJson(message);
+    }
+  }
+
+  Future<AppResponse> scheduleBox({var url, var header, var body}) async {
+    try {
+      var response = await DioManagerClass.getInstance
+          .dioPostFormMethod(url: url, header: header, body: body);
+      return AppResponse.fromJson(json.decode(response.toString()));
+    } on DioError catch (ex) {
+      var message = json.decode(ex.response.toString());
+      Logger().e(message);
+      return AppResponse.fromJson(message);
+    }
+  }
+
+  Future<AppResponse> terminateBox({var url, var header, var body}) async {
+    try {
+      var response = await DioManagerClass.getInstance
+          .dioPostFormMethod(url: url, header: header, body: body);
+      return AppResponse.fromJson(json.decode(response.toString()));
+    } on DioError catch (ex) {
+      var message = json.decode(ex.response.toString());
+      Logger().e(message);
+      return AppResponse.fromJson(message);
+    }
+  }
+
+  Future<AppResponse> createWaitingRequest(
+      {var url, var header, var body}) async {
+    try {
+      var response = await DioManagerClass.getInstance
+          .dioPostFormMethod(url: url, header: header, body: body);
+      return AppResponse.fromJson(json.decode(response.toString()));
+    } on DioError catch (ex) {
+      var message = json.decode(ex.response.toString());
+      Logger().e(message);
+      return AppResponse.fromJson(message);
+    }
+  }
+
+  Future<AppResponse> getNotification({var url, var header, var body}) async {
+    try {
+      var response = await DioManagerClass.getInstance
+          .dioGetMethod(url: url, header: header);
+      return AppResponse.fromJson(json.decode(response.toString()));
+    } on DioError catch (ex) {
+      var message = json.decode(ex.response.toString());
+      Logger().e(message);
+      return AppResponse.fromJson(message);
+    }
+  }
+
+  Future<AppResponse> getLog({var url, var header, var body}) async {
+    try {
+      var response = await DioManagerClass.getInstance
+          .dioGetMethod(url: url, header: header);
       return AppResponse.fromJson(json.decode(response.toString()));
     } on DioError catch (ex) {
       var message = json.decode(ex.response.toString());

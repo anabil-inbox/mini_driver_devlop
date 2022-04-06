@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:inbox_driver/feature/view/screens/home/new_customer/Widgets/scan_box_widget.dart';
@@ -11,7 +10,6 @@ import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
-import 'package:inbox_driver/util/font_dimne.dart';
 import 'package:inbox_driver/util/string.dart';
 import 'Widgets/balance_widget.dart';
 import 'Widgets/contract_signature_widget.dart';
@@ -20,12 +18,15 @@ import 'Widgets/customer_signature_widget.dart';
 import 'Widgets/scan_products_widget.dart';
 
 class NewCustomer extends StatelessWidget {
-  Widget get contract => ContractSignature();
+ const NewCustomer({Key? key}) : super(key: key);
+
+  Widget get contract => const ContractSignature();
   Widget get scanBox => const ScanBox();
   Widget get scanProducts => const ScanProducts();
   Widget get balance => const Balance();
   Widget get customerSignature => const CustomerSignature();
-  HomeViewModel homeViewModel = Get.find<HomeViewModel>();
+ static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
+
   Widget get idVerification => Container(
     height: sizeH50,
     padding: EdgeInsets.symmetric(horizontal: sizeW15!, vertical: sizeH13!),
@@ -42,7 +43,11 @@ class NewCustomer extends StatelessWidget {
         const Spacer(),
         GestureDetector(
           onTap: () {
-            Get.to(() => const ScanScreen());
+            Get.to(() => const ScanScreen(
+               isScanDeliverdBoxes: false,
+               isFromScanSalesBoxs: false,
+                isProductScan: false,
+            ));
           },
           child: SvgPicture.asset("assets/svgs/Scan.svg",
               color: colorRed, width: sizeW20, height: sizeH17),
@@ -63,27 +68,25 @@ class NewCustomer extends StatelessWidget {
         ),
         isCenterTitle: true,
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: padding20!),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: sizeH20),
-              contract,
-              SizedBox(height: sizeH10),
-              idVerification,
-              SizedBox(height: sizeH10),
-              scanBox,
-              SizedBox(height: sizeH10),
-              scanProducts,
-              SizedBox(height: sizeH10),
-              balance,
-              SizedBox(height: sizeH10),
-              customerSignature,
-            ],
-          ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: padding20!),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: sizeH20),
+            contract,
+            SizedBox(height: sizeH10),
+            idVerification,
+            SizedBox(height: sizeH10),
+            scanBox,
+            SizedBox(height: sizeH10),
+            scanProducts,
+            SizedBox(height: sizeH10),
+            balance,
+            SizedBox(height: sizeH10),
+            customerSignature,
+          ],
         ),
       ),
     );

@@ -54,7 +54,11 @@ class ScanBox extends StatelessWidget {
             const Spacer(),
             GestureDetector(
               onTap: () {
-                Get.to(() => const ScanScreen());
+                Get.to(() => const ScanScreen(
+                   isScanDeliverdBoxes: false,
+                   isFromScanSalesBoxs: false,
+                    isProductScan: false,
+                ));
               },
               child: SvgPicture.asset("assets/svgs/Scan.svg",
                   color: colorRed, width: sizeW20, height: sizeH17),

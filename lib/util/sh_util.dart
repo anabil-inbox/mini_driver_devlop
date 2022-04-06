@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, prefer_typing_uninitialized_variables
+
 import 'dart:convert';
 
 import 'package:get/utils.dart';
@@ -5,31 +7,75 @@ import 'package:inbox_driver/feature/model/app_setting_modle.dart';
 import 'package:inbox_driver/feature/model/driver_modle.dart';
 import 'package:inbox_driver/feature/model/language.dart';
 import 'package:inbox_driver/util/constance.dart';
+import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPref {
   static SharedPref instance = SharedPref._();
+
   final String appSettingKey = "settings";
   final String languageKey = "language";
   final String isShowKey = "loading";
   final String currentUser = "currentUser";
   final String loginKey = "login";
   final String fcmKey = "fcm";
-  final String tokenKey = "token";
+  final String tokenKey = "token_driver";
   final String customrKey = "customerKey";
   final String userDataKey = "userData";
+  final String taskKey = "taskKey";
+  final String isStartedTimerKey = "isStartedTimerKey";
+  final String timerValueKey = "timerValueKey";
 
   var log = Logger();
 
   SharedPref._();
 
-  static late SharedPreferences? _prefs;
+  static SharedPreferences? _prefs;
 
   setAppSetting(var json) async {
     String prfApiSettings = jsonEncode(json);
     _prefs?.setString(appSettingKey, prfApiSettings);
   }
+
+  // setCurrentTaskResponse({required String taskResponse}) {
+  //   try {
+  //     _prefs?.remove(taskKey);
+  //     _prefs?.setString(taskKey, jsonEncode(jsonDecode(taskResponse)));
+  //   } catch (e) {
+  //     Logger().e(e);
+  //   }
+  // }
+
+  setIsStartedTimerKey({required bool isStarted}) {
+    _prefs?.setBool(isStartedTimerKey, isStarted);
+  }
+
+  bool getIsStartedTimerKey() {
+    return _prefs?.getBool(isStartedTimerKey) ?? false;
+  }
+
+  setTimeValue({required int timerNewValue}) {
+    _prefs?.setInt(timerValueKey, timerNewValue);
+  }
+
+  int getTimerValue() {
+    return _prefs?.getInt(timerValueKey) ??
+        ApiSettings.fromJson(json.decode(SharedPref.instance.getAppSetting()))
+            .waitingTime ??
+        5 * 60;
+  }
+
+  // TaskResponse? getCurrentTaskResponse() {
+  //   try {
+  //     String? objectStr = _prefs?.getString(taskKey);
+  //     Map<String, dynamic> map = jsonDecode(objectStr!);
+  //     return TaskResponse.fromJson(map);
+  //   } catch (e) {
+  //     Logger().e(e);
+  //     return null;
+  //   }
+  // }
 
   setLocalization(String lang) {
     _prefs?.setString(_localizationKey, lang);
@@ -37,10 +83,10 @@ class SharedPref {
 
   String getLocalization() {
     try {
-      return _prefs?.getString(_localizationKey) ?? Constance.arabicKey;
+      return _prefs?.getString(_localizationKey) ?? Constance.englishKey;
     } catch (e) {
       print(e);
-      return Constance.arabicKey;
+      return Constance.englishKey;
     }
   }
 
@@ -63,8 +109,8 @@ class SharedPref {
       if (GetUtils.isNull(json.decode(string!)["data"]["Driver"])) {
         print("get Current user if");
         decode = json.decode(string)["data"];
-      }else{
-       decode = json.decode(string)["data"]["Driver"];
+      } else {
+        decode = json.decode(string)["data"]["Driver"];
       }
       Driver profileData = Driver.fromJson(decode);
       return profileData;
@@ -76,7 +122,7 @@ class SharedPref {
 
   getAppSetting() {
     try {
-      Object appSetting = _prefs!.get("$appSettingKey")!;
+      Object appSetting = _prefs!.get(appSettingKey)!;
       return appSetting;
     } catch (e) {
       log.d("$e");
@@ -99,20 +145,14 @@ class SharedPref {
               json.decode(_prefs!.get(appSettingKey).toString()))
           .languges;
     } catch (e) {
-      // ignore: avoid_print
       print(e);
+       return null;
     }
-  }
-
-  isShowProgress(bool? isShow) {
-    // ignore: unnecessary_statements
-    isShow == null ? isShow = false : isShow;
-    _prefs?.setBool("$isShowKey", isShow);
   }
 
   getShowProgress() {
     try {
-      return _prefs?.getBool("$isShowKey") ?? false;
+      return _prefs?.getBool(isShowKey) ?? false;
     } catch (e) {
       print(e);
     }
@@ -120,12 +160,12 @@ class SharedPref {
 
   setAppLanguage(var local) async {
     _prefs?.setString(languageKey, local.toString());
-    print("exxx:${local.toString()}");
+    print("exxx: ${local.toString()}");
   }
 
   String getAppLanguageMain() {
     try {
-      Object appLanguage = _prefs!.get(languageKey)?? "en";
+      Object appLanguage = _prefs!.get(languageKey) ?? "en";
       return appLanguage.toString();
     } catch (e) {
       return "en";
@@ -133,31 +173,54 @@ class SharedPref {
   }
 
   getUserType() {
-    return _prefs!.getString("$customrKey");
+    return _prefs!.getString(customrKey);
   }
 
   setUserType(String customerType) {
-    _prefs!.setString("$customrKey", customerType);
+    _prefs!.setString(customrKey, customerType);
   }
 
   setUserLoginState(String state) async {
     try {
-      SharedPreferences pref = await SharedPreferences.getInstance();
-      pref.setString('$loginKey', '$state');
+      _prefs?.setString(loginKey, state);
     } catch (e) {
       return "not Logined";
     }
   }
+
   final String _localizationKey = "Localization";
 
   getUserLoginState() {
     try {
-      return SharedPref._prefs!.getString('$loginKey');
+      return SharedPref._prefs!.getString(loginKey);
     } catch (e) {
       printError();
       return "";
     }
   }
+
+  // setBoxesList({required List<BoxModel> boxes}) {
+  //   removeBoxess();
+  //   _prefs?.setString(boxessKey, jsonEncode(boxes));
+  // }
+
+  // List<BoxModel> getBoxesList() {
+  //   try {
+  //     String? objectStr = _prefs?.getString(boxessKey);
+  //     return List<BoxModel>.from(
+  //         json.decode(objectStr!).map((x) => BoxModel.fromJson(x)));
+  //   } catch (e) {
+  //     return [];
+  //   }
+  // }
+
+  // removeBoxess() async {
+  //   try {
+  //     await _prefs?.remove(boxessKey);
+  //   } catch (e) {
+  //     Logger().e(e);
+  //   }
+  // }
 
   init() async {
     _prefs = await SharedPreferences?.getInstance();
@@ -165,21 +228,20 @@ class SharedPref {
 
   setFCMToken(String fcmToken) async {
     try {
-      SharedPreferences pref = await SharedPreferences.getInstance();
-      pref.setString(fcmKey, fcmToken);
+      await _prefs?.setString(fcmKey, fcmToken);
     } catch (e) {
       printError();
     }
   }
 
   String getFCMToken() {
-    return _prefs!.getString("$fcmKey") ?? "";
+    return _prefs!.getString(fcmKey) ?? "";
   }
 
   setUserToken(String token) async {
     try {
       if (!GetUtils.isNull(token)) {
-        _prefs!.setString("$tokenKey", token);
+        _prefs!.setString(tokenKey, token);
       }
     } catch (e) {
       printError();
@@ -188,10 +250,21 @@ class SharedPref {
 
   getUserToken() {
     try {
-      return _prefs!.getString('$tokenKey');
+      return _prefs!.getString(tokenKey);
     } catch (e) {
       print(e);
       return "";
     }
   }
+
+  String getPriceWithFormate({required num price}) {
+    final numberFormatter = NumberFormat("###.00#", "en_US");
+    const num initNumber = 0.00;
+    print("getting Price ${numberFormatter.format(initNumber + price)}");
+    return numberFormatter.format(initNumber + price) + " ${Constance.qrCoin}";
+  }
+
+  // clear() {
+  //   removeBoxess();
+  // }
 }

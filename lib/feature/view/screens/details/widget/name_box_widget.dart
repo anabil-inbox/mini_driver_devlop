@@ -8,9 +8,10 @@ import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/string.dart';
 
-class NameBox extends StatelessWidget {
-  const NameBox({Key? key}) : super(key: key);
+class NameClient extends StatelessWidget {
+  const NameClient({Key? key , required this.clientName}) : super(key: key);
 
+  final String clientName;
   @override
   Widget build(BuildContext context) {
     screenUtil(context);
@@ -37,7 +38,7 @@ class NameBox extends StatelessWidget {
             height: sizeH1,
           ),
           CustomTextView(
-            txt: txtFabianaCapmany.tr,
+            txt: clientName,
             maxLine: Constance.maxLineOne,
             textStyle:textStyleNormal(),
           ),

@@ -4,7 +4,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
-import 'package:inbox_driver/feature/view/screens/profile/log/log.dart';
+import 'package:inbox_driver/feature/view/screens/profile/cash_closure/cash_closure_view.dart';
 import 'package:inbox_driver/feature/view/screens/profile/setting/setting_screen.dart';
 import 'package:inbox_driver/feature/view/screens/profile/widget/setting_item.dart';
 import 'package:inbox_driver/feature/view_model/profile_view_modle/profile_view_modle.dart';
@@ -14,6 +14,7 @@ import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/string.dart';
 
+import 'log/log_screen.dart';
 import 'widget/header_profile_card.dart';
 
 class ProfileScreen extends GetWidget<ProfileViewModle> {
@@ -21,6 +22,7 @@ class ProfileScreen extends GetWidget<ProfileViewModle> {
 
   @override
   Widget build(BuildContext context) {
+    screenUtil(context);
     return Scaffold(
       backgroundColor: scaffoldColor,
       appBar: AppBar(
@@ -35,7 +37,10 @@ class ProfileScreen extends GetWidget<ProfileViewModle> {
             Navigator.pop(Get.context!);
           },
           icon: isArabicLang()
-              ? SvgPicture.asset("assets/svgs/back_arrow_ar.svg")
+              ? Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SvgPicture.asset("assets/svgs/back_arrow_ar.svg"),
+              )
               : SvgPicture.asset("assets/svgs/back_arrow.svg"),
         ),
         centerTitle: true,
@@ -61,7 +66,7 @@ class ProfileScreen extends GetWidget<ProfileViewModle> {
                 ),
                 SettingItem(
                   onTap: () {
-                    Get.to(() => const Log());
+                    Get.to(() => const LogScreen());
                   },
                   settingTitle: txtLog.tr,
                   trailingTitle: "",
@@ -75,6 +80,17 @@ class ProfileScreen extends GetWidget<ProfileViewModle> {
                     Get.to(() => const SettingsScreen());
                   },
                   settingTitle: txtSetting.tr,
+                  trailingTitle: "",
+                  iconPath: "assets/svgs/setting.svg",
+                ),
+                SizedBox(
+                  height: sizeH12,
+                ),
+                SettingItem(
+                  onTap: () {
+                    Get.to(() => const CashClosureView());
+                  },
+                  settingTitle: txtCashClosure.tr,
                   trailingTitle: "",
                   iconPath: "assets/svgs/setting.svg",
                 ),
