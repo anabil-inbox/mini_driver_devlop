@@ -210,6 +210,9 @@ class ProfileViewModle extends BaseController {
     try {
       isLoading = true;
       update();
+      totalAmount = 0;
+      padAmount = 0;
+      remainingAmount = 0;
       await CashCloserFeature.getInstance.getCashCloser().then((value) {
         Logger().d(value.length);
             if(value.isNotEmpty){
