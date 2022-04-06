@@ -6,7 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:inbox_driver/feature/model/tasks/task_response.dart';
+import 'package:inbox_driver/feature/view/screens/details/order_details_started_screen.dart';
 import 'package:inbox_driver/feature/view/screens/home/home_screen.dart';
+import 'package:inbox_driver/feature/view/screens/home/trasfare/trasfare_content_screen.dart';
 import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
 import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/sh_util.dart';
@@ -149,7 +151,8 @@ class AppFcm {
     });
   }
 
-  static void goToOrderPage(Map<String, dynamic> map,{required bool isFromTerminate}) async {
+  static void goToOrderPage(Map<String, dynamic> map,
+      {required bool isFromTerminate}) async {
     Logger().i(map[Constance.id].toString());
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) async {
       if (map[Constance.id].toString() == Constance.userSignature) {
@@ -168,16 +171,26 @@ class AppFcm {
               taskStatusId: "",
             ));
         homeViewModel.update();
+      } else if (map[Constance.id].toString() ==
+          Constance.confirmFirstSideContentTrasfer) {
+        Get.to(() => TrasfareContentScreen(taskId: map[Constance.taskId]));
+
+        // homeViewModel.update();
       }
     });
   }
 
   void updatePages(RemoteMessage message) async {
-    homeViewModel.operationTask = TaskResponse.fromJson(message.data, isFromNotification: true);
+    if (messages.data[Constance.id] ==
+        Constance.confirmFirstSideContentTrasfer) {
+      Get.to(() => TrasfareContentScreen(
+          taskId: messages.data[Constance.taskId]));
+      return;
+    }
+    homeViewModel.operationTask =
+        TaskResponse.fromJson(message.data, isFromNotification: true);
     await homeViewModel.refrshHome();
   }
 
-
-  // we need to get The 
+  // we need to get The
 }
-

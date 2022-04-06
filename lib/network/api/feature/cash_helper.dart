@@ -1,8 +1,6 @@
-import 'package:inbox_driver/feature/model/country.dart';
 import 'package:inbox_driver/feature/model/profile/cash_closer_data.dart';
 import 'package:inbox_driver/network/api/model/app_response.dart';
 import 'package:inbox_driver/network/api/model/cach_model.dart';
-import 'package:inbox_driver/network/api/model/country_api.dart';
 import 'package:inbox_driver/network/utils/constance_netwoek.dart';
 import 'package:logger/logger.dart';
 

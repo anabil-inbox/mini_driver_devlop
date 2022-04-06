@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:inbox_driver/feature/model/profile/log_model.dart';
 import 'package:inbox_driver/feature/view/screens/profile/log/widgets/log_item.dart';
 import 'package:inbox_driver/util/string.dart';
 
