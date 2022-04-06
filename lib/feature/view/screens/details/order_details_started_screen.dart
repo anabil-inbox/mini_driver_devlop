@@ -94,7 +94,7 @@ class OrderDetailsStarted extends StatelessWidget {
               onClicked: () async {
                 await home.updateTaskStatus(
                   taskStatusId: task.id ?? "",
-                  newStatus: Constance.taskStart,
+                  newStatus: Constance.done,
                   taskId: salesOrder.taskId ?? "",
                 );
 
