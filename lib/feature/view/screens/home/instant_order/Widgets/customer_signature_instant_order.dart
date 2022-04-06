@@ -13,7 +13,6 @@ import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/string.dart';
 
-import '../../../../../model/signature_item_model.dart';
 
 class CustomerSignatureInstantOrder extends StatelessWidget {
   const CustomerSignatureInstantOrder({Key? key, this.taskId, }) : super(key: key);

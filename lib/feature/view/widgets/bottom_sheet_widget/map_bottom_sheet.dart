@@ -24,7 +24,6 @@ class MapBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     screenUtil(context);
     return GetBuilder<MapViewModel>(
-        init: MapViewModel(),
         initState: (_) async {
           mapViewModel.getDirections();
           mapViewModel.customerLatLng =

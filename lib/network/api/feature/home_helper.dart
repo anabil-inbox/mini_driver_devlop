@@ -1,10 +1,14 @@
+import 'package:flutter/material.dart';
 import 'package:inbox_driver/feature/model/home/emergencey/emergency_case.dart';
 import 'package:inbox_driver/feature/model/home/sales_data.dart';
 import 'package:inbox_driver/feature/model/home/task_model.dart';
+import 'package:inbox_driver/feature/model/profile/log_model.dart';
 import 'package:inbox_driver/network/api/model/app_response.dart';
 import 'package:inbox_driver/network/api/model/home_api.dart';
 import 'package:inbox_driver/network/utils/constance_netwoek.dart';
 import 'package:logger/logger.dart';
+
+import '../../../feature/model/notification/notification_model.dart';
 
 class HomeHelper {
   HomeHelper._();
@@ -274,7 +278,7 @@ class HomeHelper {
     }
   }
 
-    Future<AppResponse> notifyForSign({required var body}) async {
+  Future<AppResponse> notifyForSign({required var body}) async {
     try {
       var response = await HomeApi.getInstance.uploadCustomerSignature(
           body: body,
@@ -291,7 +295,7 @@ class HomeHelper {
     }
   }
 
-      Future<AppResponse> createNewSeal({required var body}) async {
+  Future<AppResponse> createNewSeal({required var body}) async {
     try {
       var response = await HomeApi.getInstance.createNewSeal(
           body: body,
@@ -308,7 +312,7 @@ class HomeHelper {
     }
   }
 
-  Future<AppResponse> terminateBox({var body}) async{
+  Future<AppResponse> terminateBox({var body}) async {
     try {
       var response = await HomeApi.getInstance.terminateBox(
           body: body,
@@ -325,7 +329,7 @@ class HomeHelper {
     }
   }
 
-  Future<AppResponse> scheduleBox({var body}) async{
+  Future<AppResponse> scheduleBox({var body}) async {
     try {
       var response = await HomeApi.getInstance.scheduleBox(
           body: body,
@@ -341,7 +345,8 @@ class HomeHelper {
       return AppResponse.fromJson({});
     }
   }
-  Future<AppResponse> createWaitingRequest({var body}) async{
+
+  Future<AppResponse> createWaitingRequest({var body}) async {
     try {
       var response = await HomeApi.getInstance.createWaitingRequest(
           body: body,
@@ -358,4 +363,37 @@ class HomeHelper {
     }
   }
 
+  Future<List<NotificationModel>> getNotification() async {
+    try {
+      var response = await HomeApi.getInstance.getNotification(
+          url: ConstanceNetwork.getNotificationsEndPoint,
+          header: ConstanceNetwork.header(4));
+      if (response.status?.success == true) {
+        List data = response.data;
+        return data.map((e) => NotificationModel.fromJson(e)).toList();
+      } else {
+        return [];
+      }
+    } catch (e) {
+      log.d(e.toString());
+      return [];
+    }
+  }
+
+    Future<List<Log>> getLog() async {
+    try {
+      var response = await HomeApi.getInstance.getLog(
+          url: ConstanceNetwork.getLogEndPoint,
+          header: ConstanceNetwork.header(4));
+      if (response.status?.success == true) {
+        List data = response.data;
+        return data.map((e) => Log.fromJson(e)).toList();
+      } else {
+        return [];
+      }
+    } catch (e) {
+      log.d(e.toString());
+      return [];
+    }
+  }
 }

@@ -5,13 +5,13 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart' as multipart;
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:inbox_driver/feature/model/app_setting_modle.dart';
 import 'package:inbox_driver/feature/model/home/emergencey/emergency_case.dart';
 import 'package:inbox_driver/feature/model/home/sales_data.dart';
 import 'package:inbox_driver/feature/model/home/task_model.dart';
+import 'package:inbox_driver/feature/model/notification/notification_model.dart';
 import 'package:inbox_driver/feature/model/signature_item_model.dart';
 import 'package:inbox_driver/feature/model/tasks/box_model.dart';
 import 'package:inbox_driver/feature/model/tasks/task_response.dart';
@@ -809,7 +809,7 @@ class HomeViewModel extends GetxController {
             // Logger().e(operationTask),
             waiteTimeOperation =
                 Duration(minutes: operationTask.timer?.toInt() ?? 0),
-        endLoading()
+            endLoading()
           });
     } catch (e) {
       endLoading();
@@ -836,8 +836,9 @@ class HomeViewModel extends GetxController {
             if (value.status!.success!)
               {
                 snackSuccess("$txtSuccess", "${value.status!.message}"),
-    Logger().d(value.toJson()),
-                operationTask = TaskResponse.fromJson(value.data, isFromNotification: false),
+                Logger().d(value.toJson()),
+                operationTask = TaskResponse.fromJson(value.data,
+                    isFromNotification: false),
                 update(),
               }
             else
@@ -965,5 +966,19 @@ class HomeViewModel extends GetxController {
       debugPrint(e.toString());
     }
     endLoadingRequestTime();
+  }
+
+  List<NotificationModel> notifications = [];
+
+  Future<void> getNotification() async {
+    startLoading();
+    try {
+      await HomeHelper.getInstance
+          .getNotification()
+          .then((value) => {notifications = value});
+    } catch (e) {
+      debugPrint("getNotification error $e");
+    }
+    endLoading();
   }
 }

@@ -9,11 +9,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:inbox_driver/feature/model/country.dart';
+import 'package:inbox_driver/feature/model/profile/log_model.dart';
 import 'package:inbox_driver/feature/view/screens/auth/signUp_signIn/log_in/log_in_screen.dart';
 import 'package:inbox_driver/feature/view/widgets/bottom_sheet_widget/logout_bottom_sheet.dart';
 import 'package:inbox_driver/feature/view/widgets/secondery_button.dart';
 import 'package:inbox_driver/feature/view_model/auht_view_modle/auth_view_modle.dart';
 import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
+import 'package:inbox_driver/network/api/feature/home_helper.dart';
 import 'package:inbox_driver/network/api/feature/profie_helper.dart';
 import 'package:inbox_driver/network/utils/constance_netwoek.dart';
 import 'package:inbox_driver/util/app_color.dart';
@@ -36,6 +38,18 @@ class ProfileViewModle extends BaseController {
   List<Map<String, dynamic>> contactMap = [];
 
   bool isLoading = false;
+
+  startLoading() {
+    isLoading = true;
+    update();
+  }
+
+  stopLoading() {
+    isLoading = false;
+    update();
+  }
+
+  List<Log> userLogs = [];
 
 //   //-- for log out
 
@@ -61,11 +75,12 @@ class ProfileViewModle extends BaseController {
             if (value.status!.success!)
               {
                 // snackSuccess(txtSuccess!.tr, "${value.status!.message}"),
-                
+
                 isLoading = false,
                 Get.put(AuthViewModle()),
                 update(),
-                SharedPref.instance .setUserLoginState(ConstanceNetwork.userEnterd),
+                SharedPref.instance
+                    .setUserLoginState(ConstanceNetwork.userEnterd),
                 Get.offAll(() => const LoginScreen()),
                 Get.put(AuthViewModle()),
                 Get.find<HomeViewModel>().tasksDone.clear(),
@@ -101,10 +116,11 @@ class ProfileViewModle extends BaseController {
 
     myMap = {
       "full_name": tdUserFullNameEdit.text,
-      "image": myImg != null ? multipart.MultipartFile.fromFileSync(myImg.path) : "",
+      "image":
+          myImg != null ? multipart.MultipartFile.fromFileSync(myImg.path) : "",
       "contact_number": jsonEncode(contactMap),
-      "email" : tdUserEmailEdit.text,
-      "udid" : udid
+      "email": tdUserEmailEdit.text,
+      "udid": udid
     };
 
     try {
@@ -129,8 +145,7 @@ class ProfileViewModle extends BaseController {
   }
 
   void getImageBottomSheet() {
-    Get.bottomSheet(
-      Container(
+    Get.bottomSheet(Container(
       height: sizeH240,
       padding: EdgeInsets.symmetric(horizontal: padding20!),
       decoration: BoxDecoration(
@@ -194,6 +209,19 @@ class ProfileViewModle extends BaseController {
       img = File(pickedImage.path);
       update();
     }
+  }
+
+  Future<void> getUserLog() async {
+    startLoading();
+    try {
+      await HomeHelper.getInstance.getLog().then((value) => {
+            userLogs = value,
+            Logger().e(value),
+          });
+    } catch (e) {
+      Logger().e(e.toString());
+    }
+    stopLoading();
   }
 
 //   // fot timer on change number :

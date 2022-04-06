@@ -63,7 +63,7 @@ class WHCurrentScreen extends StatelessWidget {
                       }
                     : () {
                         snackError(txtError!.tr, txtPreviousTask.tr);
-                        },
+                      },
               );
             } else if (home.isTaskCustomerVist(task: task)) {
               return VisitLvItemWidget(
@@ -77,34 +77,14 @@ class WHCurrentScreen extends StatelessWidget {
               );
             } else {
               return WhLoadingCard(
-                isFromCompelted: true,
+                isFromCompelted: false,
                 task: task,
                 index: i,
                 salesData: home.operationsSalesData!,
                 salesOrder: home.operationsSalesData!.salesOrders![index],
-                onRecivedClick: i == 0
-                    ? () async {
-                        if (homeViewModel.isTaskWareHouseLoading(task: task)) {
-                          await homeViewModel.recivedBoxes(
-                              serial: homeViewModel.operationsSalesData!
-                                      .salesOrders![index].orderId ??
-                                  "",
-                              taskName: Constance.taskWarehouseLoading);
-                        } else if (homeViewModel.isTaskWorahouseClousre(
-                            task: task)) {
-                          await homeViewModel.recivedBoxes(
-                              serial: homeViewModel.operationsSalesData!
-                                      .salesOrders![index].orderId ??
-                                  "",
-                              taskName: Constance.taskWarehouseClosure);
-                        } else {}
-                        await homeViewModel.getSpecificTask(
-                            taskId: task.id ?? "",
-                            taskSatus: Constance.inProgress);
-                      }
-                    : () {
-                        snackError(txtError!.tr, txtPreviousTask.tr);
-                      },
+                onRecivedClick: () {
+                  
+                },
               );
             }
           });

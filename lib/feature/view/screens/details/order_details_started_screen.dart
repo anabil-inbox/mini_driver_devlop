@@ -191,18 +191,18 @@ class OrderDetailsStarted extends StatelessWidget {
                       taskId: salesOrder.taskId ?? "");
                   home.selectedSignatureItemModel = SignatureItemModel(
                       title: home.operationTask.signatureType);
-               await Get.to(() => InstantOrderScreen(
+                  await Get.to(() => InstantOrderScreen(
                         isFromNotification: false,
                         taskStatusId: task.id ?? "",
                         isNewCustomer: true,
                         taskId: salesOrder.taskId ?? "",
                       ));
-
                 },
                 isExpanded: true);
           },
         );
       } else {
+        //  return const Text("End Order Transfer");
         return const SizedBox();
       }
     } else if (index != 0) {
@@ -225,6 +225,7 @@ class OrderDetailsStarted extends StatelessWidget {
         ],
       );
     }
+
     return const SizedBox();
   }
 

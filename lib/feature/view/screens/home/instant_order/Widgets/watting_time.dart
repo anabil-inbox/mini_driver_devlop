@@ -39,8 +39,7 @@ class WattingTime extends StatelessWidget {
             ),
             TweenAnimationBuilder<Duration>(
                 duration: Duration(
-                    minutes:
-                        homeViewModel.operationTask.waitingTime?.toInt() ?? 0),
+                    minutes: homeViewModel.operationTask.waitingTime?.toInt() ?? 0),
                 tween: Tween(
                     begin: Duration(
                         minutes:

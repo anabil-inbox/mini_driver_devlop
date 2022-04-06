@@ -33,7 +33,7 @@ class FirebaseClint {
       FirebaseFirestore.instance.collection("$_diverTrack")
               .doc(customerId).collection(_serialOrder.toString())
               .doc(serial).set(bodyData).then((value) {
-                Logger().i("Done Store locations [Driver]");
+               // Logger().i("Done Store locations [Driver]");
       }).catchError((onError){
         Logger().e("$onError");
       });

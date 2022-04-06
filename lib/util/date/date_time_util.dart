@@ -7,17 +7,6 @@ import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 
 class DateUtility {
-  // static String getPostTime2(String date) {
-  //   initializeDateFormatting(isArabicLang() ? 'ar' : 'en');
-  //   if (date.isEmpty) {
-  //     return '';
-  //   }
-  //   var dt = DateTime.parse(date).toLocal();
-  //   var dat = DateFormat.jm().format(dt) +
-  //       ' - ' +
-  //       DateFormat("dd MMM yy", (isArabicLang() ? "ar" : "en")).format(dt);
-  //   return dat;
-  // }
 
   static String getdob(String date) {
     if (date.isEmpty) {
@@ -434,4 +423,14 @@ class DateUtility {
       return DateTime.now();
     }
   }
+
+
+  static dateFormatNamed({String? txtDate, DateTime? date}){
+  initializeDateFormatting(isArabicLang() ? 'ar' : 'en');
+  if(!GetUtils.isNull(date)) {
+    return DateFormat('MMMM d, y', (isArabicLang() ? "ar" : "en")).format(date!);
+  } else {
+    return DateFormat('MMMM d, y', (isArabicLang() ? "ar" : "en")).format(DateTime.parse(txtDate!));
+  }
+}
 }

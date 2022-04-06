@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:inbox_driver/feature/view/screens/notifications_screen/notifications_screen.dart';
 import 'package:inbox_driver/feature/view/screens/profile/profile_screen.dart';
 import 'package:inbox_driver/feature/view/widgets/appbar/custom_app_bar_widget.dart';
 import 'package:inbox_driver/feature/view/widgets/custom_text_filed.dart';
@@ -29,14 +30,13 @@ class HomeAppBar extends StatelessWidget {
             child: imageNetwork(
                 url: "${SharedPref.instance.getCurrentUserData()?.image}"))
         : CircleAvatar(
-          backgroundColor: colorPrimary,
-          radius: 30,
-        );
+            backgroundColor: colorPrimary,
+            radius: 30,
+          );
   }
 
   @override
   Widget build(BuildContext context) {
-    screenUtil(context);
     screenUtil(context);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: sizeW20!, vertical: sizeH20!),
@@ -83,6 +83,7 @@ class HomeAppBar extends StatelessWidget {
               height: sizeH48,
               backgroundColor: colorRedTrans,
               onPressed: () {
+                Get.to(() => const NotificationScreen());
                 //  Get.to(() => NewCustomer());
                 // Get.to(() => const VisitTasksView());
               },
