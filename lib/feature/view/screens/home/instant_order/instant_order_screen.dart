@@ -192,6 +192,8 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
                               isLoading: homeViewModel.isLoading,
                               onClicked: () async {
                                 await home.updateTaskStatus(
+                                    seralOrder:homeViewModel.operationTask.salesOrder,
+                                    customerId:homeViewModel.operationTask.customerId,
                                     newStatus: Constance.done,
                                     taskId: widget.taskId,
                                     taskStatusId: widget.taskStatusId);
@@ -216,6 +218,8 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
                           isLoading: homeViewModel.isLoading,
                           onClicked: () async {
                             await home.updateTaskStatus(
+                                seralOrder:homeViewModel.operationTask.salesOrder,
+                                customerId:homeViewModel.operationTask.customerId,
                                 newStatus: Constance.done,
                                 taskId: widget.taskId,
                                 taskStatusId: widget.taskStatusId);

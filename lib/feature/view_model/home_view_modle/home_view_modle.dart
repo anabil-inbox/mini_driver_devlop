@@ -19,6 +19,7 @@ import 'package:inbox_driver/feature/view/screens/home/Widgets/secondery_button.
 import 'package:inbox_driver/feature/view/screens/home/instant_order/instant_order_screen.dart';
 import 'package:inbox_driver/feature/view/screens/home/new_customer/Widgets/qty_bottom_sheet.dart';
 import 'package:inbox_driver/network/api/feature/home_helper.dart';
+import 'package:inbox_driver/network/firebase/firbase_clinte.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
@@ -467,7 +468,7 @@ class HomeViewModel extends GetxController {
   Future<void> updateTaskStatus(
       {required String newStatus,
       required String taskId,
-      required String taskStatusId}) async {
+      required String taskStatusId, String? seralOrder, String? customerId}) async {
     try {
       Map<String, dynamic> body = {};
 
@@ -521,6 +522,7 @@ class HomeViewModel extends GetxController {
                     endLoading(),
                     if (newStatus == Constance.done)
                       {
+                        FirebaseClint.instance.deleteOrderTracking(customerId, seralOrder, ),
                         Get.close(2),
                       },
                     // operationsSalesData.

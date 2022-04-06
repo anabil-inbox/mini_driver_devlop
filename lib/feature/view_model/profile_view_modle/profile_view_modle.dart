@@ -16,6 +16,7 @@ import 'package:inbox_driver/feature/view/widgets/secondery_button.dart';
 import 'package:inbox_driver/feature/view_model/auht_view_modle/auth_view_modle.dart';
 import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
 import 'package:inbox_driver/network/api/feature/home_helper.dart';
+import 'package:inbox_driver/network/api/feature/cash_helper.dart';
 import 'package:inbox_driver/network/api/feature/profie_helper.dart';
 import 'package:inbox_driver/network/utils/constance_netwoek.dart';
 import 'package:inbox_driver/util/app_color.dart';
@@ -26,6 +27,8 @@ import 'package:inbox_driver/util/base_controller.dart';
 import 'package:inbox_driver/util/sh_util.dart';
 import 'package:inbox_driver/util/string.dart';
 import 'package:logger/logger.dart';
+
+import '../../model/profile/cash_closer_data.dart';
 
 class ProfileViewModle extends BaseController {
   TextEditingController tdUserFullNameEdit = TextEditingController();
@@ -50,8 +53,13 @@ class ProfileViewModle extends BaseController {
   }
 
   List<Log> userLogs = [];
+  List<CashCloserData> listCashCloser =[];
+  num totalAmount = 0;
+  num padAmount = 0;
+  num remainingAmount = 0;
 
 //   //-- for log out
+
 
   logOutBottomSheet() {
     Get.bottomSheet(GlobalBottomSheet(
@@ -222,6 +230,83 @@ class ProfileViewModle extends BaseController {
       Logger().e(e.toString());
     }
     stopLoading();
+
+  Future<void> getCashCloser() async{
+    try {
+      isLoading = true;
+      update();
+      totalAmount = 0;
+      padAmount = 0;
+      remainingAmount = 0;
+      await CashCloserFeature.getInstance.getCashCloser().then((value) {
+        Logger().d(value.length);
+            if(value.isNotEmpty){
+              listCashCloser.clear();
+              listCashCloser=value;
+              isLoading = false;
+              totalAmountCalc();
+              padAmountCalc();
+              remainingAmountCalc();
+              update();
+            }else {
+              isLoading = false;
+              update();
+            }
+          });
+    } catch (e) {
+      Logger().e(e);
+      isLoading = false;
+      update();
+    }
+
+  }
+
+  Future<void> applyCashCloser(var id ) async{
+    try {
+      isLoading = true;
+      update();
+      await CashCloserFeature.getInstance.applyCashCloser({ConstanceNetwork.idKey:id.toString()}).then((value) {
+        if(value.status!.success!){
+          getCashCloser();
+          Get.back();
+          isLoading = false;
+          update();
+        }else {
+          isLoading = false;
+          update();
+        }
+      });
+    } catch (e) {
+      Logger().e(e);
+      isLoading = false;
+      update();
+    }
+
+  }
+
+  void totalAmountCalc() {
+    for(var item in listCashCloser){
+        totalAmount = totalAmount + item.amount!;
+    }
+    update();
+  }
+
+  void padAmountCalc() {
+    for(var item in listCashCloser){
+      if(item.status != 0) {
+        padAmount = padAmount + item.amount!;
+      }
+    }
+    update();
+  }
+
+  void remainingAmountCalc() {
+    for(var item in listCashCloser){
+      if(item.status == 0) {
+        remainingAmount = remainingAmount + item.amount!;
+      }
+    }
+    update();
   }
 
 //   // fot timer on change number :
@@ -244,4 +329,5 @@ class ProfileViewModle extends BaseController {
 //     );
 //   }
 
+}
 }

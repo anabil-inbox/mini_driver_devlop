@@ -62,7 +62,7 @@ class FirebaseClint {
 
 
   //this for add driver tracking
-  Future<void> deleteOrderTracking(var customerId , var serial , var bodyData)async{
+  Future<void> deleteOrderTracking(var customerId , var serial )async{
     try {
       ///  in _diverTrack we will go to [customerId]
       ///  in customerId we will go to [_serialOrder]

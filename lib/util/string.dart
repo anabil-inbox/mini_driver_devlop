@@ -40,6 +40,8 @@ const String txtCustomerToWH = "Customer to WH";
 const String txtHelena = "Helena Brauer";
 const String txtAddress = "20 Wadi Alsail, 918 Alreef st. Building no.10";
 const String txtReceived = "Received";
+const String txtNotPaid = "Not paid";
+const String txtHandover = "Handover";
 const String txtADD = "Add";
 const String txtAddSignature = "Add Signature";
 
@@ -185,3 +187,6 @@ const String txtItemFetched = "Items Fetched";
 const String txtChooseQuantity = "Choose Quantity";
 const String txtPleaseEnterQuantity = "Please enter quantity";
 const String txtOrderTracnfer = "Order Tracnfer";
+
+//this for cash closer page
+const String txtApplyCashCloser ="applyCashCloser";
