@@ -84,7 +84,32 @@ class OrderDetailsStarted extends StatelessWidget {
     if (isFromCompleted) {
       return const SizedBox();
     } else if (index == 0) {
-      if (home.isTaskWarwhouseLoadingOrClousre(task: task)) {
+      if(home.isTransfer(task: task)){
+        return GetBuilder<HomeViewModel>(
+          builder: (home) {
+            return PrimaryButton(
+              isExpanded: true,
+              isLoading: home.isLoading,
+              textButton: txtConfirmTransfer.tr,
+              onClicked: () async {
+                await home.updateTaskStatus(
+                  taskStatusId: task.id ?? "",
+                  newStatus: Constance.done,
+                  taskId: salesOrder.taskId ?? "",
+                );
+
+                await home.getSpecificTask(
+                    taskId: task.id ?? "", taskSatus: Constance.inProgress);
+                await home.getSpecificTask(
+                    taskId: task.id ?? "", taskSatus: Constance.done);
+                await home.getHomeTasks(taskType: Constance.done);
+                await home.getHomeTasks(taskType: Constance.inProgress);
+              },
+            );
+          },
+        );
+      }
+      else if (home.isTaskWarwhouseLoadingOrClousre(task: task)) {
         return PrimaryButton(
           isExpanded: true,
           isLoading: home.isLoading,

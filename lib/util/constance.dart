@@ -95,4 +95,6 @@ abstract class Constance {
   static String terminate = "Terminate";
 
   static String paymentMethod = "payment_method";
+
+  static String transfer = "Transfer";
 }

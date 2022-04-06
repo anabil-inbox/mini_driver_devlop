@@ -554,13 +554,17 @@ class HomeViewModel extends GetxController {
   }
 
   // to check if Task Type if Task Warwhouse Loading Or WareHouse Clouser :
+
+  bool isTransfer({required TaskModel task}) {
+    if (task.taskName!.toLowerCase().contains(Constance.transfer.toLowerCase())) {
+      return true;
+    }
+    return false;
+  }
+
   bool isTaskWarwhouseLoadingOrClousre({required TaskModel task}) {
-    if (task.taskName!
-            .toLowerCase()
-            .contains(Constance.taskWarehouseLoading.toLowerCase()) ||
-        task.taskName!
-            .toLowerCase()
-            .contains(Constance.taskWarehouseClosure.toLowerCase())) {
+    if (task.taskName!.toLowerCase().contains(Constance.taskWarehouseLoading.toLowerCase()) ||
+        task.taskName!.toLowerCase().contains(Constance.taskWarehouseClosure.toLowerCase())) {
       return true;
     }
     return false;

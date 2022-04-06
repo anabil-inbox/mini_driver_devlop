@@ -79,4 +79,5 @@ Map<String, String> enUS = {
    txtApplyCashCloser : "Apply Cash Closer",
    txtNotPaid : "Not paid",
    txtHandover : "Handover",
+   txtConfirmTransfer : "Confirm Transfer",
 };

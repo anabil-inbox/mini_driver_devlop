@@ -79,4 +79,5 @@ Map<String, String> arSU = {
   txtApplyCashCloser : "تطبيق الكاش المنتهي",
   txtNotPaid : "غير مدفوع",
   txtHandover : "سلم",
+  txtConfirmTransfer : "تاكيد النقل",
 };

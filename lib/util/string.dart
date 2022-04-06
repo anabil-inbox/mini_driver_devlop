@@ -190,3 +190,4 @@ const String txtOrderTracnfer = "Order Tracnfer";
 
 //this for cash closer page
 const String txtApplyCashCloser ="applyCashCloser";
+const String txtConfirmTransfer ="Confirm Transfer";
