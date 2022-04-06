@@ -14,6 +14,7 @@ abstract class ConstanceNetwork {
   static var deviceTypeKey = "device_type";
   static var fcmKey = "fcm";
   static var emailKey = "email";
+  static var idKey = "id";
 
   //todo user status : 
   static String userEnterd = "enterd";
@@ -78,6 +79,12 @@ abstract class ConstanceNetwork {
   static String terminateEndPoint = "inbox_app.driver.task_management.terminate_box";
   static String scheduleEndPoint = "inbox_app.driver.task_management.schedule_box";
   static String createWaitingRequestEndPoint = "inbox_app.driver.task_management.create_waiting_request";
+
+
+  //this for cash closer
+  static String getCashRequestApi = "inbox_app.driver.task_management.get_cash_request";
+  static String applyCashRequestApi = "inbox_app.driver.task_management.apply_cash_request";
+
 
 
 

@@ -83,4 +83,7 @@ Map<String, String> arSU = {
   txtTotalAmount : "المبلغ الكلي",
   txtPaidAmount : "المبلغ المدفوع",
   txtRemainingAmount : "المبلغ المتبقي",
+  txtApplyCashCloser : "تطبيق الكاش المنتهي",
+  txtNotPaid : "غير مدفوع",
+  txtHandover : "سلم",
 };

@@ -76,4 +76,7 @@ Map<String, String> enUS = {
    txtOrderTracnfer : "Order Tracnfer",
    txtSubmitReport : "Submit Report",
    txtTakePicture : "Take Picture",
+   txtApplyCashCloser : "Apply Cash Closer",
+   txtNotPaid : "Not paid",
+   txtHandover : "Handover",
 };
