@@ -139,11 +139,11 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
                   SizedBox(height: sizeH10),
                   const ScanBoxInstantOrder(),
                 ],
-                SizedBox(height: sizeH10),
                 if (home.operationTask.processType == Constance.recallId ||
                     (home.operationTask.processType == Constance.terminateId &&
                         (homeViewModel.operationTask.hasDeliveredScan ??
                             false))) ...[
+                  SizedBox(height: sizeH10),
                   GetBuilder<HomeViewModel>(builder: (homeViewModel) {
                     return scanDelivedBoxes(homeViewModel: homeViewModel);
                   })
@@ -192,8 +192,10 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
                               isLoading: homeViewModel.isLoading,
                               onClicked: () async {
                                 await home.updateTaskStatus(
-                                    seralOrder:homeViewModel.operationTask.salesOrder,
-                                    customerId:homeViewModel.operationTask.customerId,
+                                    seralOrder:
+                                        homeViewModel.operationTask.salesOrder,
+                                    customerId:
+                                        homeViewModel.operationTask.customerId,
                                     newStatus: Constance.done,
                                     taskId: widget.taskId,
                                     taskStatusId: widget.taskStatusId);
@@ -218,8 +220,10 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
                           isLoading: homeViewModel.isLoading,
                           onClicked: () async {
                             await home.updateTaskStatus(
-                                seralOrder:homeViewModel.operationTask.salesOrder,
-                                customerId:homeViewModel.operationTask.customerId,
+                                seralOrder:
+                                    homeViewModel.operationTask.salesOrder,
+                                customerId:
+                                    homeViewModel.operationTask.customerId,
                                 newStatus: Constance.done,
                                 taskId: widget.taskId,
                                 taskStatusId: widget.taskStatusId);
@@ -246,8 +250,3 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
     );
   }
 }
-
-
-// after upload customer signature 
-// request time >>
-// waiting time >>

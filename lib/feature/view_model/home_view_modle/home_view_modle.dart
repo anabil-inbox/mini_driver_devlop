@@ -388,7 +388,7 @@ class HomeViewModel extends GetxController {
       if (img != null) {
         img = await compressImage(img!);
       }
-      HomeHelper.getInstance.uploadCustomerId(body: {
+     await HomeHelper.getInstance.uploadCustomerId(body: {
         "image":
             img != null ? multipart.MultipartFile.fromFileSync(img!.path) : "",
         "customer": customerId,
@@ -785,10 +785,11 @@ class HomeViewModel extends GetxController {
     }
   }
 
-  Future<void> sendPaymentRequest() async {
+  Future<void> sendPaymentRequest({required String paymentMethod}) async {
     try {
       await HomeHelper.getInstance.paymentRequest(body: {
-        Constance.id: operationTask.childOrder?.id
+        Constance.id: operationTask.salesOrder,
+        Constance.paymentMethod: paymentMethod,
       }).then((value) => {
             if (value.status!.success!)
               {

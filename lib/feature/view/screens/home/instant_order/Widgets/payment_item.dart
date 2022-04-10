@@ -26,7 +26,7 @@ class PaymentItem extends StatelessWidget {
         taskResponse.paymentMethod = paymentMethod.name;
         homeViewModel.operationTask = taskResponse;
         homeViewModel.update();
-        homeViewModel.sendPaymentRequest();
+        homeViewModel.sendPaymentRequest(paymentMethod: paymentMethod.id ?? paymentMethod.name ?? "");
         // if (paymentMethod.id == Constance.walletKey || paymentMethod.id == Constance.bankKey ) {//applications
         //   homeViewModel.sendPaymentRequest();
         // }
@@ -48,19 +48,18 @@ class PaymentItem extends StatelessWidget {
             EdgeInsets.symmetric(vertical: padding9!, horizontal: padding14!),
         child: Row(
           children: [
-            if (paymentMethod.image != null &&
-                    paymentMethod.image != "") ...[
-                  imageNetwork(
-                      isPayment: true,
-                      url: paymentMethod.image,
-                      width: sizeW20,
-                      height: sizeH20),
-                ] else ...[
-                  imageNetwork(isPayment: true, width: sizeW20, height: sizeH20)
-                ],
-                 SizedBox(
-                  width: sizeW5,
-                ),
+            if (paymentMethod.image != null && paymentMethod.image != "") ...[
+              imageNetwork(
+                  isPayment: true,
+                  url: paymentMethod.image,
+                  width: sizeW20,
+                  height: sizeH20),
+            ] else ...[
+              imageNetwork(isPayment: true, width: sizeW20, height: sizeH20)
+            ],
+            SizedBox(
+              width: sizeW5,
+            ),
             CustomTextView(
               txt: "${paymentMethod.name}",
               textStyle:

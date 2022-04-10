@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:inbox_driver/feature/model/tasks/task_response.dart';
-import 'package:inbox_driver/feature/view/screens/details/order_details_started_screen.dart';
 import 'package:inbox_driver/feature/view/screens/home/home_screen.dart';
 import 'package:inbox_driver/feature/view/screens/home/trasfare/trasfare_content_screen.dart';
 import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
