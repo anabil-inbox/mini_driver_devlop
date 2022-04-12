@@ -115,10 +115,6 @@ class OrderDetailsStarted extends StatelessWidget {
           isLoading: home.isLoading,
           textButton: txtReceived.tr,
           onClicked: () async {
-            // await home.updateTaskStatus(
-            //   newStatus: Constance.taskStart,
-            //   taskId: salesOrder.taskId ?? "",
-            // );
             await home.recivedBoxes(
                 serial:
                     home.operationsSalesData!.salesOrders![index].orderId ?? "",
@@ -176,7 +172,7 @@ class OrderDetailsStarted extends StatelessWidget {
                 await home.getHomeTasks(taskType: Constance.done);
                 await home.getHomeTasks(taskType: Constance.inProgress);
               },
-              textButton: "Delivered",
+              textButton: "Deliver",
             ),
             SizedBox(
               width: sizeW12,
@@ -227,7 +223,6 @@ class OrderDetailsStarted extends StatelessWidget {
           },
         );
       } else {
-        //  return const Text("End Order Transfer");
         return const SizedBox();
       }
     } else if (index != 0) {

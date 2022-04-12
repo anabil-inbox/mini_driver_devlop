@@ -17,7 +17,7 @@ class TrasfareContentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: padding20!),
+        padding: EdgeInsets.symmetric(horizontal: padding20!),
         child: Center(
           child: GetBuilder<HomeViewModel>(
             builder: (home) {
@@ -26,15 +26,12 @@ class TrasfareContentScreen extends StatelessWidget {
                 isLoading: home.isLoading,
                 textButton: txtConfirmTransfer.tr,
                 onClicked: () async {
-                  await home.updateTaskStatus(
-                    taskStatusId: taskId,
-                    newStatus: Constance.done,
-                    taskId: taskId,
-                  );
-                  await home.getSpecificTask(
-                      taskId: taskId, taskSatus: Constance.inProgress);
-                  await home.getSpecificTask(
-                      taskId: taskId, taskSatus: Constance.done);
+                  await home.confirmTransfer(
+                      status: Constance.done, taskId: taskId);
+                  // await home.getSpecificTask(
+                  //     taskId: taskId, taskSatus: Constance.inProgress);
+                  // await home.getSpecificTask(
+                  //     taskId: taskId, taskSatus: Constance.done);
                   await home.getHomeTasks(taskType: Constance.done);
                   await home.getHomeTasks(taskType: Constance.inProgress);
                 },

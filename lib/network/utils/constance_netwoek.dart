@@ -100,6 +100,7 @@ abstract class ConstanceNetwork {
       "inbox_app.driver.notification.get_notifications";
 
   static String getLogEndPoint = "inbox_app.driver.notification.get_logs";
+  static String confirmTransactionEndPoint = "inbox_app.driver.task_management.confirm_transfer";
   // static String uploadCustomerSignatureEndPoint = "inbox_app.driver.task_management.upload_customer_singnature";
   // static String notifyForSignEndpoint = "inbox_app.driver.task_management.notify_customer_sign_side"; 
   // static String createNewSealEndPoint = "inbox_app.driver.task_management.create_new_seal";

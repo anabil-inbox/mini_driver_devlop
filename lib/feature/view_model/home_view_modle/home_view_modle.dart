@@ -16,6 +16,7 @@ import 'package:inbox_driver/feature/model/signature_item_model.dart';
 import 'package:inbox_driver/feature/model/tasks/box_model.dart';
 import 'package:inbox_driver/feature/model/tasks/task_response.dart';
 import 'package:inbox_driver/feature/view/screens/home/Widgets/secondery_button.dart';
+import 'package:inbox_driver/feature/view/screens/home/home_screen.dart';
 import 'package:inbox_driver/feature/view/screens/home/instant_order/instant_order_screen.dart';
 import 'package:inbox_driver/feature/view/screens/home/new_customer/Widgets/qty_bottom_sheet.dart';
 import 'package:inbox_driver/network/api/feature/home_helper.dart';
@@ -388,7 +389,7 @@ class HomeViewModel extends GetxController {
       if (img != null) {
         img = await compressImage(img!);
       }
-     await HomeHelper.getInstance.uploadCustomerId(body: {
+      await HomeHelper.getInstance.uploadCustomerId(body: {
         "image":
             img != null ? multipart.MultipartFile.fromFileSync(img!.path) : "",
         "customer": customerId,
@@ -468,7 +469,9 @@ class HomeViewModel extends GetxController {
   Future<void> updateTaskStatus(
       {required String newStatus,
       required String taskId,
-      required String taskStatusId, String? seralOrder, String? customerId}) async {
+      required String taskStatusId,
+      String? seralOrder,
+      String? customerId}) async {
     try {
       Map<String, dynamic> body = {};
 
@@ -492,9 +495,9 @@ class HomeViewModel extends GetxController {
           .then((value) => {
                 if (value.status!.success!)
                   {
+                    snackSuccess(txtSuccess!.tr, value.status!.message!),
                     operationTask = TaskResponse.fromJson(value.data,
                         isFromNotification: false),
-                    snackSuccess(txtSuccess!.tr, value.status!.message!),
 
                     operationsSalesData?.salesOrders?.forEach((element) {
                       if (element.taskId == taskId) {
@@ -506,7 +509,10 @@ class HomeViewModel extends GetxController {
                         // SharedPref.instance.setCurrentTaskResponse(
                         //     taskResponse: jsonEncode(value.data)),
                         // operationTask =
-
+                        SharedPref.instance.setDeliverdTime(
+                            deliverdTime:
+                                DateTime.now().millisecondsSinceEpoch),
+                        SharedPref.instance.setCurrentTaskId(taskId: taskId),
                         Get.to(() => InstantOrderScreen(
                             isFromNotification: false,
                             taskStatusId: taskStatusId,
@@ -522,7 +528,10 @@ class HomeViewModel extends GetxController {
                     endLoading(),
                     if (newStatus == Constance.done)
                       {
-                        FirebaseClint.instance.deleteOrderTracking(customerId, seralOrder, ),
+                        FirebaseClint.instance.deleteOrderTracking(
+                          customerId,
+                          seralOrder,
+                        ),
                         Get.close(2),
                       },
                     // operationsSalesData.
@@ -556,15 +565,21 @@ class HomeViewModel extends GetxController {
   // to check if Task Type if Task Warwhouse Loading Or WareHouse Clouser :
 
   bool isTransfer({required TaskModel task}) {
-    if (task.taskName!.toLowerCase().contains(Constance.transfer.toLowerCase())) {
+    if (task.taskName!
+        .toLowerCase()
+        .contains(Constance.transfer.toLowerCase())) {
       return true;
     }
     return false;
   }
 
   bool isTaskWarwhouseLoadingOrClousre({required TaskModel task}) {
-    if (task.taskName!.toLowerCase().contains(Constance.taskWarehouseLoading.toLowerCase()) ||
-        task.taskName!.toLowerCase().contains(Constance.taskWarehouseClosure.toLowerCase())) {
+    if (task.taskName!
+            .toLowerCase()
+            .contains(Constance.taskWarehouseLoading.toLowerCase()) ||
+        task.taskName!
+            .toLowerCase()
+            .contains(Constance.taskWarehouseClosure.toLowerCase())) {
       return true;
     }
     return false;
@@ -985,6 +1000,33 @@ class HomeViewModel extends GetxController {
           .then((value) => {notifications = value});
     } catch (e) {
       debugPrint("getNotification error $e");
+    }
+    endLoading();
+  }
+
+  Future<void> confirmTransfer(
+      {required String status, required String taskId}) async {
+    startLoading();
+    try {
+      await HomeHelper.getInstance.confirmTrasfare(body: {
+        Constance.taskId: taskId,
+        Constance.status: status
+      }).then((value) => {
+            if (value.status!.success!)
+              {
+                snackSuccess("$txtSuccess", "${value.status!.message}"),
+                update(),
+                Get.offAll(HomeScreen()),
+              }
+            else
+              {
+                
+                snackError("$txtError", "${value.status!.message}"),
+              }
+          });
+    } catch (e) {
+      Logger().e(e.toString());
+      debugPrint(e.toString());
     }
     endLoading();
   }
