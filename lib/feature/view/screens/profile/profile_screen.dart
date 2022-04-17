@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -14,12 +15,13 @@ import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/string.dart';
 
+import '../../../view_model/profile_view_modle/profile_view_modle.dart';
 import 'log/log_screen.dart';
 import 'widget/header_profile_card.dart';
 
-class ProfileScreen extends GetWidget<ProfileViewModle> {
+class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
-
+  static ProfileViewModle get _profileViewModel => Get.put(ProfileViewModle());
   @override
   Widget build(BuildContext context) {
     screenUtil(context);
@@ -99,7 +101,7 @@ class ProfileScreen extends GetWidget<ProfileViewModle> {
                 ),
                 SettingItem(
                   onTap: () {
-                    controller.logOutBottomSheet();
+                    _profileViewModel.logOutBottomSheet();
                   },
                   settingTitle: txtLogOut.tr,
                   trailingTitle: "",

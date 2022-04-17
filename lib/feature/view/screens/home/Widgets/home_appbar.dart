@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:inbox_driver/feature/view/screens/notifications_screen/notifications_screen.dart';
@@ -41,7 +43,7 @@ class HomeAppBar extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: sizeW20!, vertical: sizeH20!),
       child: SizedBox(
-        height: sizeH70,
+        height: Platform.isIOS ?sizeH90: sizeH70,
         child: CustomAppBarWidget(
           elevation: 0,
           appBarColor: Colors.transparent,
