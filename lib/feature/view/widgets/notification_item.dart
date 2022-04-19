@@ -8,13 +8,13 @@ import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/date/date_time_util.dart';
 
 import '../../../util/app_shaerd_data.dart';
+import '../../../util/constance.dart';
 
 class NotificationItem extends StatelessWidget {
   const NotificationItem({Key? key, required this.notification})
       : super(key: key);
 
   final NotificationModel notification;
-
 
   @override
   Widget build(BuildContext context) {
@@ -39,13 +39,17 @@ class NotificationItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomTextView(txt: notification.title.toString()),
+                CustomTextView(
+                    txt: notification.title.toString(),
+                    textStyle: textStyleAppbar()!.copyWith(
+                      fontSize: 14,
+                    )),
                 SizedBox(
                   height: sizeW2,
                 ),
                 CustomTextView(
                   txt: notification.message.toString(),
-                  maxLine: 1,
+                  maxLine: Constance.maxLineTwo,
                   textOverflow: TextOverflow.ellipsis,
                 ),
                 SizedBox(

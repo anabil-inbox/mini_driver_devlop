@@ -41,7 +41,3 @@ class BindingsController extends Bindings {
     // Get.lazyPut(() => HomeViewModel());
   }
 }
-
-// اشعار notifiy_for_payment_ طرف الكلاينت بياناته فاضية
-// رجعلنا بيانات ال trasfare في الاشعار
-// تعديل حالة التاسك trasfare الى مكتملة بعد التأكيد

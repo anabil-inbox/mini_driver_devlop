@@ -182,6 +182,7 @@ const String txtRemainingAmount = "remainingamount";
 //todo strings of instance
 const String txtRequestTime = "Request Time"; 
 const String  txtBoxesNeedScan = "Boxes Need Scan";
+const String txtBoxesNeedTransfer = "Boxes Need Transfer";
 const String txtChooseBoxOperation = "Choose Box Operation";
 const String txtItemFetched = "Items Fetched";
 const String txtChooseQuantity = "Choose Quantity";

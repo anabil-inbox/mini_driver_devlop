@@ -1016,11 +1016,10 @@ class HomeViewModel extends GetxController {
               {
                 snackSuccess("$txtSuccess", "${value.status!.message}"),
                 update(),
-                Get.offAll(HomeScreen()),
+                Get.offAll(() => HomeScreen()),
               }
             else
               {
-                
                 snackError("$txtError", "${value.status!.message}"),
               }
           });

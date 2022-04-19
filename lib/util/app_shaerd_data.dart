@@ -49,7 +49,7 @@ screenUtil(BuildContext context) {
           maxWidth: MediaQuery.of(context).size.width,
           maxHeight: MediaQuery.of(context).size.height),
       designSize: const Size(392.72727272727275, 803.6363636363636),
-      context: context,
+      context: Get.context,
       orientation: Orientation.portrait);
 }
 

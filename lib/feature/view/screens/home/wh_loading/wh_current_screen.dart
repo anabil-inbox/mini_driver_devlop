@@ -82,9 +82,7 @@ class WHCurrentScreen extends StatelessWidget {
                 index: i,
                 salesData: home.operationsSalesData!,
                 salesOrder: home.operationsSalesData!.salesOrders![index],
-                onRecivedClick: () {
-                  
-                },
+                onRecivedClick: () {},
               );
             }
           });
@@ -165,8 +163,11 @@ class WHCurrentScreen extends StatelessWidget {
   Widget get searchWidget => Row(
         children: [
           !(task.taskName!
-                  .toLowerCase()
-                  .contains(Constance.taskCustomerVisit.toLowerCase()))
+                      .toLowerCase()
+                      .contains(Constance.taskCustomerVisit.toLowerCase()) ||
+                  task.taskName!
+                      .toLowerCase()
+                      .contains(Constance.transfer.toLowerCase()))
               ? IconBtn(
                   iconColor: colorTextWhite,
                   width: sizeW48,
@@ -183,14 +184,9 @@ class WHCurrentScreen extends StatelessWidget {
                   borderColor: colorTrans,
                   icon: "assets/svgs/Scan.svg",
                 )
-              : const SizedBox(),
-          !(task.taskName!
-                  .toLowerCase()
-                  .contains(Constance.taskCustomerVisit.toLowerCase()))
-              ? SizedBox(
+              : SizedBox(
                   width: sizeW10,
-                )
-              : const SizedBox(),
+                ),
           Expanded(
             child: CustomTextFormFiled(
               iconSize: sizeRadius20,
