@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>Inbox Driver</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -15,19 +17,40 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>$(FLUTTER_BUILD_NAME)</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>tel</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAllowsArbitraryLoads</key>
+	<true/>
+	<key>NSAllowsLocalNetworking</key>
+	<true/>
+	<key>NSAppTransportSecurity</key>
+	<string>We need this action to work with http links</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app requires to access your Camera to show image on profile or needs camera access to scan QR codes</string>
 	<key>NSFaceIDUsageDescription</key>
-	<string>Why is my app authenticating using face id?</string>
+	<string>We need this action to authenticate your identity to login in the app</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>This app need to access your location so you can see driver near you or update your current location.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This app need to access your location so you can see driver near you or update your current location.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app need to access your location so you can see driver near you or update your current location.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app requires to access your photo library to show image on profile</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -47,5 +70,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>io.flutter.embedded_views_preview</key>
+	<true/>
 </dict>
 </plist>

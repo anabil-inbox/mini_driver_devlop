@@ -43,7 +43,7 @@ class _ChooseCountryScreenState extends State<ChooseCountryScreen> {
   Widget build(BuildContext context) {
     screenUtil(context);
     controller.addPageRequestListener((pageKey) async {
-      final data = await repo.getCountries(1 + (pageKey ~/ 10), 250);
+      final data = await repo.getCountries((1 + (pageKey ~/ 10)).toInt(), 250);
       for(var i in data){
         var contains = listCountry.contains(i);
         if(contains) {
