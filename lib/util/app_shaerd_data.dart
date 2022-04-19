@@ -45,12 +45,13 @@ String? urlUserPlaceholder =
 
 screenUtil(BuildContext context) {
   ScreenUtil.init(
-      BoxConstraints(
-          maxWidth: MediaQuery.of(context).size.width,
-          maxHeight: MediaQuery.of(context).size.height),
-      // deviceSize:const Size(392.72727272727275, 803.6363636363636) ,
-      splitScreenMode: true,
-      context: Get.context!,
+      Get.context!,
+      // BoxConstraints(
+      //     maxWidth: MediaQuery.of(context).size.width,
+      //     maxHeight: MediaQuery.of(context).size.height),
+
+       deviceSize: const Size(392.72727272727275, 803.6363636363636) ,
+       splitScreenMode: true,
       minTextAdapt: true,
       designSize: const Size(392.72727272727275, 803.6363636363636),
       orientation: Orientation.portrait);

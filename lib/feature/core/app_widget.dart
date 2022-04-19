@@ -72,7 +72,7 @@ class _AppWidgetState extends State<AppWidget> {
     ));
     return ScreenUtilInit(
       designSize: const Size(392.72727272727275, 803.6363636363636),
-      builder: () {
+      builder: (context) {
         ScreenUtil.setContext(context);
         return DismissKeyboard(
           child: GetMaterialApp(
