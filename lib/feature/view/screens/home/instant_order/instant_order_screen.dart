@@ -116,7 +116,8 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
           ),
           isCenterTitle: true,
         ),
-        body: GetBuilder<HomeViewModel>(builder: (home) {
+        body: 
+        GetBuilder<HomeViewModel>(builder: (home) {
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: padding20!),
             child: ListView(
@@ -247,6 +248,8 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
             ),
           );
         }),
+      
+      
       ),
     );
   }

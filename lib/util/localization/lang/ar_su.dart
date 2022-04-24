@@ -63,6 +63,7 @@ Map<String, String> arSU = {
   txtYouHaveToSelectEmergencyCase: "اختيار حالة الطوارئ اجبارية",
   txtRequestTime: "طلب وقت",
   txtBoxesNeedScan: "الصناديق التي تحتاج مسح",
+  txtBoxesNeedTransfer : "الصناديق التي تحتاج للتحويل",
   txtChooseBoxOperation: "اختر عملية ",
   txtItemFetched: "العناصر التي تم الحصول عليها",
   txtChooseQuantity: "اختر الكمية",

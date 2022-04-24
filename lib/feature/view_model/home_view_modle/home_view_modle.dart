@@ -489,6 +489,21 @@ class HomeViewModel extends GetxController {
         };
       }
 
+      if (newStatus == Constance.done) {
+        bool isAllowed = true;
+        operationTask.scannedBoxes?.forEach((element) {
+          if ((element.boxOperations?.isNotEmpty ?? [].isNotEmpty) &&
+              element.selectedBoxOperations?.operation == null) {
+            isAllowed = false;
+            snackError("", "You Have To Select Box Operations");
+            return;
+          }
+        });
+        if (!isAllowed) {
+          return;
+        } 
+      }
+      Logger().e("body: ${body.toString()}");
       startLoading();
       await HomeHelper.getInstance
           .updateTaskStatus(body: body)
@@ -1016,11 +1031,10 @@ class HomeViewModel extends GetxController {
               {
                 snackSuccess("$txtSuccess", "${value.status!.message}"),
                 update(),
-                Get.offAll(HomeScreen()),
+                Get.offAll(() => HomeScreen()),
               }
             else
               {
-                
                 snackError("$txtError", "${value.status!.message}"),
               }
           });

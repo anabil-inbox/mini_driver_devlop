@@ -109,7 +109,7 @@ class OrderDetailsStarted extends StatelessWidget {
           },
         );
       }
-      else if (home.isTaskWarwhouseLoadingOrClousre(task: task)) {
+        else if (home.isTaskWarwhouseLoadingOrClousre(task: task)) {
         return PrimaryButton(
           isExpanded: true,
           isLoading: home.isLoading,
@@ -140,7 +140,6 @@ class OrderDetailsStarted extends StatelessWidget {
                   newStatus: Constance.taskStart,
                   taskId: salesOrder.taskId ?? "",
                 );
-
                 await home.getSpecificTask(
                     taskId: task.id ?? "", taskSatus: Constance.inProgress);
                 await home.getSpecificTask(

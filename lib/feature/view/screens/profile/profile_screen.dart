@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:inbox_driver/feature/view/screens/profile/cash_closure/cash_closure_view.dart';
 import 'package:inbox_driver/feature/view/screens/profile/setting/setting_screen.dart';
 import 'package:inbox_driver/feature/view/screens/profile/widget/setting_item.dart';

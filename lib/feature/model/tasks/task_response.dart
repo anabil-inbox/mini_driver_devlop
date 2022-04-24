@@ -191,8 +191,8 @@ class TaskResponse {
                 ? true
                 : false,
         customerId: json["customer_id"],
-        items: json["items"] == null
-            ? null
+        items: json["items"] == null || json["items"].isEmpty
+            ? []
             : List<FetchedItem>.from(
                 jsonDecode(json["items"]).map((x) => FetchedItem.fromJson(x))),
         childOrder: json["child_order"] == null
@@ -205,29 +205,33 @@ class TaskResponse {
         taskId: json["task_id"],
         paymentMethod: json["payment_method"],
         notificationId: json["id"],
-        boxes: json["boxes"] == null
+        boxes: json["boxes"] == null || json["boxes"].isEmpty
             ? []
             : List<BoxModel>.from(
                     jsonDecode(json["boxes"]).map((x) => BoxModel.fromJson(x)))
                 .toSet()
                 .toList(),
-        lateFees: json["late_fees"] == null
+        lateFees: json["late_fees"] == null || json["late_fees"].isEmpty
             ? []
             : List<LateFees>.from(jsonDecode(json["late_fees"])
                 .map((x) => LateFees.fromJson(x))).toSet().toList(),
-        scannedBoxes: json["scanned_boxes"] == null
-            ? []
-            : List<BoxModel>.from(jsonDecode(json["scanned_boxes"])
-                .map((x) => BoxModel.fromJson(x))).toSet().toList(),
-        customerScanned: json["customer_scanned"] == null
-            ? []
-            : List<BoxModel>.from(jsonDecode(json["customer_scanned"])
-                .map((x) => BoxModel.fromJson(x))).toSet().toList(),
-        driverDelivered: json["driver_delivered"] == null
-            ? []
-            : List<BoxModel>.from(jsonDecode(json["driver_delivered"])
-                .map((x) => BoxModel.fromJson(x))).toSet().toList(),
-        customerDelivered: json["customer_delivered"] == null
+        scannedBoxes:
+            json["scanned_boxes"] == null || json["scanned_boxes"].isEmpty
+                ? []
+                : List<BoxModel>.from(jsonDecode(json["scanned_boxes"])
+                    .map((x) => BoxModel.fromJson(x))).toSet().toList(),
+        customerScanned:
+            json["customer_scanned"] == null || json["customer_scanned"].isEmpty
+                ? []
+                : List<BoxModel>.from(jsonDecode(json["customer_scanned"])
+                    .map((x) => BoxModel.fromJson(x))).toSet().toList(),
+        driverDelivered:
+            json["driver_delivered"] == null || json["driver_delivered"].isEmpty
+                ? []
+                : List<BoxModel>.from(jsonDecode(json["driver_delivered"])
+                    .map((x) => BoxModel.fromJson(x))).toSet().toList(),
+        customerDelivered: json["customer_delivered"] == null ||
+                json["customer_delivered"].isEmpty
             ? []
             : List<BoxModel>.from(jsonDecode(json["customer_delivered"])
                 .map((x) => BoxModel.fromJson(x))).toSet().toList(),
