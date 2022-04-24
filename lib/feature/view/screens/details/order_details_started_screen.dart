@@ -81,14 +81,14 @@ class OrderDetailsStarted extends StatelessWidget {
       );
 
   Widget primaryButton({required HomeViewModel home}) {
-    if (home.operationsSalesData == null ||
-        home.operationsSalesData!.salesOrders == null ||
-        home.operationsSalesData!.salesOrders?[index] == null) {
-      return const SizedBox();
-    }
     if (isFromCompleted) {
       return const SizedBox();
     } else if (index == 0) {
+      if (home.operationsSalesData == null ||
+          home.operationsSalesData!.salesOrders == null ||
+          home.operationsSalesData!.salesOrders?[index] == null) {
+        return const SizedBox();
+      }
       if (home.isTransfer(task: task)) {
         return GetBuilder<HomeViewModel>(
           builder: (home) {
