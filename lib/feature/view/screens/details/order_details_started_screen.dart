@@ -81,10 +81,13 @@ class OrderDetailsStarted extends StatelessWidget {
       );
 
   Widget primaryButton({required HomeViewModel home}) {
+    if (home.operationsSalesData == null || home.operationsSalesData!.salesOrders == null) {
+      return const SizedBox();
+    }
     if (isFromCompleted) {
       return const SizedBox();
     } else if (index == 0) {
-      if(home.isTransfer(task: task)){
+      if (home.isTransfer(task: task)) {
         return GetBuilder<HomeViewModel>(
           builder: (home) {
             return PrimaryButton(
@@ -108,8 +111,7 @@ class OrderDetailsStarted extends StatelessWidget {
             );
           },
         );
-      }
-        else if (home.isTaskWarwhouseLoadingOrClousre(task: task)) {
+      } else if (home.isTaskWarwhouseLoadingOrClousre(task: task)) {
         return PrimaryButton(
           isExpanded: true,
           isLoading: home.isLoading,
@@ -127,7 +129,8 @@ class OrderDetailsStarted extends StatelessWidget {
             await home.getHomeTasks(taskType: Constance.inProgress);
           },
         );
-      } else if (salesOrder.taskStatus == Constance.inProgress) {
+      } else if (home.operationsSalesData!.salesOrders![index].taskStatus ==
+          Constance.inProgress) {
         return GetBuilder<HomeViewModel>(
           builder: (home) {
             return PrimaryButton(
@@ -150,7 +153,7 @@ class OrderDetailsStarted extends StatelessWidget {
             );
           },
         );
-      } else if (salesOrder.taskStatus == Constance.taskStart) {
+      } else if (home.operationsSalesData!.salesOrders![index].taskStatus == Constance.taskStart) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -200,7 +203,7 @@ class OrderDetailsStarted extends StatelessWidget {
             ),
           ],
         );
-      } else if (salesOrder.taskStatus == Constance.taskdelivered) {
+      } else if (home.operationsSalesData!.salesOrders![index].taskStatus == Constance.taskdelivered) {
         return GetBuilder<HomeViewModel>(
           builder: (home) {
             return PrimaryButton(
@@ -244,7 +247,6 @@ class OrderDetailsStarted extends StatelessWidget {
         ],
       );
     }
-
     return const SizedBox();
   }
 

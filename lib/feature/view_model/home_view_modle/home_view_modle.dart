@@ -519,11 +519,7 @@ class HomeViewModel extends GetxController {
                         element.taskStatus = newStatus;
                       }
                     }),
-                    if (newStatus == Constance.taskdelivered)
-                      {
-                        // SharedPref.instance.setCurrentTaskResponse(
-                        //     taskResponse: jsonEncode(value.data)),
-                        // operationTask =
+                    if (newStatus == Constance.taskdelivered){
                         SharedPref.instance.setDeliverdTime(
                             deliverdTime:
                                 DateTime.now().millisecondsSinceEpoch),
@@ -534,11 +530,6 @@ class HomeViewModel extends GetxController {
                             isNewCustomer: true,
                             taskId: taskId))
                       },
-                    // else if (newStatus == Constance.taskDone)
-                    //   {
-
-                    //   },
-
                     update(),
                     endLoading(),
                     if (newStatus == Constance.done)
@@ -549,7 +540,6 @@ class HomeViewModel extends GetxController {
                         ),
                         Get.close(2),
                       },
-                    // operationsSalesData.
                   }
                 else
                   {
