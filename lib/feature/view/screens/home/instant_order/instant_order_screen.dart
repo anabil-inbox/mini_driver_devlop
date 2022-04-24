@@ -187,12 +187,28 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
                           SizedBox(width: sizeH20),
                           Expanded(
                             child: GreenButton(
-                              buttonText: txtDone.tr,
-                              color: colorGreen,
-                              isLoading: homeViewModel.isLoading,
-                              onClicked: () async {
-                                if (homeViewModel.formFieldKey.currentState!
-                                    .validate()) {
+                                buttonText: txtDone.tr,
+                                color: colorGreen,
+                                isLoading: homeViewModel.isLoading,
+                                onClicked: () async {
+                                  bool isAllowed = true;
+
+                                  homeViewModel.operationTask.scannedBoxes
+                                      ?.forEach((element) {
+                                    if (element.selectedBoxOperations
+                                                ?.operation ==
+                                            Constance.sealed &&
+                                        element.newSeal == null) {
+                                      snackError("",
+                                          "Please Enter seal for box ${element.boxId}");
+                                      isAllowed = false;
+                                      return;
+                                    }
+                                  });
+
+                                  if (!isAllowed) {
+                                    return;
+                                  }
                                   await home.updateTaskStatus(
                                       seralOrder: homeViewModel
                                           .operationTask.salesOrder,
@@ -211,20 +227,33 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
                                       taskType: Constance.done);
                                   await home.getHomeTasks(
                                       taskType: Constance.inProgress);
-                                }
-                              },
-                            ),
+                                }),
                           )
                         ],
                       );
                     } else {
                       return GreenButton(
-                        buttonText: txtDone.tr,
-                        color: colorGreen,
-                        isLoading: homeViewModel.isLoading,
-                        onClicked: () async {
-                          if (homeViewModel.formFieldKey.currentState!
-                              .validate()) {
+                          buttonText: txtDone.tr,
+                          color: colorGreen,
+                          isLoading: homeViewModel.isLoading,
+                          onClicked: () async {
+                            bool isAllowed = true;
+
+                            homeViewModel.operationTask.scannedBoxes
+                                ?.forEach((element) {
+                              if (element.selectedBoxOperations?.operation ==
+                                      Constance.sealed &&
+                                  element.newSeal == null) {
+                                snackError("",
+                                    "Please Enter seal for box ${element.boxId}");
+                                isAllowed = false;
+                                return;
+                              }
+                            });
+
+                            if (!isAllowed) {
+                              return;
+                            }
                             await home.updateTaskStatus(
                                 seralOrder:
                                     homeViewModel.operationTask.salesOrder,
@@ -242,9 +271,7 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
                             await home.getHomeTasks(taskType: Constance.done);
                             await home.getHomeTasks(
                                 taskType: Constance.inProgress);
-                          }
-                        },
-                      );
+                          });
                     }
                   },
                 ),

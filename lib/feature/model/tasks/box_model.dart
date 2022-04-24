@@ -4,6 +4,7 @@ class BoxModel {
       this.boxName,
       this.boxOperations,
       this.serial,
+      this.newSeal,
       this.selectedBoxOperations});
 
   String? boxId;
@@ -11,6 +12,7 @@ class BoxModel {
   List<BoxOperation>? boxOperations;
   String? serial;
   BoxOperation? selectedBoxOperations;
+  String? newSeal;
 
   factory BoxModel.fromJson(Map<String, dynamic> json) => BoxModel(
         boxId: json["serial"],

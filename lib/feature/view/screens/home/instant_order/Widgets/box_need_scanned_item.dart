@@ -16,6 +16,7 @@ class BoxNeedScannedItem extends StatelessWidget {
   const BoxNeedScannedItem({Key? key , this.isTransfare = false}) : super(key: key);
 
   final bool isTransfare;
+  static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
   @override
   Widget build(BuildContext context) {
     screenUtil(context);

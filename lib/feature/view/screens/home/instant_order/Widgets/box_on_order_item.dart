@@ -26,69 +26,65 @@ class BoxOnOrderItem extends StatelessWidget {
   final bool isShowingOperations;
 
   Widget get boxOperationSection {
-    return Form(
-      key: homeViewModel.formFieldKey,
-      child: Column(
-        children: [
-          SizedBox(
-            height: sizeH12,
-          ),
-          TextFormField(
-            controller: TextEditingController(
-                text: boxModel.selectedBoxOperations?.operation ?? ""),
-            decoration: InputDecoration(
-                hintText: txtChooseBoxOperation.tr,
-                prefixIcon: Padding(
-                  padding: const EdgeInsets.all(padding10),
-                  child: SvgPicture.asset("assets/svgs/dropdown.svg"),
-                )),
-            readOnly: true,
-            onTap: () async {
-              await Get.bottomSheet(
-                  InstantOrderBottomSheet(
-                    onEnd: (boxModel) async {
-                      this.boxModel = BoxModel();
-                      this.boxModel = boxModel;
+    return Column(
+      children: [
+        SizedBox(
+          height: sizeH12,
+        ),
+        TextFormField(
+          controller: TextEditingController(
+              text: boxModel.selectedBoxOperations?.operation ?? ""),
+          decoration: InputDecoration(
+              hintText: txtChooseBoxOperation.tr,
+              prefixIcon: Padding(
+                padding: const EdgeInsets.all(padding10),
+                child: SvgPicture.asset("assets/svgs/dropdown.svg"),
+              )),
+          readOnly: true,
+          onTap: () async {
+            await Get.bottomSheet(
+                InstantOrderBottomSheet(
+                  onEnd: (boxModel) async {
+                    this.boxModel = BoxModel();
+                    this.boxModel = boxModel;
+                  },
+                  boxModel: boxModel,
+                  boxOperations: boxModel.boxOperations ?? [],
+                ),
+                isScrollControlled: true);
+            homeViewModel.update();
+          },
+        ),
+        SizedBox(
+          height: sizeH12,
+        ),
+        GetBuilder<HomeViewModel>(
+          builder: (homeViewModel) {
+            return boxModel.selectedBoxOperations?.operation == Constance.sealed
+                ? TextFormField(
+                    textInputAction: TextInputAction.go,
+                    minLines: 2,
+                    maxLines: 2,
+                    onFieldSubmitted: (e) async {
+                      await homeViewModel.createNewSeal(
+                          serial: boxModel.serial ?? "", newSeal: e);
+                      boxModel.newSeal = e;
+                      e = "";
+                      homeViewModel.update();
                     },
-                    boxModel: boxModel,
-                    boxOperations: boxModel.boxOperations ?? [],
-                  ),
-                  isScrollControlled: true);
-              homeViewModel.update();
-            },
-          ),
-          SizedBox(
-            height: sizeH12,
-          ),
-          GetBuilder<HomeViewModel>(
-            builder: (homeViewModel) {
-              return boxModel.selectedBoxOperations?.operation == Constance.sealed
-                  ? TextFormField(
-                      textInputAction: TextInputAction.go,
-                      minLines: 2,
-                      maxLines: 2,
-                      onFieldSubmitted: (e) async {
-                        if (homeViewModel.formFieldKey.currentState!.validate()) {
-                          await homeViewModel.createNewSeal(
-                              serial: boxModel.serial ?? "", newSeal: e);
-                          e = "";
-                          homeViewModel.update();
-                        }
-                      },
-                      validator: (e) {
-                        if (e.toString().trim().isEmpty) {
-                          return "Please enter the New Seal";
-                        }
-                        return null;
-                      },
-                      decoration: const InputDecoration(
-                          hintText: "Enter New Seal Name"),
-                    )
-                  : const SizedBox();
-            },
-          ),
-        ],
-      ),
+                    validator: (e) {
+                      if (e.toString().trim().isEmpty) {
+                        return "Please enter the New Seal";
+                      }
+                      return null;
+                    },
+                    decoration:
+                        const InputDecoration(hintText: "Enter New Seal Name"),
+                  )
+                : const SizedBox();
+          },
+        ),
+      ],
     );
   }
 
