@@ -21,21 +21,21 @@ class BoxOnOrderItem extends StatelessWidget {
       : super(key: key);
 
   static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
-  GlobalKey<FormState> formFieldKey = GlobalKey<FormState>();
 
   BoxModel boxModel;
   final bool isShowingOperations;
 
   Widget get boxOperationSection {
     return Form(
-      key: formFieldKey,
+      key: homeViewModel.formFieldKey,
       child: Column(
         children: [
           SizedBox(
             height: sizeH12,
           ),
           TextFormField(
-            controller: TextEditingController(text: boxModel.selectedBoxOperations?.operation ?? ""),
+            controller: TextEditingController(
+                text: boxModel.selectedBoxOperations?.operation ?? ""),
             decoration: InputDecoration(
                 hintText: txtChooseBoxOperation.tr,
                 prefixIcon: Padding(
@@ -62,14 +62,13 @@ class BoxOnOrderItem extends StatelessWidget {
           ),
           GetBuilder<HomeViewModel>(
             builder: (homeViewModel) {
-              return boxModel.selectedBoxOperations?.operation ==
-                      Constance.sealed
+              return boxModel.selectedBoxOperations?.operation == Constance.sealed
                   ? TextFormField(
                       textInputAction: TextInputAction.go,
                       minLines: 2,
                       maxLines: 2,
                       onFieldSubmitted: (e) async {
-                        if (formFieldKey.currentState!.validate()) {
+                        if (homeViewModel.formFieldKey.currentState!.validate()) {
                           await homeViewModel.createNewSeal(
                               serial: boxModel.serial ?? "", newSeal: e);
                           e = "";

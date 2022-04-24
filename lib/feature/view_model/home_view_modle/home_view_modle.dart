@@ -46,6 +46,8 @@ class HomeViewModel extends GetxController {
     update();
   }
 
+    GlobalKey<FormState> formFieldKey = GlobalKey<FormState>();
+
   // open Scaner Qr :
   var scanArea = (MediaQuery.of(Get.context!).size.width < 400 ||
           MediaQuery.of(Get.context!).size.height < 400)

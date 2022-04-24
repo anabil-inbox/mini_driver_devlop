@@ -116,8 +116,7 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
           ),
           isCenterTitle: true,
         ),
-        body: 
-        GetBuilder<HomeViewModel>(builder: (home) {
+        body: GetBuilder<HomeViewModel>(builder: (home) {
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: padding20!),
             child: ListView(
@@ -192,24 +191,27 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
                               color: colorGreen,
                               isLoading: homeViewModel.isLoading,
                               onClicked: () async {
-                                await home.updateTaskStatus(
-                                    seralOrder:
-                                        homeViewModel.operationTask.salesOrder,
-                                    customerId:
-                                        homeViewModel.operationTask.customerId,
-                                    newStatus: Constance.done,
-                                    taskId: widget.taskId,
-                                    taskStatusId: widget.taskStatusId);
-                                await home.getSpecificTask(
-                                    taskId: widget.taskStatusId,
-                                    taskSatus: Constance.inProgress);
-                                await home.getSpecificTask(
-                                    taskId: widget.taskStatusId,
-                                    taskSatus: Constance.done);
-                                await home.getHomeTasks(
-                                    taskType: Constance.done);
-                                await home.getHomeTasks(
-                                    taskType: Constance.inProgress);
+                                if (homeViewModel.formFieldKey.currentState!
+                                    .validate()) {
+                                  await home.updateTaskStatus(
+                                      seralOrder: homeViewModel
+                                          .operationTask.salesOrder,
+                                      customerId: homeViewModel
+                                          .operationTask.customerId,
+                                      newStatus: Constance.done,
+                                      taskId: widget.taskId,
+                                      taskStatusId: widget.taskStatusId);
+                                  await home.getSpecificTask(
+                                      taskId: widget.taskStatusId,
+                                      taskSatus: Constance.inProgress);
+                                  await home.getSpecificTask(
+                                      taskId: widget.taskStatusId,
+                                      taskSatus: Constance.done);
+                                  await home.getHomeTasks(
+                                      taskType: Constance.done);
+                                  await home.getHomeTasks(
+                                      taskType: Constance.inProgress);
+                                }
                               },
                             ),
                           )
@@ -221,23 +223,26 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
                         color: colorGreen,
                         isLoading: homeViewModel.isLoading,
                         onClicked: () async {
-                          await home.updateTaskStatus(
-                              seralOrder:
-                                  homeViewModel.operationTask.salesOrder,
-                              customerId:
-                                  homeViewModel.operationTask.customerId,
-                              newStatus: Constance.done,
-                              taskId: widget.taskId,
-                              taskStatusId: widget.taskStatusId);
-                          await home.getSpecificTask(
-                              taskId: widget.taskStatusId,
-                              taskSatus: Constance.inProgress);
-                          await home.getSpecificTask(
-                              taskId: widget.taskStatusId,
-                              taskSatus: Constance.done);
-                          await home.getHomeTasks(taskType: Constance.done);
-                          await home.getHomeTasks(
-                              taskType: Constance.inProgress);
+                          if (homeViewModel.formFieldKey.currentState!
+                              .validate()) {
+                            await home.updateTaskStatus(
+                                seralOrder:
+                                    homeViewModel.operationTask.salesOrder,
+                                customerId:
+                                    homeViewModel.operationTask.customerId,
+                                newStatus: Constance.done,
+                                taskId: widget.taskId,
+                                taskStatusId: widget.taskStatusId);
+                            await home.getSpecificTask(
+                                taskId: widget.taskStatusId,
+                                taskSatus: Constance.inProgress);
+                            await home.getSpecificTask(
+                                taskId: widget.taskStatusId,
+                                taskSatus: Constance.done);
+                            await home.getHomeTasks(taskType: Constance.done);
+                            await home.getHomeTasks(
+                                taskType: Constance.inProgress);
+                          }
                         },
                       );
                     }
@@ -248,8 +253,6 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
             ),
           );
         }),
-      
-      
       ),
     );
   }

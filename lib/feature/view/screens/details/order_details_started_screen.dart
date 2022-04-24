@@ -81,7 +81,9 @@ class OrderDetailsStarted extends StatelessWidget {
       );
 
   Widget primaryButton({required HomeViewModel home}) {
-    if (home.operationsSalesData == null || home.operationsSalesData!.salesOrders == null) {
+    if (home.operationsSalesData == null ||
+        home.operationsSalesData!.salesOrders == null ||
+        home.operationsSalesData!.salesOrders?[index] == null) {
       return const SizedBox();
     }
     if (isFromCompleted) {
@@ -153,7 +155,8 @@ class OrderDetailsStarted extends StatelessWidget {
             );
           },
         );
-      } else if (home.operationsSalesData!.salesOrders![index].taskStatus == Constance.taskStart) {
+      } else if (home.operationsSalesData!.salesOrders![index].taskStatus ==
+          Constance.taskStart) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -203,7 +206,8 @@ class OrderDetailsStarted extends StatelessWidget {
             ),
           ],
         );
-      } else if (home.operationsSalesData!.salesOrders![index].taskStatus == Constance.taskdelivered) {
+      } else if (home.operationsSalesData!.salesOrders![index].taskStatus ==
+          Constance.taskdelivered) {
         return GetBuilder<HomeViewModel>(
           builder: (home) {
             return PrimaryButton(
