@@ -32,8 +32,6 @@
 	<true/>
 	<key>NSAllowsLocalNetworking</key>
 	<true/>
-	<key>NSAppTransportSecurity</key>
-	<string>We need this action to work with http links</string>
 	<key>NSCameraUsageDescription</key>
 	<string>This app requires to access your Camera to show image on profile or needs camera access to scan QR codes</string>
 	<key>NSFaceIDUsageDescription</key>
