@@ -309,14 +309,16 @@ class HomeViewModel extends GetxController {
   }
 
   void getImageBottomSheet() {
-    Get.bottomSheet(Container(
-      height: sizeH240,
+    Get.bottomSheet(
+        Container(
+      // height: sizeH240,
       padding: EdgeInsets.symmetric(horizontal: padding20!),
       decoration: BoxDecoration(
           color: colorTextWhite,
           borderRadius:
               BorderRadius.vertical(top: Radius.circular(padding30!))),
       child: Column(
+        mainAxisSize:MainAxisSize.min ,
         children: [
           SizedBox(
             height: sizeH20,
@@ -364,7 +366,8 @@ class HomeViewModel extends GetxController {
           ),
         ],
       ),
-    ));
+    ),
+        isScrollControlled:false   );
   }
 
   final picker = ImagePicker();
