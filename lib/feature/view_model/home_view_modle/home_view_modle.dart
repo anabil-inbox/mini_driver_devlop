@@ -489,7 +489,7 @@ class HomeViewModel extends GetxController {
         body = {
           Constance.status: newStatus,
           Constance.taskId: taskId,
-          Constance.paymentMethod: taskStatusId
+         // Constance.paymentMethod: taskStatusId
         };
       }
 
