@@ -120,8 +120,7 @@ class OrderDetailsStarted extends StatelessWidget {
           textButton: txtReceived.tr,
           onClicked: () async {
             await home.recivedBoxes(
-                serial:
-                    home.operationsSalesData!.salesOrders![index].orderId ?? "",
+                serial: home.operationsSalesData!.salesOrders![index].orderId ?? "",
                 taskName: Constance.taskWarehouseLoading);
             await home.getSpecificTask(
                 taskId: task.id ?? "", taskSatus: Constance.inProgress);
