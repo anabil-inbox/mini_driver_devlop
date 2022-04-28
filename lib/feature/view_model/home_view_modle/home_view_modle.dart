@@ -1030,8 +1030,10 @@ class HomeViewModel extends GetxController {
             else
               {
                 snackError("$txtError", "${value.status!.message}"),
-              }
-          });
+              },
+        Logger().d(value.toJson()),
+
+      });
     } catch (e) {
       Logger().e(e.toString());
       debugPrint(e.toString());
