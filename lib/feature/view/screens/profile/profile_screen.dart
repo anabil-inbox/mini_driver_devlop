@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:inbox_driver/feature/view/screens/profile/cash_closure/cash_closure_view.dart';
+import 'package:inbox_driver/feature/view/screens/profile/report/report_view.dart';
 import 'package:inbox_driver/feature/view/screens/profile/setting/setting_screen.dart';
 import 'package:inbox_driver/feature/view/screens/profile/widget/setting_item.dart';
 import 'package:inbox_driver/feature/view_model/profile_view_modle/profile_view_modle.dart';
@@ -67,6 +68,17 @@ class ProfileScreen extends StatelessWidget {
                     Get.to(() => const LogScreen());
                   },
                   settingTitle: txtLog.tr,
+                  trailingTitle: "",
+                  iconPath: "assets/svgs/log_icon.svg",
+                ),
+                SizedBox(
+                  height: sizeH12,
+                ),
+                SettingItem(
+                  onTap: () {
+                    Get.to(() =>  ReportView());
+                  },
+                  settingTitle: txtReport.tr,
                   trailingTitle: "",
                   iconPath: "assets/svgs/log_icon.svg",
                 ),

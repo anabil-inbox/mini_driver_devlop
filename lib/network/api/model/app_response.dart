@@ -53,7 +53,7 @@ class Status {
     this.success,
   });
 
-  String? message;
+  dynamic message;
   int? code;
   bool? success;
 

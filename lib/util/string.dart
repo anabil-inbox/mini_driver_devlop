@@ -29,6 +29,9 @@ String? txtSuccess = "Success";
 //todo this for home page
 const String txtSearchHere = "Search Here…";
 const String txtCompleted = "Completed";
+const String txtCompletedTask = "Completed Tasks";
+const String txtToDo = "To Do";
+const String txtInProgressing = "In Progressing";
 const String txtCurrent = "Current";
 const String txtWHLoading = "WH Loading";
 const String txtTotalTask = "Total Task";
@@ -107,6 +110,7 @@ const String txtChooseCountry = "Choose Country";
 const String txtSearchForCountry = "Search For Country";
 const String txtEditProfile = "Edit Profile";
 const String txtLog = "log";
+const String txtReport = "Report";
 const String txtLogOut = "logOut";
 const String txtSetting = "Settings";
 const String txtFullName = "full name";
@@ -192,3 +196,8 @@ const String txtOrderTracnfer = "Order Tracnfer";
 //this for cash closer page
 const String txtApplyCashCloser ="applyCashCloser";
 const String txtConfirmTransfer ="Confirm Transfer";
+
+//todo this for report page
+const String txtAverageTimeCompleteTask = "Average time to complete task";
+const String txtYourTime = "Your time";
+const String txtOtherDriverTime = "Other driver time";

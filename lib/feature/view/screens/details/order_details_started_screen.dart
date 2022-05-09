@@ -131,7 +131,7 @@ class OrderDetailsStarted extends StatelessWidget {
           },
         );
       } else if (home.operationsSalesData!.salesOrders![index].taskStatus ==
-          Constance.inProgress) {
+          /*Constance.inProgress*/Constance.toDo) {
         return GetBuilder<HomeViewModel>(
           builder: (home) {
             return PrimaryButton(

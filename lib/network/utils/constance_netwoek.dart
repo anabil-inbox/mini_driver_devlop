@@ -113,6 +113,9 @@ abstract class ConstanceNetwork {
   static String getCashRequestApi = "inbox_app.driver.task_management.get_cash_request";
   static String applyCashRequestApi = "inbox_app.driver.task_management.apply_cash_request";
 
+  //this for report page
+  static String driverReportRequestApi = "inbox_app.driver.task_management.driver_report";
+
 
 
 

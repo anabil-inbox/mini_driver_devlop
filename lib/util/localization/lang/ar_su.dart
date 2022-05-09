@@ -81,4 +81,11 @@ Map<String, String> arSU = {
   txtNotPaid : "غير مدفوع",
   txtHandover : "سلم",
   txtConfirmTransfer : "تاكيد النقل",
+  txtReport: "تقرير",
+  txtCompletedTask : "المهام المنجزة",
+  txtToDo: "للتنفيذ",
+  txtInProgressing: "قيد التنفيذ",
+  txtYourTime: "وقتك",
+  txtOtherDriverTime: "وقت السائقين الاخرين",
+  txtAverageTimeCompleteTask: "متوسط الوقت لإكمال المهام",
 };
