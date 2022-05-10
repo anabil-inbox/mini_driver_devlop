@@ -14,6 +14,7 @@ import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/font_dimne.dart';
 import 'package:inbox_driver/util/string.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 
 import '../../../../../util/app_color.dart';
 import '../../../../../util/app_style.dart';
@@ -66,7 +67,7 @@ class ReportView extends StatelessWidget {
                 PieChartSectionData(
                     radius: padding6,
                     color: colorRed,
-                    value: double.tryParse("${logic.driverReportData?.totalTasks??0.0}")?.toDouble(),
+                    value: double.tryParse("${logic.driverReportData?.totalTasks??0.0}")?.toDouble() == 0.0 ? 100:double.tryParse("${logic.driverReportData?.totalTasks??0.0}")?.toDouble(),
                     showTitle: false),
                 PieChartSectionData(
                     radius: padding6,
@@ -146,7 +147,7 @@ class ReportView extends StatelessWidget {
                     children: [
                        Expanded(
                           child: StatusCompletedTaskWidget(
-                        taskCount: logic.driverReportData?.doneTasks ??"0",
+                        taskCount: logic.driverReportData?.doneTasks.toString() ??"0",
                         isTodo: true,
                       )),
                       SizedBox(
@@ -154,7 +155,7 @@ class ReportView extends StatelessWidget {
                       ),
                        Expanded(
                           child: StatusCompletedTaskWidget(
-                        taskCount: logic.driverReportData?.inProgressTasks ??"0",
+                        taskCount: logic.driverReportData?.inProgressTasks.toString() ??"0",
                         isTodo: false,
                       )),
                     ],
@@ -203,9 +204,15 @@ class ReportView extends StatelessWidget {
 
   String calcPercent(ProfileViewModle logic) {
     if(logic.driverReportData?.doneTasks != null && logic.driverReportData?.totalTasks != null){
+      Logger().e(logic.driverReportData?.doneTasks);
+      Logger().e(logic.driverReportData?.totalTasks);
       var resultDiv = logic.driverReportData?.doneTasks / logic.driverReportData?.totalTasks;
-     var per = (resultDiv * 100).round();
-      return "$per";
+     var per = ((resultDiv ?? 0) * 100)??0;
+     if(per.toString().toLowerCase() == "NaN".toLowerCase()){
+       return "0.0";
+     }else {
+       return "${per??0}";
+     }
     }else{
       return "0.0";
     }
