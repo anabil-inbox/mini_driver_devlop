@@ -67,24 +67,26 @@ class BigChartWidget extends StatelessWidget {
         topTitles: SideTitles(showTitles: true , getTitles: (v){
           if(v == 0) {// 0 == my driver  || 1 == other driver
             if(logic.driverReportData?.averageForDriver == null || logic.driverReportData?.averageForDriver == 0.0) {
-              return "";
+              return "0:0";
             }else{
               Logger().d("averageForDriver:${logic.driverReportData?.averageForDriver}");
 
               var dateTime = DateTime.fromMillisecondsSinceEpoch(int.tryParse("${logic.driverReportData?.averageForDriver}")??0);
               // var format = DateFormat("yyyy-MM-dd hh:mm:ss").format(dateTime);
               // var chatTime = DateUtility.getChatTime(format);
-              return handleDateTime(dateTime).toString();
+              // return handleDateTime(dateTime).toString();
+               return showTime(double.tryParse("${logic.driverReportData?.averageForDriver}")??0.0);
             }
           }else{
             if(logic.driverReportData?.averageForOther == null || logic.driverReportData?.averageForOther == 0.0) {
-              return "";
+              return "0:0";
             }else{
               Logger().d("averageForOther:${logic.driverReportData?.averageForOther}");
               var dateTime = DateTime.fromMillisecondsSinceEpoch(int.tryParse("${logic.driverReportData?.averageForOther}")??0);
               // var format = DateFormat("yyyy-MM-dd hh:mm:ss").format(dateTime);
               // var chatTime = DateUtility.getChatTime(format);
-              return handleDateTime(dateTime).toString();
+               return handleDateTime(dateTime).toString();
+              // return showTime(double.tryParse("${logic.driverReportData?.averageForOther}")??0.0);
             }
           }
         }),
@@ -166,6 +168,32 @@ class BigChartWidget extends StatelessWidget {
         return "d  ${dateTime.day}, h  ${dateTime.hour}, m  ${dateTime.minute} , s ${dateTime.second}";
       }
     }
-    return "";
+    return "0:0";
   }
+
+   String showTime(double diff) {
+    String time="";
+    double diffSeconds = diff / 1000 % 60;
+    double diffMinutes = diff / (60 * 1000) % 60;
+    double diffHours = diff / (60 * 60 * 1000) % 24;
+    double diffDays = diff / (24 * 60 * 60 * 1000);
+
+    String  fd = diffDays.toString();
+    String  fh = diffHours.toString();
+    String fm = diffMinutes.toString();
+    String fs = diffSeconds.toString();
+    if (diffDays < 10) {
+      fd = "0" + diffDays.toString();
+    }
+    if (diffHours < 10) {
+      fh = "0" + diffHours.toString();
+    }
+    if (diffMinutes < 10) {
+      fm = "0" + diffMinutes.toString();
+    }
+    time=fd + " days, "+fh + "h, " + fm+"m";
+    Logger().e("Time:", time);
+    return time;
+  }
+
 }
