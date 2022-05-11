@@ -67,12 +67,12 @@ class ReportView extends StatelessWidget {
                 PieChartSectionData(
                     radius: padding6,
                     color: colorRed,
-                    value: double.tryParse("${logic.driverReportData?.totalTasks??0.0}")?.toDouble() == 0.0 ? 100:double.tryParse("${logic.driverReportData?.totalTasks??0.0}")?.toDouble(),
+                    value: getRedValue(double.tryParse("${logic.driverReportData?.totalTasks??0.0}")?.toDouble() == 0.0 ? 100.0:double.tryParse("${logic.driverReportData?.totalTasks??0.0}")??0.0 , logic),
                     showTitle: false),
                 PieChartSectionData(
                     radius: padding6,
                     color: colorGreen,
-                    value: double.tryParse(getUnCompleteTaskCount(logic))?.toDouble(),
+                    value: getGreenValue(double.tryParse(getUnCompleteTaskCount(logic))?.toDouble() , logic),
                     showTitle: false),
               ],
               title: "${calcPercent(logic)}%",
@@ -147,7 +147,7 @@ class ReportView extends StatelessWidget {
                     children: [
                        Expanded(
                           child: StatusCompletedTaskWidget(
-                        taskCount: logic.driverReportData?.doneTasks.toString() ??"0",
+                        taskCount: logic.driverReportData?.toDo.toString() ??"0",
                         isTodo: true,
                       )),
                       SizedBox(
@@ -216,6 +216,24 @@ class ReportView extends StatelessWidget {
     }else{
       return "0.0";
     }
+  }
+
+  double? getRedValue(double num , ProfileViewModle logic) {
+    if(num != 0) {
+      var percent = calcPercent(logic);
+      var convertToDouble = double.tryParse(percent)?.toDouble();
+      return (100 - convertToDouble!.toDouble()).abs().toDouble();
+    }
+    return 100.0;
+  }
+
+  double? getGreenValue(double? doubles, ProfileViewModle logic) {
+    if(doubles != null) {
+      var percent = calcPercent(logic);
+      var convertToDouble = double.tryParse(percent)?.toDouble();
+      return convertToDouble;
+    }
+    return 0.0;
   }
 
 }
