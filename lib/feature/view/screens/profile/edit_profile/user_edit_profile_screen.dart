@@ -27,7 +27,7 @@ class EditProfileScreen extends StatefulWidget {
 class _UserEditProfileScreenState extends State<EditProfileScreen> {
   ProfileViewModle profileViewModle = Get.put(ProfileViewModle());
   AuthViewModle authViewModle = Get.put(AuthViewModle());
-  final _formFieldKey = GlobalKey<FormState>();
+  final _formFieldKeyProfile = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -222,7 +222,7 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
                                       initState: (_) {},
                                       builder: (bloc) {
                                         return Form(
-                                          key: _formFieldKey,
+                                          key: _formFieldKeyProfile,
                                           child: Expanded(
                                             child: TextFormField(
                                               enabled: true,
@@ -340,7 +340,7 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
   }
 
   addNewContact(String countryCode) {
-    if (_formFieldKey.currentState!.validate()) {
+    if (_formFieldKeyProfile.currentState!.validate()) {
       Map<String, String> map = {
         ConstanceNetwork.countryCodeKey: countryCode,
         ConstanceNetwork.mobileNumberKey:

@@ -13,8 +13,10 @@ import 'package:inbox_driver/util/string.dart';
 import 'box_on_order_item.dart';
 
 class BoxNeedScannedItem extends StatelessWidget {
-  const BoxNeedScannedItem({Key? key}) : super(key: key);
+  const BoxNeedScannedItem({Key? key , this.isTransfare = false}) : super(key: key);
 
+  final bool isTransfare;
+  static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
   @override
   Widget build(BuildContext context) {
     screenUtil(context);
@@ -49,7 +51,7 @@ class BoxNeedScannedItem extends StatelessWidget {
             ),
             SizedBox(width: sizeW10),
             CustomTextView(
-              txt: txtBoxesNeedScan.tr,
+              txt: isTransfare ? txtBoxesNeedTransfer.tr : txtBoxesNeedScan.tr,
               textStyle: textStyleNormal()?.copyWith(color: colorBlack),
             ),
           ],

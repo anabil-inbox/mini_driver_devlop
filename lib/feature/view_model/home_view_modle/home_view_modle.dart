@@ -16,6 +16,7 @@ import 'package:inbox_driver/feature/model/signature_item_model.dart';
 import 'package:inbox_driver/feature/model/tasks/box_model.dart';
 import 'package:inbox_driver/feature/model/tasks/task_response.dart';
 import 'package:inbox_driver/feature/view/screens/home/Widgets/secondery_button.dart';
+import 'package:inbox_driver/feature/view/screens/home/home_screen.dart';
 import 'package:inbox_driver/feature/view/screens/home/instant_order/instant_order_screen.dart';
 import 'package:inbox_driver/feature/view/screens/home/new_customer/Widgets/qty_bottom_sheet.dart';
 import 'package:inbox_driver/network/api/feature/home_helper.dart';
@@ -44,6 +45,7 @@ class HomeViewModel extends GetxController {
     selectedTab = x;
     update();
   }
+
 
   // open Scaner Qr :
   var scanArea = (MediaQuery.of(Get.context!).size.width < 400 ||
@@ -307,14 +309,16 @@ class HomeViewModel extends GetxController {
   }
 
   void getImageBottomSheet() {
-    Get.bottomSheet(Container(
-      height: sizeH240,
+    Get.bottomSheet(
+        Container(
+      // height: sizeH240,
       padding: EdgeInsets.symmetric(horizontal: padding20!),
       decoration: BoxDecoration(
           color: colorTextWhite,
           borderRadius:
               BorderRadius.vertical(top: Radius.circular(padding30!))),
       child: Column(
+        mainAxisSize:MainAxisSize.min ,
         children: [
           SizedBox(
             height: sizeH20,
@@ -362,7 +366,8 @@ class HomeViewModel extends GetxController {
           ),
         ],
       ),
-    ));
+    ),
+        isScrollControlled:false   );
   }
 
   final picker = ImagePicker();
@@ -388,7 +393,7 @@ class HomeViewModel extends GetxController {
       if (img != null) {
         img = await compressImage(img!);
       }
-      HomeHelper.getInstance.uploadCustomerId(body: {
+      await HomeHelper.getInstance.uploadCustomerId(body: {
         "image":
             img != null ? multipart.MultipartFile.fromFileSync(img!.path) : "",
         "customer": customerId,
@@ -468,7 +473,9 @@ class HomeViewModel extends GetxController {
   Future<void> updateTaskStatus(
       {required String newStatus,
       required String taskId,
-      required String taskStatusId, String? seralOrder, String? customerId}) async {
+      required String taskStatusId,
+      String? seralOrder,
+      String? customerId}) async {
     try {
       Map<String, dynamic> body = {};
 
@@ -482,50 +489,61 @@ class HomeViewModel extends GetxController {
         body = {
           Constance.status: newStatus,
           Constance.taskId: taskId,
-          Constance.paymentMethod: taskStatusId
+         // Constance.paymentMethod: taskStatusId
         };
       }
 
+      if (newStatus == Constance.done) {
+        bool isAllowed = true;
+        operationTask.scannedBoxes?.forEach((element) {
+          if ((element.boxOperations?.isNotEmpty ?? [].isNotEmpty) &&
+              element.selectedBoxOperations?.operation == null) {
+            isAllowed = false;
+            snackError("", "You Have To Select Box Operations");
+            return;
+          }
+        });
+        if (!isAllowed) {
+          return;
+        } 
+      }
+      Logger().e("body: ${body.toString()}");
       startLoading();
       await HomeHelper.getInstance
           .updateTaskStatus(body: body)
           .then((value) => {
                 if (value.status!.success!)
                   {
+                    snackSuccess(txtSuccess!.tr, value.status!.message!),
                     operationTask = TaskResponse.fromJson(value.data,
                         isFromNotification: false),
-                    snackSuccess(txtSuccess!.tr, value.status!.message!),
 
                     operationsSalesData?.salesOrders?.forEach((element) {
                       if (element.taskId == taskId) {
                         element.taskStatus = newStatus;
                       }
                     }),
-                    if (newStatus == Constance.taskdelivered)
-                      {
-                        // SharedPref.instance.setCurrentTaskResponse(
-                        //     taskResponse: jsonEncode(value.data)),
-                        // operationTask =
-
+                    if (newStatus == Constance.taskdelivered){
+                        SharedPref.instance.setDeliverdTime(
+                            deliverdTime:
+                                DateTime.now().millisecondsSinceEpoch),
+                        SharedPref.instance.setCurrentTaskId(taskId: taskId),
                         Get.to(() => InstantOrderScreen(
                             isFromNotification: false,
                             taskStatusId: taskStatusId,
                             isNewCustomer: true,
                             taskId: taskId))
                       },
-                    // else if (newStatus == Constance.taskDone)
-                    //   {
-
-                    //   },
-
                     update(),
                     endLoading(),
                     if (newStatus == Constance.done)
                       {
-                        FirebaseClint.instance.deleteOrderTracking(customerId, seralOrder, ),
+                        FirebaseClint.instance.deleteOrderTracking(
+                          customerId,
+                          seralOrder,
+                        ),
                         Get.close(2),
                       },
-                    // operationsSalesData.
                   }
                 else
                   {
@@ -556,15 +574,21 @@ class HomeViewModel extends GetxController {
   // to check if Task Type if Task Warwhouse Loading Or WareHouse Clouser :
 
   bool isTransfer({required TaskModel task}) {
-    if (task.taskName!.toLowerCase().contains(Constance.transfer.toLowerCase())) {
+    if (task.taskName!
+        .toLowerCase()
+        .contains(Constance.transfer.toLowerCase())) {
       return true;
     }
     return false;
   }
 
   bool isTaskWarwhouseLoadingOrClousre({required TaskModel task}) {
-    if (task.taskName!.toLowerCase().contains(Constance.taskWarehouseLoading.toLowerCase()) ||
-        task.taskName!.toLowerCase().contains(Constance.taskWarehouseClosure.toLowerCase())) {
+    if (task.taskName!
+            .toLowerCase()
+            .contains(Constance.taskWarehouseLoading.toLowerCase()) ||
+        task.taskName!
+            .toLowerCase()
+            .contains(Constance.taskWarehouseClosure.toLowerCase())) {
       return true;
     }
     return false;
@@ -785,10 +809,11 @@ class HomeViewModel extends GetxController {
     }
   }
 
-  Future<void> sendPaymentRequest() async {
+  Future<void> sendPaymentRequest({required String paymentMethod}) async {
     try {
       await HomeHelper.getInstance.paymentRequest(body: {
-        Constance.id: operationTask.childOrder?.id
+        Constance.id: operationTask.salesOrder,
+        Constance.paymentMethod: paymentMethod,
       }).then((value) => {
             if (value.status!.success!)
               {
@@ -984,6 +1009,34 @@ class HomeViewModel extends GetxController {
           .then((value) => {notifications = value});
     } catch (e) {
       debugPrint("getNotification error $e");
+    }
+    endLoading();
+  }
+
+  Future<void> confirmTransfer(
+      {required String status, required String taskId}) async {
+    startLoading();
+    try {
+      await HomeHelper.getInstance.confirmTrasfare(body: {
+        Constance.taskId: taskId,
+        Constance.status: status
+      }).then((value) => {
+            if (value.status!.success!)
+              {
+                snackSuccess("$txtSuccess", "${value.status!.message}"),
+                update(),
+                Get.offAll(() => HomeScreen()),
+              }
+            else
+              {
+                snackError("$txtError", "${value.status!.message}"),
+              },
+        Logger().d(value.toJson()),
+
+      });
+    } catch (e) {
+      Logger().e(e.toString());
+      debugPrint(e.toString());
     }
     endLoading();
   }

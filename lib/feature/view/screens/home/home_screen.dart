@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget {
 
   HomeViewModel homeViewModel = Get.put(HomeViewModel(), permanent: true);
   MapViewModel mapViewModel = Get.put(MapViewModel(), permanent: true);
-
+  
   @override
   Widget build(BuildContext context) {
     screenUtil(context);
@@ -35,6 +35,7 @@ class HomeScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
           backgroundColor: colorRed,
           onPressed: () async {
+            Logger().e("MSG_USER_ID: ${SharedPref.instance.getCurrentUserData()?.id}");
             await mapViewModel.getMyCurrentPosition();
             Logger().i(SharedPref.instance.getUserToken());
             

@@ -45,11 +45,15 @@ String? urlUserPlaceholder =
 
 screenUtil(BuildContext context) {
   ScreenUtil.init(
-      BoxConstraints(
-          maxWidth: MediaQuery.of(context).size.width,
-          maxHeight: MediaQuery.of(context).size.height),
+      Get.context!,
+      // BoxConstraints(
+      //     maxWidth: MediaQuery.of(context).size.width,
+      //     maxHeight: MediaQuery.of(context).size.height),
+
+       deviceSize: const Size(392.72727272727275, 803.6363636363636) ,
+       splitScreenMode: true,
+      minTextAdapt: true,
       designSize: const Size(392.72727272727275, 803.6363636363636),
-      context: context,
       orientation: Orientation.portrait);
 }
 
@@ -642,4 +646,25 @@ String formatStringWithCurrency(var data, String currency) {
 bool isArabicLang() {
   return (SharedPref.instance.getLocalization() == "Arabic" ? true : false);
   // return isRTL;
+}
+
+class DismissKeyboard extends StatelessWidget {
+  final Widget? child;
+
+   const DismissKeyboard({Key? key, this.child}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // screenUtil(context);
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+        if (!currentFocus.hasPrimaryFocus &&
+            currentFocus.focusedChild != null) {
+          FocusManager.instance.primaryFocus?.unfocus();
+        }
+      },
+      child: child,
+    );
+  }
 }

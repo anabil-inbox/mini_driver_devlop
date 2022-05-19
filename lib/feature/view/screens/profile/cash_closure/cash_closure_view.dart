@@ -18,9 +18,7 @@ class CashClosureView extends StatelessWidget {
 
   PreferredSizeWidget get myAppbar =>
       CustomAppBarWidget(
-
         titleWidget: CustomTextView(
-
           txt: txtCashClosure.tr,
           maxLine: Constance.maxLineOne,
           textStyle: textStyleAppBarTitle(),

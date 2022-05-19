@@ -12,7 +12,6 @@ import 'package:inbox_driver/feature/view/screens/home/new_customer/Widgets/scan
 import 'package:inbox_driver/feature/view/widgets/appbar/custom_app_bar_widget.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/feature/view/widgets/primary_button.dart';
-import 'package:inbox_driver/feature/view/widgets/secondery_form_button.dart';
 import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
@@ -21,6 +20,7 @@ import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/string.dart';
 import 'package:get/get.dart';
+import '../../../widgets/green_button.dart';
 import 'Widgets/customer_signature_instant_order.dart';
 import 'Widgets/scan_box_instant_order.dart';
 
@@ -45,6 +45,7 @@ class InstantOrderScreen extends StatefulWidget {
 
 class _InstantOrderScreenState extends State<InstantOrderScreen> {
   static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
+
   Widget get idVerification => Container(
         height: sizeH50,
         padding: EdgeInsets.symmetric(horizontal: sizeW15!, vertical: sizeH13!),
@@ -133,17 +134,15 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
                 ] else ...[
                   const FetchedItems(),
                 ],
-                if (!(home.operationTask.processType == Constance.fetchId ||
-                    home.operationTask.processType ==
-                        Constance.terminateId)) ...[
+                if (home.operationTask.processType != Constance.fetchId) ...[
                   SizedBox(height: sizeH10),
                   const ScanBoxInstantOrder(),
                 ],
-                SizedBox(height: sizeH10),
                 if (home.operationTask.processType == Constance.recallId ||
                     (home.operationTask.processType == Constance.terminateId &&
                         (homeViewModel.operationTask.hasDeliveredScan ??
                             false))) ...[
+                  SizedBox(height: sizeH10),
                   GetBuilder<HomeViewModel>(builder: (homeViewModel) {
                     return scanDelivedBoxes(homeViewModel: homeViewModel);
                   })
@@ -187,39 +186,79 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
                           ),
                           SizedBox(width: sizeH20),
                           Expanded(
-                            child: SeconderyFormButton(
-                              buttonText: txtDone.tr,
-                              isLoading: homeViewModel.isLoading,
-                              onClicked: () async {
-                                await home.updateTaskStatus(
-                                    seralOrder:homeViewModel.operationTask.salesOrder,
-                                    customerId:homeViewModel.operationTask.customerId,
-                                    newStatus: Constance.done,
-                                    taskId: widget.taskId,
-                                    taskStatusId: widget.taskStatusId);
-                                await home.getSpecificTask(
-                                    taskId: widget.taskStatusId,
-                                    taskSatus: Constance.inProgress);
-                                await home.getSpecificTask(
-                                    taskId: widget.taskStatusId,
-                                    taskSatus: Constance.done);
-                                await home.getHomeTasks(
-                                    taskType: Constance.done);
-                                await home.getHomeTasks(
-                                    taskType: Constance.inProgress);
-                              },
-                            ),
+                            child: GreenButton(
+                                buttonText: txtDone.tr,
+                                color: colorGreen,
+                                isLoading: homeViewModel.isLoading,
+                                onClicked: () async {
+                                  bool isAllowed = true;
+
+                                  homeViewModel.operationTask.scannedBoxes
+                                      ?.forEach((element) {
+                                    if (element.selectedBoxOperations
+                                                ?.operation ==
+                                            Constance.sealed &&
+                                        element.newSeal == null) {
+                                      snackError("",
+                                          "Please Enter seal for box ${element.boxId}");
+                                      isAllowed = false;
+                                      return;
+                                    }
+                                  });
+
+                                  if (!isAllowed) {
+                                    return;
+                                  }
+                                  await home.updateTaskStatus(
+                                      seralOrder: homeViewModel
+                                          .operationTask.salesOrder,
+                                      customerId: homeViewModel
+                                          .operationTask.customerId,
+                                      newStatus: Constance.done,
+                                      taskId: widget.taskId,
+                                      taskStatusId: widget.taskStatusId);
+                                  await home.getSpecificTask(
+                                      taskId: widget.taskStatusId,
+                                      taskSatus: Constance.inProgress);
+                                  await home.getSpecificTask(
+                                      taskId: widget.taskStatusId,
+                                      taskSatus: Constance.done);
+                                  await home.getHomeTasks(
+                                      taskType: Constance.done);
+                                  await home.getHomeTasks(
+                                      taskType: Constance.inProgress);
+                                }),
                           )
                         ],
                       );
                     } else {
-                      return PrimaryButton(
-                          textButton: txtDone.tr,
+                      return GreenButton(
+                          buttonText: txtDone.tr,
+                          color: colorGreen,
                           isLoading: homeViewModel.isLoading,
                           onClicked: () async {
+                            bool isAllowed = true;
+
+                            homeViewModel.operationTask.scannedBoxes
+                                ?.forEach((element) {
+                              if (element.selectedBoxOperations?.operation ==
+                                      Constance.sealed &&
+                                  element.newSeal == null) {
+                                snackError("",
+                                    "Please Enter seal for box ${element.boxId}");
+                                isAllowed = false;
+                                return;
+                              }
+                            });
+
+                            if (!isAllowed) {
+                              return;
+                            }
                             await home.updateTaskStatus(
-                                seralOrder:homeViewModel.operationTask.salesOrder,
-                                customerId:homeViewModel.operationTask.customerId,
+                                seralOrder:
+                                    homeViewModel.operationTask.salesOrder,
+                                customerId:
+                                    homeViewModel.operationTask.customerId,
                                 newStatus: Constance.done,
                                 taskId: widget.taskId,
                                 taskStatusId: widget.taskStatusId);
@@ -232,8 +271,7 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
                             await home.getHomeTasks(taskType: Constance.done);
                             await home.getHomeTasks(
                                 taskType: Constance.inProgress);
-                          },
-                          isExpanded: true);
+                          });
                     }
                   },
                 ),
@@ -246,8 +284,3 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
     );
   }
 }
-
-
-// after upload customer signature 
-// request time >>
-// waiting time >>

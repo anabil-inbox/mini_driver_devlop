@@ -26,6 +26,8 @@ class SharedPref {
   final String taskKey = "taskKey";
   final String isStartedTimerKey = "isStartedTimerKey";
   final String timerValueKey = "timerValueKey";
+  final String deliveredDateTime = "DeliveredDateTime";
+  final String taskIdKey = "taskIdKey";
 
   var log = Logger();
 
@@ -267,4 +269,21 @@ class SharedPref {
   // clear() {
   //   removeBoxess();
   // }
+
+  setDeliverdTime({required int deliverdTime}){
+    _prefs?.setInt(deliveredDateTime, deliverdTime);
+  }
+
+  int getDeliverdTime(){
+    return _prefs?.getInt(deliveredDateTime) ?? 0;
+  }
+
+  setCurrentTaskId ({required String taskId}){
+    _prefs?.setString(taskIdKey, taskId);
+  }
+
+  String getCurrentTaskId(){
+    return _prefs?.getString(taskIdKey) ?? "";
+  }
+
 }

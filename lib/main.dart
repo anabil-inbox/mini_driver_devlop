@@ -41,7 +41,3 @@ class BindingsController extends Bindings {
     // Get.lazyPut(() => HomeViewModel());
   }
 }
-//مشكلة في طلب الوقت الاضافي بيرجع رقم بالسالب
-//شاشة الاشعارات في الدرايفر والكلايانت api
-// شاشة اللوق عند الدراييفر api
-// كيفية انهاء طلب النقل

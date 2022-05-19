@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:inbox_driver/feature/model/profile/driver_report_data.dart';
 import 'package:inbox_driver/network/api/model/app_response.dart';
 import 'package:inbox_driver/network/api/model/profile_api.dart';
 import 'package:inbox_driver/network/utils/constance_netwoek.dart';
@@ -32,6 +35,18 @@ class ProfileHelper {
     }
   }
 
+
+  Future<DriverReportData> getDriverReport() async {
+    var appResponse = await ProfileApi.getInstance.getDriverReport(
+        url: ConstanceNetwork.driverReportRequestApi,
+        header: ConstanceNetwork.header(4));
+    Logger().d(appResponse.toJson());
+    if (appResponse.status?.success == true ) {
+        return DriverReportData.fromJson(appResponse.data);
+    } else {
+      return DriverReportData.fromJson({});
+    }
+  }
 
 
 }

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -6,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:inbox_driver/feature/model/tasks/task_response.dart';
-import 'package:inbox_driver/feature/view/screens/details/order_details_started_screen.dart';
 import 'package:inbox_driver/feature/view/screens/home/home_screen.dart';
 import 'package:inbox_driver/feature/view/screens/home/trasfare/trasfare_content_screen.dart';
 import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
@@ -173,8 +173,9 @@ class AppFcm {
         homeViewModel.update();
       } else if (map[Constance.id].toString() ==
           Constance.confirmFirstSideContentTrasfer) {
+        homeViewModel.operationTask =
+            TaskResponse.fromJson(map, isFromNotification: true);
         Get.to(() => TrasfareContentScreen(taskId: map[Constance.taskId]));
-
         // homeViewModel.update();
       }
     });
@@ -183,8 +184,10 @@ class AppFcm {
   void updatePages(RemoteMessage message) async {
     if (messages.data[Constance.id] ==
         Constance.confirmFirstSideContentTrasfer) {
-      Get.to(() => TrasfareContentScreen(
-          taskId: messages.data[Constance.taskId]));
+      var data = jsonDecode(messages.data[Constance.data]);
+      homeViewModel.operationTask =
+          TaskResponse.fromJson(data, isFromNotification: false);
+      Get.to(() => TrasfareContentScreen(taskId: data[Constance.taskId]));
       return;
     }
     homeViewModel.operationTask =

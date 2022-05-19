@@ -84,7 +84,12 @@ class OrderDetailsStarted extends StatelessWidget {
     if (isFromCompleted) {
       return const SizedBox();
     } else if (index == 0) {
-      if(home.isTransfer(task: task)){
+      if (home.operationsSalesData == null ||
+          home.operationsSalesData!.salesOrders == null ||
+          home.operationsSalesData!.salesOrders?[index] == null) {
+        return const SizedBox();
+      }
+      if (home.isTransfer(task: task)) {
         return GetBuilder<HomeViewModel>(
           builder: (home) {
             return PrimaryButton(
@@ -108,20 +113,14 @@ class OrderDetailsStarted extends StatelessWidget {
             );
           },
         );
-      }
-      else if (home.isTaskWarwhouseLoadingOrClousre(task: task)) {
+      } else if (home.isTaskWarwhouseLoadingOrClousre(task: task)) {
         return PrimaryButton(
           isExpanded: true,
           isLoading: home.isLoading,
           textButton: txtReceived.tr,
           onClicked: () async {
-            // await home.updateTaskStatus(
-            //   newStatus: Constance.taskStart,
-            //   taskId: salesOrder.taskId ?? "",
-            // );
             await home.recivedBoxes(
-                serial:
-                    home.operationsSalesData!.salesOrders![index].orderId ?? "",
+                serial: home.operationsSalesData!.salesOrders![index].orderId ?? "",
                 taskName: Constance.taskWarehouseLoading);
             await home.getSpecificTask(
                 taskId: task.id ?? "", taskSatus: Constance.inProgress);
@@ -131,7 +130,8 @@ class OrderDetailsStarted extends StatelessWidget {
             await home.getHomeTasks(taskType: Constance.inProgress);
           },
         );
-      } else if (salesOrder.taskStatus == Constance.inProgress) {
+      } else if (home.operationsSalesData!.salesOrders![index].taskStatus ==
+          /*Constance.inProgress*/Constance.toDo) {
         return GetBuilder<HomeViewModel>(
           builder: (home) {
             return PrimaryButton(
@@ -144,7 +144,6 @@ class OrderDetailsStarted extends StatelessWidget {
                   newStatus: Constance.taskStart,
                   taskId: salesOrder.taskId ?? "",
                 );
-
                 await home.getSpecificTask(
                     taskId: task.id ?? "", taskSatus: Constance.inProgress);
                 await home.getSpecificTask(
@@ -155,7 +154,8 @@ class OrderDetailsStarted extends StatelessWidget {
             );
           },
         );
-      } else if (salesOrder.taskStatus == Constance.taskStart) {
+      } else if (home.operationsSalesData!.salesOrders![index].taskStatus ==
+          Constance.taskStart) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -176,7 +176,7 @@ class OrderDetailsStarted extends StatelessWidget {
                 await home.getHomeTasks(taskType: Constance.done);
                 await home.getHomeTasks(taskType: Constance.inProgress);
               },
-              textButton: "Delivered",
+              textButton: "Deliver",
             ),
             SizedBox(
               width: sizeW12,
@@ -205,7 +205,8 @@ class OrderDetailsStarted extends StatelessWidget {
             ),
           ],
         );
-      } else if (salesOrder.taskStatus == Constance.taskdelivered) {
+      } else if (home.operationsSalesData!.salesOrders![index].taskStatus ==
+          Constance.taskdelivered) {
         return GetBuilder<HomeViewModel>(
           builder: (home) {
             return PrimaryButton(
@@ -227,7 +228,6 @@ class OrderDetailsStarted extends StatelessWidget {
           },
         );
       } else {
-        //  return const Text("End Order Transfer");
         return const SizedBox();
       }
     } else if (index != 0) {
@@ -250,7 +250,6 @@ class OrderDetailsStarted extends StatelessWidget {
         ],
       );
     }
-
     return const SizedBox();
   }
 

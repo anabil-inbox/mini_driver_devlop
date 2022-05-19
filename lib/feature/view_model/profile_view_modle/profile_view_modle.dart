@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:inbox_driver/feature/model/country.dart';
+import 'package:inbox_driver/feature/model/profile/driver_report_data.dart';
 import 'package:inbox_driver/feature/model/profile/log_model.dart';
 import 'package:inbox_driver/feature/view/screens/auth/signUp_signIn/log_in/log_in_screen.dart';
 import 'package:inbox_driver/feature/view/widgets/bottom_sheet_widget/logout_bottom_sheet.dart';
@@ -41,7 +42,7 @@ class ProfileViewModle extends BaseController {
   List<Map<String, dynamic>> contactMap = [];
 
   bool isLoading = false;
-
+  DriverReportData? driverReportData;
   startLoading() {
     isLoading = true;
     update();
@@ -308,6 +309,23 @@ class ProfileViewModle extends BaseController {
     update();
   }
 
+  Future<void> getDriverReport() async {
+    try {
+      isLoading = true;
+      update();
+      await ProfileHelper.getInstance.getDriverReport().then((value) {
+        driverReportData = DriverReportData();
+        driverReportData =value;
+        Logger().d(driverReportData?.toJson());
+        isLoading = false;
+        update();
+      });
+    } catch (e) {
+      print(e);
+      isLoading = false;
+      update();
+    }
+  }
 //   // fot timer on change number :
 //   Timer? timer;
 //   int startTimerCounter = 60;

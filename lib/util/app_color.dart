@@ -56,3 +56,6 @@ var scaffoldColor = const Color(0xFFF7F9FB);
 
 //todo trasparent color
 var transparent = const Color(0x00000000);
+
+var colorYellowLightChart = const  Color(0xFFEEC451);//yellow
+var colorBlueLightChart = const Color(0xFF56A3F5);//yellow
