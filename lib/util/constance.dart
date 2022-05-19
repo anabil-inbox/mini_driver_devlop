@@ -91,7 +91,7 @@ abstract class Constance {
   static String confirmFirstSideContentTrasfer = "30";
 
   static String fingerprint = "Fingerprint";
-  static String schedule = "Schedule";
+  static String schedule = "Schedule";//schedule
   static String terminate = "Terminate";
 
   static String paymentMethod = "payment_method";

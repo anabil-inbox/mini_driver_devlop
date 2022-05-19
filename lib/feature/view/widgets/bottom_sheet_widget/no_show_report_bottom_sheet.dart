@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:inbox_driver/feature/model/home/sales_order.dart';
 import 'package:inbox_driver/feature/model/home/task_model.dart';
+import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/feature/view/widgets/primary_button.dart';
 import 'package:inbox_driver/feature/view_model/auht_view_modle/auth_view_modle.dart';
 import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
@@ -84,7 +85,7 @@ class NoShowReportBottomSheet extends StatelessWidget {
                 onClicked: () async {
                   if (homeViewModel.wateTime.inMilliseconds == 0) {
                     await homeViewModel.updateTaskStatus(
-                        newStatus: Constance.schedule,
+                        newStatus: Constance.schedule.toLowerCase(),
                         taskId: salesOrder.taskId ?? "",
                         taskStatusId: task.id ?? "");
                     Get.back();
