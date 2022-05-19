@@ -23,6 +23,10 @@ class ScanScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     screenUtil(context);
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: colorBlack,
+        leading: Icon(Icons.arrow_back_ios , color: colorTextWhite,),
+      ),
       body: Stack(
         children: [
           QRView(

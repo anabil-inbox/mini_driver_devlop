@@ -118,6 +118,9 @@ class _ChooseCountryScreenState extends State<ChooseCountryScreen> {
                        // if(listCountry.contains(item)){
                        //   return const SizedBox.shrink();
                        // }
+                    if(item.name?.toLowerCase() == "iran" ||item.name?.toLowerCase() == "syria"){
+                      return const SizedBox();
+                    }
                     return InkWell(
                       onTap: () {
                         logic.selectedIndex = -1;
