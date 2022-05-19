@@ -25,7 +25,11 @@ class ScanScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: colorBlack,
-        leading: Icon(Icons.arrow_back_ios , color: colorTextWhite,),
+        leading: InkWell(
+            onTap: (){
+              Get.back();
+            },
+            child: Icon(Icons.arrow_back_ios , color: colorTextWhite,)),
       ),
       body: Stack(
         children: [
