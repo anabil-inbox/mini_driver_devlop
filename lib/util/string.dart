@@ -47,6 +47,8 @@ const String txtNotPaid = "Not paid";
 const String txtHandover = "Handover";
 const String txtADD = "Add";
 const String txtAddSignature = "Add Signature";
+const String txtDeliver = "Deliver";
+const String txtNoShow = "No Show";
 
 
 //todo this for New Customer
@@ -81,6 +83,9 @@ const String txtTakePicture = "Take a Picture";
 const String txtSubmitReport = "Submit Report";
 const String txtWriteDownRemarksOrComments = "Write down remarks or comments";
 const String txtWaitingTime = "Waiting Time";
+const String txtEnterSeal= "Please Enter seal for box";
+const String txtEnterNewSeal= "Please enter the New Seal";
+const String txtEnterNewSealName= "Write new seal name";
 
 //todo this for Bottom Sheets
 String? txtCall = "Call";
@@ -96,8 +101,8 @@ const String txtWriteDownCaseRemarks = "Write down case remarks";
 String? txtNoShowReport = "No Show Report";
 const String txtTimer = "00:00:00";
 String? txtReSchedule = "Re-Schedule";
-String? txtNoShow = "No Show";
 String? txtCancelOrder = "Cancel Order";
+String txtCompleteDetails = "Complete Details";
 
 String txtContinue = "Continue";
 String txtWhatsIsyourMobileNumber = "What is your Phone Number?";
@@ -201,3 +206,6 @@ const String txtConfirmTransfer ="Confirm Transfer";
 const String txtAverageTimeCompleteTask = "Average time to complete task";
 const String txtYourTime = "Your time";
 const String txtOtherDriverTime = "Other driver time";
+
+//todo this for notifications
+const String txtNotifications = "Notifications";

@@ -211,7 +211,7 @@ class ReportView extends StatelessWidget {
      if(per.toString().toLowerCase() == "NaN".toLowerCase()){
        return "0.0";
      }else {
-       return "${per??0}";
+       return (per??0).toStringAsFixed(1);
      }
     }else{
       return "0.0";

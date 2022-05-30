@@ -200,7 +200,7 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
                                             Constance.sealed &&
                                         element.newSeal == null) {
                                       snackError("",
-                                          "Please Enter seal for box ${element.boxId}");
+                                          "${txtEnterSeal.tr} ${element.boxId}");
                                       isAllowed = false;
                                       return;
                                     }
@@ -245,7 +245,7 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
                                       Constance.sealed &&
                                   element.newSeal == null) {
                                 snackError("",
-                                    "Please Enter seal for box ${element.boxId}");
+                                    "${txtEnterSeal.tr} ${element.boxId}");
                                 isAllowed = false;
                                 return;
                               }

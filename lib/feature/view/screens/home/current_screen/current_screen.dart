@@ -23,6 +23,23 @@ class _CurrentScreenState extends State<CurrentScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           GetBuilder<HomeViewModel>(builder: (home) {
+            if (!home.isLoading && home.tasksInProgress.isEmpty) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    SizedBox(height: sizeH50,),
+                    Center(
+                      child: Image.asset("assets/gif/empty_state.gif" ,
+                        width: MediaQuery.of(context).size.width,
+                        fit: BoxFit.fill,),
+                    ),
+                  ],
+                ),
+              );
+            }
             return Expanded(
                 child: ListView(
                     padding: EdgeInsets.all(padding0!),
@@ -31,10 +48,8 @@ class _CurrentScreenState extends State<CurrentScreen> {
                         .map((i, element) => MapEntry(
                             i,
                             (home.tdSearchHome.text.isEmpty ||
-                                    element.taskName!
-                                        .toLowerCase()
-                                        .contains(
-                                            home.tdSearchHome.text.toLowerCase()))
+                                    element.taskName!.toLowerCase().contains(
+                                        home.tdSearchHome.text.toLowerCase()))
                                 ? HomeCard(
                                     isFromCompleted: false,
                                     index: i,

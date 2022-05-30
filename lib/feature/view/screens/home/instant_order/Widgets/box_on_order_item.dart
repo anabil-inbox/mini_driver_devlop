@@ -74,12 +74,12 @@ class BoxOnOrderItem extends StatelessWidget {
                     },
                     validator: (e) {
                       if (e.toString().trim().isEmpty) {
-                        return "Please enter the New Seal";
+                        return txtEnterNewSeal.tr;
                       }
                       return null;
                     },
                     decoration:
-                        const InputDecoration(hintText: "Enter New Seal Name"),
+                        InputDecoration(hintText: txtEnterNewSealName.tr),
                   )
                 : const SizedBox();
           },

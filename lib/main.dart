@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:inbox_driver/fcm/app_fcm.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
+import 'package:inbox_driver/util/constance.dart';
+import 'package:inbox_driver/util/localization/localization_service.dart';
 import 'package:inbox_driver/util/sh_util.dart';
 
 import 'feature/core/app_widget.dart';
@@ -21,6 +23,9 @@ void main() async {
   DioManagerClass.getInstance.init();
   enableHybridComposition();
   await SharedPref.instance.init();
+  // LocalizationService().changeLocale(Constance.englishKey);
+  // await SharedPref.instance
+  //     .setLocalization(Constance.englishKey);
   runApp(const AppWidget());
 }
 

@@ -19,6 +19,23 @@ class CompletedScreen extends StatelessWidget {
         children: [
           GetBuilder<HomeViewModel>(
             builder: (home) {
+              if (!home.isLoading && home.tasksDone.isEmpty) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      SizedBox(height: sizeH50,),
+                      Center(
+                        child: Image.asset("assets/gif/empty_state.gif" ,
+                          // width: MediaQuery.of(context).size.width,
+                          fit: BoxFit.fill,),
+                      ),
+                    ],
+                  ),
+                );
+              }
               return Expanded(
                 child: ListView(
                     padding: EdgeInsets.all(padding0!),

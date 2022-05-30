@@ -145,7 +145,7 @@ class SharedPref {
     try {
       return ApiSettings.fromJson(
               json.decode(_prefs!.get(appSettingKey).toString()))
-          .languges;
+          .languges ;
     } catch (e) {
       print(e);
        return null;

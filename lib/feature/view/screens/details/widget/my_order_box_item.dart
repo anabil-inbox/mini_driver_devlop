@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:inbox_driver/feature/model/home/sales_order.dart';
 import 'package:inbox_driver/feature/model/tasks/box_model.dart';
 import 'package:inbox_driver/feature/view/screens/details/widget/option_detailes.dart';
@@ -8,6 +9,7 @@ import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/font_dimne.dart';
+import 'package:inbox_driver/util/string.dart';
 
 class MyOrderBoxItem extends StatelessWidget {
   const MyOrderBoxItem({Key? key, required this.orderItem, required this.boxes})
@@ -96,7 +98,7 @@ class MyOrderBoxItem extends StatelessWidget {
               SizedBox(
                 width: sizeW15,
               ),
-              const Text("Total:"),
+               Text("${txtTotal.tr}:"),
               const Spacer(),
               Text(
                 getPriceWithFormate(price: orderItem.totalPrice ?? 0),

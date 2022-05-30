@@ -176,7 +176,7 @@ class OrderDetailsStarted extends StatelessWidget {
                 await home.getHomeTasks(taskType: Constance.done);
                 await home.getHomeTasks(taskType: Constance.inProgress);
               },
-              textButton: "Deliver",
+              textButton: txtDeliver.tr,
             ),
             SizedBox(
               width: sizeW12,
@@ -184,7 +184,7 @@ class OrderDetailsStarted extends StatelessWidget {
             SizedBox(
               width: sizeW150,
               child: SeconderyFormButton(
-                buttonText: "No Show",
+                buttonText: txtNoShow.tr,
                 onClicked: () {
                   homeViewModel.startTimer();
                   SharedPref.instance.setIsStartedTimerKey(isStarted: true);
@@ -210,7 +210,7 @@ class OrderDetailsStarted extends StatelessWidget {
         return GetBuilder<HomeViewModel>(
           builder: (home) {
             return PrimaryButton(
-                textButton: "Complete Details",
+                textButton: txtCompleteDetails.tr,
                 isLoading: home.isLoading,
                 onClicked: () async {
                   await homeViewModel.checkTaskStatus(

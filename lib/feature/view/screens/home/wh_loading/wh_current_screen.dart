@@ -207,7 +207,7 @@ class WHCurrentScreen extends StatelessWidget {
               fillColor: colorBackground,
               isFill: true,
               isBorder: true,
-              label: "Search here ...",
+              label: txtSearchHere.tr,
             ),
           ),
         ],
