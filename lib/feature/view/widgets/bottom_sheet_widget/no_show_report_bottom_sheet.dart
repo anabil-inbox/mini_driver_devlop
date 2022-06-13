@@ -94,7 +94,7 @@ class NoShowReportBottomSheet extends StatelessWidget {
               ),
               SizedBox(height: sizeH10),
               BottomSheetCard(
-                text: txtNoShow!.tr,
+                text: txtNoShow.tr,
                 textStyleColor: colorRed,
                 onClicked: () async {
                   if (homeViewModel.wateTime.inMilliseconds == 0) {
