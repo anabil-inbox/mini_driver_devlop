@@ -101,6 +101,7 @@ class LoginForm extends GetWidget<AuthViewModle> {
                 ? Row(
                     children: [
                       GetBuilder<AuthViewModle>(
+                        init: AuthViewModle(),
                         builder: (logic) {
                           return PrimaryButtonFingerPinter(
                             isExpanded: false,

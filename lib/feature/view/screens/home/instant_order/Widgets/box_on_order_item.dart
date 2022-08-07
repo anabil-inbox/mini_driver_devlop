@@ -24,6 +24,7 @@ class BoxOnOrderItem extends StatelessWidget {
 
   BoxModel boxModel;
   final bool isShowingOperations;
+  TextEditingController newSealController = TextEditingController();
 
   Widget get boxOperationSection {
     return Column(
@@ -61,26 +62,45 @@ class BoxOnOrderItem extends StatelessWidget {
         GetBuilder<HomeViewModel>(
           builder: (homeViewModel) {
             return boxModel.selectedBoxOperations?.operation == Constance.sealed
-                ? TextFormField(
-                    textInputAction: TextInputAction.go,
-                    minLines: 2,
-                    maxLines: 2,
-                    onFieldSubmitted: (e) async {
-                      await homeViewModel.createNewSeal(
-                          serial: boxModel.serial ?? "", newSeal: e);
-                      boxModel.newSeal = e;
-                      e = "";
-                      homeViewModel.update();
-                    },
-                    validator: (e) {
-                      if (e.toString().trim().isEmpty) {
-                        return txtEnterNewSeal.tr;
-                      }
-                      return null;
-                    },
-                    decoration:
-                        InputDecoration(hintText: txtEnterNewSealName.tr),
-                  )
+                ? Row(
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                        controller: newSealController,
+                          textInputAction: TextInputAction.go,
+                          minLines: 1,
+                          maxLines: 1,
+                          onFieldSubmitted: (e) async {
+                            await homeViewModel.createNewSeal(
+                                serial: boxModel.serial ?? "", newSeal: e);
+                            boxModel.newSeal = e;
+                             e = "";
+                            hideFocus(Get.context!);
+                            homeViewModel.update();
+                          },
+                          validator: (e) {
+                            if (e.toString().trim().isEmpty) {
+                              return txtEnterNewSeal.tr;
+                            }
+                            return null;
+                          },
+                          decoration:
+                              InputDecoration(hintText: txtEnterNewSealName.tr),
+                        ),
+                    ),
+                    SizedBox(width: sizeW10!,),
+                    InkWell(
+                        onTap:()async {
+                          await homeViewModel.createNewSeal(
+                              serial: boxModel.serial ?? "", newSeal: newSealController.text.toString());
+                          boxModel.newSeal = newSealController.text.toString();
+                           // newSealController.text = "";
+                         hideFocus(Get.context!);
+                          homeViewModel.update();
+                        },
+                        child: SvgPicture.asset("assets/svgs/add_orange.svg")),
+                  ],
+                )
                 : const SizedBox();
           },
         ),

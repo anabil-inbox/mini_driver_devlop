@@ -67,4 +67,14 @@ class BoxOperation {
         "enabled": enabled,
         "default": isDefault,
       };
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is BoxOperation &&
+          runtimeType == other.runtimeType &&
+          operation == other.operation;
+
+  @override
+  int get hashCode => operation.hashCode;
 }

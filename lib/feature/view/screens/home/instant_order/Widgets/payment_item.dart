@@ -4,6 +4,7 @@ import 'package:inbox_driver/feature/model/payment/payment.dart';
 import 'package:inbox_driver/feature/model/tasks/task_response.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
+import 'package:inbox_driver/network/utils/constance_netwoek.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_style.dart';
@@ -51,7 +52,7 @@ class PaymentItem extends StatelessWidget {
             if (paymentMethod.image != null && paymentMethod.image != "") ...[
               imageNetwork(
                   isPayment: true,
-                  url: paymentMethod.image,
+                  url:ConstanceNetwork.imageUrl + paymentMethod.image.toString(),
                   width: sizeW20,
                   height: sizeH20),
             ] else ...[
