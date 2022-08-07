@@ -99,7 +99,7 @@ class HeaderProfileCard extends StatelessWidget {
                                         "${SharedPref.instance.getCurrentUserData()?.countryCode} ${SharedPref.instance.getCurrentUserData()?.mobileNumber}",
                                   ));
                             },
-                            child: SvgPicture.asset("assets/svgs/edit_pen.svg"))
+                            child: SvgPicture.asset("assets/svgs/update_icon_orange.svg"/*edit_pen.svg*/))
                       
                     ],
                   )

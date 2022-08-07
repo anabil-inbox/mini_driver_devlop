@@ -123,7 +123,7 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
                           PositionedDirectional(
                             end: 0,
                             child:
-                                SvgPicture.asset("assets/svgs/update_red.svg"),
+                                SvgPicture.asset("assets/svgs/update_orange.svg"/*update_red.svg*/),
                           )
                         ],
                       ),
@@ -267,7 +267,7 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
                                   addNewContact("${logic.defCountry.prefix}");
                                 },
                                 child: SvgPicture.asset(
-                                  "assets/svgs/add.svg",
+                                  "assets/svgs/add_orange.svg",
                                   fit: BoxFit.cover,
                                 ),
                               );

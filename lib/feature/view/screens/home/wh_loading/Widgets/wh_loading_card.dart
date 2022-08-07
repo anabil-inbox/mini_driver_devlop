@@ -130,7 +130,7 @@ class WhLoadingCard extends StatelessWidget {
                           ? const SizedBox()
                           : PrimaryBorderButton(
                               isLoading: builder.isLoading,
-                              buttonText: txtReceived,
+                              buttonText: txtReceived.tr,
                               function: () {
                                 onRecivedClick();
                               });

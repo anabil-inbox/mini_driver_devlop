@@ -66,7 +66,7 @@ class ReportView extends StatelessWidget {
               pieCharts: [
                 PieChartSectionData(
                     radius: padding6,
-                    color: colorRed,
+                    color: colorPrimary/*colorRed*/,
                     value: getRedValue(double.tryParse("${logic.driverReportData?.totalTasks??0.0}")?.toDouble() == 0.0 ? 100.0:double.tryParse("${logic.driverReportData?.totalTasks??0.0}")??0.0 , logic),
                     showTitle: false),
                 PieChartSectionData(

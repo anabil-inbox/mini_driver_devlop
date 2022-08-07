@@ -80,10 +80,10 @@ class HomeAppBar extends StatelessWidget {
           actionsWidgets: [
             IconBtn(
               icon: "assets/svgs/notification.svg",
-              iconColor: colorRed,
+              iconColor: colorPrimary,
               width: sizeW48,
               height: sizeH48,
-              backgroundColor: colorRedTrans,
+              backgroundColor: colorPrimaryOpcaityColor,
               onPressed: () {
                 Get.to(() => const NotificationScreen());
                 //  Get.to(() => NewCustomer());

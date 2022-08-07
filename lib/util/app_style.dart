@@ -77,6 +77,16 @@ TextStyle? textStyleBtnBlue() {
       fontFamily: Constance.Font_bold);
 }
 
+TextStyle? textHelpFollow() {
+  return TextStyle(
+      color: colorBlack, fontSize: fontSize14, fontWeight: FontWeight.normal);
+}
+
+TextStyle? textHelp() {
+  return TextStyle(
+      color: colorBlack, fontSize: fontSize14, fontWeight: FontWeight.normal);
+}
+
 TextStyle? textStyleLoginPage() {
   return textStyle()?.copyWith(
       color: colorBlack, fontSize: fontSize28, fontFamily: Constance.Font_bold);

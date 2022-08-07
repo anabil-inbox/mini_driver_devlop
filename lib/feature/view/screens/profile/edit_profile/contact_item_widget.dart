@@ -93,7 +93,7 @@ class ContactItemWidget extends StatelessWidget {
         InkWell(
           onTap: deleteContact ?? () {},
           child: SvgPicture.asset(
-            "assets/svgs/delete_box_widget.svg",
+            "assets/svgs/delete_box_widget_orange.svg",
             fit: BoxFit.cover,
           ),
         )

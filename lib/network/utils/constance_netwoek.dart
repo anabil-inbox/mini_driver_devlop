@@ -14,6 +14,7 @@ abstract class ConstanceNetwork {
   static var deviceTypeKey = "device_type";
   static var fcmKey = "fcm";
   static var emailKey = "email";
+  static var notesKey = "notes";
   static var idKey = "id";
 
   //todo user status :
@@ -115,6 +116,7 @@ abstract class ConstanceNetwork {
 
   //this for report page
   static String driverReportRequestApi = "inbox_app.driver.task_management.driver_report";
+  static String createHelpDocPoint = "inbox_app.api.service_center.create_help_doc";
 
 
 

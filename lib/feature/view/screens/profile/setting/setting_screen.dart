@@ -4,6 +4,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:inbox_driver/feature/view/screens/auth/terms/terms_view.dart';
+import 'package:inbox_driver/feature/view/screens/profile/setting/help_center/help_center_screen.dart';
 import 'package:inbox_driver/feature/view/screens/profile/widget/setting_item_no_padding.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
@@ -32,9 +33,9 @@ class SettingsScreen extends StatelessWidget {
           },
           icon: isArabicLang()
               ? Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SvgPicture.asset("assets/svgs/back_arrow_ar.svg"),
-              )
+                  padding: const EdgeInsets.all(8.0),
+                  child: SvgPicture.asset("assets/svgs/back_arrow_ar.svg"),
+                )
               : SvgPicture.asset("assets/svgs/back_arrow.svg"),
         ),
         centerTitle: true,
@@ -42,24 +43,32 @@ class SettingsScreen extends StatelessWidget {
       ),
       body: ListView(
         children: [
+          // SizedBox(
+          //   height: sizeH20,
+          // ),
+          // SettingItemNoPadding(
+          //     settingTitle: txtHelpCenter.tr,
+          //     onTap: () {
+          //       Get.to(const HelpCenterScreen());
+          //     }),
           SizedBox(
-            height: sizeH20,
-          ),
-          SettingItemNoPadding(settingTitle: txtHelpCenter.tr, onTap: (){
-
-          }),
-           SizedBox(
             height: sizeH16,
           ),
-          SettingItemNoPadding(settingTitle: txtAboutInbox.tr, onTap: (){
-            Get.to(() => const TermsScreen(isAboutUs: true,));
-          }),
-           SizedBox(
+          SettingItemNoPadding(
+              settingTitle: txtAboutInbox.tr,
+              onTap: () {
+                Get.to(() => const TermsScreen(
+                      isAboutUs: true,
+                    ));
+              }),
+          SizedBox(
             height: sizeH16,
           ),
-          SettingItemNoPadding(settingTitle: txtTirms.tr, onTap: (){
-            Get.to(() => const TermsScreen());
-          }),
+          SettingItemNoPadding(
+              settingTitle: txtTirms.tr,
+              onTap: () {
+                Get.to(() => const TermsScreen());
+              }),
         ],
       ),
     );

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 //todo this for theme
-var colorPrimary = const Color(0xFFE63331);
-var colorPrimaryDark = const Color(0xFF50133A);
+var colorPrimary = const Color(0xFFF68620/*F68620*/);
+var colorPrimaryDark = const Color(0xFFF68620/*50133A*/);
 var colorHint = const Color(0xff676771);
-Color seconderyColor = const Color(0xffE63331);
+Color seconderyColor = const Color(0xffF68620/*F68620*/);
 Color colorUnSelectedWidget = const Color(0xff676771).withAlpha(17);
 const Color colorTextHint1 = Color(0xff676771);
 const Color colorHint2 = Color(0xff9B9997);
@@ -12,7 +12,7 @@ const Color colorHint3 = Color(0xffB0B0B0);
 Color colorScaffoldRegistrationBody = const Color(0xffF7F9FB);
 Color seconderyButton = const Color(0xffDFE1E5);
 Color seconderyButtonUnSelected = const Color(0xff676771);
-Color colorPrimaryOpcaityColor = const Color(0xffF6E3E5);
+Color colorPrimaryOpcaityColor =  Color(0xffFFEAD7/*F6E3E5*/);
 Color colorBtnGray = const Color(0xFFDADBDF);
 Color colorSearchBox = const Color(0xFFF7F9FB);
 Color colorGreenText = const Color(0xFF2ED0A5);
@@ -42,8 +42,8 @@ var colorTextDark = const Color(0xFF676771);
 
 //todo this for btn
 var colorPink = const Color(0xFFD84B71);
-var colorRed = const Color(0xFFE63331);
-var colorRedTrans = const Color(0x22E63331);
+var colorRed = const Color(0xFFF68620);
+var colorRedTrans = const Color(0xffFFEAD7);
 var colorGreen = const Color(0xFF27D39F);
 var colorBlue = const Color(0xFF0091FF);
 var colorBlueLight = const Color(0xFF0091FF).withAlpha(15);

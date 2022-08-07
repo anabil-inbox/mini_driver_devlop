@@ -88,7 +88,7 @@ const String txtEnterNewSeal= "Please enter the New Seal";
 const String txtEnterNewSealName= "Write new seal name";
 
 //todo this for Bottom Sheets
-String? txtCall = "Call";
+const String txtCall = "Call";
 String? txtWhatsApp = "WhatsApp";
 String? txtPhoneCall = "Phone Call";
 String? txtSMSOnMyWay = "SMS: I’m on my way";
@@ -98,10 +98,10 @@ String? txtNextScan = "Next Scan";
 const String txtEmergency = "Emergency";
 String? txtCase1 = "Case 1";
 const String txtWriteDownCaseRemarks = "Write down case remarks";
-String? txtNoShowReport = "No Show Report";
+String txtNoShowReport = "No Show Report";
 const String txtTimer = "00:00:00";
 String? txtReSchedule = "Re-Schedule";
-String? txtCancelOrder = "Cancel Order";
+String txtCancelOrder = "Cancel Order";
 String txtCompleteDetails = "Complete Details";
 
 String txtContinue = "Continue";
@@ -127,7 +127,7 @@ const String txtSelectImage = "Select Image";
 const String txtCamera = "Camera";
 const String txtGallery = "Gallery";
 const String txtTirms = "tirms";
-const String txtAboutInbox = "About Inbox";
+const String txtAboutInbox = "About Inbox-Mini";
 const String txtHelpCenter = "Help Center";
 const String txtProfile = "Profile";
 const String txtLogOutChecking = "Are You Sure You Want to LogOut ?";
@@ -141,6 +141,7 @@ const String txtHour = "Hour";
 const String txtMinute = "Minute";
 const String txtSecondes = "secondes";
 const String txtNow = "now";
+const String txtWriteHer = "Write Her ...";
 
 //todo this for Order details
 const String txtOrderList = "Order List";
@@ -209,3 +210,9 @@ const String txtOtherDriverTime = "Other driver time";
 
 //todo this for notifications
 const String txtNotifications = "Notifications";
+
+
+
+const String txtFollow = "تابعنا على منصات التواصل الإجتماع";
+const String txtTechnicalSupport = "بامكانك ارسـال رسالة مباشرة للدعم الفني";
+

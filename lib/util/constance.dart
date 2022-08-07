@@ -80,6 +80,8 @@ abstract class Constance {
   static String application = "Application";
   static String walletKey = "Wallet";
   static String bankKey = "Bank";
+  // to add here payment Methodes :
+
 
   // Notifications Ids:
 

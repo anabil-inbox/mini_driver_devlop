@@ -48,5 +48,17 @@ class ProfileHelper {
     }
   }
 
+  Future<AppResponse> sendNote(Map<String, dynamic> body) async {
+    var appResponse = await ProfileApi.getInstance.sendNote(
+        body: body,
+        url: "${ConstanceNetwork.createHelpDocPoint}",
+        header: ConstanceNetwork.header(2));
+    if (appResponse.status?.success == true) {
+      return appResponse;
+    } else {
+      return appResponse;
+    }
+  }
+
 
 }

@@ -5,6 +5,7 @@ import 'package:inbox_driver/feature/view/widgets/bottom_sheet_widget/Widgets/bo
 import 'package:inbox_driver/feature/view/widgets/primary_button.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
+import 'package:logger/logger.dart';
 
 import '../../../../util/app_color.dart';
 import '../../../../util/app_dimen.dart';
@@ -31,7 +32,7 @@ class CallBottomSheet extends StatelessWidget {
             SvgPicture.asset('assets/svgs/Indicator.svg'),
             SizedBox(height: sizeH17),
             Text(
-              txtCall!.tr,
+              txtCall.tr,
               style: textStyleTitle(),
             ),
             SizedBox(height: sizeH25),

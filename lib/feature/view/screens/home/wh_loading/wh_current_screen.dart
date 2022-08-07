@@ -132,7 +132,7 @@ class WHCurrentScreen extends StatelessWidget {
             firstGreenValue: greenValue,
             firstRedValue: redValue,
             firstTitle:
-                "${homeViewModel.operationsSalesData?.totalReceived ?? 0} / ${d ?? 0} \nBoxes",
+                "${homeViewModel.operationsSalesData?.totalReceived ?? 0} / ${d ?? 0} \n ${txtBoxes.tr}",
             secondGreenValue: 30,
             isHaveItems: false,
             secondRedValue: 100,

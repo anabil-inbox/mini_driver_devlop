@@ -326,7 +326,43 @@ class ProfileViewModle extends BaseController {
       update();
     }
   }
-//   // fot timer on change number :
+
+  void sendNote(TextEditingController emailController,
+      TextEditingController noteController) {
+    if (emailController.text.isEmpty) {
+      return;
+    }
+    if (noteController.text.isEmpty) {
+      return;
+    }
+    Map<String, dynamic> map = {
+      ConstanceNetwork.emailKey: emailController.text.toString(),
+      ConstanceNetwork.notesKey: noteController.text.toString(),
+    };
+    _sendNote(map, emailController, noteController);
+  }
+
+  Future<void> _sendNote(
+      Map<String, dynamic> map,
+      TextEditingController emailController,
+      TextEditingController noteController) async {
+    startLoading();
+    await ProfileHelper.getInstance.sendNote(map).then((value) {
+      if (value.status!.success!) {
+        emailController.clear();
+        noteController.clear();
+        snackSuccess("", value.status?.message.toString());
+      } else {
+        snackError("", value.status?.message.toString());
+      }
+      isLoading = false;
+      update();
+    }).catchError((value) {
+      isLoading = false;
+      update();
+      Logger().d(value);
+    });
+  }//   // fot timer on change number :
 //   Timer? timer;
 //   int startTimerCounter = 60;
 

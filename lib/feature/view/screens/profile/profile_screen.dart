@@ -113,7 +113,7 @@ class ProfileScreen extends StatelessWidget {
                   },
                   settingTitle: txtLogOut.tr,
                   trailingTitle: "",
-                  iconPath: "assets/svgs/logout.svg",
+                  iconPath: "assets/svgs/logout_icons_ornage.svg",
                 ),
               ],
             ),

@@ -130,6 +130,16 @@ class SharedPref {
       log.d("$e");
     }
   }
+  ApiSettings? getAppSettings() {
+    try {
+      return ApiSettings.fromJson(
+          json.decode(_prefs!.get("$appSettingKey").toString()));
+    } catch (e) {
+      print("e");
+      return null;
+    }
+  }
+
 
   // List<CompanySector>? getAppSectors() {
   //   try {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
@@ -74,11 +75,12 @@ class AddressBox extends StatelessWidget {
           ),
           InkWell(
             onTap: () => _goToMap(salesOrder: salesOrder),
-            child: Image.asset(
+            child: SvgPicture.asset("assets/svgs/locations_orange.svg", height: sizeH32,
+              width: sizeW30,)/*Image.asset(
               "assets/png/Location.png",
               height: sizeH32,
               width: sizeW30,
-            ),
+            )*/,
           ),
         ],
       ),

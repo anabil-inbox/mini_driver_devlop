@@ -18,7 +18,7 @@ class StatusCompletedTaskWidget extends StatelessWidget {
     screenUtil(context);
     return Container(
         decoration: BoxDecoration(
-            color:isTodo!?colorGreen: colorRed,
+            color:isTodo!?colorGreen: colorPrimary/*colorRed*/,
             boxShadow: [boxShadowLight()!],
             borderRadius: BorderRadius.circular(sizeRadius10!)),
         padding: EdgeInsets.symmetric(horizontal: sizeW12!, vertical: sizeH22!),

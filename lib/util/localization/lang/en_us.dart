@@ -28,7 +28,8 @@ Map<String, String> enUS = {
   txtSelectImage: "Select Image",
   txtCamera: "Camera",
   txtGallery: "Gallery",
-  txtAboutInbox: "About Inbox",
+  txtAboutInbox: "About Inbox-Mini",
+  txtWriteHer: "Write Her ...",
   txtTirms: "Tirms And Conditions",
   txtHelpCenter: "Help Center",
   txtProfile: "Profile",
@@ -121,6 +122,12 @@ Map<String, String> enUS = {
   txtEnterSeal : "Please Enter seal for box",
   txtEnterNewSeal : "Please enter the New Seal",
   txtEnterNewSealName : "Write new seal name",
+  txtFollow : "Follow us on social media",
+  txtTechnicalSupport : "You can send a direct message to technical support",
+  txtCall : "Call",
+  txtCancelOrder : "Cancel Order",
+  txtNoShowReport : "No Show Report",
+
 
 
 };

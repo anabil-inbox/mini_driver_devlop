@@ -43,7 +43,7 @@ class NoShowReportBottomSheet extends StatelessWidget {
               SvgPicture.asset('assets/svgs/Indicator.svg'),
               SizedBox(height: sizeH17),
               Text(
-                txtNoShowReport!.tr,
+                txtNoShowReport.tr,
                 style: textStyleTitle(),
               ),
               SizedBox(height: sizeH12),
@@ -112,7 +112,7 @@ class NoShowReportBottomSheet extends StatelessWidget {
               ),
               PrimaryButton(
                   isLoading: false,
-                  textButton: txtCancelOrder!.tr,
+                  textButton: txtCancelOrder.tr,
                   onClicked: () async {
                     if (homeViewModel.wateTime.inMilliseconds == 0) {
                       await homeViewModel.updateTaskStatus(

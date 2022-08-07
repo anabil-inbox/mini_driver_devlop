@@ -40,7 +40,7 @@ class HeaderLogin extends GetWidget<AuthViewModle> {
             end: padding0,
             top: padding80,
             bottom: padding40,
-            child: SvgPicture.asset("assets/svgs/logo_horizantal.svg",),
+            child: SvgPicture.asset("assets/svgs/logo_new.svg"/*logo_horizantal.svg*/,),
           ),
         ],
       ),

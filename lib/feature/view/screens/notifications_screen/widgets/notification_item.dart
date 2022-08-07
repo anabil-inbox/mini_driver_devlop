@@ -23,7 +23,7 @@ class NotificationItem extends StatelessWidget {
           SizedBox(
             width: sizeW15,
           ),
-          SvgPicture.asset("assets/svgs/notification_icon.svg"),
+          SvgPicture.asset("assets/svgs/orange_notifications.svg"),
           SizedBox(
             width: sizeW10,
           ),

@@ -1,9 +1,14 @@
 // ignore_for_file: avoid_print
 
 import 'package:dio/dio.dart';
+import 'package:inbox_driver/feature/view/screens/auth/signUp_signIn/log_in/log_in_screen.dart';
+import 'package:inbox_driver/feature/view/screens/profile/log/log_screen.dart';
+import 'package:inbox_driver/network/utils/constance_netwoek.dart';
+import 'package:inbox_driver/util/sh_util.dart';
 import 'dart:async';
 
 import 'package:logger/logger.dart';
+import 'package:get/get.dart' as getx;
 
 class DioManagerClass {
   DioManagerClass._();
@@ -78,6 +83,13 @@ class DioManagerClass {
     return await _dio!
         .delete(url, options: Options(headers: header), data: body);
   }
+  handleNotAuthorized(var message){
+    if (message.contains("غير مصرح له") || message.contains("Not Authorized") || message.contains("401")) {
+      SharedPref.instance.setUserLoginState("${ConstanceNetwork.userEnterd}");
+      getx.Get.offAll(() => const LoginScreen());
+      return;
+    }
+  }
 }
 
 class ApiInterceptors extends Interceptor {
@@ -98,5 +110,10 @@ class ApiInterceptors extends Interceptor {
   void onError(DioError err, ErrorInterceptorHandler handler) {
     super.onError(err, handler);
     Logger().d("onError : ${err.message}");
+    if (err.message.contains("غير مصرح له") || err.message.contains("Not Authorized") || err.message.contains("401")) {
+      SharedPref.instance.setUserLoginState("${ConstanceNetwork.userEnterd}");
+      getx.Get.offAll(() => const LoginScreen());
+      return;
+    }
   }
 }

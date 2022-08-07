@@ -45,7 +45,7 @@ class HeaderCodeVerfication extends StatelessWidget {
             end: padding104,
             top: padding63,
             bottom: padding32,
-            child: SvgPicture.asset("assets/svgs/logo_horizantal.svg",),
+            child: SvgPicture.asset("assets/svgs/logo_new.svg",/*logo_horizantal.svg*/),
           ),
           
         ],

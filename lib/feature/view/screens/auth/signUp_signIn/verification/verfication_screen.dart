@@ -176,7 +176,7 @@ class _ChangeMobilScreenState extends State<VerficationScreen> {
           animationDuration: const Duration(milliseconds: 300),
           backgroundColor: colorScaffoldRegistrationBody,
           enableActiveFill: true,
-          keyboardType: TextInputType.number,
+          // keyboardType: TextInputType.number,
           onCompleted: (v) {
             authViewModle.checkVerficationCode(
                 code: v,

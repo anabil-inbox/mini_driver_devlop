@@ -162,7 +162,7 @@ class VisitLvItemWidget extends StatelessWidget {
                     isScrollControlled: true);
               },
               icon: SvgPicture.asset(
-                "assets/svgs/call_red_fig.svg",
+                "assets/svgs/call_fig_orange.svg",
               ),
             )),
 

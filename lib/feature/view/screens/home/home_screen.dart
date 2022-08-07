@@ -33,7 +33,7 @@ class HomeScreen extends StatelessWidget {
     screenUtil(context);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-          backgroundColor: colorRed,
+          backgroundColor: colorPrimary,
           onPressed: () async {
             Logger().e("MSG_USER_ID: ${SharedPref.instance.getCurrentUserData()?.id}");
             await mapViewModel.getMyCurrentPosition();

@@ -164,6 +164,7 @@ openwhatsapp({required String phoneNumber}) async {
   String whatsapp = phoneNumber;
   String whatsappAndroid = "whatsapp://send?phone=" + whatsapp + "&text=";
   String whatappIos = "https://wa.me/$whatsapp?text=}";
+
   if (Platform.isIOS) {
     if (await canLaunch(whatappIos)) {
       await launch(whatappIos, forceSafariVC: false);
@@ -185,18 +186,28 @@ openwhatsapp({required String phoneNumber}) async {
 sendSmsOnMyWay({required String phoneNumber}) async {
   String number = phoneNumber;
   String sms = 'sms:$number?body=I\'m%20on%20my%20way';
-  launch(sms);
+  if(Platform.isAndroid){
+    //FOR Android
+    sms ='sms:$number??body=I\'m on myway';
+    await launch(sms);
+  }
+  else if(Platform.isIOS){
+    //FOR IOS
+    sms ='sms:${number.replaceAll("+", "00")}?body=I\'m on myway';
+    launch(sms);
+  }
+
 }
 
 sendSmsArrivedHereOutside({required String phoneNumber}) async {
   String number = phoneNumber;
-  String sms = 'sms:$number?body=I%20arrived%20here%20outside';
+  String sms = Platform.isIOS ? 'sms:${number.replaceAll("+", "00")}?body=I%20arrived%20here%20outside':'sms:$number?body=I%20arrived%20here%20outside';
   launch(sms);
 }
 
 sendSmsNoShow({required String phoneNumber}) async {
   String number = phoneNumber;
-  String sms = 'sms:$number?body=I\'ll%20report%20"no show"%20within 5 mins';
+  String sms = Platform.isIOS ? 'sms:${number.replaceAll("+", "00")}?body=I\'ll%20report%20"no show"%20within 5 mins': 'sms:$number?body=I\'ll%20report%20"no show"%20within 5 mins';
   launch(sms);
 }
 
@@ -204,7 +215,7 @@ sendCustomizeSMS({required String phoneNumber}) async {
   String number = phoneNumber;
   String message = '';
 
-  String sms = 'sms:$number?body=$message';
+  String sms = Platform.isIOS ? 'sms:${number.replaceAll("+", "00")}?body=$message':'sms:$number?body=$message';
   launch(sms);
 }
 
@@ -667,4 +678,60 @@ class DismissKeyboard extends StatelessWidget {
       child: child,
     );
   }
+}
+Future<void> askOnWhatsApp(String? phoneNumber) async {
+  if(phoneNumber == null || phoneNumber.isEmpty){
+    return ;
+  }
+  final u =
+      "https://api.whatsapp.com/send?phone=+972${phoneNumber.toString().replaceFirst(RegExp(r'^0+'), "")}&text=";
+
+  final uri = Uri.encodeFull(u);
+  if (await canLaunch(uri)) {
+    try {
+      await launch(uri);
+    } catch (e) {
+      //Crashlytics.instance.recordError('Manuel Reporting Crash $e', s);
+      snackError(
+          "خطا",
+          'لم نتمكن من فتح الواتساب في جهازك، برجاء التأكد من تنصيبه او ارسل لنا استفسارك علي'
+              '\n'
+              '$phoneNumber'
+              '\n'
+              'مع الرقم المرجعي للمنتج');
+    }
+  } else {
+    final u =
+        "whatsapp://send?phone=+972${phoneNumber.toString().replaceFirst(RegExp(r'^0+'), "")}&text=";
+
+    final uri = Uri.encodeFull(u);
+    try {
+      await launch(uri);
+    } catch (e) {
+      //Crashlytics.instance.recordError('Manuel Reporting Crash $e', s);
+      snackError(
+          "خطا",
+          'لم نتمكن من فتح الواتساب في جهازك، برجاء التأكد من تنصيبه او ارسل لنا استفسارك علي'
+              '\n'
+              '$phoneNumber'
+              '\n'
+              'مع الرقم المرجعي للمنتج');
+    }
+  }
+}
+
+openBrowser(url)async{//openBrowser
+  if(url == null ){
+    return;
+  }
+  if (await canLaunch(url)) {
+    // await launch(url, /*forceSafariVC: false, forceWebView: false*/);
+    await launch(
+      url,
+      forceSafariVC: true,
+      forceWebView: true,
+      // statusBarBrightness: Brightness.dark,
+    );
+  }
+
 }
