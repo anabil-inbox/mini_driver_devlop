@@ -323,10 +323,12 @@ class OrderDetailsStarted extends StatelessWidget {
     Logger().e(salesOrder.taskId ?? "");
     return Scaffold(
         appBar: CustomAppBarWidget(
-          titleWidget: CustomTextView(
-            txt: txtOrderDetails.tr,
-            maxLine: Constance.maxLineOne,
-            textStyle: textStyleAppBarTitle(),
+          titleWidget: FittedBox(
+            child: CustomTextView(
+              txt: txtOrderDetails.tr + " " + salesOrder.orderId.toString() ,
+              maxLine: Constance.maxLineOne,
+              textStyle: textStyleAppBarTitle(),
+            ),
           ),
           isCenterTitle: true,
           leadingWidget: IconButton(

@@ -15,14 +15,16 @@ import 'package:signature/signature.dart';
 import '../custome_text_view.dart';
 
 class SignatureBottomSheet extends StatefulWidget {
-  const SignatureBottomSheet({Key? key, required this.onSignatureCallBack})
+  const SignatureBottomSheet({Key? key, required this.onSignatureCallBack, this.isContractSign = false})
       : super(key: key);
   final Function(SignatureController?)? onSignatureCallBack;
+  final bool? isContractSign;
 
   static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
 
-  static void showSignatureBottomSheet() {
+  static void showSignatureBottomSheet({bool? isContractSign = false}) {
     Get.bottomSheet(SignatureBottomSheet(
+        isContractSign:isContractSign,
       onSignatureCallBack: (SignatureController? controller) {
         controller?.toPngBytes();
         controller?.toImage();
@@ -131,7 +133,14 @@ class _SignatureBottomSheetState extends State<SignatureBottomSheet> {
       final Uint8List? data = await _controller.toPngBytes();
       if (data != null) {
         SignatureBottomSheet.homeViewModel.signatureOutput = data;
-        await SignatureBottomSheet.homeViewModel.uploadCustomerSignature();
+        if(widget.isContractSign!){
+          var operationTask = SignatureBottomSheet.homeViewModel.operationTask;
+          await SignatureBottomSheet.homeViewModel.uploadVerficationId(
+              customerId: operationTask.customerId.toString(),
+              taskId: operationTask.taskId.toString());
+        }else {
+          await SignatureBottomSheet.homeViewModel.uploadCustomerSignature();
+        }
         SignatureBottomSheet.homeViewModel.update();
         Get.back();
         // await Navigator.of(context).push(

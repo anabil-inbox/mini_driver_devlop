@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:inbox_driver/feature/view/widgets/bottom_sheet_widget/signature_bottom_sheet.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
+import 'package:inbox_driver/network/utils/constance_netwoek.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
@@ -29,7 +30,7 @@ class ContractSignature extends StatelessWidget {
                 logic.isSelected = !logic.isSelected;
                 logic.update();
                 if(logic.isSelected){
-                  SignatureBottomSheet.showSignatureBottomSheet();
+                  SignatureBottomSheet.showSignatureBottomSheet(isContractSign:true);
                 }
               },
               child: Row(
@@ -52,8 +53,8 @@ class ContractSignature extends StatelessWidget {
                         child: Container(
                             decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: logic.operationTask.isNew ??
-                                  false
+                          color: (logic.operationTask.isNew ??
+                                  false)
                               ? Colors.transparent
                               : colorRed,
                         )),
@@ -62,9 +63,17 @@ class ContractSignature extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: sizeW5),
-                  CustomTextView(
-                    txt: txtContractSignature.tr,
-                    textStyle: textStyleNormal()?.copyWith(color: colorBlack),
+                  Expanded(
+                    child: CustomTextView(
+                      txt: txtContractSignature.tr,
+                      textStyle: textStyleNormal()?.copyWith(color: colorBlack),
+                    ),
+                  ),
+                  if(logic.operationTask.signatureFile != null && logic.operationTask.signatureFile.toString().isNotEmpty)
+                  imageNetwork(
+                      width: sizeW30,
+                      height: sizeH30,
+                    url:ConstanceNetwork.imageUrl + (logic.operationTask.signatureFile ??"")
                   ),
                 ],
               ),

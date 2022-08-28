@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_sms/flutter_sms.dart';
 import 'package:get/get.dart';
 import 'package:image/image.dart' as img;
 import 'package:inbox_driver/feature/core/dialog_loading.dart';
@@ -188,34 +189,69 @@ sendSmsOnMyWay({required String phoneNumber}) async {
   String sms = 'sms:$number?body=I\'m%20on%20my%20way';
   if(Platform.isAndroid){
     //FOR Android
-    sms ='sms:$number??body=I\'m on myway';
+    sms ='sms:$number?body=I\'m on myway';
     await launch(sms);
   }
   else if(Platform.isIOS){
     //FOR IOS
-    sms ='sms:${number.replaceAll("+", "00")}?body=I\'m on myway';
-    launch(sms);
+    String message = "I\'m on my way";
+    List<String> recipents = ["$phoneNumber"];
+
+    String _result = await sendSMS(message: message, recipients: recipents, sendDirect: true)
+        .catchError((onError) {
+      Logger().e(onError);
+    });
+
   }
 
+}
+String? encodeQueryParameters(Map<String, String> params) {
+  return params.entries
+      .map((e) => '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+      .join('&');
 }
 
 sendSmsArrivedHereOutside({required String phoneNumber}) async {
   String number = phoneNumber;
-  String sms = Platform.isIOS ? 'sms:${number.replaceAll("+", "00")}?body=I%20arrived%20here%20outside':'sms:$number?body=I%20arrived%20here%20outside';
-  launch(sms);
+
+  if(Platform.isIOS){
+    String message = "I arrived here outside";
+    List<String> recipents = ["$phoneNumber"];
+
+    String _result = await sendSMS(message: message, recipients: recipents, sendDirect: true)
+        .catchError((onError) {
+      Logger().e(onError);
+    });
+  }else{
+    String sms =/* Platform.isIOS ? 'sms:${number.replaceAll("+", "00")}?body=I%20arrived%20here%20outside':*/'sms:$number?body=I%20arrived%20here%20outside';
+    launch(sms);
+  }
 }
 
 sendSmsNoShow({required String phoneNumber}) async {
   String number = phoneNumber;
-  String sms = Platform.isIOS ? 'sms:${number.replaceAll("+", "00")}?body=I\'ll%20report%20"no show"%20within 5 mins': 'sms:$number?body=I\'ll%20report%20"no show"%20within 5 mins';
-  launch(sms);
+  if(Platform.isIOS){
+    String message = "I\'ll report no show within 5 mins";
+    List<String> recipents = ["$phoneNumber"];
+
+    String _result = await sendSMS(message: message, recipients: recipents, sendDirect: true)
+        .catchError((onError) {
+      Logger().e(onError);
+    });
+  }else {
+    String sms =/* Platform.isIOS
+        ? 'sms:${number.replaceAll(
+        "+", "00")}?body=I\'ll%20report%20"no show"%20within 5 mins'
+        :*/ 'sms:$number?body=I\'ll%20report%20"no show"%20within 5 mins';
+    launch(sms);
+  }
 }
 
 sendCustomizeSMS({required String phoneNumber}) async {
   String number = phoneNumber;
   String message = '';
 
-  String sms = Platform.isIOS ? 'sms:${number.replaceAll("+", "00")}?body=$message':'sms:$number?body=$message';
+  String sms = Platform.isIOS ? 'sms:${number.replaceAll("+", "00")}':'sms:$number?body=$message';
   launch(sms);
 }
 

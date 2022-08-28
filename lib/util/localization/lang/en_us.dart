@@ -104,6 +104,7 @@ Map<String, String> enUS = {
   txtScanProducts : "Scan Products",
   txtBalance : "Balance",
   txtPaid : "Paid",
+  txtNote : "Note",
   txtAmountDue : "Amount Due",
   txtInstantOrder : "Instant Order",
   txtScanDeliveredBox : "Scan Delivered Box",

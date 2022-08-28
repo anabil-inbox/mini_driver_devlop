@@ -102,4 +102,6 @@ abstract class Constance {
   static String data = "data";
 
   static Object toDo = "to do";
+
+  static var noteKey = "note";
 }

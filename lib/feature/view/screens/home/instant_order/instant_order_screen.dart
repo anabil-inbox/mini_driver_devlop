@@ -10,6 +10,7 @@ import 'package:inbox_driver/feature/view/screens/home/new_customer/Widgets/bala
 import 'package:inbox_driver/feature/view/screens/home/new_customer/Widgets/contract_signature_widget.dart';
 import 'package:inbox_driver/feature/view/screens/home/new_customer/Widgets/scan_products_widget.dart';
 import 'package:inbox_driver/feature/view/widgets/appbar/custom_app_bar_widget.dart';
+import 'package:inbox_driver/feature/view/widgets/custom_text_filed.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/feature/view/widgets/primary_button.dart';
 import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
@@ -20,6 +21,7 @@ import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/string.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 import '../../../widgets/green_button.dart';
 import 'Widgets/customer_signature_instant_order.dart';
 import 'Widgets/scan_box_instant_order.dart';
@@ -95,6 +97,11 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
     } else {
       Get.close(2);
     }
+    homeViewModel.operationTask.boxes?.forEach((element) {
+      element.selectedBoxOperations?.operation = "";
+    });
+    homeViewModel.selectedBoxOperation = null;
+    homeViewModel.update();
 
     return false;
   }
@@ -109,14 +116,17 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
           onBackBtnClick: () {
             onWillPop(isFromNotification: widget.isFromNotification);
           },
-          titleWidget: CustomTextView(
-            txt: txtInstantOrder.tr,
-            maxLine: Constance.maxLineOne,
-            textStyle: textStyleAppBarTitle(),
+          titleWidget: FittedBox(
+            child: CustomTextView(
+              txt: txtInstantOrder.tr  + " " + homeViewModel.operationTask.salesOrder.toString(),
+              maxLine: Constance.maxLineOne,
+              textStyle: textStyleAppBarTitle(),
+            ),
           ),
           isCenterTitle: true,
         ),
         body: GetBuilder<HomeViewModel>(builder: (home) {
+          // Logger().w(home.operationTask.isNew);
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: padding20!),
             child: ListView(
@@ -151,6 +161,17 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
                 const ScanProducts(),
                 SizedBox(height: sizeH10),
                 const Balance(),
+                SizedBox(height: sizeH10),
+                CustomTextFormFiled(
+                  label: txtNote.tr,
+                  controller: home.tdNote,
+                  isSmallPadding: true,
+                  isSmallPaddingWidth: false,
+                  isFill: true,
+                  fillColor: colorTextWhite,
+                  maxLine: 5,
+                  minLine: 3,
+                ),
                 SizedBox(height: sizeH10),
                 GetBuilder<HomeViewModel>(builder: (logic) {
                   return CustomerSignatureInstantOrder(

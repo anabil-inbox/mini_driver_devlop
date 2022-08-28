@@ -15,15 +15,22 @@ import 'package:inbox_driver/util/string.dart';
 
 import '../../../../../../util/app_shaerd_data.dart';
 
-class BoxOnOrderItem extends StatelessWidget {
+class BoxOnOrderItem extends StatefulWidget {
   BoxOnOrderItem(
       {Key? key, required this.boxModel, required this.isShowingOperations})
       : super(key: key);
 
-  static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
+
 
   BoxModel boxModel;
   final bool isShowingOperations;
+  static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
+
+  @override
+  State<BoxOnOrderItem> createState() => _BoxOnOrderItemState();
+}
+
+class _BoxOnOrderItemState extends State<BoxOnOrderItem> {
   TextEditingController newSealController = TextEditingController();
 
   Widget get boxOperationSection {
@@ -34,7 +41,7 @@ class BoxOnOrderItem extends StatelessWidget {
         ),
         TextFormField(
           controller: TextEditingController(
-              text: boxModel.selectedBoxOperations?.operation ?? ""),
+              text: widget.boxModel.selectedBoxOperations?.operation ?? ""),
           decoration: InputDecoration(
               hintText: txtChooseBoxOperation.tr,
               prefixIcon: Padding(
@@ -46,14 +53,14 @@ class BoxOnOrderItem extends StatelessWidget {
             await Get.bottomSheet(
                 InstantOrderBottomSheet(
                   onEnd: (boxModel) async {
-                    this.boxModel = BoxModel();
-                    this.boxModel = boxModel;
+                    widget.boxModel = BoxModel();
+                    widget.boxModel = boxModel;
                   },
-                  boxModel: boxModel,
-                  boxOperations: boxModel.boxOperations ?? [],
+                  boxModel: widget.boxModel,
+                  boxOperations: widget.boxModel.boxOperations ?? [],
                 ),
                 isScrollControlled: true);
-            homeViewModel.update();
+            BoxOnOrderItem.homeViewModel.update();
           },
         ),
         SizedBox(
@@ -61,7 +68,7 @@ class BoxOnOrderItem extends StatelessWidget {
         ),
         GetBuilder<HomeViewModel>(
           builder: (homeViewModel) {
-            return boxModel.selectedBoxOperations?.operation == Constance.sealed
+            return widget.boxModel.selectedBoxOperations?.operation == Constance.sealed
                 ? Row(
                   children: [
                     Expanded(
@@ -72,11 +79,11 @@ class BoxOnOrderItem extends StatelessWidget {
                           maxLines: 1,
                           onFieldSubmitted: (e) async {
                             await homeViewModel.createNewSeal(
-                                serial: boxModel.serial ?? "", newSeal: e);
-                            boxModel.newSeal = e;
-                             e = "";
+                                serial: widget.boxModel.serial ?? "", newSeal: e);
+                            widget.boxModel.newSeal = e;
+                              e = "";
                             hideFocus(Get.context!);
-                            homeViewModel.update();
+                            // homeViewModel.update();
                           },
                           validator: (e) {
                             if (e.toString().trim().isEmpty) {
@@ -92,11 +99,11 @@ class BoxOnOrderItem extends StatelessWidget {
                     InkWell(
                         onTap:()async {
                           await homeViewModel.createNewSeal(
-                              serial: boxModel.serial ?? "", newSeal: newSealController.text.toString());
-                          boxModel.newSeal = newSealController.text.toString();
+                              serial: widget.boxModel.serial ?? "", newSeal: newSealController.text.toString());
+                          widget.boxModel.newSeal = newSealController.text.toString();
                            // newSealController.text = "";
                          hideFocus(Get.context!);
-                          homeViewModel.update();
+                          // homeViewModel.update();
                         },
                         child: SvgPicture.asset("assets/svgs/add_orange.svg")),
                   ],
@@ -121,7 +128,7 @@ class BoxOnOrderItem extends StatelessWidget {
                 SvgPicture.asset('assets/svgs/Folder_Shared.svg'),
                 SizedBox(width: sizeW5),
                 CustomTextView(
-                  txt: boxModel.boxId,
+                  txt: widget.boxModel.boxId,
                   textStyle: textStyleNormal()?.copyWith(color: colorBlack),
                 ),
               ],
@@ -130,10 +137,10 @@ class BoxOnOrderItem extends StatelessWidget {
               height: sizeH12,
             ),
             GetBuilder<HomeViewModel>(builder: (home) {
-              if (!isShowingOperations) {
+              if (!widget.isShowingOperations) {
                 return const SizedBox();
-              } else if (boxModel.boxOperations == null ||
-                  boxModel.boxOperations!.isEmpty) {
+              } else if (widget.boxModel.boxOperations == null ||
+                  widget.boxModel.boxOperations!.isEmpty) {
                 return const SizedBox();
               } else {
                 return boxOperationSection;

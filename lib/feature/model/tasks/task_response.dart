@@ -120,7 +120,7 @@ import 'package:inbox_driver/feature/model/tasks/box_model.dart';
 class TaskResponse {
   TaskResponse(
       {this.salesOrder,
-      this.isNew,
+      this.isNew = false,
       this.customerId,
       this.childOrder,
       this.total,
@@ -181,7 +181,7 @@ class TaskResponse {
     if (isFromNotification) {
       return TaskResponse(
         salesOrder: json["sales_order"],
-        isNew: json["is_new"] == "false" ? false : json["is_new"] == "true",
+        isNew: json["is_new"] == "false" ? false : json["is_new"] == "true" ? true :false,
         hasDeliveredScan: json["has_delivered_scan"] == "false"
             ? false
             : json["has_delivered_scan"] == "true",
@@ -247,7 +247,7 @@ class TaskResponse {
     } else {
       return TaskResponse(
         salesOrder: json["sales_order"],
-        isNew: json["is_new"] == null ? null : json["is_new"],
+        isNew: json["is_new"] == null ? false : json["is_new"],
         hasDeliveredScan: json["has_delivered_scan"] == null
             ? null
             : json["has_delivered_scan"],

@@ -109,6 +109,7 @@ Map<String, String> arSU = {
   txtScanDeliveredBox : "فحص الصناديق الموصلة",
   txtSealed : "الختم",
   txtTerminate : "إنهاء",
+  txtNote : "ملاحظة",
   txtReschedule : "إعادة الجدولة",
   txtWriteDownRemarksOrComments :  "اكتب الملاحظات أو التعليقات",
   txtWaitingTime : "وقت الانتظار",

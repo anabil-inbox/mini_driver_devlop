@@ -62,6 +62,7 @@ const String txtTotal = "Total";
 const String txtPaid = "Paid";
 const String txtAmountDue = "Amount Due";
 const String txtCash = "Cash";
+const String txtNote = "Note";
 const String txtCard = "Card";
 const String txtApplication = "Application";
 const String txtQR = "QR";

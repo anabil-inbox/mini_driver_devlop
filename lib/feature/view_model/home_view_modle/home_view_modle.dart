@@ -41,6 +41,8 @@ class HomeViewModel extends GetxController {
 
   bool isNeedTrancfre = false;
 
+  TextEditingController tdNote = TextEditingController();
+
   void changeTab(int x) {
     selectedTab = x;
     update();
@@ -392,10 +394,23 @@ class HomeViewModel extends GetxController {
     try {
       if (img != null) {
         img = await compressImage(img!);
+      }else{
+        if(signatureOutput != null) {
+          Uint8List imageInUnit8List = signatureOutput;
+          final tempDir = await getTemporaryDirectory();
+          File file = await File('${tempDir.path}/image.png').create();
+          file.writeAsBytesSync(imageInUnit8List);
+          img = file;
+          update();
+        }
       }
+      // Logger().i({
+      //   "image": img != null ? multipart.MultipartFile.fromFileSync(img!.path) : "",
+      //   "customer": customerId,
+      //   "task_id": taskId,
+      // });
       await HomeHelper.getInstance.uploadCustomerId(body: {
-        "image":
-            img != null ? multipart.MultipartFile.fromFileSync(img!.path) : "",
+        "image": img != null ? multipart.MultipartFile.fromFileSync(img!.path) : "",
         "customer": customerId,
         "task_id": taskId,
       }).then((value) => {
@@ -483,12 +498,14 @@ class HomeViewModel extends GetxController {
         body = {
           Constance.status: newStatus,
           Constance.taskId: taskId,
+          Constance.noteKey: tdNote.text.toString() ,
           Constance.paymentMethod: operationTask.paymentMethod
         };
       } else {
         body = {
           Constance.status: newStatus,
           Constance.taskId: taskId,
+          Constance.noteKey: tdNote.text.toString() ,
          // Constance.paymentMethod: taskStatusId
         };
       }

@@ -72,7 +72,7 @@ class WhLoadingCard extends StatelessWidget {
                           PositionedDirectional(
                               top: padding6,
                               start: padding9,
-                              child: Text(
+                              child:salesOrder.totalBoxes == 0 ? const SizedBox.shrink(): Text(
                                 "X ${salesOrder.totalBoxes}",
                                 style: textStyleSmall()
                                     ?.copyWith(color: colorTextWhite),

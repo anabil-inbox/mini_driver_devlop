@@ -46,6 +46,7 @@ class _ChangeMobilScreenState extends State<VerficationScreen> {
         authViewModle.startTimer();
       }
     });
+    initSmsListener();
   }
 
   // String _commingSms = 'Unknown';

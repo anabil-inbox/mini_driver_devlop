@@ -35,7 +35,7 @@
 
    <application
        android:allowBackup="false"
-        android:label="inbox_driver"
+        android:label="Inbox Driver"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true"
         >
