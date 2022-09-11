@@ -80,19 +80,21 @@ class MyOrderBoxItem extends StatelessWidget {
           OptionDeatailes(
             orderItem: orderItem,
           ),
-          SizedBox(
-            height: 40,
-            child: ListView.separated(
-              itemCount: boxes.length,
-              padding:  EdgeInsets.symmetric(horizontal: padding20!),
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) => Text(boxes[index].serial ?? ""),
-              separatorBuilder: (context, index) => SizedBox(width : sizeW12),
+          if(orderItem.boxes != null && orderItem.boxes!.isNotEmpty)...[
+            SizedBox(
+              height: 40,
+              child: ListView.separated(
+                itemCount: orderItem.boxes!.length,
+                padding:  EdgeInsets.symmetric(horizontal: padding20!),
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) => Text(orderItem.boxes![index]/*.serial ?? ""*/ ),
+                separatorBuilder: (context, index) => SizedBox(width : sizeW12),
+              ),
             ),
-          ),
-          SizedBox(
-            height: sizeH10,
-          ),
+            SizedBox(
+              height: sizeH10,
+            ),
+          ],
           Row(
             children: [
               SizedBox(

@@ -114,6 +114,16 @@ class ProfileScreen extends StatelessWidget {
                   settingTitle: txtLogOut.tr,
                   trailingTitle: "",
                   iconPath: "assets/svgs/logout_icons_ornage.svg",
+                ), SizedBox(
+                  height: sizeH12,
+                ),
+                SettingItem(
+                  onTap: () {
+                    _profileViewModel.deleteAccountBottomSheet();
+                  },
+                  settingTitle: txtDeleteAccount.tr,
+                  trailingTitle: "",
+                  iconPath: "assets/svgs/delete_account.svg",
                 ),
               ],
             ),

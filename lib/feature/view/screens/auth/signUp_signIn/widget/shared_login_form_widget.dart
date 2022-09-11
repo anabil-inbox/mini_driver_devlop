@@ -7,6 +7,7 @@ import 'package:get/utils.dart';
 import 'package:inbox_driver/feature/model/driver_modle.dart';
 import 'package:inbox_driver/feature/view/screens/auth/country/choose_country_view.dart';
 import 'package:inbox_driver/feature/view/screens/auth/signUp_signIn/widget/primary_button_finger_pinter.dart';
+import 'package:inbox_driver/feature/view/widgets/cut_corner.dart';
 import 'package:inbox_driver/feature/view_model/auht_view_modle/auth_view_modle.dart';
 import 'package:inbox_driver/network/utils/constance_netwoek.dart';
 import 'package:inbox_driver/util/app_color.dart';
@@ -81,7 +82,8 @@ class LoginForm extends GetWidget<AuthViewModle> {
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return txtErrorMobileNumber.tr;
-                              } else if (value.length > 10 || value.length < 8) {
+                              } else if (value.length > 10 ||
+                                  value.length < 8) {
                                 return txtErrorMobileNumber.tr;
                               } else {
                                 return null;
@@ -96,8 +98,13 @@ class LoginForm extends GetWidget<AuthViewModle> {
                 );
               },
             ),
+
             SizedBox(height: sizeH28),
-            (SharedPref.instance .getUserToken() != null && !GetUtils.isNull(SharedPref.instance.getCurrentUserData()?.id) &&"${SharedPref.instance.getCurrentUserData()?.id.toString()}".isNotEmpty )
+            (SharedPref.instance.getUserToken() != null &&
+                    !GetUtils.isNull(
+                        SharedPref.instance.getCurrentUserData()?.id) &&
+                    "${SharedPref.instance.getCurrentUserData()?.id.toString()}"
+                        .isNotEmpty)
                 ? Row(
                     children: [
                       GetBuilder<AuthViewModle>(
@@ -142,14 +149,13 @@ class LoginForm extends GetWidget<AuthViewModle> {
                         onClicked: () {
                           if (_formKey.currentState!.validate()) {
                             logic.signInUser(
-                                    user: Driver(
-                                  countryCode: "${controller.defCountry.prefix}",
-                                  mobileNumber: controller.tdMobileNumber.text,
-                                  udId: controller.identifier,
-                                  deviceType: controller.deviceType,
-                                  fcm: SharedPref.instance.getFCMToken(),
-                                ));
-                            
+                                user: Driver(
+                              countryCode: "${controller.defCountry.prefix}",
+                              mobileNumber: controller.tdMobileNumber.text,
+                              udId: controller.identifier,
+                              deviceType: controller.deviceType,
+                              fcm: SharedPref.instance.getFCMToken(),
+                            ));
                           }
                         },
                         isLoading: controller.isLoading,
@@ -157,6 +163,16 @@ class LoginForm extends GetWidget<AuthViewModle> {
                       );
                     },
                   ),
+            // SizedBox(height: sizeW10),
+            // TextFormField(
+            //   textDirection: TextDirection.ltr,
+            //   maxLength: 10,
+            //   decoration: const InputDecoration(
+            //       counterText: "",
+            //       border:  CutCornersBorder(cut: 28),),
+            //   keyboardType: TextInputType.number,
+            // ),
+
           ],
         ),
       ),

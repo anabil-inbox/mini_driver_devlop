@@ -14,6 +14,7 @@ class ApiSettings {
       this.borderFactor,
       this.paymentMethod,
       this.waitingTime,
+      this.domain,
       this.deliveryFactor});
 
   String? customerType;
@@ -26,13 +27,15 @@ class ApiSettings {
   num? borderFactor;
   num? deliveryFactor;
   int? waitingTime;
+  String? domain;
   List<PaymentMethod>? paymentMethod;
 
   factory ApiSettings.fromJson(Map<String, dynamic> json) => ApiSettings(
         customerType: json["customer_type"],
         aboutUs: json["about_us"] ?? "",
         waitingTime: json["waiting_time"],
-        deliveryFactor: json["delivery_factor"] ?? 1,
+    domain: json["domain"] == null ? "" : json["domain"].toString().contains("http") ?json["domain"] :"http://"+json["domain"],
+    deliveryFactor: json["delivery_factor"] ?? 1,
         borderFactor: json["border_factor"] ?? 1,
         termOfConditions: json["term_of_conditions"],
         paymentMethod: (json["payment_method"] == [] || json["payment_method"] == null)
@@ -58,6 +61,7 @@ class ApiSettings {
   Map<String, dynamic> toJson() => {
         "customer_type": customerType,
         "about_us": aboutUs,
+        "domain": domain,
         "delivery_factor": deliveryFactor,
         "border_factor": borderFactor,
         "term_of_conditions": termOfConditions,

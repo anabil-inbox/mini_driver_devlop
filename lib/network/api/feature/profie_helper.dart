@@ -11,10 +11,21 @@ class ProfileHelper {
   static final ProfileHelper getInstance = ProfileHelper._();
   var log = Logger();
   Future<AppResponse> logOut() async {
-
     var appResponse = await ProfileApi.getInstance.logOut(
       url: ConstanceNetwork.logOutEndPoint,
       header: ConstanceNetwork.header(4),
+    );
+    if (appResponse.status?.success == true) {
+      return appResponse;
+    } else {
+      return appResponse;
+    }
+  }
+
+  Future<AppResponse> deleteAccount() async {
+    var appResponse = await ProfileApi.getInstance.deleteAccount(
+      url: ConstanceNetwork.deleteAccountApi,
+      header: ConstanceNetwork.header(2),
     );
     if (appResponse.status?.success == true) {
       return appResponse;

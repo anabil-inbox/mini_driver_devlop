@@ -104,4 +104,8 @@ abstract class Constance {
   static Object toDo = "to do";
 
   static var noteKey = "note";
+
+  static String applePay = "Apple Pay";
+  static String appleImage = "https://imagedelivery.net/AtkJu2wCmOwcp9lTOSgupQ/097c3115-6c81-4933-6e67-5968b1e0af00/public";
+
 }

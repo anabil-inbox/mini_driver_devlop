@@ -361,6 +361,7 @@ class OrderDetailsStarted extends StatelessWidget {
                         SizedBox(height: sizeH10),
                         ScheduleBox(
                           dateTime: salesData.lastUpdate.toString(),
+                          salesData: salesOrder,
                         ),
                         SizedBox(height: sizeH10),
                         lvOrderItems(),

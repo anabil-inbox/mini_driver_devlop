@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:inbox_driver/feature/model/home/sales_data.dart';
+import 'package:inbox_driver/feature/model/home/sales_order.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
@@ -12,9 +14,10 @@ import 'package:inbox_driver/util/string.dart';
 import '../../../../../util/app_shaerd_data.dart';
 
 class ScheduleBox extends StatelessWidget {
-  const ScheduleBox({Key? key ,required this.dateTime }) : super(key: key);
+  const ScheduleBox({Key? key ,required this.dateTime,required this.salesData,  }) : super(key: key);
 
   final String dateTime;
+  final SalesOrder salesData;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +40,11 @@ class ScheduleBox extends StatelessWidget {
           ),
           CustomTextView(
             txt: /* DateUtility.getChatTime(dateTime) */ dateTime.split(" ")[0],
+            maxLine: Constance.maxLineOne,
+            textStyle:textStyleNormal(),
+          ),
+          CustomTextView(
+            txt: /* DateUtility.getChatTime(dateTime) */"${salesData.fromTime?.split(":")[0] }:${salesData.fromTime?.split(":")[1]} - ${salesData.toTime?.split(":")[0] }:${salesData.toTime?.split(":")[1]}",
             maxLine: Constance.maxLineOne,
             textStyle:textStyleNormal(),
           ),

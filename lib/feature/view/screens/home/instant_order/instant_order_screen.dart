@@ -230,6 +230,15 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
                                   if (!isAllowed) {
                                     return;
                                   }
+                                  if(homeViewModel.operationTask.signatureFile ==null){
+                                    snackError("",txtAddSignature.tr);
+                                    return;
+                                  }
+
+                                  if(homeViewModel.operationTask.signatureFile !=null && homeViewModel.operationTask.signatureFile.toString().isEmpty){
+                                    snackError("",txtAddSignature.tr);
+                                    return;
+                                  }
                                   await home.updateTaskStatus(
                                       seralOrder: homeViewModel
                                           .operationTask.salesOrder,

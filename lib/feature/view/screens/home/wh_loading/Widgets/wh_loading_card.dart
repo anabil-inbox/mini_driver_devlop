@@ -124,18 +124,18 @@ class WhLoadingCard extends StatelessWidget {
                   SizedBox(
                     height: sizeH10,
                   ),
-                  GetBuilder<HomeViewModel>(
-                    builder: (builder) {
-                      return salesOrder.totalBoxes == salesOrder.totalReceived
-                          ? const SizedBox()
-                          : PrimaryBorderButton(
-                              isLoading: builder.isLoading,
-                              buttonText: txtReceived.tr,
-                              function: () {
-                                onRecivedClick();
-                              });
-                    },
-                  ),
+                  // GetBuilder<HomeViewModel>(
+                  //   builder: (builder) {
+                  //     return salesOrder.totalBoxes == salesOrder.totalReceived
+                  //         ? const SizedBox()
+                  //         : PrimaryBorderButton(
+                  //             isLoading: builder.isLoading,
+                  //             buttonText: txtReceived.tr,
+                  //             function: () {
+                  //               onRecivedClick();
+                  //             });
+                  //   },
+                  // ),
                   SizedBox(height: sizeH16),
                 ],
               ),

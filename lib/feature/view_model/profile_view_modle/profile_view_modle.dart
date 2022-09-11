@@ -99,6 +99,57 @@ class ProfileViewModle extends BaseController {
                 isLoading = false,
                 update(),
                 snackError(txtError!.tr, "${value.status!.message}"),
+                SharedPref.instance
+                    .setUserLoginState(ConstanceNetwork.userEnterd),
+                Get.offAll(() => const LoginScreen()),
+                Get.put(AuthViewModle()),
+                Get.find<HomeViewModel>().tasksDone.clear(),
+                Get.find<HomeViewModel>().tasksInProgress.clear(),
+              }
+          });
+    } catch (e) {
+      printError();
+    }
+  }
+
+
+  deleteAccountBottomSheet() {
+    Get.bottomSheet(GlobalBottomSheet(
+      title: txtDeleteYouAccount.tr,
+      onOkBtnClick: () {
+        deleteAccount();
+        Get.back();
+      },
+      onCancelBtnClick: () {
+        Get.back();
+      },
+    ));
+  }
+  deleteAccount() async {
+    isLoading = true;
+    update();
+    try {
+      await ProfileHelper.getInstance.deleteAccount().then((value) => {
+            Logger().i("${value.status!.message}"),
+            if (value.status!.success!)
+              {
+                // snackSuccess(txtSuccess!.tr, "${value.status!.message}"),
+
+                isLoading = false,
+                Get.put(AuthViewModle()),
+                update(),
+                SharedPref.instance
+                    .setUserLoginState(ConstanceNetwork.userEnterd),
+                Get.offAll(() => const LoginScreen()),
+                Get.put(AuthViewModle()),
+                Get.find<HomeViewModel>().tasksDone.clear(),
+                Get.find<HomeViewModel>().tasksInProgress.clear(),
+              }
+            else
+              {
+                isLoading = false,
+                update(),
+                snackError(txtError!.tr, "${value.status!.message}"),
                 Get.offAll(() => const LoginScreen()),
                 Get.put(AuthViewModle()),
                 Get.find<HomeViewModel>().tasksDone.clear(),

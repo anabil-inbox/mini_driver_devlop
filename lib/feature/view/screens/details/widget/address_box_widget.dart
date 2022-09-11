@@ -13,6 +13,7 @@ import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/string.dart';
+import 'package:logger/logger.dart';
 
 import '../../../../../util/app_shaerd_data.dart';
 
@@ -22,11 +23,25 @@ class AddressBox extends StatelessWidget {
   final SalesOrder salesOrder;
 
   Widget textAddressWidget() {
-    String fullAddress = (salesOrder.orderShippingAddress) ?? (salesOrder.orderWarehouseAddress);
-    fullAddress +=
-        " , ${salesOrder.street} , ${salesOrder.unitNo} , ${salesOrder.buildingNo}";
-    
-    fullAddress += "\n ${salesOrder.fromTime?.split(":")[0] }:${salesOrder.fromTime?.split(":")[1]} - ${salesOrder.toTime?.split(":")[0] }:${salesOrder.toTime?.split(":")[1]}";
+    Logger().w(salesOrder.toJson());
+    String fullAddress = salesOrder.orderShippingAddress != null && salesOrder.orderShippingAddress!.isNotEmpty ? salesOrder.orderShippingAddress:salesOrder.orderWarehouseAddress ;
+
+   if(salesOrder.street != null && salesOrder.street!.isNotEmpty){
+     fullAddress +=
+     " , ${salesOrder.street}";
+   }
+   if(salesOrder.unitNo != null && salesOrder.unitNo!.isNotEmpty){
+     fullAddress +=
+     " , ${salesOrder.unitNo}";
+   }
+   if(salesOrder.buildingNo != null && salesOrder.buildingNo!.isNotEmpty){
+     fullAddress +=
+     " , ${salesOrder.buildingNo}";
+   }
+    // fullAddress +=
+    //     " , ${salesOrder.street} , ${salesOrder.unitNo} , ${salesOrder.buildingNo}";
+    //
+    // fullAddress += "\n ${salesOrder.fromTime?.split(":")[0] }:${salesOrder.fromTime?.split(":")[1]} - ${salesOrder.toTime?.split(":")[0] }:${salesOrder.toTime?.split(":")[1]}";
     fullAddress = fullAddress.replaceAll(",  ," ,  "");
     return InkWell(
       onTap: () => _goToMap(salesOrder: salesOrder),

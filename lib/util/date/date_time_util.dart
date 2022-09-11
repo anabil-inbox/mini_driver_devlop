@@ -386,6 +386,25 @@ class DateUtility {
     }
   }
 
+  // timeString must be of the format "3:52:59 PM"
+  static DateTime parseHoursInUtil(String timeString) {
+    try {
+      final match = _timePattern.firstMatch(timeString);
+
+      final hour = int.parse(match!.namedGroup('hour')!);
+      final minute = int.parse(match.namedGroup('minute')!);
+      // final second = int.parse(match.namedGroup('second'));
+      final isPm = match.namedGroup('amPm') == 'PM';
+      final now = DateTime.now()/*.toUtc()*/;
+      return DateTime(
+          now.year, now.month, now.day, isPm ? hour + 12 : hour, minute, 0)
+          /*.toUtc()*/;
+    } catch (e) {
+      Logger().d(e);
+      return DateTime.now()/*.toUtc()*/;
+    }
+  }
+
   static compareToTime(TimeOfDay oneVal, TimeOfDay twoVal) {
     try {
       Logger().d("$oneVal  $twoVal");

@@ -14,7 +14,7 @@ class Balance extends StatelessWidget {
 
   Widget paymentMethod({required HomeViewModel homeViewModel}) {
     if ((homeViewModel.operationTask.totalDue ?? 0) > 0) {
-      return const PaymentWidget();
+      return  PaymentWidget(operationTask:homeViewModel.operationTask);
     } else {
       return const SizedBox();
     }
@@ -32,6 +32,7 @@ class Balance extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(height: sizeH13),
           Row(
@@ -104,6 +105,9 @@ class Balance extends StatelessWidget {
           ),
           SizedBox(height: sizeH22),
           GetBuilder<HomeViewModel>(
+            initState: (init){
+
+            },
             builder: (homeViewModel) {
               return paymentMethod(homeViewModel: homeViewModel);
             },

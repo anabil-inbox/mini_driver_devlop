@@ -3,7 +3,10 @@ import 'package:inbox_driver/util/sh_util.dart';
 
 abstract class ConstanceNetwork {
   ///todo here insert base_url
-  static String imageUrl = "http://50.17.152.72".trim();
+  ///old imageUrl http://inbox.ahdtech.com/
+  ///new imageUrl http://mini.inbox.com.qa/
+  static String imageUrl = SharedPref.instance.getAppSettings()!.domain.toString().trim();
+
 
   ///todo here insert key Of Request
 
@@ -43,6 +46,7 @@ abstract class ConstanceNetwork {
   static String editProfilEndPoint = "inbox_app.driver.auth.edit_profile";
 
   static String logOutEndPoint = "inbox_app.driver.auth.logout";
+  static String deleteAccountApi = "inbox_app.driver.auth.delete_account";
 
   // to add here Home End Points ::
   static String homeTasksEndPoint =
@@ -137,7 +141,7 @@ abstract class ConstanceNetwork {
       };
     } else if (typeToken == 2) {
       headers = {
-        //    'Authorization': '${SharedPref.instance.getToken().toString()}',
+            'Authorization': 'Bearer ${SharedPref.instance.getUserToken()}',
       };
     } else if (typeToken == 3) {
       headers = {
