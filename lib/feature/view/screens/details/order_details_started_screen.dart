@@ -144,6 +144,7 @@ class OrderDetailsStarted extends StatelessWidget {
                   newStatus: Constance.taskStart,
                   taskId: salesOrder.taskId ?? "",
                 );
+                mapViewModel.onDriverStart(salesOrder: home.operationsSalesData!.salesOrders![index]);
                 await home.getSpecificTask(
                     taskId: task.id ?? "", taskSatus: Constance.inProgress);
                 await home.getSpecificTask(
@@ -217,6 +218,7 @@ class OrderDetailsStarted extends StatelessWidget {
                       taskId: salesOrder.taskId ?? "");
                   home.selectedSignatureItemModel = SignatureItemModel(
                       title: home.operationTask.signatureType);
+                   mapViewModel.onDriverStart(salesOrder: home.operationsSalesData!.salesOrders![index]);
                   await Get.to(() => InstantOrderScreen(
                         isFromNotification: false,
                         taskStatusId: task.id ?? "",
@@ -376,7 +378,14 @@ class OrderDetailsStarted extends StatelessWidget {
               bottom: padding20,
               right: padding20,
               left: padding20,
-              child: GetBuilder<HomeViewModel>(builder: (home) {
+              child: GetBuilder<HomeViewModel>(
+                  initState: (_){
+                    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+                      mapViewModel.isStreamOpen = true;
+                      mapViewModel.update();
+                    });
+                  },
+                  builder: (home) {
                 return primaryButton(home: home);
               }),
             ),

@@ -14,6 +14,7 @@ import 'package:inbox_driver/feature/view/widgets/custom_text_filed.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/feature/view/widgets/primary_button.dart';
 import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
+import 'package:inbox_driver/feature/view_model/map_view_model/map_view_model.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
@@ -47,6 +48,7 @@ class InstantOrderScreen extends StatefulWidget {
 
 class _InstantOrderScreenState extends State<InstantOrderScreen> {
   static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
+  static MapViewModel mapViewModel = Get.find<MapViewModel>();
 
   Widget get idVerification => Container(
         height: sizeH50,
@@ -213,7 +215,6 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
                                 isLoading: homeViewModel.isLoading,
                                 onClicked: () async {
                                   bool isAllowed = true;
-
                                   homeViewModel.operationTask.scannedBoxes
                                       ?.forEach((element) {
                                     if (element.selectedBoxOperations
@@ -239,6 +240,7 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
                                     snackError("",txtAddSignature.tr);
                                     return;
                                   }
+                                  mapViewModel.closeStream();
                                   await home.updateTaskStatus(
                                       seralOrder: homeViewModel
                                           .operationTask.salesOrder,
@@ -257,6 +259,7 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
                                       taskType: Constance.done);
                                   await home.getHomeTasks(
                                       taskType: Constance.inProgress);
+
                                 }),
                           )
                         ],

@@ -78,7 +78,7 @@ class MapViewModel extends GetxController {
     //todo here we use two method first for me and another for the user
     //todo me = driver
     await getMyCurrentPosition();
-    getStreamLocation(salesOrder:salesOrder);
+    getStreamLocation(salesOrder: salesOrder);
     getUserMarkers(salesOrder: salesOrder);
     Future.delayed(const Duration(seconds: 0)).then((value) async {
       await foucCameraOnUsers(
@@ -89,12 +89,18 @@ class MapViewModel extends GetxController {
     });
   }
 
+  onDriverStart({required SalesOrder salesOrder}) async {
+    await getMyCurrentPosition();
+    getStreamLocation(salesOrder: salesOrder);
+  }
+
   onMapTaped(LatLng argument) {}
 
   Future<BitmapDescriptor> _getMarkerImageFromUrl(String url,
       {int? targetWidth, Color? color}) async {
-    if(GetUtils.isNull(url)  || url .isEmpty){
-      url = "https://c8.alamy.com/comp/2A8GA22/location-pin-icon-on-transparent-map-marker-sign-flat-style-map-point-symbol-map-pointer-symbol-map-pin-sign-2A8GA22.jpg";
+    if (GetUtils.isNull(url) || url.isEmpty) {
+      url =
+          "https://c8.alamy.com/comp/2A8GA22/location-pin-icon-on-transparent-map-marker-sign-flat-style-map-point-symbol-map-pointer-symbol-map-pin-sign-2A8GA22.jpg";
     }
     final File markerImageFile = await DefaultCacheManager().getSingleFile(url);
     if (targetWidth != null) {
@@ -180,7 +186,8 @@ class MapViewModel extends GetxController {
 
   getUserMarkers({required SalesOrder salesOrder}) async {
     // markers.clear();
-    Logger().d("salesOrder_${salesOrder.customerImage}\n${salesOrder.toJson()}");
+    Logger()
+        .d("salesOrder_${salesOrder.customerImage}\n${salesOrder.toJson()}");
     final Marker marker = Marker(
       markerId: MarkerId("${salesOrder.customerId}"),
       icon: await _getMarkerImageFromUrl(
@@ -284,6 +291,9 @@ class MapViewModel extends GetxController {
 
   getStreamLocation({required SalesOrder salesOrder}) async {
     try {
+      if(!isStreamOpen){
+        return;
+      }
       Geolocator.getPositionStream().listen((event) {
         myLatLng = LatLng(event.latitude, event.longitude);
         var allowToDeliver = isAllowToDeliver(
@@ -292,7 +302,8 @@ class MapViewModel extends GetxController {
             lat2: customerLatLng.latitude,
             lon2: customerLatLng.longitude);
         update();
-        addDriverTackLocation(allowToDeliver ,salesOrder:salesOrder ,driverLocation:myLatLng);
+        addDriverTackLocation(allowToDeliver,
+            salesOrder: salesOrder, driverLocation: myLatLng);
       });
     } catch (e) {
       printError();
@@ -370,7 +381,7 @@ class MapViewModel extends GetxController {
     // num a = 0.5 -
     //     cos((lat2 - lat1) * p) / 2 +
     //     cos(lat1 * p) * cos(lat2 * p) * (1 - cos((lon2 - lon1) * p)) / 2;
-   // Logger().e("msg_Map : From $lat1 , $lon1 to $lat2 , $lon2");
+    // Logger().e("msg_Map : From $lat1 , $lon1 to $lat2 , $lon2");
     // Logger().e("msg_Map : The distance is : ${12742 * asin(sqrt(a))}");
     // Logger().e(
     //     "msg_Map : The distance From GeoLoacator : ${Geolocator.distanceBetween(lat1, lon1, lat2, lon2) / 1000}");
@@ -389,10 +400,10 @@ class MapViewModel extends GetxController {
     try {
       if (settings.deliveryFactor! >
           calculateDistance(lat1: lat1, lon1: lon1, lat2: lat2, lon2: lon2)) {
-       // Logger().e("msg_Map : isAllow to Dilivery true");
+        // Logger().e("msg_Map : isAllow to Dilivery true");
         return true;
       } else {
-       // Logger().e("msg_Map : isAllow to Dilivery false");
+        // Logger().e("msg_Map : isAllow to Dilivery false");
         return false;
       }
     } catch (e) {
@@ -411,16 +422,29 @@ class MapViewModel extends GetxController {
   }
 
   // this for add driver location to firebase
-  void addDriverTackLocation(bool allowToDeliver, {required SalesOrder salesOrder,required LatLng driverLocation}) {
-    if(!allowToDeliver) return;
-    Map<String ,dynamic> bodyData = {
-      "${FirebaseClint.serialOrderData}" : jsonEncode(salesOrder.toJson()),
-      "${FirebaseClint.serialOrderDriverData}" : jsonEncode(SharedPref.instance.getCurrentUserData()!.toJson()),
-      "${FirebaseClint.serialOrderDriverLocations}" : driverLocation.toJson(),
+  void addDriverTackLocation(bool allowToDeliver,
+      {required SalesOrder salesOrder, required LatLng driverLocation}) {
+    if (!allowToDeliver) return;
+    if(!isStreamOpen){
+      return;
+    }
+    Map<String, dynamic> bodyData = {
+      "${FirebaseClint.serialOrderData}": jsonEncode(salesOrder.toJson()),
+      "${FirebaseClint.serialOrderDriverData}":
+          jsonEncode(SharedPref.instance.getCurrentUserData()!.toJson()),
+      "${FirebaseClint.serialOrderDriverLocations}": driverLocation.toJson(),
     };
+
     /// store [salesOrder]
     /// store [CurrentUserData]
     /// store [driverLocation]
-    FirebaseClint.instance.addDriverLocation(salesOrder.customerId, salesOrder.orderId, bodyData);
+    FirebaseClint.instance
+        .addDriverLocation(salesOrder.customerId, salesOrder.orderId, bodyData);
+  }
+
+  bool isStreamOpen = true;
+  void closeStream() {
+    isStreamOpen = !isStreamOpen;
+    update();
   }
 }

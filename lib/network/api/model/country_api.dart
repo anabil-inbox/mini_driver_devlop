@@ -13,7 +13,7 @@ class CountryApi {
   Future<AppResponse> getAppCountreis({var url , var header , var queryParameters })async{
     try {
       var response = await DioManagerClass.getInstance.dioGetMethod(url: url, header: header , queryParameters: queryParameters);
-      log.d(AppResponse.fromJson(json.decode(response.toString())).toJson());
+      // log.d(AppResponse.fromJson(json.decode(response.toString())).toJson());
       return AppResponse.fromJson(json.decode(response.toString()));
     }  on DioError catch (ex) {
       var message = json.decode(ex.response.toString());
