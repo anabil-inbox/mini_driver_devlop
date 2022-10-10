@@ -72,20 +72,20 @@ class PaymentWidget extends StatelessWidget {
           SizedBox(
             height: sizeH16,
           ),
-          if (Platform.isIOS) ...[
-            SizedBox(
-              height: sizeH36,
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width / 1.14,
-              child: PaymentItem(
-                paymentMethod: PaymentMethod(
-                    id: Constance.applePay,
-                    name: Constance.applePay,
-                    image: Constance.appleImage),
-              ),
-            ),
-          ],
+          // if (Platform.isIOS) ...[
+          //   SizedBox(
+          //     height: sizeH36,
+          //   ),
+          //   SizedBox(
+          //     width: MediaQuery.of(context).size.width / 1.14,
+          //     child: PaymentItem(
+          //       paymentMethod: PaymentMethod(
+          //           id: Constance.applePay,
+          //           name: Constance.applePay,
+          //           image: Constance.appleImage),
+          //     ),
+          //   ),
+          // ],
           SizedBox(
             height: sizeH25,
           ),

@@ -37,7 +37,7 @@ class NewOrderItemTask extends StatelessWidget {
                       width: sizeW10,
                     ),
                     Text(
-                      orderItem.item ?? "",
+                      orderItem.itemName ??orderItem.item ?? "",
                       style: textStyleMeduimPrimaryText()!.copyWith(
                         fontSize: fontSize16,
                       ),

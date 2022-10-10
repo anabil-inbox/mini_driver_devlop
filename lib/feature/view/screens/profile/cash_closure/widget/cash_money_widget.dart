@@ -27,7 +27,7 @@ class CashMoneyItem extends StatelessWidget {
             height: sizeH16,
           ),
           Text(
-            formatStringWithCurrency(value.toString() , "\$"),
+            formatStringWithCurrency(value.toString() , "QR"),
             style: TextStyle(color: colorPrimary),
           ),
           SizedBox(

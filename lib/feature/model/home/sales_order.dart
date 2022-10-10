@@ -131,10 +131,12 @@ class OrderItem {
       this.itemsList,
       this.itemStatus,
       this.boxes,
+        this.itemName,
       this.options});
 
   String? itemParent;
   String? item;
+  String? itemName;
   num? needAdviser;
   num? price;
   num? quantity;
@@ -154,6 +156,7 @@ class OrderItem {
         price: json["price"],
         quantity: json["quantity"],
         totalPrice: json["totalPrice"],
+        itemName: json["item_name"] == null ? null : json["item_name"],
         groupId: json["group_id"],
         boxes: json["boxes"] == null
             ? []
@@ -172,6 +175,7 @@ class OrderItem {
   Map<String, dynamic> toJson() => {
         "item_parent": itemParent,
         "item": item,
+        "item_name": itemName,
         "need_Adviser": needAdviser,
         "price": price,
         "quantity": quantity,

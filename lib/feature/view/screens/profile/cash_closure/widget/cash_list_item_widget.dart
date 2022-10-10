@@ -43,7 +43,7 @@ class CashListItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children : [
 
-              Text(formatStringWithCurrency("${cashCloserData?.amount}" , "\$"),style: textStylePrimaryFont(),),
+              Text(formatStringWithCurrency("${cashCloserData?.amount}" , "QR"),style: textStylePrimaryFont(),),
               Container(
                 width: sizeW90,
                 height: sizeH27,

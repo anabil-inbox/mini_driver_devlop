@@ -44,6 +44,7 @@ abstract class Constance {
   static String taskStart = "start";
   static String taskdelivered = "delivered";
   static String taskNoShow = "no show";
+  static String taskSchedule = "schedule";
   static String taskDone = "done";
   static String inProgress = "in processing";
   static String cancelled = "cancelled";
@@ -100,6 +101,7 @@ abstract class Constance {
 
   static String transfer = "Transfer";
   static String data = "data";
+  static String date = "date";
 
   static Object toDo = "to do";
 

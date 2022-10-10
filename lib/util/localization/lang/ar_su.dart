@@ -130,4 +130,9 @@ Map<String, String> arSU = {
   txtCall : "اتصال",
   txtCancelOrder : "الغاء الطلب",
   txtNoShowReport : "لا يوجد تقرير عن العرض",
+  txtFilterByDate : "تصفية حسب التاريخ",
+  txtHi : "مرحبا",
+  txtUnCompleted : "غير مكتمل",
+  txtClear : "مسح",
+  txtCustomizeSms:"تخصيص الرسائل القصيرة"
 };

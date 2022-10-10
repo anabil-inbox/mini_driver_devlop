@@ -26,6 +26,7 @@ abstract class ConstanceNetwork {
 
   ///todo this for add new contact key
   static var mobileNumberKey = "mobile_number";
+  static var messageKey = "message";
   static var countryCodeKey = "country_code";
 
   ///todo here insert end Point
@@ -49,22 +50,18 @@ abstract class ConstanceNetwork {
   static String deleteAccountApi = "inbox_app.driver.auth.delete_account";
 
   // to add here Home End Points ::
-  static String homeTasksEndPoint =
-      "inbox_app.driver.task_management.get_level_one_tasks";
-  static String getSpecificTask =
-      "inbox_app.driver.task_management.get_level_one_task";
+  static String homeTasksEndPoint = "inbox_app.driver.task_management.get_level_one_tasks";
+  static String getLateTasksApi = "inbox_app.driver.task_management.get_late_tasks";
+  static String getSpecificTask = "inbox_app.driver.task_management.get_level_one_task";
   static String scanBoxEndPoint = "inbox_app.driver.task_management.scan_box";
 
   // to add here emergency End Points ::
-  static String getEmergencyCassesEndPoint =
-      "inbox_app.driver.emergency_report.get_emergency_cases";
-  static String sendEmergencyReportEndPoint =
-      "inbox_app.driver.emergency_report.create_report";
-  static String getEmergencyReportsEndPoint =
-      "inbox_app.driver.emergency_report.get_emergency_reports";
+  static String getEmergencyCassesEndPoint = "inbox_app.driver.emergency_report.get_emergency_cases";
+  static String sendEmergencyReportEndPoint = "inbox_app.driver.emergency_report.create_report";
+  static String getEmergencyReportsEndPoint = "inbox_app.driver.emergency_report.get_emergency_reports";
 
-  static String reciveBoxessEndPoint =
-      "inbox_app.driver.task_management.receive_all_boxes";
+  static String reciveBoxessEndPoint = "inbox_app.driver.task_management.receive_all_boxes";
+  static String sendSmsMessageApi = "inbox_app.driver.task_management.send_sms_message";
   static String updateBoxTaskEndpoint =
       "inbox_app.driver.task_management.update_task_status";
   static String searchEndPoint =

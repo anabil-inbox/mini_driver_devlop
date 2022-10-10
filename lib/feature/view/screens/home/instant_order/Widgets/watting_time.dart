@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:inbox_driver/feature/view/widgets/custome_text_view.dart';
 import 'package:inbox_driver/feature/view_model/home_view_modle/home_view_modle.dart';
+import 'package:inbox_driver/util/sh_util.dart';
 import 'package:logger/logger.dart';
 
 import '../../../../../../util/app_color.dart';
@@ -39,12 +40,11 @@ class WattingTime extends StatelessWidget {
             ),
             TweenAnimationBuilder<Duration>(
                 duration: Duration(
-                    minutes: homeViewModel.operationTask.waitingTime?.toInt() ?? 0),
+                    minutes: !SharedPref.instance.isTimerNull(homeViewModel.operationTask.salesOrder!) /*!= 0*/ ? SharedPref.instance.getTimer(homeViewModel.operationTask.salesOrder!) :homeViewModel.operationTask.waitingTime?.toInt() ?? 0,
+                    seconds: SharedPref.instance.getTimerSecond(homeViewModel.operationTask.salesOrder!) != 0  ? SharedPref.instance.getTimerSecond(homeViewModel.operationTask.salesOrder!).toInt():0),
                 tween: Tween(
-                    begin: Duration(
-                        minutes:
-                            homeViewModel.operationTask.waitingTime?.toInt() ??
-                                0),
+                    begin: Duration(minutes: !SharedPref.instance.isTimerNull(homeViewModel.operationTask.salesOrder!) /*!= 0*/ ? SharedPref.instance.getTimer(homeViewModel.operationTask.salesOrder!) :homeViewModel.operationTask.waitingTime?.toInt() ?? 0,
+                        seconds: SharedPref.instance.getTimerSecond(homeViewModel.operationTask.salesOrder!) != 0  ? SharedPref.instance.getTimerSecond(homeViewModel.operationTask.salesOrder!).toInt():0),
                     end: Duration.zero),
                 onEnd: () {
                   Logger().e('Timer ended');
@@ -52,8 +52,9 @@ class WattingTime extends StatelessWidget {
                 builder: (BuildContext context, Duration value, Widget? child) {
                   final minutes = value.inMinutes;
                   final seconds = value.inSeconds % 60;
-                  homeViewModel.waiteTimeOperation =
-                      Duration(minutes: minutes, seconds: seconds);
+                  SharedPref.instance.setTimer(timer: minutes , id:homeViewModel.operationTask.salesOrder);
+                   SharedPref.instance.setTimerSecond(timer: seconds , id:homeViewModel.operationTask.salesOrder);
+                  homeViewModel.waiteTimeOperation = Duration(minutes: minutes, seconds: seconds);
                   return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 5),
                       child: Text(

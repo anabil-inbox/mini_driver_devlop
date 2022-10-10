@@ -218,4 +218,8 @@ const String txtNotifications = "Notifications";
 
 const String txtFollow = "تابعنا على منصات التواصل الإجتماع";
 const String txtTechnicalSupport = "بامكانك ارسـال رسالة مباشرة للدعم الفني";
-
+const String txtFilterByDate = "Filter By Date";
+const String txtHi = "Hi";
+const String txtUnCompleted = "Un Completed";
+const String txtClear = "Clear";
+const String txtCustomizeSms = "Customize Sms";

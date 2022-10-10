@@ -9,7 +9,7 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 import '../../../../../util/app_shaerd_data.dart';
 
 class ScanScreen extends StatelessWidget {
-  const ScanScreen({Key? key, this.taskModel, required this.isFromScanSalesBoxs , required this.isProductScan , required this.isScanDeliverdBoxes})
+  const ScanScreen({Key? key, this.taskModel, required this.isFromScanSalesBoxs , required this.isProductScan , required this.isScanDeliverdBoxes, this.isFromAddSeal = false, })
       : super(key: key);
 
   static HomeViewModel homeViewModel = Get.find<HomeViewModel>();
@@ -18,6 +18,7 @@ class ScanScreen extends StatelessWidget {
   final bool isFromScanSalesBoxs;
   final bool isProductScan;
   final bool isScanDeliverdBoxes;
+  final bool? isFromAddSeal;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +41,7 @@ class ScanScreen extends StatelessWidget {
                 taskModel: taskModel,
                 isScanDeliverdBoxes: isScanDeliverdBoxes,
                 isProductScan: isProductScan,
+                isFromAddSeal:isFromAddSeal,
                 isFromScanSalesBoxs: isFromScanSalesBoxs),
             overlay: QrScannerOverlayShape(
                 borderColor: colorRed,

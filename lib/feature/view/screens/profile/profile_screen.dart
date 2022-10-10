@@ -80,7 +80,7 @@ class ProfileScreen extends StatelessWidget {
                   },
                   settingTitle: txtReport.tr,
                   trailingTitle: "",
-                  iconPath: "assets/svgs/log_icon.svg",
+                  iconPath: "assets/svgs/report.svg",
                 ),
                 SizedBox(
                   height: sizeH12,
@@ -102,7 +102,7 @@ class ProfileScreen extends StatelessWidget {
                   },
                   settingTitle: txtCashClosure.tr,
                   trailingTitle: "",
-                  iconPath: "assets/svgs/setting.svg",
+                  iconPath: "assets/svgs/cashe.svg",
                 ),
                 SizedBox(
                   height: sizeH12,

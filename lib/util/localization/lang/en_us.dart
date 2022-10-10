@@ -130,7 +130,11 @@ Map<String, String> enUS = {
   txtCall : "Call",
   txtCancelOrder : "Cancel Order",
   txtNoShowReport : "No Show Report",
-
+  txtFilterByDate : "Filter By Date",
+  txtHi : "Hi",
+  txtUnCompleted : "Un Completed",
+  txtClear : "Clear",
+  txtCustomizeSms:"Customize Sms"
 
 
 };

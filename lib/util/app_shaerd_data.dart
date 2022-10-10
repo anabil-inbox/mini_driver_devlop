@@ -67,9 +67,12 @@ var safeAreaLight =
 ));
 
 List<PaymentMethod> getPaymentMethod() {
+  if(ApiSettings.fromJson(json.decode(SharedPref.instance.getAppSetting())).paymentMethod == null){
+    return [];
+  }
   List<PaymentMethod> list =
       ApiSettings.fromJson(json.decode(SharedPref.instance.getAppSetting()))
-              .paymentMethod ??
+              .paymentMethod?.where((element) => element.target != null && element.target == "both" ||element.target == "driver" ).toList() ??
           [];
 
   /// todo:// [wallet and back] => Application
@@ -770,4 +773,18 @@ openBrowser(url)async{//openBrowser
     );
   }
 
+}
+
+Future<DateTime?> dateBiker() async {
+  Locale myLocale = Localizations.localeOf(Get.context!);
+  var picker = await showDatePicker(
+    context: Get.context!,
+    initialDate: DateTime.now(),
+    firstDate: DateTime.now().subtract(const Duration(days: 30)),
+    lastDate: DateTime(2030),
+    locale: myLocale,
+    // confirmText:
+  );
+
+  return picker;
 }

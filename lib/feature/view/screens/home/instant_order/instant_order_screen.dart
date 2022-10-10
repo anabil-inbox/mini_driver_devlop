@@ -20,6 +20,7 @@ import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
+import 'package:inbox_driver/util/sh_util.dart';
 import 'package:inbox_driver/util/string.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
@@ -132,6 +133,7 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: padding20!),
             child: ListView(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               shrinkWrap: true,
               children: [
                 if (home.operationTask.isNew ?? false) ...[
@@ -169,6 +171,7 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
                   controller: home.tdNote,
                   isSmallPadding: true,
                   isSmallPaddingWidth: false,
+                  textInputAction: TextInputAction.done,
                   isFill: true,
                   fillColor: colorTextWhite,
                   maxLine: 5,
@@ -217,12 +220,12 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
                                   bool isAllowed = true;
                                   homeViewModel.operationTask.scannedBoxes
                                       ?.forEach((element) {
-                                    if (element.selectedBoxOperations
-                                                ?.operation ==
-                                            Constance.sealed &&
-                                        element.newSeal == null) {
-                                      snackError("",
-                                          "${txtEnterSeal.tr} ${element.boxId}");
+                                      if(SharedPref.instance.getSeal(element.serial!) .isNotEmpty){
+                                        element.newSeal = SharedPref.instance.getSeal(element.serial!);
+                                      }
+                                    if (element.selectedBoxOperations?.operation == Constance.sealed && element.newSeal == null) {
+                                      snackError("", "${txtEnterSeal.tr} ${element.boxId}");
+                                      Logger().w(element.newSeal);
                                       isAllowed = false;
                                       return;
                                     }

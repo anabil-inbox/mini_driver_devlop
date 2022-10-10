@@ -34,6 +34,26 @@ class HomeHelper {
     }
   }
 
+  //todo get Home Tasks For Driver From Api
+  Future<List<TaskModel>> getLateTasksApi(
+      {required Map<String, dynamic> taskDatae}) async {
+    try {
+      var response = await HomeApi.getInstance.getHomeTasks(
+          body: taskDatae,
+          url: ConstanceNetwork.getLateTasksApi,
+          header: ConstanceNetwork.header(4));
+      if (response.status?.success == true) {
+        List data = response.data;
+        return data.map((e) => TaskModel.fromJson(e)).toList();
+      } else {
+        return [];
+      }
+    } catch (e) {
+      log.d(e.toString());
+      return [];
+    }
+  }
+
   Future<SalesData> getSpecificTask(
       {required Map<String, dynamic> taskId}) async {
     try {
@@ -401,6 +421,23 @@ class HomeHelper {
       var response = await HomeApi.getInstance.confirmTransfare(
           body: body,
           url: ConstanceNetwork.confirmTransactionEndPoint,
+          header: ConstanceNetwork.header(4));
+      if (response.status?.success == true) {
+        return response;
+      } else {
+        return response;
+      }
+    } catch (e) {
+      log.d(e.toString());
+      return AppResponse.fromJson({});
+    }
+  }
+
+  Future<AppResponse> sendSmsMessageApi({var body}) async {
+    try {
+      var response = await HomeApi.getInstance.sendSmsMessageApi(
+          body: body,
+          url: ConstanceNetwork.sendSmsMessageApi,
           header: ConstanceNetwork.header(4));
       if (response.status?.success == true) {
         return response;

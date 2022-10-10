@@ -21,6 +21,7 @@ import 'package:inbox_driver/feature/view/screens/home/instant_order/instant_ord
 import 'package:inbox_driver/feature/view/screens/home/new_customer/Widgets/qty_bottom_sheet.dart';
 import 'package:inbox_driver/network/api/feature/home_helper.dart';
 import 'package:inbox_driver/network/firebase/firbase_clinte.dart';
+import 'package:inbox_driver/network/utils/constance_netwoek.dart';
 import 'package:inbox_driver/util/app_color.dart';
 import 'package:inbox_driver/util/app_dimen.dart';
 import 'package:inbox_driver/util/app_shaerd_data.dart';
@@ -28,6 +29,7 @@ import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/constance.dart';
 import 'package:inbox_driver/util/sh_util.dart';
 import 'package:inbox_driver/util/string.dart';
+import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -43,11 +45,27 @@ class HomeViewModel extends GetxController {
 
   TextEditingController tdNote = TextEditingController();
 
+  DateTime? selectedDateTime =
+      DateFormat("yyyy-MM-dd").parse(DateTime.now().toString());
+
+  bool isLoadingOnWay = false;
+  bool isLoadingArrived = false;
+  bool isLoadingNoShow = false;
+  bool isLoadingCustomize = false;
+
   void changeTab(int x) {
     selectedTab = x;
     update();
   }
 
+  void showDatePicker() async {
+    var dt = await dateBiker();
+    if (!GetUtils.isNull(dt)) {
+      selectedDateTime = DateTime(dt!.year, dt.month, dt.day);
+      getUnCompletedTasks(taskDate: DateFormat("yyyy-MM-dd").format(dt));
+    }
+    update();
+  }
 
   // open Scaner Qr :
   var scanArea = (MediaQuery.of(Get.context!).size.width < 400 ||
@@ -57,6 +75,7 @@ class HomeViewModel extends GetxController {
 
   Barcode? result;
   QRViewController? controller;
+  String scannedSeal = ""; //scannedSeal
 
   onQRViewCreated(QRViewController controller,
       {bool? isFromAtHome,
@@ -64,7 +83,8 @@ class HomeViewModel extends GetxController {
       TaskModel? taskModel,
       required bool isProductScan,
       required bool isScanDeliverdBoxes,
-      required bool isFromScanSalesBoxs}) {
+      required bool isFromScanSalesBoxs,
+      bool? isFromAddSeal = false}) {
     try {
       int i = 0;
       if (this.controller == null) {
@@ -86,6 +106,10 @@ class HomeViewModel extends GetxController {
             await scanProudct(productCode: data.code ?? "");
             tdQty.clear();
             Get.close(2);
+          } else if (isFromAddSeal!) {
+            scannedSeal = "${data.code}";
+            update();
+            Get.back();
           } else {
             await scanBox(
               serial: data.code ?? "",
@@ -121,16 +145,6 @@ class HomeViewModel extends GetxController {
   // this Fun For Loading And ETC >>
   bool isLoading = false;
 
-  startLoading() {
-    isLoading = true;
-    update();
-  }
-
-  endLoading() {
-    isLoading = false;
-    update();
-  }
-
   bool isLoadingRequestTime = false;
 
   startLoadingRequestTime() {
@@ -145,6 +159,7 @@ class HomeViewModel extends GetxController {
 
   List<TaskModel> tasksInProgress = [];
   List<TaskModel> tasksDone = [];
+  List<TaskModel> tasksUnCompleted = []; //tasksUnCompleted
 
   // to do here for Getting Driver Tasks :
   Future<void> getHomeTasks({required String taskType}) async {
@@ -162,6 +177,26 @@ class HomeViewModel extends GetxController {
                 tasksDone = value,
               }
           });
+    } catch (e) {
+      //Fauiler State
+      endLoading();
+      printError();
+    }
+    endLoading();
+    update();
+  }
+
+  // to do here for Getting Driver Tasks un complete
+  Future<void> getUnCompletedTasks({required String? taskDate}) async {
+    try {
+      startLoading();
+      await HomeHelper.getInstance
+          .getLateTasksApi(
+              taskDatae: taskDate == null ? {} : {Constance.date: taskDate})
+          .then((value) => {
+                tasksUnCompleted = value,
+                endLoading(),
+              });
     } catch (e) {
       //Fauiler State
       endLoading();
@@ -256,6 +291,7 @@ class HomeViewModel extends GetxController {
   List<EmergencyCase> emEmergencyCases = [];
   final TextEditingController tdEmergencyNote = TextEditingController();
   File? img;
+
   // to do here Get Emergancy::
   Future<void> getEmergancy() async {
     try {
@@ -313,63 +349,63 @@ class HomeViewModel extends GetxController {
   void getImageBottomSheet() {
     Get.bottomSheet(
         Container(
-      // height: sizeH240,
-      padding: EdgeInsets.symmetric(horizontal: padding20!),
-      decoration: BoxDecoration(
-          color: colorTextWhite,
-          borderRadius:
-              BorderRadius.vertical(top: Radius.circular(padding30!))),
-      child: Column(
-        mainAxisSize:MainAxisSize.min ,
-        children: [
-          SizedBox(
-            height: sizeH20,
+          // height: sizeH240,
+          padding: EdgeInsets.symmetric(horizontal: padding20!),
+          decoration: BoxDecoration(
+              color: colorTextWhite,
+              borderRadius:
+                  BorderRadius.vertical(top: Radius.circular(padding30!))),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                height: sizeH20,
+              ),
+              Container(
+                height: sizeH5,
+                width: sizeH50,
+                decoration: BoxDecoration(
+                    color: colorUnSelectedWidget,
+                    borderRadius: BorderRadius.circular(2.5)),
+              ),
+              SizedBox(
+                height: sizeH20,
+              ),
+              Text(
+                txtSelectImage.tr,
+                style: textStyleAppBarTitle(),
+              ),
+              SizedBox(
+                height: sizeH25,
+              ),
+              SeconderyButtom(
+                // buttonTextStyle: textSeconderyButtonUnBold(),
+                textButton: txtCamera.tr,
+                onClicked: () async {
+                  await getImage(ImageSource.camera);
+                  Get.back();
+                },
+                // isExpanded: true,
+              ),
+              SizedBox(
+                height: sizeH20,
+              ),
+              SeconderyButtom(
+                //  buttonTextStyle: textSeconderyButtonUnBold(),
+                textButton: txtGallery.tr,
+                onClicked: () async {
+                  await getImage(ImageSource.gallery);
+                  Get.back();
+                },
+                //  isExpanded: true,
+              ),
+              SizedBox(
+                height: sizeH20,
+              ),
+            ],
           ),
-          Container(
-            height: sizeH5,
-            width: sizeH50,
-            decoration: BoxDecoration(
-                color: colorUnSelectedWidget,
-                borderRadius: BorderRadius.circular(2.5)),
-          ),
-          SizedBox(
-            height: sizeH20,
-          ),
-          Text(
-            txtSelectImage.tr,
-            style: textStyleAppBarTitle(),
-          ),
-          SizedBox(
-            height: sizeH25,
-          ),
-          SeconderyButtom(
-            // buttonTextStyle: textSeconderyButtonUnBold(),
-            textButton: txtCamera.tr,
-            onClicked: () async {
-              await getImage(ImageSource.camera);
-              Get.back();
-            },
-            // isExpanded: true,
-          ),
-          SizedBox(
-            height: sizeH20,
-          ),
-          SeconderyButtom(
-            //  buttonTextStyle: textSeconderyButtonUnBold(),
-            textButton: txtGallery.tr,
-            onClicked: () async {
-              await getImage(ImageSource.gallery);
-              Get.back();
-            },
-            //  isExpanded: true,
-          ),
-          SizedBox(
-            height: sizeH20,
-          ),
-        ],
-      ),
-    ),
-        isScrollControlled:false   );
+        ),
+        isScrollControlled: false);
   }
 
   final picker = ImagePicker();
@@ -394,8 +430,8 @@ class HomeViewModel extends GetxController {
     try {
       if (img != null) {
         img = await compressImage(img!);
-      }else{
-        if(signatureOutput != null) {
+      } else {
+        if (signatureOutput != null) {
           Uint8List imageInUnit8List = signatureOutput;
           final tempDir = await getTemporaryDirectory();
           File file = await File('${tempDir.path}/image.png').create();
@@ -410,7 +446,8 @@ class HomeViewModel extends GetxController {
       //   "task_id": taskId,
       // });
       await HomeHelper.getInstance.uploadCustomerId(body: {
-        "image": img != null ? multipart.MultipartFile.fromFileSync(img!.path) : "",
+        "image":
+            img != null ? multipart.MultipartFile.fromFileSync(img!.path) : "",
         "customer": customerId,
         "task_id": taskId,
       }).then((value) => {
@@ -498,15 +535,15 @@ class HomeViewModel extends GetxController {
         body = {
           Constance.status: newStatus,
           Constance.taskId: taskId,
-          Constance.noteKey: tdNote.text.toString() ,
+          Constance.noteKey: tdNote.text.toString(),
           Constance.paymentMethod: operationTask.paymentMethod
         };
       } else {
         body = {
           Constance.status: newStatus,
           Constance.taskId: taskId,
-          Constance.noteKey: tdNote.text.toString() ,
-         // Constance.paymentMethod: taskStatusId
+          Constance.noteKey: tdNote.text.toString(),
+          // Constance.paymentMethod: taskStatusId
         };
       }
 
@@ -522,7 +559,7 @@ class HomeViewModel extends GetxController {
         });
         if (!isAllowed) {
           return;
-        } 
+        }
       }
       Logger().e("body: ${body.toString()}");
       startLoading();
@@ -534,13 +571,13 @@ class HomeViewModel extends GetxController {
                     snackSuccess(txtSuccess!.tr, value.status!.message!),
                     operationTask = TaskResponse.fromJson(value.data,
                         isFromNotification: false),
-
                     operationsSalesData?.salesOrders?.forEach((element) {
                       if (element.taskId == taskId) {
                         element.taskStatus = newStatus;
                       }
                     }),
-                    if (newStatus == Constance.taskdelivered){
+                    if (newStatus == Constance.taskdelivered)
+                      {
                         SharedPref.instance.setDeliverdTime(
                             deliverdTime:
                                 DateTime.now().millisecondsSinceEpoch),
@@ -1048,13 +1085,126 @@ class HomeViewModel extends GetxController {
               {
                 snackError("$txtError", "${value.status!.message}"),
               },
-        Logger().d(value.toJson()),
-
-      });
+            Logger().d(value.toJson()),
+          });
     } catch (e) {
       Logger().e(e.toString());
       debugPrint(e.toString());
     }
     endLoading();
+  }
+
+  Future<void> sendSmsMessage(
+      {required String message,
+      required String phoneNUmber,
+      required int type}) async {
+    startLoadingCustom(type);
+    try {
+      await HomeHelper.getInstance.sendSmsMessageApi(body: {
+        ConstanceNetwork.mobileNumberKey: phoneNUmber,
+        ConstanceNetwork.messageKey: message
+      }).then((value) => {
+            if (value.status!.success!)
+              {
+                snackSuccess("$txtSuccess", "${value.status!.message}"),
+                update(),
+                // Get.offAll(() => HomeScreen()),
+                endLoadingCustom(type),
+              }
+            else
+              {
+                snackError("$txtError", "${value.status!.message}"),
+              endLoadingCustom(type),
+              },
+            Logger().d(value.toJson()),
+          });
+    } catch (e) {
+      Logger().e(e.toString());
+      debugPrint(e.toString());
+    }
+    endLoadingCustom(type);
+  }
+
+  startLoadingCustom(type) {
+    switch (type) {
+      case 1:
+        {
+          isLoadingOnWay = true;
+          update();
+          break;
+        }
+      case 2:
+        {
+          isLoadingArrived = true;
+          update();
+          break;
+        }
+      case 3:
+        {
+          isLoadingNoShow = true;
+          update();
+          break;
+        }
+      case 4:
+        {
+          isLoadingCustomize = true;
+          update();
+          break;
+        }
+      default:
+        {
+          break;
+        }
+    }
+  }
+
+  endLoadingCustom(type) {
+    switch (type) {
+      case 1:
+        {
+          isLoadingOnWay = false;
+          update();
+          break;
+        }
+      case 2:
+        {
+          isLoadingArrived = false;
+          update();
+          break;
+        }
+      case 3:
+        {
+          isLoadingNoShow = false;
+          update();
+          break;
+        }
+      case 4:
+        {
+          isLoadingCustomize = false;
+          update();
+          break;
+        }
+      default:
+        {
+          break;
+        }
+    }
+  }
+
+  bool isShowCustomMessage = false;
+
+  void showCustomMessage() {
+    isShowCustomMessage = !isShowCustomMessage;
+    update();
+  }
+
+  startLoading() {
+    isLoading = true;
+    update();
+  }
+
+  endLoading() {
+    isLoading = false;
+    update();
   }
 }

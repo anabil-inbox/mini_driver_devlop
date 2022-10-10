@@ -151,9 +151,11 @@ class _ChooseCountryScreenState extends State<ChooseCountryScreen> {
                     isLoading: false,
                     textButton: txtOk.tr,
                     onClicked: () {
-                      logic.defCountry = selctedCountry;
-                      logic.update();
-                      Navigator.pop(context);
+                      if(selctedCountry.name != null && selctedCountry.code != null) {
+                        logic.defCountry = selctedCountry;
+                        logic.update();
+                        Navigator.pop(context);
+                      }
                     },
                     isExpanded: true),
               ),

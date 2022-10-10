@@ -28,6 +28,9 @@ class SharedPref {
   final String timerValueKey = "timerValueKey";
   final String deliveredDateTime = "DeliveredDateTime";
   final String taskIdKey = "taskIdKey";
+  final String sealKey = "sealKey";
+  final String timerKey = "timerKey";
+  final String timerSecondKey = "timerSecondKey";
 
   var log = Logger();
 
@@ -130,6 +133,7 @@ class SharedPref {
       log.d("$e");
     }
   }
+
   ApiSettings? getAppSettings() {
     try {
       return ApiSettings.fromJson(
@@ -139,7 +143,6 @@ class SharedPref {
       return null;
     }
   }
-
 
   // List<CompanySector>? getAppSectors() {
   //   try {
@@ -155,10 +158,10 @@ class SharedPref {
     try {
       return ApiSettings.fromJson(
               json.decode(_prefs!.get(appSettingKey).toString()))
-          .languges ;
+          .languges;
     } catch (e) {
       print(e);
-       return null;
+      return null;
     }
   }
 
@@ -280,20 +283,52 @@ class SharedPref {
   //   removeBoxess();
   // }
 
-  setDeliverdTime({required int deliverdTime}){
+  setDeliverdTime({required int deliverdTime}) {
     _prefs?.setInt(deliveredDateTime, deliverdTime);
   }
 
-  int getDeliverdTime(){
+  int getDeliverdTime() {
     return _prefs?.getInt(deliveredDateTime) ?? 0;
   }
 
-  setCurrentTaskId ({required String taskId}){
+  setCurrentTaskId({required String taskId}) {
     _prefs?.setString(taskIdKey, taskId);
   }
 
-  String getCurrentTaskId(){
-    return _prefs?.getString(taskIdKey) ?? "";
+  setSeal({required String seal, required String id}) {
+    _prefs?.setString(sealKey + "_$id", seal);
   }
 
+  setTimer({required int timer,required String? id}) {
+    _prefs?.setInt(timerKey + "_$id", timer);
+  }
+  setTimerSecond({required int timer,required String? id}) {//setTimerSecond
+    _prefs?.setInt(timerSecondKey + "_$id", timer);
+  }
+
+  String getSeal(String id) {
+    return _prefs?.getString(sealKey + "_$id") ?? "";
+  }
+
+  int getTimer(String id) {
+    if(_prefs?.getInt(timerKey + "_$id") != null /*&& _prefs!.getInt(timerKey + "_$id")! > 0*/){
+      return (_prefs!.getInt(timerKey + "_$id")! == 0 ?_prefs!.getInt(timerKey + "_$id")! :_prefs!.getInt(timerKey + "_$id")! + 1);
+    }
+    return _prefs?.getInt(timerKey + "_$id") ?? 0;
+  }
+
+  int getTimerSecond(String id) {
+    if(_prefs?.getInt(timerSecondKey + "_$id") != null /*&& _prefs!.getInt(timerKey + "_$id")! > 0*/){
+      return (_prefs!.getInt(timerSecondKey + "_$id")! == 0 ?_prefs!.getInt(timerSecondKey + "_$id")! :_prefs!.getInt(timerSecondKey + "_$id")! + 1 );
+    }
+    return _prefs?.getInt(timerSecondKey + "_$id") ?? 0;
+  }
+
+  bool isTimerNull(String id){
+    return _prefs?.getInt(timerKey + "_$id") == null ? true:false;
+  }
+
+  String getCurrentTaskId() {
+    return _prefs?.getString(taskIdKey) ?? "";
+  }
 }

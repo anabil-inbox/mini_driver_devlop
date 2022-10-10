@@ -85,7 +85,7 @@ class NoShowReportBottomSheet extends StatelessWidget {
                 onClicked: () async {
                   if (homeViewModel.wateTime.inMilliseconds == 0) {
                     await homeViewModel.updateTaskStatus(
-                        newStatus: Constance.schedule.toLowerCase(),
+                        newStatus: Constance.taskSchedule.toLowerCase(),
                         taskId: salesOrder.taskId ?? "",
                         taskStatusId: task.id ?? "");
                     Get.back();
@@ -107,22 +107,22 @@ class NoShowReportBottomSheet extends StatelessWidget {
                 },
               ),
               SizedBox(height: sizeH10),
-              SizedBox(
-                height: sizeH18,
-              ),
-              PrimaryButton(
-                  isLoading: false,
-                  textButton: txtCancelOrder.tr,
-                  onClicked: () async {
-                    if (homeViewModel.wateTime.inMilliseconds == 0) {
-                      await homeViewModel.updateTaskStatus(
-                          newStatus: Constance.cancelled,
-                          taskId: salesOrder.taskId ?? "",
-                          taskStatusId: task.id ?? "");
-                      Get.back();
-                    }
-                  },
-                  isExpanded: true),
+              // SizedBox(
+              //   height: sizeH18,
+              // ),
+              // PrimaryButton(
+              //     isLoading: false,
+              //     textButton: txtCancelOrder.tr,
+              //     onClicked: () async {
+              //       if (homeViewModel.wateTime.inMilliseconds == 0) {
+              //         await homeViewModel.updateTaskStatus(
+              //             newStatus: Constance.cancelled,
+              //             taskId: salesOrder.taskId ?? "",
+              //             taskStatusId: task.id ?? "");
+              //         Get.back();
+              //       }
+              //     },
+              //     isExpanded: true),
               SizedBox(
                 height: sizeH34,
               )
