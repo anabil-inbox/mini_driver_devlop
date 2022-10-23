@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:inbox_driver/feature/view/screens/auth/signUp_signIn/log_in/log_in_screen.dart';
 import 'package:inbox_driver/feature/view/screens/profile/log/log_screen.dart';
 import 'package:inbox_driver/network/utils/constance_netwoek.dart';
@@ -32,8 +33,11 @@ class DioManagerClass {
 
   Future<Response> dioGetMethod(
       {var url, Map<String, dynamic>? header, var queryParameters}) async {
-    print("msg_request_url : $url");
-    print("msg_request_header : $header");
+    if(kDebugMode) {
+      print("msg_request_url : $url");
+      print("msg_request_header : $header");
+      print("msg_request_body : $queryParameters");
+    }
     return await _dio!.get(url,
         options: Options(headers: header), queryParameters: queryParameters);
   }
@@ -42,9 +46,11 @@ class DioManagerClass {
       {var url,
       Map<String, dynamic>? header,
       Map<String, dynamic>? body}) async {
-    print("msg_request_url : $url");
-    print("msg_request_header : $header");
-    print("msg_request_body : $body");
+    if(kDebugMode) {
+      print("msg_request_url : $url");
+      print("msg_request_header : $header");
+      print("msg_request_body : $body");
+    }
     return await _dio!.post(
       url,
       options: Options(headers: header),
@@ -54,9 +60,11 @@ class DioManagerClass {
 
   Future<Response> dioPostFormMethod(
       {var url, Map<String, dynamic>? header, var body}) async {
-    print("msg_request_url : $url");
-    print("msg_request_header : $header");
-    print("msg_request_body : $body");
+    if(kDebugMode) {
+      print("msg_request_url : $url");
+      print("msg_request_header : $header");
+      print("msg_request_body : $body");
+    }
     return await _dio!.post(
       url,
       options: Options(headers: header),
@@ -69,8 +77,11 @@ class DioManagerClass {
       Map<String, dynamic>? header,
       Map<String, dynamic>? body}) async {
            print("msg_request_url : $url");
-    print("msg_request_header : $header");
-    print("msg_request_body : $body");
+           if(kDebugMode) {
+             print("msg_request_url : $url");
+             print("msg_request_header : $header");
+             print("msg_request_body : $body");
+           }
     return await _dio!.put(url, options: Options(headers: header), data: body);
   }
 
@@ -78,9 +89,11 @@ class DioManagerClass {
       {var url,
       Map<String, dynamic>? header,
       Map<String, dynamic>? body}) async {
-    print("msg_request_url : $url");
-    print("msg_request_header : $header");
-    print("msg_request_body : $body");
+    if(kDebugMode) {
+      print("msg_request_url : $url");
+      print("msg_request_header : $header");
+      print("msg_request_body : $body");
+    }
     return await _dio!
         .delete(url, options: Options(headers: header), data: body);
   }
@@ -112,7 +125,7 @@ class ApiInterceptors extends Interceptor {
     super.onError(err, handler);
     Logger().d("onError : ${err.message}");
     if (err.message.contains("غير مصرح له") || err.message.contains("Not Authorized") || err.message.contains("401")) {
-      SharedPref.instance.setUserLoginState("${ConstanceNetwork.userEnterd}");
+      SharedPref.instance.setUserLoginState(ConstanceNetwork.userEnterd);
       getx.Get.offAll(() => const LoginScreen());
       return;
     }

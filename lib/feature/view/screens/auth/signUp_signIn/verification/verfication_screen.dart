@@ -1,4 +1,7 @@
-import 'package:alt_sms_autofill/alt_sms_autofill.dart';
+// import 'package:alt_sms_autofill/alt_sms_autofill.dart';
+import 'dart:io';
+
+import 'package:android_sms_retriever/android_sms_retriever.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -46,15 +49,33 @@ class _ChangeMobilScreenState extends State<VerficationScreen> {
         authViewModle.startTimer();
       }
     });
+
+
     initSmsListener();
   }
 
   // String _commingSms = 'Unknown';
 
   Future<void> initSmsListener() async {
+
+    if(Platform.isAndroid) {
+      String? appSignature = await AndroidSmsRetriever.getAppSignature();
+      Logger().w(appSignature);
+      // getAppSignature();
+      // getSmsCode();
+      String? message = await AndroidSmsRetriever.listenForSms();
+      Logger().w(message);
+      if (message != null && message.length > 33) {
+        Logger().e(message);
+        authViewModle.tdPinCode.text = message.substring(33);
+        authViewModle.update();
+      }
+    }
+
+
     String? commingSms;
     try {
-      commingSms = await AltSmsAutofill().listenForSms;
+      // commingSms = await AltSmsAutofill().listenForSms;
     } on PlatformException {
       commingSms = 'Failed to get Sms.';
     }
@@ -73,8 +94,10 @@ class _ChangeMobilScreenState extends State<VerficationScreen> {
 
   @override
   void dispose() {
+    AndroidSmsRetriever.stopSmsListener();
     super.dispose();
-    AltSmsAutofill().unregisterListener();
+    // AltSmsAutofill().unregisterListener();
+
   }
 
   @override
@@ -82,7 +105,9 @@ class _ChangeMobilScreenState extends State<VerficationScreen> {
     screenUtil(context);
     return Scaffold(
         backgroundColor: colorScaffoldRegistrationBody,
-        body: GetBuilder<AuthViewModle>(builder: (logic) {
+        body: GetBuilder<AuthViewModle>(
+            assignId: true,
+            builder: (logic) {
           return ListView(padding: const EdgeInsets.all(0), children: [
             const HeaderCodeVerfication(),
             Column(
@@ -153,6 +178,7 @@ class _ChangeMobilScreenState extends State<VerficationScreen> {
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: sizeW80!),
         child: PinCodeTextField(
+          controller: authViewModle.tdPinCode,
           autoFocus: true,
           hintCharacter: "__",
           hintStyle: textStyleTitle(),

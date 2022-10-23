@@ -145,9 +145,11 @@ class TaskResponse {
       this.taskId,
       this.hasTimeRequest,
       this.timer,
+        this.verificationId,
       this.notificationId});
 
   String? salesOrder;
+  String? verificationId;
   bool? isNew;
   String? taskId;
   String? customerId;
@@ -236,6 +238,7 @@ class TaskResponse {
             : List<BoxModel>.from(jsonDecode(json["customer_delivered"])
                 .map((x) => BoxModel.fromJson(x))).toSet().toList(),
         signatureType: json["signature_type"],
+        verificationId: json["verification_id"]  == null   ? null:json["verification_id"],
         signatureFile: json["signature_file"],
         processType: json["process_type"],
         driverToken: json["driver_token"],
@@ -255,6 +258,7 @@ class TaskResponse {
             json["has_time_request"] == null ? null : json["has_time_request"],
         customerId: json["customer_id"],
         taskId: json["task_id"],
+        verificationId: json["verification_id"]  == null   ? null:json["verification_id"],
         childOrder: json["child_order"] == null
             ? null
             : ChildOrder.fromJson(json["child_order"]),
@@ -308,6 +312,7 @@ class TaskResponse {
         "sales_order": salesOrder,
         "is_new": isNew,
         "customer_id": customerId,
+        "verification_id":  verificationId,
         "waiting_time": waitingTime ?? 0.0,
         "child_order": childOrder,
         "total": total,

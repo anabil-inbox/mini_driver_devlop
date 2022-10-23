@@ -139,6 +139,8 @@ class _InstantOrderScreenState extends State<InstantOrderScreen> {
                 if (home.operationTask.isNew ?? false) ...[
                   SizedBox(height: sizeH27),
                   const ContractSignature(),
+                ],
+                if(home.operationTask.verificationId == null)...[
                   SizedBox(height: sizeH10),
                   idVerification
                 ],

@@ -23,7 +23,9 @@ class CountryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     screenUtil(context);
-    return GetBuilder<AuthViewModle>(builder: (_) {
+    return GetBuilder<AuthViewModle>(
+        init: AuthViewModle(),
+        builder: (_) {
       return Container(
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
