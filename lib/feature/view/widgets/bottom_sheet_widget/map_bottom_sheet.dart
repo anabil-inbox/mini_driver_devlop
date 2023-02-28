@@ -15,11 +15,18 @@ class MapBottomSheet extends StatelessWidget {
   final SalesOrder salesOrder;
 
   Widget get closeBtnWidget => InkWell(
-        child: SvgPicture.asset("assets/svgs/Close_orange.svg"),
+        child: SizedBox(
+            width: sizeW30,
+            height: sizeH30,
+            child: SvgPicture.asset("assets/svgs/Close_orange.svg" ,)),
         onTap: () {
           Get.back();
         },
       );
+  Widget get closeBtnTraWidget => SizedBox(
+      width: sizeW30,
+      height: sizeH30,
+      child: SvgPicture.asset("assets/svgs/Close_orange.svg" , /*close.svg*/color: Colors.transparent,));
   @override
   Widget build(BuildContext context) {
     screenUtil(context);
@@ -54,37 +61,54 @@ class MapBottomSheet extends StatelessWidget {
                               borderRadius: BorderRadius.only(
                                   topRight: Radius.circular(sizeRadius25!),
                                   topLeft: Radius.circular(sizeRadius25!)),
-                              child: GoogleMap(
-                                myLocationButtonEnabled: true,
-                                initialCameraPosition:
-                                    logic.initialCameraPosition,
-                                zoomControlsEnabled: true,
-                                mapType: MapType.normal,
-                                mapToolbarEnabled: true,
-                                myLocationEnabled: true,
-                                zoomGesturesEnabled: true,
-                                scrollGesturesEnabled: true,
-                                rotateGesturesEnabled: false,
-                                compassEnabled: false,
-                                onTap: (argument) => logic.onMapTaped(argument),
-                                markers: logic.markers,
-                                polylines: logic.polyLines,
-                                gestureRecognizers: logic.gestureRecognizers,
-                                onMapCreated:
-                                    (GoogleMapController controller) =>
-                                        logic.onMapCreated(controller,
-                                            salesOrder: salesOrder),
+                              child: Directionality(
+                                textDirection: TextDirection.ltr,
+                                child: GoogleMap(
+                                  myLocationButtonEnabled: true,
+                                  initialCameraPosition:
+                                      logic.initialCameraPosition,
+                                  zoomControlsEnabled: true,
+                                  mapType: MapType.normal,
+                                  mapToolbarEnabled: true,
+                                  myLocationEnabled: true,
+                                  zoomGesturesEnabled: true,
+                                  scrollGesturesEnabled: true,
+                                  rotateGesturesEnabled: false,
+                                  compassEnabled: false,
+                                  onTap: (argument) => logic.onMapTaped(argument),
+                                  markers: logic.markers,
+                                  polylines: logic.polyLines,
+                                  gestureRecognizers: logic.gestureRecognizers,
+                                  onMapCreated:
+                                      (GoogleMapController controller) =>
+                                          logic.onMapCreated(controller,
+                                              salesOrder: salesOrder),
+                                ),
                               ),
                             ),
                           ),
                         ],
                       ),
-                      PositionedDirectional(
-                        start: sizeW20,
-                        top: sizeH20,
-                        height: sizeH30,
-                        width: sizeW30,
-                        child: closeBtnWidget,
+                      Positioned(
+                        top: sizeW20,
+                        // left: sizeW20,
+                        // right: MediaQuery.of(context).size.width *0.80,
+                        // height: sizeH60,
+                        // width: sizeW60,
+                        child: Container(
+                            width: MediaQuery.of(context).size.width ,
+                            alignment: Alignment.centerLeft,
+                            margin: EdgeInsets.only(left: sizeW20! ),
+                            color: Colors.transparent,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              textDirection: TextDirection.ltr,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                closeBtnWidget,
+                                closeBtnTraWidget,
+                              ],
+                            )),
                       ),
                     ],
                   ),

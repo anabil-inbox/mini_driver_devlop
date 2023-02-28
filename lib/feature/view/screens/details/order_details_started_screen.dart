@@ -84,9 +84,16 @@ class OrderDetailsStarted extends StatelessWidget {
     if (isFromCompleted) {
       return const SizedBox();
     } else if (index == 0) {
-      if (home.operationsSalesData == null ||
-          home.operationsSalesData!.salesOrders == null ||
-          home.operationsSalesData!.salesOrders?[index] == null) {
+      if (home.operationsSalesData == null) {
+        return const SizedBox();
+      }
+      if (home.operationsSalesData!.salesOrders == null) {
+        return const SizedBox();
+      }
+      if (home.operationsSalesData!.salesOrders!.isEmpty) {
+        return const SizedBox();
+      }
+      if (home.operationsSalesData!.salesOrders?[index] == null) {
         return const SizedBox();
       }
       if (home.isTransfer(task: task)) {
@@ -120,7 +127,8 @@ class OrderDetailsStarted extends StatelessWidget {
           textButton: txtReceived.tr,
           onClicked: () async {
             await home.recivedBoxes(
-                serial: home.operationsSalesData!.salesOrders![index].orderId ?? "",
+                serial:
+                    home.operationsSalesData!.salesOrders![index].orderId ?? "",
                 taskName: Constance.taskWarehouseLoading);
             await home.getSpecificTask(
                 taskId: task.id ?? "", taskSatus: Constance.inProgress);
@@ -131,7 +139,7 @@ class OrderDetailsStarted extends StatelessWidget {
           },
         );
       } else if (home.operationsSalesData!.salesOrders![index].taskStatus ==
-          /*Constance.inProgress*/Constance.toDo) {
+          /*Constance.inProgress*/ Constance.toDo) {
         return GetBuilder<HomeViewModel>(
           builder: (home) {
             return PrimaryButton(
@@ -144,7 +152,8 @@ class OrderDetailsStarted extends StatelessWidget {
                   newStatus: Constance.taskStart,
                   taskId: salesOrder.taskId ?? "",
                 );
-                mapViewModel.onDriverStart(salesOrder: home.operationsSalesData!.salesOrders![index]);
+                mapViewModel.onDriverStart(
+                    salesOrder: home.operationsSalesData!.salesOrders![index]);
                 await home.getSpecificTask(
                     taskId: task.id ?? "", taskSatus: Constance.inProgress);
                 await home.getSpecificTask(
@@ -218,7 +227,9 @@ class OrderDetailsStarted extends StatelessWidget {
                       taskId: salesOrder.taskId ?? "");
                   home.selectedSignatureItemModel = SignatureItemModel(
                       title: home.operationTask.signatureType);
-                   mapViewModel.onDriverStart(salesOrder: home.operationsSalesData!.salesOrders![index]);
+                  mapViewModel.onDriverStart(
+                      salesOrder:
+                          home.operationsSalesData!.salesOrders![index]);
                   await Get.to(() => InstantOrderScreen(
                         isFromNotification: false,
                         taskStatusId: task.id ?? "",
@@ -327,7 +338,7 @@ class OrderDetailsStarted extends StatelessWidget {
         appBar: CustomAppBarWidget(
           titleWidget: FittedBox(
             child: CustomTextView(
-              txt: txtOrderDetails.tr + " " + salesOrder.orderId.toString() ,
+              txt: txtOrderDetails.tr + " " + salesOrder.orderId.toString(),
               maxLine: Constance.maxLineOne,
               textStyle: textStyleAppBarTitle(),
             ),
@@ -378,14 +389,12 @@ class OrderDetailsStarted extends StatelessWidget {
               bottom: padding20,
               right: padding20,
               left: padding20,
-              child: GetBuilder<HomeViewModel>(
-                  initState: (_){
-                    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-                      mapViewModel.isStreamOpen = true;
-                      mapViewModel.update();
-                    });
-                  },
-                  builder: (home) {
+              child: GetBuilder<HomeViewModel>(initState: (_) {
+                WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+                  mapViewModel.isStreamOpen = true;
+                  mapViewModel.update();
+                });
+              }, builder: (home) {
                 return primaryButton(home: home);
               }),
             ),

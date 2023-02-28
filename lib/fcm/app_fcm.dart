@@ -154,7 +154,7 @@ class AppFcm {
   static void goToOrderPage(Map<String, dynamic> map,
       {required bool isFromTerminate}) async {
     Logger().i(map[Constance.id].toString());
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) async {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       if (map[Constance.id].toString() == Constance.userSignature) {
       } else if (map[Constance.id].toString() == Constance.addedNewTask) {
         await homeViewModel.refrshHome();
@@ -190,6 +190,67 @@ class AppFcm {
       Get.to(() => TrasfareContentScreen(taskId: data[Constance.taskId]));
       return;
     }
+
+
+    if(messages.data[Constance.id] ==
+        Constance.userScanBox){
+      var data = jsonDecode(messages.data[Constance.data]);
+      homeViewModel.operationTask =
+          TaskResponse.fromJson(data, isFromNotification: true);
+      Get.offAll(() => InstantOrderScreen(
+        isFromNotification: true,
+        taskId: homeViewModel.operationTask.taskId ?? "",
+        taskStatusId: "",
+      ));
+      homeViewModel.update();
+      return;
+    }
+
+    if(messages.data[Constance.id] ==
+        Constance.userSignContract){
+      var data = jsonDecode(messages.data[Constance.data]);
+      homeViewModel.operationTask =
+          TaskResponse.fromJson(data, isFromNotification: true);
+      Get.offAll(() => InstantOrderScreen(
+        isFromNotification: true,
+        taskId: homeViewModel.operationTask.taskId ?? "",
+        taskStatusId: "",
+      ));
+      homeViewModel.update();
+      return;
+    }
+
+
+    if(messages.data[Constance.id] ==
+        Constance.userPay){
+      var data = jsonDecode(messages.data[Constance.data]);
+      homeViewModel.operationTask =
+          TaskResponse.fromJson(data, isFromNotification: true);
+      Get.offAll(() => InstantOrderScreen(
+        isFromNotification: true,
+        taskId: homeViewModel.operationTask.taskId ?? "",
+        taskStatusId: "",
+      ));
+      homeViewModel.update();
+      return;
+    }
+
+    // if(messages.data[Constance.id] ==
+    //     Constance.userPay){
+    //   var data = jsonDecode(messages.data[Constance.data]);
+    //   homeViewModel.operationTask =
+    //       TaskResponse.fromJson(data, isFromNotification: true);
+    //   Get.offAll(() => InstantOrderScreen(
+    //     isFromNotification: true,
+    //     taskId: homeViewModel.operationTask.taskId ?? "",
+    //     taskStatusId: "",
+    //   ));
+    //   homeViewModel.update();
+    //   return;
+    // }
+
+
+
     homeViewModel.operationTask =
         TaskResponse.fromJson(message.data, isFromNotification: true);
     await homeViewModel.refrshHome();

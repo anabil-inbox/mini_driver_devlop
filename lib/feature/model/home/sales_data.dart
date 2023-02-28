@@ -38,7 +38,7 @@ class SalesData {
         "total_received": totalReceived,
         "longtuide": longtuide,
         "latituide": latituide,
-        "Sales Orders":
+        "Sales Orders":salesOrders == null ? []:
             List<SalesOrder>.from(salesOrders!.map((x) => x.toJson())),
         "last_update":
             "${lastUpdate?.year.toString().padLeft(4, '0')}-${lastUpdate?.month.toString().padLeft(2, '0')}-${lastUpdate?.day.toString().padLeft(2, '0')}",

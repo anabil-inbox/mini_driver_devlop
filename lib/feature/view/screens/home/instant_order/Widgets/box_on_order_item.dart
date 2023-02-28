@@ -70,7 +70,7 @@ class _BoxOnOrderItemState extends State<BoxOnOrderItem> {
         ),
         GetBuilder<HomeViewModel>(
           initState: (con){
-            WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
               if( SharedPref.instance.getSeal(widget.boxModel.boxId.toString()).isNotEmpty){
                 newSealController.text = SharedPref.instance.getSeal(widget.boxModel.boxId.toString());
                 widget.boxModel.newSeal = SharedPref.instance.getSeal(widget.boxModel.boxId.toString());
@@ -92,6 +92,7 @@ class _BoxOnOrderItemState extends State<BoxOnOrderItem> {
                       child: TextFormField(
                         controller: newSealController,
                           textInputAction: TextInputAction.go,
+                          keyboardType: TextInputType.numberWithOptions(),
                           minLines: 1,
                           maxLines: 1,
                           readOnly: widget.boxModel.selectedBoxOperations!.operation! == Constance.schedule,

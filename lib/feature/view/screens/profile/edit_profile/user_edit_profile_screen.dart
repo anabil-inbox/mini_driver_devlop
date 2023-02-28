@@ -12,6 +12,7 @@ import 'package:inbox_driver/util/app_shaerd_data.dart';
 import 'package:inbox_driver/util/app_style.dart';
 import 'package:inbox_driver/util/sh_util.dart';
 import 'package:inbox_driver/util/string.dart';
+import 'package:logger/logger.dart';
 
 import 'contact_item_widget.dart';
 
@@ -34,13 +35,11 @@ class _UserEditProfileScreenState extends State<EditProfileScreen> {
     super.initState();
  
     Get.put(ProfileViewModle());
-    profileViewModle.tdUserFullNameEdit.text =
-        SharedPref.instance.getCurrentUserData()?.driverName ?? "";
-    profileViewModle.tdUserEmailEdit.text =
-        SharedPref.instance.getCurrentUserData()?.email ?? "";
+    profileViewModle.tdUserFullNameEdit.text = SharedPref.instance.getCurrentUserData()?.driverName ?? "";
+    profileViewModle.tdUserEmailEdit.text = SharedPref.instance.getCurrentUserData()?.email ?? "";
     profileViewModle.contactMap.clear();
-    profileViewModle.contactMap =
-        SharedPref.instance.getCurrentUserData()?.contactNumber ?? [];
+    profileViewModle.contactMap = SharedPref.instance.getCurrentUserData()?.contactNumber ?? [];
+    Logger().w(SharedPref.instance.getCurrentUserData()?.toJson());
   }
 
   @override

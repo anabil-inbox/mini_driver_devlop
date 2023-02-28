@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:inbox_driver/feature/model/home/task_model.dart';
@@ -19,6 +21,8 @@ class ScanScreen extends StatelessWidget {
   final bool isProductScan;
   final bool isScanDeliverdBoxes;
   final bool? isFromAddSeal;
+  // In order to get hot reload to work we need to pause the camera if the platform
+  // is android, or resume the camera if the platform is iOS.
 
   @override
   Widget build(BuildContext context) {

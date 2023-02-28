@@ -40,11 +40,11 @@ class WattingTime extends StatelessWidget {
             ),
             TweenAnimationBuilder<Duration>(
                 duration: Duration(
-                    minutes: !SharedPref.instance.isTimerNull(homeViewModel.operationTask.salesOrder!) /*!= 0*/ ? SharedPref.instance.getTimer(homeViewModel.operationTask.salesOrder!) :homeViewModel.operationTask.waitingTime?.toInt() ?? 0,
-                    seconds: SharedPref.instance.getTimerSecond(homeViewModel.operationTask.salesOrder!) != 0  ? SharedPref.instance.getTimerSecond(homeViewModel.operationTask.salesOrder!).toInt():0),
+                    minutes: homeViewModel.operationTask.salesOrder !=null && !SharedPref.instance.isTimerNull(homeViewModel.operationTask.salesOrder!)  /*!= 0*/ ? SharedPref.instance.getTimer(homeViewModel.operationTask.salesOrder!) :homeViewModel.operationTask.waitingTime?.toInt() ?? 0,
+                    seconds: homeViewModel.operationTask.salesOrder != null && SharedPref.instance.getTimerSecond(homeViewModel.operationTask.salesOrder!) != 0  ? SharedPref.instance.getTimerSecond(homeViewModel.operationTask.salesOrder!).toInt():0),
                 tween: Tween(
-                    begin: Duration(minutes: !SharedPref.instance.isTimerNull(homeViewModel.operationTask.salesOrder!) /*!= 0*/ ? SharedPref.instance.getTimer(homeViewModel.operationTask.salesOrder!) :homeViewModel.operationTask.waitingTime?.toInt() ?? 0,
-                        seconds: SharedPref.instance.getTimerSecond(homeViewModel.operationTask.salesOrder!) != 0  ? SharedPref.instance.getTimerSecond(homeViewModel.operationTask.salesOrder!).toInt():0),
+                    begin: Duration(minutes:homeViewModel.operationTask.salesOrder != null && !SharedPref.instance.isTimerNull(homeViewModel.operationTask.salesOrder!) /*!= 0*/ ? SharedPref.instance.getTimer(homeViewModel.operationTask.salesOrder!) :homeViewModel.operationTask.waitingTime?.toInt() ?? 0,
+                        seconds:homeViewModel.operationTask.salesOrder != null && SharedPref.instance.getTimerSecond(homeViewModel.operationTask.salesOrder!) != 0  ? SharedPref.instance.getTimerSecond(homeViewModel.operationTask.salesOrder!).toInt():0),
                     end: Duration.zero),
                 onEnd: () {
                   Logger().e('Timer ended');

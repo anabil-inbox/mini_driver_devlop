@@ -177,57 +177,60 @@ class _ChangeMobilScreenState extends State<VerficationScreen> {
     return GetBuilder<AuthViewModle>(builder: (logic) {
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: sizeW80!),
-        child: PinCodeTextField(
-          controller: authViewModle.tdPinCode,
-          autoFocus: true,
-          hintCharacter: "__",
-          hintStyle: textStyleTitle(),
-          length: 4,
-          textStyle: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
+        child: AutofillGroup(
+          child: PinCodeTextField(
+            controller: authViewModle.tdPinCode,
+            autoFocus: true,
+            hintCharacter: "__",
+            keyboardType:TextInputType.numberWithOptions() ,
+            hintStyle: textStyleTitle(),
+            length: 4,
+            textStyle: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+            obscureText: false,
+            animationType: AnimationType.fade,
+            pinTheme: PinTheme(
+              shape: PinCodeFieldShape.underline,
+              fieldHeight: 50,
+              fieldWidth: 50,
+              disabledColor: const Color(0xFFCECECE),
+              selectedFillColor: colorTextWhite,
+              activeFillColor: colorTextWhite,
+              inactiveFillColor: colorTextWhite,
+              inactiveColor: const Color(0xFFCECECE),
+            ),
+            cursorColor: Colors.black,
+            animationDuration: const Duration(milliseconds: 300),
+            backgroundColor: colorScaffoldRegistrationBody,
+            enableActiveFill: true,
+            // keyboardType: TextInputType.number,
+            onCompleted: (v) {
+              authViewModle.checkVerficationCode(
+                  code: v,
+                  id: widget.id,
+                  mobileNumber: widget.mobileNumber,
+                  countryCode: widget.countryCode
+              );
+            },
+            onChanged: (value) {},
+            /*validator: (value) {
+            if(value.isEmpty) {
+              return kPleaseActiveCode.tr;
+            }else if(value.length!=4) {
+             // return kPleaseActiveCode.tr;
+            }else{
+              return null;
+            }
+          },*/
+            beforeTextPaste: (text) {
+              //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
+              //but you can show anything you want here, like your pop up saying wrong paste format or etc
+              return true;
+            },
+            appContext: context,
           ),
-          obscureText: false,
-          animationType: AnimationType.fade,
-          pinTheme: PinTheme(
-            shape: PinCodeFieldShape.underline,
-            fieldHeight: 50,
-            fieldWidth: 50,
-            disabledColor: const Color(0xFFCECECE),
-            selectedFillColor: colorTextWhite,
-            activeFillColor: colorTextWhite,
-            inactiveFillColor: colorTextWhite,
-            inactiveColor: const Color(0xFFCECECE),
-          ),
-          cursorColor: Colors.black,
-          animationDuration: const Duration(milliseconds: 300),
-          backgroundColor: colorScaffoldRegistrationBody,
-          enableActiveFill: true,
-          // keyboardType: TextInputType.number,
-          onCompleted: (v) {
-            authViewModle.checkVerficationCode(
-                code: v,
-                id: widget.id,
-                mobileNumber: widget.mobileNumber,
-                countryCode: widget.countryCode
-            );
-          },
-          onChanged: (value) {},
-          /*validator: (value) {
-          if(value.isEmpty) {
-            return kPleaseActiveCode.tr;
-          }else if(value.length!=4) {
-           // return kPleaseActiveCode.tr;
-          }else{
-            return null;
-          }
-        },*/
-          beforeTextPaste: (text) {
-            //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
-            //but you can show anything you want here, like your pop up saying wrong paste format or etc
-            return true;
-          },
-          appContext: context,
         ),
       );
     });

@@ -77,6 +77,7 @@ class HomeViewModel extends GetxController {
   QRViewController? controller;
   String scannedSeal = ""; //scannedSeal
 
+
   onQRViewCreated(QRViewController controller,
       {bool? isFromAtHome,
       int? index,
@@ -89,6 +90,11 @@ class HomeViewModel extends GetxController {
       int i = 0;
       if (this.controller == null) {
         this.controller = controller;
+        if (Platform.isAndroid) {
+          controller.pauseCamera();
+        } else if (Platform.isIOS) {
+          controller.resumeCamera();
+        }
       }
 
       controller.scannedDataStream.listen((scanData) {
@@ -135,6 +141,7 @@ class HomeViewModel extends GetxController {
           const SnackBar(content: Text('no Permission')),
         );
       }
+      ctrl.resumeCamera();
     } catch (e) {
       printError();
     }

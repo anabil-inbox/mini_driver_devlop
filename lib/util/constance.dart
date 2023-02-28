@@ -92,6 +92,9 @@ abstract class Constance {
   // static String accetedRequestTime = "23";
   static String accetedRequestTime = "24";
   static String confirmFirstSideContentTrasfer = "30";
+  static String userScanBox = "30";
+  static String userSignContract = "20";
+  static String userPay = "23";
 
   static String fingerprint = "Fingerprint";
   static String schedule = "Schedule";//schedule

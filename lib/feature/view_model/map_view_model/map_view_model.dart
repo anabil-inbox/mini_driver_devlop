@@ -148,6 +148,7 @@ class MapViewModel extends GetxController {
     final ui.FrameInfo imageFI = await codec.getNextFrame();
     paintImage(
         canvas: canvas,
+        fit: BoxFit.cover,
         rect: Rect.fromLTWH(0, 0, size.toDouble(), size.toDouble()),
         image: imageFI.image);
 
@@ -291,16 +292,20 @@ class MapViewModel extends GetxController {
 
   getStreamLocation({required SalesOrder salesOrder}) async {
     try {
+      // Logger().w(isStreamOpen);
       if(!isStreamOpen){
         return;
       }
       Geolocator.getPositionStream().listen((event) {
         myLatLng = LatLng(event.latitude, event.longitude);
+
         var allowToDeliver = isAllowToDeliver(
             lat1: myLatLng.latitude,
             lon1: myLatLng.longitude,
             lat2: customerLatLng.latitude,
             lon2: customerLatLng.longitude);
+
+        // Logger().w(allowToDeliver);
         update();
         addDriverTackLocation(allowToDeliver,
             salesOrder: salesOrder, driverLocation: myLatLng);

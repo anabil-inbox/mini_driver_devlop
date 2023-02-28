@@ -325,7 +325,12 @@ class SharedPref {
   }
 
   bool isTimerNull(String id){
-    return _prefs?.getInt(timerKey + "_$id") == null ? true:false;
+    try {
+      return _prefs?.getInt(timerKey + "_$id") == null ? true:false;
+    } catch (e) {
+      // print(e);
+      return false;
+    }
   }
 
   String getCurrentTaskId() {
