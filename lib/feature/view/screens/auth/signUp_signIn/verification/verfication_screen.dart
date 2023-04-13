@@ -182,7 +182,7 @@ class _ChangeMobilScreenState extends State<VerficationScreen> {
             controller: authViewModle.tdPinCode,
             autoFocus: true,
             hintCharacter: "__",
-            keyboardType:TextInputType.numberWithOptions() ,
+            keyboardType:const TextInputType.numberWithOptions() ,
             hintStyle: textStyleTitle(),
             length: 4,
             textStyle: const TextStyle(
